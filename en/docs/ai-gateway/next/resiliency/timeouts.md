@@ -1,10 +1,10 @@
 ---
 title: "Configure Gateway Timeouts"
-description: "Configure router-level and API-level timeouts (connect, route, idle, and HTTP connection manager) in the API Platform Gateway to protect against slow or unreachable backends and slow clients."
-canonical_url: https://wso2.com/api-platform/docs/api-gateway/setup/upstream-timeouts/
-md_url: https://wso2.com/api-platform/docs/api-gateway/setup/upstream-timeouts.md
+description: "Configure gateway-level and API-level timeouts (connect, route, idle, and HTTP connection manager) in the API Platform AI Gateway to protect against slow or unreachable backends and slow clients."
+canonical_url: https://wso2.com/api-platform/docs/ai-gateway/resiliency/timeouts/
+md_url: https://wso2.com/api-platform/docs/ai-gateway/resiliency/timeouts.md
 tags:
-  - api-gateway
+  - ai-gateway
   - configuration
   - networking
   - resiliency
@@ -13,7 +13,7 @@ last_updated: 2026-06-30
 content_type: "how-to"
 ---
 
-# Gateway Timeouts
+# Confuguring Timeouts
 
 This guide explains how to configure **timeouts** for the API Platform Gateway so that requests to slow or unreachable backends, and slow downstream clients, fail within a predictable time instead of hanging indefinitely.
 
@@ -21,14 +21,14 @@ Timeouts are configured at **two levels**:
 
 | Level | Where it is configured | Scope | Typical use |
 |-------|------------------------|-------|-------------|
-| **Router level** | The gateway controller's `config.toml` (`[router.*]`) | Global defaults applied to **all** traffic on the gateway | Operator-wide baselines (connect timeout, default route timeout, downstream/HCM timeouts) |
-| **API level** | The API definition — the `resilience` block (RestApi, LLM Provider, LLM Proxy) and `upstreamDefinitions[].timeout.connect` (RestApi) | A single API, its routes, and its upstream clusters | Per-API/per-route overrides for backends that are faster or slower than the global default |
+| **Gateway level** | Inside the gateway `config.toml` | Global defaults applied to **all** traffic on the gateway | Operator-wide baselines (connect timeout, default route timeout, downstream/HCM timeouts) |
+| **API level** | The API definition — the `resilience` block and `upstreamDefinitions[].timeout.connect` | A single API, its routes, and its upstream clusters | Per-API/per-route overrides for backends that are faster or slower than the global default |
 
-The router level establishes the **defaults**. The API level **overrides** those defaults for a specific API (and, for REST APIs, a specific operation). When an API does not specify a value, the router-level default applies.
+The gateway level establishes the **defaults**. The API level **overrides** those defaults for a specific API. When an API does not specify a value, the gateway-level default applies.
 
-## Router-level timeouts (config.toml)
+## Gateway-level timeouts (config.toml)
 
-Router-level timeouts are global defaults that apply to every request handled by the gateway, regardless of which API serves it. They are configured in the gateway controller configuration. You can use `gateway/configs/config-template.toml` as a reference when creating your own `config.toml`.
+These timeouts are global defaults that apply to every request handled by the gateway, regardless of which API serves it. You can use `gateway/configs/config-template.toml` as a reference when creating your own `config.toml`.
 
 There are two groups:
 
@@ -46,7 +46,7 @@ connect_timeout_ms    = 5000    # TCP connection establishment timeout
 
 | Setting | Default | Maps to (Envoy) | Description |
 |---------|---------|-----------------|---------|
-| `connect_timeout_ms` | `5000` | Cluster `connect_timeout` | How long the router waits to **establish a TCP connection** to an upstream endpoint before failing the request. |
+| `connect_timeout_ms` | `5000` | Cluster `connect_timeout` | How long the gateway waits to **establish a TCP connection** to an upstream endpoint before failing the request. |
 | `route_timeout_ms` | `60000` | `RouteAction.timeout` | Default maximum time for the **entire request→upstream-response** on a route. This is the default that an API's `resilience.timeout` overrides. |
 | `route_idle_timeout_ms` | `300000` | `RouteAction.idle_timeout` | Default **per-route stream idle** timeout. This is the default that an API's `resilience.idleTimeout` overrides. |
 
@@ -78,7 +78,7 @@ Durations use Go duration syntax with a single unit (for example `"30s"`, `"500m
 !!! warning
     `idle_timeout` can also be disabled by setting it to zero explicitly. Disabling it has a high likelihood of yielding connection leaks (for example, due to lost TCP FIN packets).
 
-### Setting router-level timeouts in different deployments
+### Setting gateway-level timeouts in different deployments
 
 #### Standalone / local
 
@@ -111,102 +111,70 @@ The chart renders these values into the generated `config.toml` used by the gate
 
 Two of the timeout layers are naturally per-API and can be tuned directly in the API definition, each through its own field:
 
-| Surface | Field(s) | Maps to (Envoy) | Overrides router default |
+| Surface | Field(s) | Maps to (Envoy) | Overrides gateway default |
 |---------|----------|-----------------|--------------------------|
-| `upstreamDefinitions[].timeout.connect` | `connect` | Cluster `connect_timeout` | `connect_timeout_ms` |
+| Connect timeout per upstream (`upstreamDefinitions[].timeout.connect`) | `connect` | Cluster `connect_timeout` | `connect_timeout_ms` |
 | `resilience` block | `timeout`, `idleTimeout` | `RouteAction.timeout` / `idle_timeout` | `route_timeout_ms` / `route_idle_timeout_ms` |
 
-The HCM (downstream) timeouts have no per-API equivalent and remain router-level only.
+The HCM (downstream) timeouts have no per-API equivalent and remain gateway-level only.
 
 ### Connect timeout per upstream (`upstreamDefinitions[].timeout.connect`)
 
-When an API routes through a named **upstream definition**, that definition can set its own `connect` timeout, which overrides the router-level `connect_timeout_ms` for the cluster built from it. Because the setting lives on the upstream definition, different upstreams used by the same API can have different connect timeouts.
+When an API routes through a named **upstream definition**, that definition can set its own `connect` timeout, which overrides the gateway-level `connect_timeout_ms` for the cluster built from it. Because the setting lives on the upstream definition, different upstreams used by the same API can have different connect timeouts.
 
 ```yaml
 apiVersion: gateway.api-platform.wso2.com/v1
-kind: RestApi
+kind: LlmProvider
 metadata:
-  name: orders-api
+  name: openai-provider
 spec:
-  displayName: Orders API
+  displayName: OpenAI Provider
   version: v1.0
-  context: /orders/$version
+  template: openai
+  context: /openai
   upstreamDefinitions:
-    - name: orders-backend
+    - name: openai-backend
       timeout:
         connect: 6000ms        # overrides connect_timeout_ms for this cluster
       upstreams:
-        - url: http://orders.internal:8080
+        - url: https://api.openai.com/v1
   upstream:
-    main:
-      ref: orders-backend      # this API routes through the orders-backend cluster
-  operations:
-    - method: GET
-      path: /list
+    ref: openai-backend        # this provider routes through the openai-backend cluster
+  accessControl:
+    mode: deny_all
+    exceptions:
+      - path: /chat/completions
+        methods: [POST]
 ```
+
+The same shape applies to the `Mcp` kind — declare `upstreamDefinitions` at the spec level and point `upstream.ref` at the definition by name.
 
 - `connect` is a duration string (for example `6000ms`, `5s`).
 - It governs only **TCP connection establishment** (plus the TLS handshake for HTTPS upstreams) — not the response wait, which is the route timeout below.
-- An API that uses a direct `upstream.main.url` (instead of an `upstreamDefinitions` ref) uses the router-level `connect_timeout_ms`.
+- An API that uses a direct `upstream.url` (instead of an `upstreamDefinitions` ref) uses the gateway-level `connect_timeout_ms`.
+
+!!! note
+    `upstreamDefinitions` — and therefore the per-upstream `connect` timeout — are supported only for the **`LlmProvider`** and **`Mcp`** kinds. **`LlmProxy`** does not connect to a backend directly (it loops back to its backing provider), so it has no upstream definition of its own. To bound connection establishment for a proxied call, configure the connect timeout on the backing `LlmProvider` to match your requirements.
 
 ### Route timeouts (via `resilience` block)
 
-The `resilience` block lets an individual API override the router-level **route** timeouts for its own traffic. It maps to Envoy's `RouteAction` timeouts and is available on `RestApi`, `LlmProvider`, and `LlmProxy` resources.
+The `resilience` block lets an individual API override the gateway-level **route** timeouts for its own traffic. It maps to Envoy's `RouteAction` timeouts.
+
+!!! note
+    For all three kinds — **`LlmProvider`**, **`LlmProxy`**, and **`Mcp`** — the `resilience` block is supported at the **API level only**. There is no operation-level override; a single API-level block applies to every route generated for the API.
 
 It supports two fields:
 
-| Field | Maps to (Envoy) | Overrides router default |
+| Field | Maps to (Envoy) | Overrides gateway default |
 |-------|-----------------|--------------------------|
 | `timeout` | `RouteAction.timeout` | `route_timeout_ms` |
 | `idleTimeout` | `RouteAction.idle_timeout` | `route_idle_timeout_ms` |
 
 !!! note "Duration format"
-    `timeout` and `idleTimeout` take single-unit duration strings (for example `30s`, `500ms`, `1.5m`). Use `0s` to disable a timeout, or omit the field to fall back to the router-level default. Compound (`1h30m`), negative (`-30s`), and unitless (`0`, `30`) values are rejected.
+    `timeout` and `idleTimeout` take single-unit duration strings (for example `30s`, `500ms`, `1.5m`). Use `0s` to disable a timeout, or omit the field to fall back to the gateway-level default. Compound (`1h30m`), negative (`-30s`), and unitless (`0`, `30`) values are rejected.
 
-### REST APIs: API level and operation level
 
-For `RestApi`, the `resilience` block can be set at **two levels**:
-
-- **API level** — applies to every operation/route of the API.
-- **Operation level** — applies to that single operation and overrides the API-level value.
-
-Precedence is **most-specific-wins, per field**: an operation's `timeout` overrides the API's `timeout`, while still inheriting the API's `idleTimeout` if the operation does not set its own. If neither level sets a field, the router-level default applies.
-
-```yaml
-apiVersion: gateway.api-platform.wso2.com/v1
-kind: RestApi
-metadata:
-  name: orders-api
-spec:
-  displayName: Orders API
-  version: v1.0
-  context: /orders/$version
-  upstream:
-    main:
-      url: https://backend.example.com
-  # API-level: applies to all operations unless overridden.
-  resilience:
-    timeout: 15s
-    idleTimeout: 30s
-  operations:
-    - method: GET
-      path: /list
-    - method: POST
-      path: /reports
-      # Operation-level override: this slow report endpoint gets a longer
-      # route timeout, but still inherits the API-level idleTimeout (30s).
-      resilience:
-        timeout: 60s
-```
-
-Resolution for the example above:
-
-| Route | `timeout` | `idleTimeout` |
-|-------|-----------|---------------|
-| `GET /list` | `15s` (API level) | `30s` (API level) |
-| `POST /reports` | `60s` (operation level) | `30s` (inherited from API level) |
-
-### LLM Provider and LLM Proxy: API level only
+### Sample LLM Provider, LLM Proxy, and MCP:
 
 For `LlmProvider` and `LlmProxy`, the `resilience` block is supported at the **API level only**. LLM routes are generated by the gateway from the access-control configuration and policy attachments (rather than authored as explicit operations), so there is no operation-level override. A single API-level block applies to **all** routes generated for the LLM API.
 
@@ -251,6 +219,27 @@ spec:
 !!! note "LLM Proxy double hop"
     A request to a proxy traverses two routes — `client → proxy route → (loopback) → provider route → backend`. The **proxy's** `resilience.timeout` bounds the whole proxied call, while the backing **provider's** `resilience.timeout` bounds the provider→backend call. For a meaningful end-to-end budget, keep the proxy timeout greater than or equal to the provider timeout; the shorter of the two effectively wins.
 
+For `Mcp`, the `resilience` block applies to the traffic-forwarding routes generated for the proxy. Because MCP transports are long-lived streams, MCP treats the **route timeout** differently from the other kinds (see the note below).
+
+```yaml
+apiVersion: gateway.api-platform.wso2.com/v1
+kind: Mcp
+metadata:
+  name: everything-mcp
+spec:
+  displayName: Everything MCP
+  version: v1.0
+  context: /everything
+  upstream:
+    url: https://mcp.example.com
+  # Applies to the traffic-forwarding routes generated for this MCP proxy.
+  resilience:
+    idleTimeout: 30m
+```
+
+!!! note "MCP route timeout defaults to disabled"
+    MCP transports (SSE / streamable HTTP) are long-lived streams, so a finite route timeout would sever an otherwise healthy stream. For `Mcp`, the route `timeout` therefore defaults to **disabled (`0s`)** when the `resilience` block does not set it — unlike the other kinds, which fall back to the gateway-level `route_timeout_ms`. Liveness on a stalled stream is instead bounded by `idleTimeout`. You can still set `timeout` explicitly if you need a hard cap, but be aware it will cut long-lived streams. The per-upstream `connect` timeout still applies to MCP as usual.
+
 ## Practical guidance
 
 ### Connect timeout (`connect_timeout_ms`)
@@ -258,11 +247,11 @@ spec:
 - **Decrease** when backends are highly available and you want to fail fast on unhealthy or misconfigured targets, freeing resources quickly.
 - **Increase** when backends sit behind slower networks/load balancers, or may experience cold starts or scaling events that briefly delay connection establishment.
 - Avoid setting it too low — it may cause **false-positive timeouts** during short periods of backend slowness or network jitter.
-- Set the **router default** for the common case, and override **per upstream** via `upstreamDefinitions[].timeout.connect` (see [Connect timeout per upstream](#connect-timeout-per-upstream-upstreamdefinitionstimeoutconnect)) when a specific backend needs a different connection budget.
+- Set the **gateway default** for the common case, and override **per upstream** via `upstreamDefinitions[].timeout.connect` (see [Connect timeout per upstream](#connect-timeout-per-upstream-upstreamdefinitionstimeoutconnect)) when a specific backend needs a different connection budget.
 
 ### Route timeout (`route_timeout_ms` / `resilience.timeout`)
 
-- Set the **router default** to a sane upper bound for typical backends, and use **API/operation-level** `resilience.timeout` for endpoints that are known to be faster (tighter budget) or legitimately slower (e.g. report generation, LLM completions).
+- Set the **gateway default** to a sane upper bound for typical backends, and use **API level** `resilience.timeout` for endpoints that are known to be faster (tighter budget) or legitimately slower (e.g. report generation, LLM completions).
 - For streaming/long-lived responses (e.g. SSE from LLM backends), be mindful of `idleTimeout`: a long total `timeout` with a short `idleTimeout` can still cut a slow token stream. Leave `idleTimeout` generous (or unset) for streaming providers.
 
 ### HCM/downstream timeouts
@@ -281,26 +270,7 @@ A backend may take a few seconds to accept new connections during peak load. Giv
 connect_timeout_ms = 6000
 ```
 
-The router gives each upstream connection attempt up to 6 seconds; if the backend is down, requests fail after ~6 seconds (`503`) instead of hanging.
-
-### One slow endpoint on an otherwise fast API
-
-The API as a whole should respond within 5 seconds, but a single report endpoint legitimately takes longer:
-
-```yaml
-spec:
-  resilience:
-    timeout: 5s
-  operations:
-    - method: GET
-      path: /summary
-    - method: POST
-      path: /reports
-      resilience:
-        timeout: 60s
-```
-
-`GET /summary` is bounded at 5 seconds; `POST /reports` is allowed up to 60 seconds; both inherit the router-level `route_idle_timeout_ms`.
+The gateway gives each upstream connection attempt up to 6 seconds; if the backend is down, requests fail after ~6 seconds (`503`) instead of hanging.
 
 ### Disabling the route timeout for a long-running API
 
