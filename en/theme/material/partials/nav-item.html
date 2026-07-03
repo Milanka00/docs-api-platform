@@ -61,6 +61,19 @@
     {% set versioned_cfg = config.extra.versioned_sections[nav_item.title] %}
   {% endif %}
 
+  <!-- Version-scoped nav config (see extra.version_scoped_navs in mkdocs.yml).
+       Top-level sections listed there are rendered hidden and revealed by
+       theme.js only while the matching doc version (e.g. "next") is active.
+       Level 1 only, so the same-named section nested under its source (e.g.
+       Cloud > Developer Portal) is unaffected. -->
+  {% set scoped_version = None %}
+  {% if level == 1 and config.extra.version_scoped_navs %}
+    {% set scoped_nav = config.extra.version_scoped_navs | selectattr("title", "equalto", nav_item.title) | first %}
+    {% if scoped_nav is defined and scoped_nav %}
+      {% set scoped_version = scoped_nav.version %}
+    {% endif %}
+  {% endif %}
+
   <!-- Set nav icon -->
   {% set icon = None %}
 
@@ -106,6 +119,12 @@
     {% set v_slug = versioned_cfg.slug %}
     {% set v_default = versioned_cfg.default %}
     {% set v_versions = versioned_cfg.versions %}
+
+    <!-- Split into "Latest Version" (the configured default) and "Previous
+         Versions" (everything else, in configured order) for the dropdown
+         below. -->
+    {% set v_latest = v_default if v_default in v_versions else v_versions[0] %}
+    {% set v_previous = v_versions | reject("equalto", v_latest) | list %}
 
     <!-- Resolve the active version from the current page URL, else the default.
          A namespace is required so the assignment survives the for-loop scope. -->
@@ -160,9 +179,16 @@
           </span>
         </label>
         <select class="md-nav__version-dropdown" aria-label="{{ nav_item.title }} version">
-          {% for v in v_versions %}
-            <option value="{{ v }}" {{ "selected" if v == active_version }}>{{ v }}</option>
-          {% endfor %}
+          <optgroup label="Latest Version">
+            <option value="{{ v_latest }}" {{ "selected" if v_latest == active_version }}>{{ v_latest }}</option>
+          </optgroup>
+          {% if v_previous %}
+            <optgroup label="Previous Versions">
+              {% for v in v_previous %}
+                <option value="{{ v }}" {{ "selected" if v == active_version }}>{{ v }}</option>
+              {% endfor %}
+            </optgroup>
+          {% endif %}
         </select>
         <label class="md-nav__icon md-icon md-nav__versioned-toggle" for="{{ path }}"></label>
       </div>
@@ -240,8 +266,20 @@
       {% endif %}
     {% endif %}
 
+    <!-- Version-scoped sections carry their own divider so it hides and
+         shows together with the section itself. -->
+    {% if scoped_version %}
+      <hr
+        class="md-nav--expanded-section-divider"
+        data-md-scoped-version="{{ scoped_version }}"
+      />
+    {% endif %}
+
     <!-- Render item with nested items -->
-    <li class="{{ class }} md-nav__item--nested {{ has_icon_class }} {{ hide_nav_class }}">
+    <li
+      class="{{ class }} md-nav__item--nested {{ has_icon_class }} {{ hide_nav_class }}"
+      {% if scoped_version %}data-md-scoped-version="{{ scoped_version }}"{% endif %}
+    >
       {% set expanded = "navigation.expand" in features %}
       {% set active = nav_item.active or expanded %}
       

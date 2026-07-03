@@ -661,7 +661,77 @@ nav:
         - Analytics:
             - Moesif Analytics: ai-gateway/1.0.0/analytics/moesif-analytics.md
             - Analytics Header Filter: ai-gateway/1.0.0/analytics/analytics-header-filter.md
-  - Analytics: 
+  # In-development 'next' doc sets, only shown in the nav while browsing a
+  # /next/ (or <component>/next/) URL — see extra.version_scoped_navs.
+  - Developer Portal:
+    - Theming Developer Portal:
+        - Theming with AI: next/developer-portal/theming-devportal-with-ai.md
+        - Theming Manually:
+            - Theme in Organizational Level: next/developer-portal/theming-devportal-org-level.md
+            - Theme in API Level: next/developer-portal/theming-devportal-api-level.md
+        - Devportal Mode: next/developer-portal/developer-portal-mode.md
+    - AI Agent Discovery: next/developer-portal/discover-apis/ai-agent-discovery.md
+    - Discover APIs:
+        - Search APIs: next/developer-portal/discover-apis/api-search.md
+        - Documentations: next/developer-portal/discover-apis/api-documentations.md
+    - API Workflows:
+        - Consuming API Workflows: next/developer-portal/api-workflows/consuming-api-workflows.md
+    - Consume an API:
+        - Consume an API Secured with OAuth2: next/developer-portal/consuming-services/consume-an-api-secured-with-oauth2.md
+        - Consume an API Secured with API Key: next/developer-portal/consuming-services/consume-an-api-secured-with-api-key.md
+    - Manage Applications:
+        - Create an Application: next/developer-portal/manage-applications/create-an-application.md
+    - Manage Subscriptions:
+        - Subscribe to an API: next/developer-portal/manage-subscriptions/subscribe-to-an-api.md
+    - SDK Generation:
+        - AI Assisted SDK Generation: next/developer-portal/sdk-generation/ai-assisted-sdk-generation.md
+    - Admin Settings:
+        - LLM Instructions: next/developer-portal/admin-settings/llm-instructions.md
+        - Managing API Workflows: next/developer-portal/admin-settings/managing-api-workflows.md
+  - AI Workspace:
+    - Overview: next/ai-workspace/overview.md
+    - Getting Started: next/ai-workspace/getting-started.md
+    - AI Gateways:
+        - Setting Up: next/ai-workspace/ai-gateways/setting-up.md
+    - LLM Providers:
+        - Overview: next/ai-workspace/llm-providers/overview.md
+        - Configure Provider: next/ai-workspace/llm-providers/configure-provider.md
+        - Manage Provider: next/ai-workspace/llm-providers/manage-provider.md
+    - App LLM Proxies:
+        - Overview: next/ai-workspace/llm-proxies/overview.md
+        - Configure App LLM Proxy: next/ai-workspace/llm-proxies/configure-proxy.md
+        - Manage App LLM Proxy: next/ai-workspace/llm-proxies/manage-proxy.md
+    - MCP Proxies:
+        - Overview: next/ai-workspace/mcp-proxies/overview.md
+        - Configure Proxy: next/ai-workspace/mcp-proxies/configure-proxy.md
+        - Apply Policies: next/ai-workspace/mcp-proxies/apply-policies.md
+    - MCP Registry:
+        - What is an MCP Registry?: next/ai-workspace/mcp-registry/mcp-registry.md
+        - Publish MCP Proxies: next/ai-workspace/mcp-registry/publish-mcp-proxies.md
+        - Browse the MCP Hub: next/ai-workspace/mcp-registry/browse-mcp-hub.md
+        - Use the MCP Registry API: next/ai-workspace/mcp-registry/mcp-registry-api.md
+    - GenAI Applications: next/ai-workspace/genai-applications.md
+    - Configure Inbound Auth: next/ai-workspace/configure-inbound-auth.md
+    - Invoke via SDKs: next/ai-workspace/using-sdks.md
+    - Policies:
+        - Overview: next/ai-workspace/policies/overview.md
+        - Guardrails:
+            - Overview: next/ai-workspace/policies/guardrails/overview.md
+            - PII Masking Regex: next/ai-workspace/policies/guardrails/regex-pii-masking.md
+            - Azure Content Safety: next/ai-workspace/policies/guardrails/azure-content-safety.md
+            - Word Count: next/ai-workspace/policies/guardrails/word-count-guardrail.md
+            - Sentence Count: next/ai-workspace/policies/guardrails/sentence-count-guardrail.md
+        - Rate Limit:
+            - LLM Cost: next/ai-workspace/policies/rate-limit/llm-cost.md
+            - Token-Based Rate Limit: next/ai-workspace/policies/rate-limit/token-based-rate-limit.md
+            - LLM Cost-Based Rate Limit: next/ai-workspace/policies/rate-limit/llm-cost-based-rate-limit.md
+        - Other Policies:
+            - Model Round Robin: next/ai-workspace/policies/other-policies/model-round-robin.md
+            - Prompt Decorator: next/ai-workspace/policies/other-policies/prompt-decorator.md
+            - Prompt Template: next/ai-workspace/policies/other-policies/prompt-template.md
+            - Semantic Cache: next/ai-workspace/policies/other-policies/semantic-cache.md
+        - Writing an AI Policy: next/ai-workspace/policies/writing-an-ai-policy.md
+  - Analytics:
     - Overview: analytics/overview.md
   - Monetization:
     - Overview: monetization/overview.md
@@ -1087,14 +1157,21 @@ extra:
       versions:
         - "1.1.0"
         - "1.0.0"
-        - "next"
     AI Gateway:
       slug: ai-gateway
       default: "1.1.0"
       versions:
         - "1.1.0"
         - "1.0.0"
-        - "next"
+  # Top-level nav sections that only apply to a given doc version. They are
+  # rendered hidden; theme.js reveals them while the current URL contains the
+  # version as a path segment (e.g. /next/ai-workspace/... or
+  # /api-gateway/next/...). See partials/nav-item.html and theme.js.
+  version_scoped_navs:
+    - title: Developer Portal
+      version: "next"
+    - title: AI Workspace
+      version: "next"
   expanded_navs:
     - title: Cloud
       options:
@@ -1116,6 +1193,12 @@ extra:
       options:
         - verticle-line-only
     - title: Developer Portal
+      options:
+        - verticle-line
+    # Root-level (version-scoped) copy only; 'level: 1' keeps the AI Workspace
+    # section nested under Cloud rendering as a regular collapsed item.
+    - title: AI Workspace
+      level: 1
       options:
         - verticle-line
     - title: API Manager

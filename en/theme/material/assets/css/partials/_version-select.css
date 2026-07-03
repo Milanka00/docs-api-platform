@@ -76,3 +76,14 @@
 .md-nav__version-group.is-active {
   display: block;
 }
+
+/* Version-scoped root nav sections (extra.version_scoped_navs) and their
+   preceding dividers stay hidden until theme.js marks them visible for the
+   matching doc version (e.g. "next"). */
+.md-nav--primary [data-md-scoped-version] {
+  display: none;
+}
+
+.md-nav--primary [data-md-scoped-version].md-nav__scoped--visible {
+  display: block;
+}

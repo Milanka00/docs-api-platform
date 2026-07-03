@@ -332,6 +332,17 @@ document.addEventListener('DOMContentLoaded', function () {
   if (window.versionedNavInitialized) return;
   window.versionedNavInitialized = true;
 
+  // Version-scoped root nav sections (extra.version_scoped_navs): rendered
+  // hidden (see nav-item.html / _version-select.css), revealed while the
+  // current URL contains the matching version as a path segment — e.g.
+  // Developer Portal and AI Workspace appear at root level on /next/... and
+  // /api-gateway/next/... pages.
+  var pathSegments = window.location.pathname.split('/').filter(Boolean);
+  document.querySelectorAll('.md-nav--primary [data-md-scoped-version]').forEach(function (el) {
+    var visible = pathSegments.indexOf(el.getAttribute('data-md-scoped-version')) !== -1;
+    el.classList.toggle('md-nav__scoped--visible', visible);
+  });
+
   document.querySelectorAll('.md-nav__item--versioned').forEach(function (section) {
     var slug = section.getAttribute('data-md-versioned-section');
     var defaultVersion = section.getAttribute('data-md-default-version');
@@ -377,6 +388,23 @@ document.addEventListener('DOMContentLoaded', function () {
       groups.forEach(function (g) {
         g.classList.toggle('is-active', g.getAttribute('data-md-version') === version);
       });
+      // A version can be active without being offered in the dropdown (e.g.
+      // "next" exists in the nav but is reachable only by URL). Append it
+      // under its own group so the select reflects the active version
+      // instead of going blank, and so the user can switch back to a
+      // released version.
+      if (!select.querySelector('option[value="' + version + '"]')) {
+        var unreleasedGroup = select.querySelector('optgroup[label="Unreleased"]');
+        if (!unreleasedGroup) {
+          unreleasedGroup = document.createElement('optgroup');
+          unreleasedGroup.label = 'Unreleased';
+          select.appendChild(unreleasedGroup);
+        }
+        var option = document.createElement('option');
+        option.value = version;
+        option.textContent = version;
+        unreleasedGroup.appendChild(option);
+      }
       if (select.value !== version) select.value = version;
       try {
         window.localStorage.setItem(storageKey, version);
@@ -530,11 +558,28 @@ document.addEventListener('DOMContentLoaded', function () {
     return path;
   }
 
+  // Version values used by version-scoped doc sets (extra.version_scoped_navs),
+  // whose pages live under "<version>/..." (e.g. next/ai-workspace/...).
+  var scopedVersions = null;
+  function getScopedVersions() {
+    if (scopedVersions) return scopedVersions;
+    scopedVersions = {};
+    document.querySelectorAll('.md-nav--primary [data-md-scoped-version]').forEach(function (el) {
+      scopedVersions[el.getAttribute('data-md-scoped-version')] = true;
+    });
+    return scopedVersions;
+  }
+
   // True if the page key belongs to a non-active version (should be hidden).
   function isHiddenVersion(key) {
     if (!key) return false;
     var parts = key.split('/');
     if (parts.length < 2) return false;
+    // Version-scoped doc sets: hide unless that version is in the current URL
+    // (mirrors the nav visibility rule for these sections).
+    if (getScopedVersions()[parts[0]]) {
+      return window.location.pathname.split('/').indexOf(parts[0]) === -1;
+    }
     var cfg = getActiveVersions()[parts[0]];
     if (!cfg) return false;
     if (cfg.versions.indexOf(parts[1]) === -1) return false; // not a version segment
