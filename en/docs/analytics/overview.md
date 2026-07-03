@@ -8,7 +8,7 @@ tags:
   - moesif
   - api-management
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-30
+last_updated: 2026-07-03
 content_type: "overview"
 ---
   
@@ -84,9 +84,11 @@ These are the different analytics dashboards that are available:
 
 The following image shows some of the dashboards in the **Overview** screen:
 
-![Overview screen in Moesif Basic, showing assorted analytics in existing APIs, LLM Proxies, and MCP servers](../../assets/img/analytics/analytics-overview-screen.png)
+![Overview screen in Moesif Basic, showing assorted analytics in existing APIs, LLM Proxies, and MCP servers](../../assets/img/analytics/analytics-overview.png)
 
 #### API Analytics
+
+![API analytics overview screen in Moesif Basic, showing the following assorted analytics in existing APIs](../../assets/img/analytics/api-analytics-overview.png)
 
 * Total requests   
 * Average latency  
@@ -101,6 +103,8 @@ The following image shows some of the dashboards in the **Overview** screen:
 * Geographic heatmaps
 
 #### LLM Analytics
+
+![LLM analytics overview screen in Moesif Basic, showing the following assorted analytics in existing LLMs](../../assets/img/analytics/llm-analytics-overview.png)
 
 * Unique consumers  
 * Total requests  
@@ -117,6 +121,8 @@ The following image shows some of the dashboards in the **Overview** screen:
 * Error type breakdown
 
 ####  MCP Analytics
+
+![MCP analytics overview screen in Moesif Basic, showing the following assorted analytics in existing MCP servers](../../assets/img/analytics/mcp-analytics-overview.png)
 
 * Tool calls  
 * Unique consumers  
