@@ -18,7 +18,7 @@ content_type: "tutorial"
 
 ## Overview
 
-This guide shows you how to discover MCP servers in the MCP Hub, evaluate the tools they expose, generate OAuth2 credentials, and connect Claude Desktop to an enterprise MCP server using a secure MCP Server URL.
+This guide shows you how to discover MCP servers in the [MCP Hub](https://devportal.bijira.dev), evaluate the tools they expose, generate OAuth2 credentials, and connect Claude Desktop to an enterprise MCP server using a secure MCP Server URL.
 
 In this guide, you will walk through a scenario where an AI engineer is building a sales copilot that needs access to customer, deal, and pricing data through MCP tools. However, they do not know which MCP servers are available, which tools they expose, whether those tools meet the requirements, or how to connect an AI client such as Claude Desktop to them.
 
