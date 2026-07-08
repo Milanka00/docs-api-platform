@@ -710,6 +710,9 @@ nav:
         - Publish MCP Proxies: next/ai-workspace/mcp-registry/publish-mcp-proxies.md
         - Browse the MCP Hub: next/ai-workspace/mcp-registry/browse-mcp-hub.md
         - Use the MCP Registry API: next/ai-workspace/mcp-registry/mcp-registry-api.md
+    - CI/CD:
+        - Overview: next/ai-workspace/ci-cd/overview.md
+        - Configure CI/CD Workflow: next/ai-workspace/ci-cd/configure-ci-cd-workflow.md
     - GenAI Applications: next/ai-workspace/genai-applications.md
     - Configure Inbound Auth: next/ai-workspace/configure-inbound-auth.md
     - Invoke via SDKs: next/ai-workspace/using-sdks.md
