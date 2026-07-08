@@ -115,45 +115,6 @@ curl -X POST https://localhost:8443/openai/latest/chat/completions \
   }' -k
 ```
 
-## Deploy an LLM proxy configuration to consume an LLM provider
-
-The API Platform Gateway provides first-class support for configuring and deploying LLM proxies. As an AI developer, run the following command to deploy a sample LLM proxy that consumes the OpenAI LLM provider previously deployed by the platform administrator.
-
-```bash
-curl -X POST http://localhost:9090/api/management/v0.9/llm-proxies \
-  -H "Content-Type: application/yaml" \
-  -H "Authorization: Basic YWRtaW46YWRtaW4=" \
-  --data-binary @- <<'EOF'
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
-kind: LlmProxy
-metadata:
-  name: openai-assistant
-spec:
-  displayName: OpenAI Assistant
-  version: v1.0
-  context: /assistant
-  provider:
-    id: openai-provider
-  policies: []
-EOF
-```
-
-To test LLM proxy traffic routing through the gateway and consume the LLM provider, invoke the following request.
-
-```bash
-curl -X POST "https://localhost:8443/assistant/chat/completions" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "gpt-4o-mini",
-    "messages": [
-      {
-        "role": "user",
-        "content": "Hi"
-      }
-    ]
-  }' -k
-```
-
 ## Stopping the Gateway
 
 When stopping the gateway, you have two options:
