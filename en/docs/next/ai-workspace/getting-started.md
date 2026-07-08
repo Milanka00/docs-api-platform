@@ -42,6 +42,8 @@ docker compose up -d
 
 Navigate to **https://localhost:5380** and sign in with the default credentials:
 
+![AI Workspace file-based login window with Username and Password fields](../../assets/img/ai-gateway/ai-workspace/authentication/filebased-login.png)
+
 | Field    | Value   |
 |----------|---------|
 | Username | `admin` |

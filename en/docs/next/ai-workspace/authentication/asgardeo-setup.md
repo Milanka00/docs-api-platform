@@ -139,6 +139,10 @@ OIDC_POST_LOGOUT_REDIRECT_URL=https://<your-domain>/login
 
 `OIDC_REDIRECT_URL` must exactly match the authorized redirect URL you registered in step 2.
 
+Once configured, opening AI Workspace redirects you to the Asgardeo hosted login page instead of the file-based login form:
+
+![AI Workspace login page redirecting to the Asgardeo hosted login page](../../../assets/img/ai-gateway/ai-workspace/authentication/oidc-login-redirect.png)
+
 ## Claim flow summary
 
 The Asgardeo token carries these claims through to the Platform API:

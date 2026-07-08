@@ -27,6 +27,8 @@ File-based authentication stores a list of users directly in the Platform API co
 
 When `auth_mode = "basic"`, the AI Workspace login page renders a username and password form. The Platform API validates the credentials against a hashed user list defined in `config-platform-api.toml`:
 
+![AI Workspace file-based login window with Username and Password fields](../../../assets/img/ai-gateway/ai-workspace/authentication/filebased-login.png)
+
 ```toml
 [auth.file_based]
 enabled = true
