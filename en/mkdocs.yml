@@ -366,7 +366,9 @@ nav:
           - Deploying APIs:
             - Bottom-Up Deployment: api-gateway/next/deployment/deploying-apis/bottom-up-api-deployment.md
         - Observability:
-          - Logging: api-gateway/next/observability/logging.md
+          - Logging:
+            - Centralized Logging: api-gateway/next/observability/logging.md
+            - Traffic Logging: api-gateway/next/observability/traffic-logging.md
           - Tracing:
             - Overview: api-gateway/next/observability/tracing/overview.md
             - Enabling and Disabling Tracing: api-gateway/next/observability/tracing/enabling-tracing.md
