@@ -13,7 +13,7 @@ last_updated: 2026-06-30
 content_type: "how-to"
 ---
 
-# Confuguring Timeouts
+# Configuring Timeouts
 
 This guide explains how to configure **timeouts** for the API Platform Gateway so that requests to slow or unreachable backends, and slow downstream clients, fail within a predictable time instead of hanging indefinitely.
 
@@ -280,4 +280,4 @@ spec:
     timeout: 0s   # no route (response) timeout for this API
 ```
 
-The route will wait indefinitely for the upstream response (bounded only by connect and idle timeouts). Use with care.
+Disabling the route timeout removes only the per-route **response deadline** — it does not make the request truly unbounded. The request is still subject to every other applicable timeout: the upstream `connect_timeout_ms`, the route `idleTimeout`, and the downstream HCM `stream_idle_timeout` / `idle_timeout`, any of which can still terminate a stalled stream or connection. In other words, behaviour is bounded by all applicable gateway- and API-level timeouts. Use with care.
