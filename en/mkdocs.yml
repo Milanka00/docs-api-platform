@@ -702,6 +702,10 @@ nav:
         - Overview: next/ai-workspace/llm-providers/overview.md
         - Configure Provider: next/ai-workspace/llm-providers/configure-provider.md
         - Manage Provider: next/ai-workspace/llm-providers/manage-provider.md
+    - LLM Provider Templates:
+        - Overview: next/ai-workspace/llm-provider-templates/overview.md
+        - Configure Template: next/ai-workspace/llm-provider-templates/configure-template.md
+        - Manage Template: next/ai-workspace/llm-provider-templates/manage-template.md
     - App LLM Proxies:
         - Overview: next/ai-workspace/llm-proxies/overview.md
         - Configure App LLM Proxy: next/ai-workspace/llm-proxies/configure-proxy.md
