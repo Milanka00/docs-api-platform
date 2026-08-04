@@ -542,7 +542,6 @@ nav:
     - "next":
         - Overview: ai-gateway/next/overview.md
         - Quick Start Guide: ai-gateway/next/quick-start-guide.md
-        - Real-Time AI Streaming: ai-gateway/next/streaming-responses.md
         - Setup:
             - Configuration & Interpolation: ai-gateway/next/setup/configuration.md
             - Setting Up the Database: ai-gateway/next/setup/database-setup.md
@@ -575,6 +574,7 @@ nav:
                 - MCP Authentication: ai-gateway/next/mcp-proxy/policies/mcp-authentication.md
                 - MCP Authorization: ai-gateway/next/mcp-proxy/policies/mcp-authorization.md
                 - MCP Rewrite: ai-gateway/next/mcp-proxy/policies/mcp-rewrite.md
+        - Real-Time AI Streaming: ai-gateway/next/streaming-responses.md
         - Deployment Modes:
           - Immutable Gateway: ai-gateway/next/deployment-modes/immutable-gateway.md
           - Kubernetes:
