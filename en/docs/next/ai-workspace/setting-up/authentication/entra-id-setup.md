@@ -310,6 +310,3 @@ Check the following fields:
 | `tid` | `<TENANT_ID>` |
 | `roles` | The assigned application role |
 | `scp` | `access` |
-
-!!! warning
-    Don't share access tokens publicly.

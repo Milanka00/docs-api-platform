@@ -541,6 +541,7 @@ nav:
   - AI Gateway:
     - "next":
         - Overview: ai-gateway/next/overview.md
+        - Quick Start Guide: ai-gateway/next/quick-start-guide.md
         - Setup:
             - Configuration & Interpolation: ai-gateway/next/setup/configuration.md
             - Setting Up the Database: ai-gateway/next/setup/database-setup.md
@@ -783,7 +784,7 @@ nav:
     # Credentials the artifacts above reference.
     - Secrets Management: next/ai-workspace/secrets-management.md
     # The other two ways artifacts get created.
-    - Sync Gateway-Created Artifacts: next/ai-workspace/sync-gateway-created-artifacts.md
+    - Manage Gateway-deployed AI artifacts: next/ai-workspace/sync-gateway-created-artifacts.md
     - CI/CD:
         - Overview: next/ai-workspace/ci-cd/overview.md
         - Configure CI/CD Workflow: next/ai-workspace/ci-cd/configure-ci-cd-workflow.md

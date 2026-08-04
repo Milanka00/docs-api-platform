@@ -1,18 +1,22 @@
 ---
-title: "LLM Proxy Quick Start Guide"
-description: "Run API Platform AI Gateway with Docker Compose, configure an LLM provider, and route your first LLM request through a managed proxy."
-canonical_url: https://wso2.com/api-platform/docs/ai-gateway/llm-proxy/quick-start-guide/
-md_url: https://wso2.com/api-platform/docs/ai-gateway/llm-proxy/quick-start-guide.md
+title: "AI Gateway Quick Start Guide"
+description: "Run API Platform AI Gateway with Docker Compose, deploy an LLM provider and an LLM proxy, route your first LLM request, and govern the gateway from AI Workspace."
+canonical_url: https://wso2.com/api-platform/docs/ai-gateway/quick-start-guide/
+md_url: https://wso2.com/api-platform/docs/ai-gateway/quick-start-guide.md
 tags:
   - ai-gateway
   - llm
+  - mcp
   - quickstart
+  - docker
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-07-02
+last_updated: 2026-08-04
 content_type: "quickstart"
 ---
 
-## Quick Start
+# Quick Start Guide
+
+This guide takes you from a downloaded distribution to an LLM request routed through the API Platform AI Gateway, then shows you how to govern that gateway from [AI Workspace](../../next/ai-workspace/overview.md), the control plane for AI traffic. It's written for platform administrators and AI developers.
 
 !!! info "Watch the video walkthrough"
     [Check out this quick start on YouTube](https://youtu.be/p5xBXZWt5GU?rel=0) or watch below.
@@ -27,10 +31,7 @@ content_type: "quickstart"
   allowfullscreen>
 </iframe>
 
-### Using Docker Compose (Recommended)
-
-
-### Prerequisites
+## Prerequisites
 
 A Docker-compatible container runtime such as:
 
@@ -46,7 +47,12 @@ docker --version
 docker compose version
 ```
 
-<!-- Replace ${version} with the actual release version of the API Platform Gateway. -->
+To call an LLM through the gateway, you also need an OpenAI API key.
+
+## Start the gateway
+
+<!-- Replace `${version}` with the API Platform AI Gateway release version you want to run. -->
+
 ```bash
 # Download distribution.
 wget https://github.com/wso2/api-platform/releases/download/ai-gateway/v1.2.0-rc/wso2apip-ai-gateway-1.2.0-rc.zip
@@ -91,9 +97,12 @@ curl http://localhost:9094/api/admin/v1/health
       --data-binary "@openai-provider.yaml"
     ```
 
+!!! tip "Customizing configuration"
+    The setup script (`setup.sh`, or `setup.ps1` on Windows) writes `api-platform.env`, which is loaded into the containers via Docker Compose `env_file`. To change the storage backend, connect to a control plane, or tune other settings, edit that file (or the `config.toml` interpolation tokens directly). See [Gateway Configuration and Environment Interpolation](./setup/configuration.md).
+
 ## Deploy an OpenAI LLM provider configuration
 
-The API Platform Gateway currently includes first-class support for the OpenAI LLM provider. As a platform administrator, replace `<openai-apikey>` with your openai API key and run the following command to deploy a sample OpenAI LLM provider.
+The API Platform Gateway includes first-class support for the OpenAI LLM provider. As a platform administrator, replace `<openai-apikey>` with your OpenAI API key and run the following command to deploy a sample OpenAI LLM provider.
 
 ```bash
 curl -X POST http://localhost:9090/api/management/v1/llm-providers \
@@ -145,7 +154,7 @@ curl -X POST https://localhost:8443/openai/latest/chat/completions \
 
 ## Deploy an LLM proxy configuration to consume an LLM provider
 
-The API Platform Gateway provides first-class support for configuring and deploying LLM proxies. As an AI developer, run the following command to deploy a sample LLM proxy that consumes the OpenAI LLM provider previously deployed by the platform administrator.
+The API Platform Gateway provides first-class support for configuring and deploying LLM proxies. As an AI developer, run the following command to deploy a sample LLM proxy that consumes the OpenAI LLM provider the platform administrator deployed above.
 
 ```bash
 curl -X POST http://localhost:9090/api/management/v1/llm-proxies \
@@ -182,25 +191,40 @@ curl -X POST "https://localhost:8443/assistant/chat/completions" \
   }' -k
 ```
 
-## View the LLM provider and proxy in AI Workspace
+## Govern this gateway from AI Workspace
 
-The gateway syncs the artifacts you deploy on it up to [AI Workspace](../../../next/ai-workspace/overview.md), the control plane for AI traffic across your organization. The OpenAI provider and the `openai-assistant` proxy you deployed above appear there without being re-declared. See [Manage Gateway-deployed AI artifacts in AI Workspace](../../../next/ai-workspace/sync-gateway-created-artifacts.md).
+The gateway you just started serves traffic on its own, and it doesn't have to run alone. [AI Workspace](../../next/ai-workspace/overview.md) is the control plane for AI traffic across your organization: one console for LLM providers, App LLM proxies, MCP proxies, policies such as guardrails and token-based rate limits, and the credentials behind them. Register this gateway with AI Workspace to govern every AI gateway you run from a single place, across every environment.
 
-## Stopping the Gateway
+Both directions work, and you can use them together:
+
+- **Top-down.** Configure an artifact in AI Workspace, apply policies to it, then deploy it to one or more gateways.
+- **Bottom-up.** Keep deploying through the management API, the way this guide does. Every artifact you create on the gateway syncs up to AI Workspace automatically and appears there as a copy the gateway owns, so the OpenAI provider and the `openai-assistant` proxy you deployed above show up without being re-declared. To see what a synced artifact looks like, and what stays editable, see [Manage Gateway-deployed AI artifacts in AI Workspace](../../next/ai-workspace/sync-gateway-created-artifacts.md).
+
+The gateway keeps serving traffic either way. If AI Workspace is unreachable, the gateway carries on and the sync catches up once the connection is restored.
+
+## Stopping the gateway
 
 When stopping the gateway, you have two options:
 
-### Option 1: Stop runtime, keep data (persisted proxies and configuration)
+**Option 1: Stop runtime, keep data (persisted proxies and configuration)**
 
 ```bash
 docker compose down
 ```
 
-This stops the containers but preserves the `controller-data` volume. When you restart with `docker compose up`, all your API configurations will be restored.
+This stops the containers but preserves the `controller-data` volume. When you restart with `docker compose up`, all your configurations are restored.
 
-### Option 2: Complete shutdown with data cleanup (fresh start)
+**Option 2: Complete shutdown with data cleanup (fresh start)**
 
 ```bash
 docker compose down -v
 ```
-This stops containers and removes the `controller-data` volume. Next startup will be a clean slate with no persisted templates or provider configuration.
+
+This stops the containers and removes the `controller-data` volume. The next startup is a clean slate with no persisted templates or provider configuration.
+
+## Next steps
+
+- Route to more than one provider, with failover: [Multi-provider routing](./llm-proxy/multi-provider-routing.md)
+- Add guardrails to a proxy, such as [PII masking](./llm-proxy/guardrails/pii-masking-regex.md) or a [JSON schema guardrail](./llm-proxy/guardrails/json-schema.md)
+- Expose an MCP server through the gateway: [MCP proxy quick start guide](./mcp-proxy/quick-start-guide.md)
+- Govern AI traffic across all your gateways from the control plane: [AI Workspace overview](../../next/ai-workspace/overview.md)
