@@ -548,7 +548,9 @@ nav:
             - Setting Up the Database: ai-gateway/next/setup/database-setup.md
         - LLM Proxy:
             - Quick Start Guide: ai-gateway/next/llm-proxy/quick-start-guide.md
-            - LLM Provider Templates: ai-gateway/next/llm-proxy/llm-templates.md
+            - LLM Providers:
+                - Provider Templates: ai-gateway/next/llm-proxy/llm-templates.md
+                - AWS Bedrock: ai-gateway/next/llm-proxy/configure-aws-bedrock-provider.md
             - Multi-Provider Routing: ai-gateway/next/llm-proxy/multi-provider-routing.md
             - Guardrails:
                 - AWS Bedrock Guardrail: ai-gateway/next/llm-proxy/guardrails/aws-bedrock-guardrail.md
