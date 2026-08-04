@@ -76,6 +76,7 @@ Step 4 points both `[api_portal.auth.authorization.portal_roles]` entries at the
 Update the `[api_portal.auth]` tables in `configs/config.toml`:
 
 {% raw %}
+
 ```toml
 [api_portal.auth]
 mode = "idp"
@@ -113,6 +114,7 @@ page_role_validation  = true
 admin      = "dp_admin"
 subscriber = "dp_subscriber"
 ```
+
 {% endraw %}
 
 `mode = "idp"` selects the identity provider backend and stops the local login form from being used. `callback_url` must exactly match one of the authorized redirect URLs you registered in step 2. A single `callback_url` is shared across all portal organizations—after the callback, the portal uses the session's stored return path to redirect the user to the correct organization, so you register only this one URL with Asgardeo.
@@ -137,7 +139,7 @@ handle       = "acme"      # the Asgardeo sub-org handle
 display_name = "Acme"
 ```
 
-Set this before the portal first starts. The handle is what the portal writes into the organization's **IDP reference ID** when it seeds the organization row, and that field is fixed afterwards—the Management API rejects a request that changes it. Changing the handle later means seeding a new organization.
+Set this before the portal first starts. The handle is what the portal writes into the organization's **IDP reference ID** when it seeds the organization row, and that field is fixed afterward—the Management API rejects a request that changes it. Changing the handle later means seeding a new organization.
 
 The handle is also the URL slug in `/{handle}/views/{viewName}`, so it appears in every portal URL. The portal normalizes it to lowercase, though the claim match itself tolerates any case.
 
@@ -204,7 +206,7 @@ Keep the claim names consistent between the Asgardeo token attributes and the `[
 6. Assign the `dp:*` scopes to your roles, giving administrators the full set and subscribers only what everyday consumer operations need—`dp:application:manage`, `dp:subscription:manage`, `dp:api_key:manage`, and the `dp:*:read` scopes for browsing the catalog.
 7. Set `mode = "scope"` in `[api_portal.auth.authorization]`.
 
-The script registers an API resource representing the portal, with all `dp:*` scopes under it. For local testing, its default `ASGARDEO_RESOURCE_IDENTIFIER=https://localhost:9543` works unchanged. The system application is only needed to run the script, and can be deleted afterwards.
+The script registers an API resource representing the portal, with all `dp:*` scopes under it. For local testing, its default `ASGARDEO_RESOURCE_IDENTIFIER=https://localhost:9543` works unchanged. The system application is only needed to run the script, and can be deleted afterward.
 
 In scope mode, browser sessions are preauthorized: the portal skips the per-operation scope check for a user signed in through Asgardeo, and page role gating is the authorization that applies to them. The `dp:*` scopes then govern machine clients calling `/api/v0.9` with a Bearer token.
 

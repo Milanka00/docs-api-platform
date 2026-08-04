@@ -137,10 +137,10 @@ See the [Management API](../rest-api/overview.md) for the full set of available 
 | Symptom | Cause | Fix |
 |---|---|---|
 | `403 Missing organization claim in token` | Token has no org claim | Log in with `org=<ORGANIZATION_IDENTIFIER>` in the auth URL |
-| `404 Organization not found` | Token's org claim doesn't match any known org | Verify `ORGANIZATION_IDENTIFIER` matches the portal's `[api_portal.organization] handle` |
-| `403 Forbidden` (scope error) | Token is missing required `dp:*` scopes | Assign the user a role the portal's grant table names, or register the `dp:*` scopes when running in `mode = "scope"` |
+| `403 Forbidden` (organization) | Token's org claim doesn't resolve to the organization this portal serves. Unknown and foreign organizations return the same status, so the response can't be used to discover which organizations exist | Verify `ORGANIZATION_IDENTIFIER` matches the portal's `[api_portal.organization] handle` |
+| `403 Forbidden` (scope error) | The request's effective scopes don't cover the operation | In `mode = "role"`, assign the user a role the portal's grant table names. In `mode = "scope"`, grant the operation's `dp:*` scope to the application in the IDP |
 | `401 Authentication required` | Token expired or invalid | Re-run steps 1–5 for a fresh token |
-| Token has no `dp:*` scopes | Role not assigned to the user | In the Asgardeo console, assign `dp_admin` for full access, or `dp_subscriber`, to the user |
+| Token carries no `dp:*` scopes | Expected in `mode = "role"`—the portal derives scopes from the roles claim and ignores the token's own scope claim, so an absent `dp:*` scope isn't the fault | Check the roles claim instead. In the Asgardeo console, assign `dp_admin` for full access, or `dp_subscriber`. Only `mode = "scope"` requires the scopes in the token |
 | `nc` gets no output | Redirect URI not registered in IDP | Add `http://localhost:8080` to authorized redirect URIs |
 
 ## Token lifetime

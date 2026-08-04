@@ -115,11 +115,11 @@ To install and run it, follow the [Getting started](getting-started.md) guide.
 
 ??? note "Webhook-based event integration"
 
-    The portal emits signed events for credential and plan changes instead of writing to a gateway itself, so it doesn't depend on a specific gateway or control plane.
+    The portal emits signed events for credential and plan changes rather than holding gateway-specific logic. Most deployments subscribe the Platform API control plane, which propagates each change to the gateways the API is deployed to.
 
-    - **Signed delivery**: Events for API key, application, and subscription plan changes carry a signature receivers verify.
-    - **Downstream provisioning**: Receivers react to events to provision, revoke, or sync resources in their own systems.
-    - **Per-organization subscribers**: Register receivers through the Management API rather than static configuration.
+    - **Signed delivery**: Events for API key, application, and subscription plan changes carry a signature the subscriber verifies, and credential fields arrive encrypted.
+    - **Control plane integration**: Register the Platform API as a subscriber and it persists each credential and pushes it out to every gateway serving the API. A gateway or a handler of your own can subscribe directly instead.
+    - **Per-organization subscribers**: Register receivers through the Settings UI or the Management API rather than static configuration, so your own handler can subscribe alongside the control plane.
 
     **[Learn more](admin-settings/webhook-integration.md)**
 

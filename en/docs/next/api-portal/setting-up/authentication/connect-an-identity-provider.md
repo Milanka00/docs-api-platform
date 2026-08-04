@@ -50,7 +50,7 @@ In your IdP, create a confidential OIDC application. Replace `<your-domain>` wit
 2. Set the post-logout redirect URL to `https://<your-domain>/<org-handle>`. Most IdPs validate `post_logout_redirect_uri` against the same list as the login callback, so add both URLs there.
 3. Enable the **Authorization Code** and **Refresh Token** grants.
 4. Set the access token type to **JWT**.
-5. Add `given_name`, `family_name`, `email`, and `roles` to the token's attributes, along with whichever claim carries the organization identifier.
+5. Configure the IdP to emit `given_name`, `family_name`, `email`, `roles`, and the claim carrying the organization identifier **in the ID token**. The portal reads user and organization identity from the ID token, not the access token, so a claim released only on the access token or the userinfo endpoint won't be seen.
 6. Record the client ID and client secret.
 
 One redirect URL covers the whole portal. After the callback, the portal routes the user from the return path stored in their session, so there are no per-view or per-page redirect URLs to register.
@@ -69,7 +69,7 @@ Each value is either a flat top-level claim name or a dot-separated path into a 
 
 A roles or groups claim may arrive as a JSON array or as a space- or comma-separated string. The portal accepts both.
 
-Four more claims are read under fixed names and aren't configurable: `sub` for the user identity, `given_name` (falling back to `nickname`) and `family_name` for the display name, `email` for the address shown in the profile menu, and `picture` for the avatar.
+The portal also reads these fixed claims, whose names aren't configurable: `sub` for the user identity, `given_name` (falling back to `nickname`) and `family_name` for the display name, `email` for the address shown in the profile menu, and `picture` for the avatar.
 
 ## Step 3: Choose how privileges reach the token
 
@@ -115,7 +115,7 @@ mode = "idp"
 
 [api_portal.auth.idp]
 name                = "my-idp"                                          # friendly name, used in logs
-issuer              = "https://idp.example.com/oauth2/token"
+issuer              = "https://idp.example.com"                         # exact "iss" claim value, not an endpoint
 authorization_url   = "https://idp.example.com/oauth2/authorize"
 token_url           = "https://idp.example.com/oauth2/token"
 user_info_url       = "https://idp.example.com/oauth2/userinfo"
@@ -149,10 +149,11 @@ subscriber = "ap_subscriber"
 
 {% endraw %}
 
-Three things to get right:
+Four things to get right:
 
 - **`callback_url`** must match the URL registered in step 1 exactly, character for character.
-- **`issuer`** must match the token's `iss` claim, and **`audience`** its `aud` claim. Set `audience` to your client ID rather than leaving it empty, so a token minted for a different application is rejected.
+- **`issuer`** is the IdP's issuer identifier—the exact string it puts in the token's `iss` claim—and is compared verbatim. It's a distinct value from `token_url`, though some providers do use their token endpoint URL as the issuer: Asgardeo and WSO2 Identity Server both issue `iss` as `.../oauth2/token`. Decode a token from your IdP and copy `iss` out of it rather than assuming either form.
+- **`audience`** must match the token's `aud` claim. Set it to your client ID rather than leaving it empty, so a token minted for a different application is rejected.
 - **`scope`** must request whatever the IdP needs to emit the organization and roles claims. Keep `openid`, and add the scope your IdP attaches role information to.
 
 !!! important "Two retired keys abort startup"
@@ -230,7 +231,7 @@ If sign-in fails, the mismatch is usually one of these:
 
 - `callback_url` differs from the redirect URL registered in the IdP.
 - `issuer` doesn't match the token's `iss` claim, or `audience` doesn't match its `aud` claim.
-- The ID token carries organization or roles claims under names `[api_portal.auth.claim_mappings]` doesn't name.
+- The ID token doesn't carry the claim names configured in `[api_portal.auth.claim_mappings]`, so the organization or roles claim is never found.
 - The organization claim's value is neither the organization handle nor its display name, so it resolves to no organization the instance serves.
 - The IdP issues opaque access tokens rather than JWTs, which fails Bearer-token requests to `/api/v0.9` while browser login still works.
 
@@ -260,7 +261,7 @@ The roles claim is the one that most often differs. These paths are known to wor
 
 ## Related topics
 
-- [Set up Asgardeo as your identity provider](../../tutorials/asgardeo-as-idp.md): these steps applied to Asgardeo, including `dp:*` scope registration
+- [Set up Asgardeo as your identity provider](../../tutorials/asgardeo-as-idp.md): these steps apply to Asgardeo, including `dp:*` scope registration
 - [Authentication in the API Portal & MCP Hub](overview.md): how identity provider authentication compares with local authentication
 - [Configurations](../../references/configurations.md): every `config.toml` key, and how interpolation tokens deliver values into it
 - [Organization settings](../../admin-settings/organization-settings.md): the organization's display name and references, as administrators see them

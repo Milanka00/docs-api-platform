@@ -14,7 +14,7 @@ content_type: "overview"
 
 # API Portal & MCP Hub overview
 
-The API Portal & MCP Hub is a portal that acts as the front door between your APIs and the developers who consume them. API publishers register APIs and MCP servers in the portal, and developers discover, subscribe, and generate credentials—all without needing direct access to the underlying gateway or infrastructure.
+The API Portal & MCP Hub connects the teams that publish your APIs with the developers who consume them. API publishers register APIs and MCP servers in the portal, and developers discover, subscribe, and generate credentials—all without needing direct access to the underlying gateway or infrastructure.
 
 New to the portal's building blocks? See [Concepts](concepts.md) for a glossary of the organization, views, labels, APIs, MCP servers, API workflows, subscription plans, applications, subscriptions, and API keys.
 
@@ -86,13 +86,16 @@ The **Settings** page is where admins configure everything above from one place:
 
 ## Gateway-agnostic, unified developer experience
 
-The portal doesn't embed gateway-specific logic. Instead, it emits signed webhook events: whenever a developer generates an API key, subscribes, or revokes a key, the portal fires a signed HTTP POST to every registered gateway subscriber, and each gateway adapter enforces access in its own way.
+The portal holds no gateway-specific logic. Instead, it emits signed webhook events: whenever a developer generates an API key, subscribes, or revokes a key, the portal fires a signed HTTP POST to every registered subscriber.
+
+A subscriber is any endpoint you register. Most deployments point it at the Platform API control plane, which verifies the signature, decrypts the credential, persists it, and propagates it to every gateway the API is deployed to. A gateway that consumes the events itself can subscribe directly instead, as can a handler of your own.
 
 This means you can:
 
-- Connect multiple gateways of different types to the same portal simultaneously
+- Serve every gateway type your control plane supports, through one integration
 - Replace or swap a gateway without changing how developers interact with the portal
 - Run the portal standalone, with no live gateway required
+- Provision systems beyond a gateway, by registering a handler that acts on the same events
 
 ## Views
 
