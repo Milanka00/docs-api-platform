@@ -14,7 +14,9 @@ content_type: "overview"
 
 # API Portal & MCP Hub overview
 
-The API Portal & MCP Hub connects the teams that publish your APIs with the developers who consume them. API publishers register APIs and MCP servers in the portal, and developers discover, subscribe, and generate credentials—all without needing direct access to the underlying gateway or infrastructure.
+The API Portal & MCP Hub is a web application that serves a catalog of APIs, MCP servers, and API workflows. It keeps its own database and exposes a Management REST API for everything the UI does. Publishers register artifacts in the portal, and developers browse them, subscribe under a plan, and generate credentials.
+
+The portal issues those credentials without enforcing them: it publishes signed events, and the gateway checks each call—so developers need no access to the gateway or the infrastructure behind it.
 
 New to the portal's building blocks? See [Concepts](concepts.md) for a glossary of the organization, views, labels, APIs, MCP servers, API workflows, subscription plans, applications, subscriptions, and API keys.
 

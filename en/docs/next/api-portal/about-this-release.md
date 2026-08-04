@@ -14,7 +14,7 @@ content_type: "release-notes"
 
 # About this release
 
-The API Portal & MCP Hub is a portal for APIs and Model Context Protocol (MCP) servers. API publishers expose APIs, MCP servers, and guided API workflows through a themed catalog, and developers discover them, subscribe to plans, generate credentials, and call them. It runs as a standalone distribution alongside the Platform API control plane, keeps its own database, and integrates with gateways through signed webhook events rather than a fixed control-plane binding.
+The API Portal & MCP Hub is a web application that serves a catalog of APIs, Model Context Protocol (MCP) servers, and API workflows. Publishers register artifacts in it, and developers browse them, subscribe to plans, generate credentials, and call the APIs. It runs as a standalone distribution alongside the Platform API control plane, keeps its own database, and reaches gateways through signed webhook events rather than a fixed control-plane binding.
 
 **API Portal & MCP Hub 1.0.0** is the first **API Portal & MCP Hub release**. Every capability listed below is available for the first time, so there is no predecessor to upgrade from.
 
