@@ -235,7 +235,7 @@ services:
 Once updated, start the gateway as usual:
 
 ```bash
-docker compose up -d
+docker compose up
 ```
 
 ## Deploy the API

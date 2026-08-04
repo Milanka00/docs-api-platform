@@ -50,7 +50,7 @@ The script prompts for the admin username and password. Press <kbd>Enter</kbd> a
 | API Portal encryption key | `resources/keys/api-portal-encryption.key` | Encrypts the API Portal's subscription and webhook secrets at rest. Retain it for the same reason. |
 | API Portal session secret | `resources/keys/api-portal-session-secret` | Signs API Portal session cookies. Rotating it only signs users out. |
 | Admin credentials | `api-platform.env` | The Platform API's basic-auth admin user: `APIP_CP_ADMIN_USERNAME` plus the bcrypt `APIP_CP_ADMIN_PASSWORD_HASH`. |
-| Compose defaults | `.env` | `COMPOSE_PROFILES`, which decides the services a plain `docker compose up -d` starts, and `COMPOSE_PROJECT_NAME`, which namespaces this copy's containers, networks, and volumes. |
+| Compose defaults | `.env` | `COMPOSE_PROFILES`, which decides the services a plain `docker compose up` starts, and `COMPOSE_PROJECT_NAME`, which namespaces this copy's containers, networks, and volumes. |
 
 
 !!! warning "Save the printed admin username and password"
@@ -62,7 +62,7 @@ The script prompts for the admin username and password. Press <kbd>Enter</kbd> a
 ## Step 3: Start the stack
 
 ```bash
-docker compose up -d
+docker compose up
 ```
 
 !!! tip "Port 9643 or 9243 already taken?"
@@ -113,7 +113,7 @@ Rerunning `./scripts/setup.sh` is safe. By default it fills in only what's missi
 | `--force` | Regenerate the TLS certificate, the JWT keypair, and the API Portal session secret, and rotate the admin credentials. Never touches either encryption key. |
 | `--rotate-encryption-key` | Replace `resources/keys/encryption.key` and `resources/keys/api-portal-encryption.key`, even though they exist. Destructive — see the warning below. |
 | `--certs-only` | Generate only the TLS certificate. Skips the keys, the admin credentials, and `api-platform.env`. |
-| `--profiles=<a,b,...>` | Write a different `COMPOSE_PROFILES` value to `.env`, for example `--profiles=all` or `--profiles=platform-api`. |
+| `--profiles=<a,b,...>` | Write a different `COMPOSE_PROFILES` value to `.env`, for example `--profiles=platform-api` or `--profiles=platform-api,api-portal`. |
 
 To rotate a single value by hand, delete it from `api-platform.env` — or delete the file under `resources/certificates` or `resources/keys` — and rerun the script.
 

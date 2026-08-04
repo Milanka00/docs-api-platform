@@ -114,14 +114,14 @@ The distribution ships `scripts/setup.sh` (and `scripts/setup.ps1`, its Windows 
 
     ```bash
     ./scripts/setup.sh
-    docker compose up -d
+    docker compose up
     ```
 
 === "Windows (PowerShell)"
 
     ```powershell
     powershell -ExecutionPolicy Bypass -File .\scripts\setup.ps1
-    docker compose up -d
+    docker compose up
     ```
 
 The setup script provisions, idempotently:

@@ -87,7 +87,7 @@ This starts:
 To run only the core gateway services without the demonstration metrics stack:
 
 ```bash
-docker compose up -d
+docker compose up
 ```
 
 **Note:** The gateway components still expose metrics if enabled in the configuration. You can still access metrics directly at:

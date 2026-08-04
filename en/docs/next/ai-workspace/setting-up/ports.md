@@ -119,7 +119,7 @@ So a wrong value leaves AI Workspace working normally and breaks the gateway ins
 Recreate the containers so they pick up the new values:
 
 ```bash
-docker compose up -d --force-recreate
+docker compose up --force-recreate
 ```
 
 !!! note "Ports in an OpenID Connect (OIDC) setup"

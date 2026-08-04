@@ -106,7 +106,7 @@ For production, configure AI Workspace to delegate login to an identity provider
 | Custom claims | Tokens carry organization identity as custom claims (claim names are configurable) |
 | Confidential client | AI Workspace is registered as a confidential client with a client secret, not a public or single-page application client |
 
-[Connect an identity provider to AI Workspace](connect-an-identity-provider.md) covers the configuration for any such IdP. It walks through client registration, claim mappings, and the choice between scope and role authorization. [Set up Asgardeo as your identity provider](asgardeo-setup.md) applies those steps to one specific IdP.
+[Connect an identity provider to AI Workspace](connect-an-identity-provider.md) covers the configuration for any such IdP. It walks through client registration, claim mappings, and the choice between scope and role authorization. Two guides apply those steps to a specific IdP: [Set up Asgardeo as your identity provider](asgardeo-setup.md) and [Set up Microsoft Entra ID as your identity provider](entra-id-setup.md).
 
 ## Choosing a mode
 

@@ -109,6 +109,8 @@ apiVersion: gateway.api-platform.wso2.com/v1
 kind: Mcp
 metadata:
   name: everything-mcp-v1.0
+  annotations:
+    "gateway.api-platform.wso2.com/project-id": "default"
 spec:
   displayName: Everything
   version: v1.0
@@ -126,6 +128,10 @@ To test MCP traffic routing through the gateway, add the following URL to your M
 ```
 http://localhost:8080/everything/mcp
 ```
+
+## View the MCP proxy in AI Workspace
+
+The gateway syncs the artifacts you deploy on it up to [AI Workspace](../../../next/ai-workspace/overview.md), the control plane for AI traffic across your organization. The `everything-mcp-v1.0` proxy you deployed above appears there without being re-declared, in the `default` project named in its `project-id` annotation. See [Manage Gateway-deployed AI artifacts in AI Workspace](../../../next/ai-workspace/sync-gateway-created-artifacts.md).
 
 ## Stopping the Gateway
 
