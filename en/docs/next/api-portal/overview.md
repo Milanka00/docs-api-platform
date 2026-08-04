@@ -1,6 +1,6 @@
 ---
 title: "API Portal & MCP Hub overview"
-description: "The API Portal & MCP Hub is a self-hosted portal where API publishers expose APIs and MCP servers, and developers discover, subscribe, and consume them."
+description: "The API Portal & MCP Hub is a portal where API publishers expose APIs and MCP servers, and developers discover, subscribe, and consume them."
 canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/overview/
 md_url: https://wso2.com/api-platform/docs/cloud/api-portal/overview.md
 tags:
@@ -14,7 +14,7 @@ content_type: "overview"
 
 # API Portal & MCP Hub overview
 
-The API Portal & MCP Hub is a self-hosted web application that acts as the front door between your APIs and the developers who consume them. API publishers register APIs and MCP servers in the portal, and developers discover, subscribe, and generate credentials—all without needing direct access to the underlying gateway or infrastructure.
+The API Portal & MCP Hub is a portal that acts as the front door between your APIs and the developers who consume them. API publishers register APIs and MCP servers in the portal, and developers discover, subscribe, and generate credentials—all without needing direct access to the underlying gateway or infrastructure.
 
 New to the portal's building blocks? See [Concepts](concepts.md) for a glossary of the organization, views, labels, APIs, MCP servers, API workflows, subscription plans, applications, subscriptions, and API keys.
 
