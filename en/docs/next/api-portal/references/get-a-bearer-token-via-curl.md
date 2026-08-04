@@ -23,7 +23,7 @@ When the API Portal & MCP Hub is configured with an external IDP (e.g. Asgardeo)
 ## Prerequisites
 
 - An identity provider (IDP) is configured, with `api_portal.auth.idp.client_id` set in `config.toml`—see [Authentication](../setting-up/authentication/overview.md)
-- The `dp:*` scopes are registered in the IDP and assigned to your user (see [Set up Asgardeo](../setting-up/authentication/asgardeo-setup.md) steps 3–4)
+- Your user carries the privileges the operations need: a role the portal's grant table names when `auth.authorization.mode = "role"`, or the `dp:*` scopes themselves when it's `"scope"`—see [Choose how privileges reach the token](../setting-up/authentication/connect-an-identity-provider.md#step-3-choose-how-privileges-reach-the-token)
 - You have the **client ID** and **client secret** from your IDP application
 - You know your org's identifier (the `ORGANIZATION_IDENTIFIER` value used to scope the login, e.g. `sub`)
 

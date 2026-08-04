@@ -157,7 +157,7 @@ silent_sso = true      # Enable silent SSO
 org_callback = false   # Redirect to the org's own landing page after login
 ```
 
-See [Authentication](../setting-up/authentication/overview.md) for the authentication modes and the Asgardeo identity-provider walkthrough.
+See [Authentication](../setting-up/authentication/overview.md) for the authentication modes, and [Connect an identity provider](../setting-up/authentication/connect-an-identity-provider.md) for what each `[api_portal.auth.idp]` key has to line up with in the IdP.
 
 ### Authorization
 
@@ -214,15 +214,17 @@ Patterns are glob-matched (minimatch) against the request URL and merged with—
 handle = "default"                       # URL slug: /{handle}/views/{viewName}
 display_name = "Default"                 # Used only when first seeding the organization
 auto_create_subscription_plans = true    # Auto-create Bronze/Silver/Gold/Unlimited/AsyncUnlimited
+# idp_ref_id = "default"                 # IdP org claim; unset means "use the handle". Seed-time only
 ```
 
-These three keys describe the organization the instance serves:
+These keys describe the organization the instance serves:
 
 | Key | Description |
 |---|---|
 | `organization.handle` | The URL slug of the single organization this instance serves, and the pin every route is scoped against. Anything resolving to a different organization is rejected. In local-auth mode it must match the Platform API's organization id. In IDP mode the token's organization claim is matched against the organization's `idpRefId` instead—see the note below |
 | `organization.display_name` | Used only when seeding the organization for the first time. Never overwrites an existing name, so an admin's later edit in the settings UI survives restarts. Empty means "use the handle" |
 | `organization.auto_create_subscription_plans` | Seeds Bronze, Silver, Gold, Unlimited, and AsyncUnlimited alongside the organization |
+| `organization.idp_ref_id` | The organization claim value your IdP asserts, which incoming tokens are matched against. Read only when the organization row is seeded, so a later change here has no effect—edit **IDP reference ID** in [Organization settings](../admin-settings/organization-settings.md) instead. Empty means "use the handle". Matched verbatim, so unlike the handle it isn't lowercased |
 
 Seeding runs on startup only if the organization doesn't already exist, so it's idempotent and safe to leave enabled.
 
