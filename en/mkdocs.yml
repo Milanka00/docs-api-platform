@@ -542,7 +542,7 @@ nav:
     - "next":
         - Overview: ai-gateway/next/overview.md
         - Quick Start Guide: ai-gateway/next/quick-start-guide.md
-        - Streaming Responses: ai-gateway/next/streaming-responses.md
+        - Real-Time AI Streaming: ai-gateway/next/streaming-responses.md
         - Setup:
             - Configuration & Interpolation: ai-gateway/next/setup/configuration.md
             - Setting Up the Database: ai-gateway/next/setup/database-setup.md
@@ -595,7 +595,6 @@ nav:
             - AI Gateway runtime with four CPUs: ai-gateway/next/performance/ai-gateway-runtime-with-four-cpus.md
     - "1.1.0":
         - Overview: ai-gateway/1.1.0/overview.md
-        - Streaming Responses: ai-gateway/1.1.0/streaming-responses.md
         - LLM Proxy:
             - Quick Start Guide: ai-gateway/1.1.0/llm-proxy/quick-start-guide.md
             - LLM Provider Templates: ai-gateway/1.1.0/llm-proxy/llm-templates.md
@@ -624,6 +623,7 @@ nav:
                 - MCP Authentication: ai-gateway/1.1.0/mcp-proxy/policies/mcp-authentication.md
                 - MCP Authorization: ai-gateway/1.1.0/mcp-proxy/policies/mcp-authorization.md
                 - MCP Rewrite: ai-gateway/1.1.0/mcp-proxy/policies/mcp-rewrite.md
+        - Real-Time AI Streaming: ai-gateway/1.1.0/streaming-responses.md
         - Deployment Modes:
           - Immutable Gateway: ai-gateway/1.1.0/deployment-modes/immutable-gateway.md
           - Kubernetes:
