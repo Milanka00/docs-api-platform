@@ -1,6 +1,6 @@
 ---
 title: "Set up Microsoft Entra ID as your identity provider"
-description: "Configure Microsoft Entra ID as the identity provider for a production AI Workspace deployment, from application registration and app roles through to the config.toml tables both services read."
+description: "Configure Microsoft Entra ID for a production AI Workspace deployment: application registration, app roles, and the config.toml settings both services read."
 canonical_url: https://wso2.com/api-platform/docs/next/ai-workspace/setting-up/authentication/entra-id-setup/
 md_url: https://wso2.com/api-platform/docs/next/ai-workspace/setting-up/authentication/entra-id-setup.md
 tags:
@@ -35,25 +35,28 @@ This guide uses the following placeholders:
 |-------------|-------------|
 | `<TENANT_ID>` | The **Directory (tenant) ID** from the application's **Overview** page |
 | `<CLIENT_ID>` | The **Application (client) ID** from the application's **Overview** page |
-| `<AIW_HOST>` | The AI Workspace host as the browser reaches it, including the port when it isn't `443` — for example, `localhost:9643` |
+| `<AIW_HOST>` | The AI Workspace host as the browser reaches it, including the port when it isn't `443`—for example, `localhost:9643` |
 
 ## Configure Microsoft Entra ID
 
 ### Step 1: Register the application
 
+Register the application with the following settings:
+
+| Setting | Value |
+|---------|-------|
+| **Name** | `AI Workspace` |
+| **Supported account types** | Accounts in this organizational directory only |
+| **Redirect URI platform** | Web |
+| **Redirect URI** | `https://<AIW_HOST>/api/auth/callback` |
+| **Additional redirect URI** | `https://<AIW_HOST>/login` |
+
+Choose **Web** as the platform, not **Single-page application**, and register both redirect URIs on that platform. The first receives the sign-in callback. The second is where Entra ID returns the browser after sign-out. Entra ID validates the `post_logout_redirect_uri` against the registered redirect URIs, so the `/login` destination you set as `post_logout_redirect_url` in [Step 10](#step-10-configure-oidc-authentication) has to appear here.
+
+To register the application, follow these steps:
+
 1. In the Azure portal, go to **Microsoft Entra ID > App registrations > New registration**.
-2. Configure the application with these settings:
-
-    | Setting | Value |
-    |---------|-------|
-    | **Name** | `AI Workspace` |
-    | **Supported account types** | Accounts in this organizational directory only |
-    | **Redirect URI platform** | Web |
-    | **Redirect URI** | `https://<AIW_HOST>/api/auth/callback` |
-
-    !!! note
-        Select **Web** as the platform, not **Single-page application**.
-
+2. Enter the settings from the preceding table.
 3. Select **Register**.
 4. Open the application's **Overview** page and record the **Application (client) ID** and the **Directory (tenant) ID**.
 
@@ -69,24 +72,27 @@ Go to **App registrations > AI Workspace > Expose an API**.
 
 #### 2.2 Add an API scope
 
+Add a scope with the following settings:
+
+| Setting | Value |
+|---------|-------|
+| **Scope name** | `access` |
+| **Who can consent** | Admins and users |
+| **Admin consent display name** | Access AI Workspace |
+| **State** | Enabled |
+
+To add the scope, follow these steps:
+
 1. Select **Add a scope**.
-2. Configure the scope with these settings:
-
-    | Setting | Value |
-    |---------|-------|
-    | **Scope name** | `access` |
-    | **Who can consent** | Admins and users |
-    | **Admin consent display name** | Access AI Workspace |
-    | **State** | Enabled |
-
+2. Enter the settings from the preceding table.
 3. Select **Add scope**.
 
 #### 2.3 Add API permissions
 
 1. Go to **API permissions > Add a permission > My APIs**.
-2. Select the **AI Workspace** application.
-3. Select **Delegated permissions**, then select the `access` scope.
-4. Select **Add permissions**.
+2. Choose the **AI Workspace** application.
+3. Under **Delegated permissions**, select the `access` scope.
+4. Confirm with **Add permissions**.
 
 #### 2.4 Grant admin consent
 
@@ -119,36 +125,40 @@ Store the secret securely. You configure it in AI Workspace in [Step 10](#step-1
 
 ### Step 5: Create application roles
 
+Each app role takes the following settings, shown here for `ap_admin`:
+
+| Setting | Value |
+|---------|-------|
+| **Display name** | `ap_admin` |
+| **Allowed member types** | Users/Groups |
+| **Value** | `ap_admin` |
+| **Do you want to enable this app role?** | Enabled |
+
+**Value** must match the corresponding role name in `role-to-scope-mapping.yaml`.
+
+To create a role, follow these steps:
+
 1. Go to **App registrations > AI Workspace > App roles**.
 2. Select **Create app role**.
-3. Configure the role with these settings, using `ap_admin` as an example:
+3. Enter the settings from the preceding table.
+4. Repeat for each role you need.
 
-    | Setting | Value |
-    |---------|-------|
-    | **Display name** | `ap_admin` |
-    | **Allowed member types** | Users/Groups |
-    | **Value** | `ap_admin` |
-    | **Do you want to enable this app role?** | Enabled |
+The default roles are:
 
-    **Value** must match the corresponding role name in `role-to-scope-mapping.yaml`.
-
-4. Repeat for each role you need. The default roles are:
-
-    | Role | Grants |
-    |------|--------|
-    | `ap_admin` | Full access to every resource and operation |
-    | `ap_operator` | Gateway and deployment operations |
-    | `ap_publisher` | Creating and publishing APIs and proxies |
-    | `ap_subscriber` | Applications and subscriptions |
-    | `ap_viewer` | Read-only access |
+| Role | Grants |
+|------|--------|
+| `ap_admin` | Full access to every resource and operation |
+| `ap_operator` | Gateway and deployment operations |
+| `ap_publisher` | Creating and publishing APIs and proxies |
+| `ap_subscriber` | Applications and subscriptions |
+| `ap_viewer` | Read-only access |
 
 ### Step 6: Assign roles to users or groups
 
 1. Go to **Microsoft Entra ID > Enterprise applications** and select the **AI Workspace** application.
-2. Go to **Users and groups > Add user/group**.
-3. Select the user or group.
-4. Select the application role to assign.
-5. Select **Assign**.
+2. Open **Users and groups > Add user/group**.
+3. Choose the user or group, then choose the application role to assign.
+4. Select **Assign**.
 
 ### Step 7: Add optional claims
 
@@ -157,15 +167,15 @@ Store the secret securely. You configure it in AI Workspace in [Step 10](#step-1
 3. Select **Access** as the token type.
 4. Add the `preferred_username`, `tid`, `oid`, and `email` claims.
 
-### Step 8: Get the OIDC endpoints
+### Step 8: Get the OpenID Connect (OIDC) endpoints
 
 Go to **App registrations > AI Workspace > Overview > Endpoints** and use the version 2.0 endpoints:
 
 | Endpoint | URL |
 |----------|-----|
-| OpenID Connect metadata | `https://login.microsoftonline.com/<TENANT_ID>/v2.0/.well-known/openid-configuration` |
+| OIDC metadata | `https://login.microsoftonline.com/<TENANT_ID>/v2.0/.well-known/openid-configuration` |
 | Issuer | `https://login.microsoftonline.com/<TENANT_ID>/v2.0` |
-| JWKS | `https://login.microsoftonline.com/<TENANT_ID>/discovery/v2.0/keys` |
+| JSON Web Key Set (JWKS) | `https://login.microsoftonline.com/<TENANT_ID>/discovery/v2.0/keys` |
 
 These values go into the Platform API configuration in the next step.
 
@@ -196,13 +206,15 @@ role_to_scope_mapping = "/etc/platform-api/role-to-scope-mapping.yaml"
 # Microsoft Entra ID claim mappings.
 [platform_api.auth.claim_mappings]
 organization = "tid"
-org_handle   = "oid"
-org_name     = "oid"
+org_handle   = "tid"
+org_name     = "tid"
 user_id      = "sub"
 username     = "preferred_username"
 email        = "email"
 roles        = "roles"
 ```
+
+All three organization keys map to `tid`, the directory (tenant) ID. `tid` is the only tenant-level identifier a version 2.0 access token carries by default, so every user in the tenant resolves to the same organization. For a readable organization name or slug, add a custom claim that carries the same value for every user in the tenant, then map `org_name` and `org_handle` to it.
 
 ## Configure AI Workspace
 
@@ -234,8 +246,8 @@ role_to_scope_mapping = "/etc/ai-workspace/role-to-scope-mapping.yaml"
 # Microsoft Entra ID claim mappings.
 [ai_workspace.auth.claim_mappings]
 organization = "tid"
-org_name     = "oid"
-org_handle   = "oid"
+org_name     = "tid"
+org_handle   = "tid"
 username     = "preferred_username"
 email        = "email"
 roles        = "roles"

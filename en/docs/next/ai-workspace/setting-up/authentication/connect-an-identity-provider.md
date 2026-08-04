@@ -166,7 +166,7 @@ roles        = "roles"
 
 Four things to get right:
 
-- **`[ai_workspace.auth.authorization]`** must use the same `mode` as `[platform_api.auth.authorization]`, and in role mode the same mapping file must be mounted into the `ai-workspace` container. The UI gates every action on the scopes `/api/session` reports, and AI Workspace builds that list from the token. In role mode it expands the `roles` claim through the mapping file, so without this table the UI shows operations as blocked that the Platform API would authorize.
+- **`[ai_workspace.auth.authorization]`** needs the same `mode` as `[platform_api.auth.authorization]`. In role mode, mount the same mapping file into the `ai-workspace` container. The UI gates every action on the scopes `/api/session` reports, and AI Workspace derives those scopes from the token. In role mode it expands the `roles` claim through the mapping file. Omit this table, and the UI blocks operations the Platform API would authorize.
 - **`authority`** is the issuer URL. Endpoints are discovered from it, so it must be the URL whose `/.well-known/openid-configuration` describes your IdP.
 - **`redirect_url`** must match the URL registered in Step 1 exactly, character for character.
 - **`[ai_workspace.auth.claim_mappings]`** must give every key it shares with `[platform_api.auth.claim_mappings]` the same value. Both services read the same token, so a mismatch means one of them reads the wrong claim. AI Workspace uses `username` and `email` to render the signed-in user, so they matter here as much as the organization claims. The table has no `user_id` key — only the Platform API maps that claim.
@@ -217,6 +217,6 @@ The roles claim is the one that most often differs. These paths are known to wor
 ## Next steps
 
 - [Set up Asgardeo as your identity provider](asgardeo-setup.md): an example of these steps applied to Asgardeo, including scope registration
-- [Set up Microsoft Entra ID as your identity provider](entra-id-setup.md): these steps applied to Entra ID, which needs app roles rather than scopes
+- [Set up Microsoft Entra ID as your identity provider](entra-id-setup.md): these steps applied to Entra ID, where authorization runs on app roles rather than scope-based authorization, and an API access scope such as `api://<CLIENT_ID>/access` is still required to acquire a token
 - [Authentication in AI Workspace](overview.md): how identity provider authentication compares with file-based authentication
 - [AI Workspace configuration](../configuration.md): how interpolation tokens deliver values into `config.toml`
