@@ -548,9 +548,7 @@ nav:
             - Setting Up the Database: ai-gateway/next/setup/database-setup.md
         - LLM Proxy:
             - Quick Start Guide: ai-gateway/next/llm-proxy/quick-start-guide.md
-            - LLM Providers:
-                - Provider Templates: ai-gateway/next/llm-proxy/llm-templates.md
-                - AWS Bedrock: ai-gateway/next/llm-proxy/configure-aws-bedrock-provider.md
+            - Provider Templates: ai-gateway/next/llm-proxy/llm-templates.md
             - Multi-Provider Routing: ai-gateway/next/llm-proxy/multi-provider-routing.md
             - Guardrails:
                 - AWS Bedrock Guardrail: ai-gateway/next/llm-proxy/guardrails/aws-bedrock-guardrail.md
@@ -827,18 +825,20 @@ nav:
   - Policy Hub:
     - Overview: policy-hub/overview.md
   - Guides:
-    - AI and MCP:
-        - Convert a REST API into an MCP Tool and Use It in Claude Desktop: guides/ai-and-mcp/convert-rest-api-to-mcp-server.md
+    - LLM Proxies:
         - Build an AI App with Claude Code that Calls Governed Backend APIs: guides/ai-and-mcp/build-ai-app-with-claude-code.md
         - Set up a Governed Multi-Model LLM Proxy with Cost Controls and Failover: guides/ai-and-mcp/set-up-a-governed-multi-model-llm-proxy-with-cost-controls-and-failover.md
-        - Find and Connect to an Enterprise MCP Server from the MCP Hub: guides/ai-and-mcp/find-and-connect-to-an-enterprise-mcp-server-from-the-mcp-hub.md
         - Enforce Token-Based Rate Limiting on an LLM Proxy: guides/ai-and-mcp/enforce-token-based-rate-limiting-on-an-llm-proxy.md
-        - Build an AI agent That Uses Aggregated MCP Tools from Multiple APIs: guides/ai-and-mcp/build-ai-agent-with-multiple-mcp-servers.md
         - Enforce a Consistent AI Persona with the Prompt Decorator Policy: guides/ai-and-mcp/using-prompt-decorator-policy.md
+        - Configure an AWS Bedrock Large Language Model Provider: ai-gateway/next/llm-proxy/configure-aws-bedrock-provider.md
         - AI Coding Assistants:
             - Configure Claude Code with AI Gateway: guides/ai-and-mcp/ai-coding-assistants/claude-code-configuration-with-ai-gateway.md
             - Configure Google Gemini CLI with AI Gateway: guides/ai-and-mcp/ai-coding-assistants/gemini-cli-configuration-with-ai-gateway.md
             - Configure OpenAI Codex CLI with AI Gateway: guides/ai-and-mcp/ai-coding-assistants/codex-configuration-with-ai-gateway.md
+    - MCP Proxies:
+        - Convert a REST API into an MCP Tool and Use It in Claude Desktop: guides/ai-and-mcp/convert-rest-api-to-mcp-server.md
+        - Find and Connect to an Enterprise MCP Server from the MCP Hub: guides/ai-and-mcp/find-and-connect-to-an-enterprise-mcp-server-from-the-mcp-hub.md
+        - Build an AI Agent That Uses Aggregated MCP Tools from Multiple APIs: guides/ai-and-mcp/build-ai-agent-with-multiple-mcp-servers.md
     - Developer Portal:
         - Go from Zero to a Working API Call Using the Developer Portal: guides/developer-portal/api-discovery-and-tryout.md
     - Monetization:
