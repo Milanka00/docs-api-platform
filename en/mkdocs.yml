@@ -760,6 +760,7 @@ nav:
             - Overview: next/ai-workspace/setting-up/authentication/overview.md
             - Connect an Identity Provider: next/ai-workspace/setting-up/authentication/connect-an-identity-provider.md
             - Set up Asgardeo: next/ai-workspace/setting-up/authentication/asgardeo-setup.md
+            - Set up Microsoft Entra ID: next/ai-workspace/setting-up/authentication/entra-id-setup.md
     # Build the artifacts, in the order you create them.
     - AI Gateways:
         - Setting Up: next/ai-workspace/ai-gateways/setting-up.md
