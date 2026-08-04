@@ -19,8 +19,8 @@ This tutorial walks you through configuring WSO2 Asgardeo as the identity provid
 
 The API Portal & MCP Hub uses Asgardeo's sub-organization model: each API Portal organization maps to one Asgardeo sub-organization. A single Asgardeo application, shared across every portal organization, handles login, and each session is scoped to one sub-organization:
 
-1. A portal organization has its IDP reference ID set to its Asgardeo sub-org handle.
-2. When a user selects **Login**, the portal redirects to Asgardeo with `org=<identifier>`, scoping the authorization to that sub-organization.
+1. A portal organization's handle is the Asgardeo sub-org handle.
+2. When a user selects **Login**, the portal redirects to Asgardeo with `org=<handle>`, scoping the authorization to that sub-organization.
 3. Asgardeo issues a JWT whose organization claim identifies the sub-organization. On every authenticated request, the portal verifies this claim matches the organization being accessed.
 4. Each session is bound to one sub-organization—reaching a different portal organization's protected pages means logging out and back in on that organization.
 
@@ -41,9 +41,9 @@ The API Portal & MCP Hub is a server-side application that can hold a client sec
 
 1. In the root organization, go to **Applications > New Application**.
 2. Choose **Traditional Web Application** and name it `API Portal & MCP Hub`.
-3. Under **Authorized redirect URLs**, add both:
-      - `https://<your-domain>/default/callback`—the login callback
-      - `https://<your-domain>/default`—the post-logout redirect (Asgardeo validates `post_logout_redirect_uri` against this same list)
+3. Under **Authorized redirect URLs**, add both, replacing `<org-handle>` with the sub-organization handle you settle on in step 5:
+      - `https://<your-domain>/<org-handle>/callback`—the login callback
+      - `https://<your-domain>/<org-handle>`—the post-logout redirect (Asgardeo validates `post_logout_redirect_uri` against this same list)
 
     This single shared URI pair is the only one you register. It matches the `callback_url` and `logout_redirect_uri` you set in step 4—after the callback, the portal uses the session's stored return path to route the user to the correct organization, so no per-organization redirect URLs are needed.
 4. Enable **Share with all organizations** so users in sub-organizations can log in.
@@ -90,9 +90,9 @@ jwks_url          = "https://api.asgardeo.io/t/<your-tenant>/oauth2/jwks"
 client_id         = "<api-portal-app-client-id>"
 client_secret     = '{{ env "APIP_AP_AUTH_IDP_CLIENT_SECRET" }}'
 audience          = "<api-portal-app-client-id>"   # Asgardeo sets the client ID as the aud claim
-callback_url      = "https://<your-domain>/default/callback"
+callback_url      = "https://<your-domain>/<org-handle>/callback"
 logout_url        = "https://api.asgardeo.io/t/<your-tenant>/oidc/logout"
-logout_redirect_uri = "https://<your-domain>/default"
+logout_redirect_uri = "https://<your-domain>/<org-handle>"
 scope             = "openid profile email roles"
 
 # Which token claim carries each field. Asgardeo B2B puts the sub-org handle in org_name.
@@ -117,7 +117,7 @@ subscriber = "dp_subscriber"
 
 `mode = "idp"` selects the identity provider backend and stops the local login form from being used. `callback_url` must exactly match one of the authorized redirect URLs you registered in step 2. A single `callback_url` is shared across all portal organizations—after the callback, the portal uses the session's stored return path to redirect the user to the correct organization, so you register only this one URL with Asgardeo.
 
-Replace `default` in `callback_url` and `logout_redirect_uri` with your own `[api_portal.organization] handle` if it isn't the packaged `default`.
+Replace `<org-handle>` in `callback_url` and `logout_redirect_uri` with the `[api_portal.organization] handle` from step 5, and keep it identical to the redirect URLs registered in step 2.
 
 Never write the client secret as a literal in `config.toml`—the {% raw %}`{{ env }}`{% endraw %} placeholder above reads it from an environment variable instead, so it never has to be committed to source control:
 
@@ -127,20 +127,33 @@ export APIP_AP_AUTH_IDP_CLIENT_SECRET=<api-portal-app-client-secret>
 
 In a production deployment, prefer supplying it from a mounted secret file instead, by swapping the token for {% raw %}`'{{ file "/secrets/api-portal/oidc_client_secret" }}'`{% endraw %} and mounting the secret at that path—resolution fails closed, so a missing or unreadable file aborts startup rather than falling back to an empty credential.
 
-## Step 5: Map the organization to its sub-organization
+## Step 5: Align the portal handle with the sub-organization
 
-Each API Portal organization maps to one Asgardeo sub-organization, through the organization's **IDP reference ID**. Set it to the Asgardeo sub-org's **handle**—the URL slug shown in the Asgardeo console:
+Asgardeo puts the sub-organization's handle in the `org_name` claim, and the portal resolves that claim against the organization it serves. The two names have to agree, so set `[api_portal.organization] handle` to the Asgardeo sub-org's **handle**—the URL slug shown in the Asgardeo console:
 
-- **Before first boot:** set `idp_ref_id` in `[api_portal.organization]`. The portal reads this key only when it seeds the organization row, so a later change to it has no effect.
-- **After first boot:** edit **IDP reference ID** under **Settings > Organization**, or set `idpRefId` through the [Organizations](../rest-api/organizations.md) Management API.
+```toml
+[api_portal.organization]
+handle       = "acme"      # the Asgardeo sub-org handle
+display_name = "Acme"
+```
 
-Leave it unset when the sub-org handle already equals the portal's organization handle—the portal falls back to the handle. The value is compared verbatim and is case-sensitive.
+Set this before the portal first starts. The handle is what the portal writes into the organization's **IDP reference ID** when it seeds the organization row, and that field is fixed afterwards—the Management API rejects a request that changes it. Changing the handle later means seeding a new organization.
 
-When a user selects **Login**, the portal appends `org=<idp-reference-id>` to the Asgardeo authorization URL. Asgardeo scopes the login session to that sub-organization and issues a token whose `org_name` claim identifies it. On every authenticated request, the portal verifies that this claim resolves to the organization it serves; a mismatch is a `403`, and the user has to log out and log in again on the correct organization.
+The handle is also the URL slug in `/{handle}/views/{viewName}`, so it appears in every portal URL. The portal normalizes it to lowercase, though the claim match itself tolerates any case.
 
-- One login session per organization—each session is scoped to one Asgardeo sub-organization.
-- Public pages (the API catalog and documentation) remain accessible across organizations without authentication.
-- Protected pages (applications, subscriptions, API keys) require a token whose organization claim matches.
+With the two aligned, the login flow closes:
+
+1. A user selects **Login**, and the portal appends `org=<handle>` to the Asgardeo authorization URL.
+2. Asgardeo scopes the login session to that sub-organization, and issues a token whose `org_name` claim identifies it.
+3. On every authenticated request, the portal resolves that claim against the organization it serves. A token minted for a different sub-organization resolves elsewhere and is refused with `403`.
+
+Two consequences worth knowing:
+
+- Public pages (the API catalog and documentation) stay accessible without authentication.
+- Protected pages (applications, subscriptions, API keys) need a token whose `org_name` matches, so a user reaching a different portal organization has to log out and log in again there.
+
+!!! note "If the handle can't match"
+    When the sub-org handle isn't a name you want in your portal URLs, the alternative is to have Asgardeo emit a separate claim carrying the portal handle as a constant, and map `organization` to that claim instead. Doing so drops the sub-organization distinction from the check—every sub-org's token then carries the same value—so choose it only for a tenant with a single sub-organization. See [when your IdP has no organization concept](../setting-up/authentication/connect-an-identity-provider.md#when-your-idp-has-no-organization-concept).
 
 ## Step 6: Restart and verify
 
@@ -159,7 +172,7 @@ The Asgardeo token carries these claims through to the API Portal & MCP Hub:
 | Claim | Purpose | Configured as |
 |-------|---------|----------------|
 | `sub` | User identity | Read under a fixed name, not configurable |
-| `org_name` | Sub-organization handle, resolved against the organization's IDP reference ID | `organization` in `[api_portal.auth.claim_mappings]` |
+| `org_name` | Sub-organization handle, resolved against the portal's `[api_portal.organization] handle` | `organization` in `[api_portal.auth.claim_mappings]` |
 | `roles` | Role list. Expanded into Management API scopes through `role_to_scope_mapping`, and matched against `[api_portal.auth.authorization.portal_roles]` for page access | `roles` in `[api_portal.auth.claim_mappings]` |
 
 Keep the claim names consistent between the Asgardeo token attributes and the `[api_portal.auth.claim_mappings]` table.

@@ -137,10 +137,10 @@ See the [Management API](../rest-api/overview.md) for the full set of available 
 | Symptom | Cause | Fix |
 |---|---|---|
 | `403 Missing organization claim in token` | Token has no org claim | Log in with `org=<ORGANIZATION_IDENTIFIER>` in the auth URL |
-| `404 Organization not found` | Token's org claim doesn't match any known org | Verify `ORGANIZATION_IDENTIFIER` matches an org's `idpRefId` |
-| `403 Forbidden` (scope error) | Token is missing required `dp:*` scopes | Complete Asgardeo Setup sections 3–4: register scopes and assign the role to your user |
+| `404 Organization not found` | Token's org claim doesn't match any known org | Verify `ORGANIZATION_IDENTIFIER` matches the portal's `[api_portal.organization] handle` |
+| `403 Forbidden` (scope error) | Token is missing required `dp:*` scopes | Assign the user a role the portal's grant table names, or register the `dp:*` scopes when running in `mode = "scope"` |
 | `401 Authentication required` | Token expired or invalid | Re-run steps 1–5 for a fresh token |
-| Token has no `dp:*` scopes | Role not assigned to the user | In the Asgardeo console, assign the appropriate role (`admin` for full access, or the subscriber role) to the user |
+| Token has no `dp:*` scopes | Role not assigned to the user | In the Asgardeo console, assign `dp_admin` for full access, or `dp_subscriber`, to the user |
 | `nc` gets no output | Redirect URI not registered in IDP | Add `http://localhost:8080` to authorized redirect URIs |
 
 ## Token lifetime

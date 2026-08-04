@@ -61,7 +61,7 @@ The portal reads three claims out of the ID token by name, and `[api_portal.auth
 
 | Mapping key | Default claim | Carries |
 |-------------|---------------|---------|
-| `organization` | `org_name` | The organization identifier, matched against the organization's IDP reference ID on every request. Required—a token without it is rejected with `403`. |
+| `organization` | `org_name` | The organization identifier, resolved against the organization this instance serves on every request. Required—a token without it is rejected with `403`. See [step 5](#step-5-make-the-organization-claim-resolve-to-your-organization). |
 | `roles` | `roles` | The user's role names. Required when `authorization.mode = "role"`; startup fails if the mapping is empty. |
 | `groups` | `groups` | The user's group names. Carried into the session for use in page and content rules. |
 
@@ -168,18 +168,53 @@ export APIP_AP_AUTH_IDP_CLIENT_SECRET=<portal-client-secret>
 
 In production, prefer a mounted secret file. Swap the token for {% raw %}`'{{ file "/secrets/api-portal/oidc_client_secret" }}'`{% endraw %}, then mount the secret at that path. Both forms fail closed: a missing variable or unreadable file aborts startup rather than falling back to an empty credential. See [Interpolation tokens](../../references/configurations.md#interpolation-tokens).
 
-## Step 5: Match the organization claim
+## Step 5: Make the organization claim resolve to your organization
 
-A portal instance serves exactly one organization, and the database schema is multi-organization—so a token your IdP correctly signed for a *different* organization would pass every signature, expiry, and audience check. The portal closes that gap by comparing the mapped organization claim against the organization it's pinned to, at login and on every authenticated request. A mismatch is a flat `403`, whether the asserted organization is unknown or merely someone else's.
+A portal instance serves exactly one organization, and the database schema is multi-organization—so a token your IdP correctly signed for a *different* organization would pass every signature, expiry, and audience check. The portal closes that gap by resolving the mapped organization claim and confirming it names the organization the instance is pinned to. It does this at login and on every authenticated request, and a mismatch is a flat `403`, whether the asserted organization is unknown or merely someone else's. A token carrying no organization claim at all is rejected the same way.
 
-The value the claim is compared against is the organization's **IDP reference ID**, which defaults to the organization handle. Set it when your IdP asserts something other than the handle:
+The claim's value has to resolve to your organization, which means it must equal either of these:
 
-- **Before first boot:** set `idp_ref_id` in `[api_portal.organization]`. This key is read only when the organization row is seeded, so a later change to it has no effect.
-- **After first boot:** edit **IDP reference ID** under **Settings > Organization**, or set `idpRefId` through the [Organizations](../../rest-api/organizations.md) Management API.
+| Value | Matching |
+|-------|----------|
+| The organization handle, from `[api_portal.organization] handle` | Case-insensitive |
+| The organization display name, from **Settings > Organization** | Exact |
 
-The value is compared verbatim and is case-sensitive, unlike the handle.
+The handle is also the organization's **IDP reference ID**, which the portal writes when it first seeds the organization row. That field is fixed from then on: the Management API rejects a request that changes it, so **IDP reference ID** in [Organization settings](../../admin-settings/organization-settings.md) reflects the handle rather than offering a second value to match against.
 
-When the organization has an IDP reference ID, the portal also appends `org=<idp-reference-id>` to the authorization request. Providers with a business-to-business organization model—Asgardeo among them—use that parameter to scope the login session to the matching sub-organization. Providers that don't recognize it ignore it.
+So point the claim at the handle. Which way round you do that depends on what your IdP has to assert.
+
+### When your IdP asserts an organization identifier
+
+Providers with a business-to-business organization model—Asgardeo sub-organizations, an Entra ID tenant—already put an organization identifier in the token. Set `[api_portal.organization] handle` to that identifier, and map the claim carrying it:
+
+```toml
+[api_portal.organization]
+handle = "acme"          # the identifier the IdP asserts
+
+[api_portal.auth.claim_mappings]
+organization = "org_name"
+```
+
+This is the option to prefer when it's available to you. The claim keeps carrying a real organization identity, so a token minted for a different organization still resolves elsewhere and is still refused. It also keeps the authorization request correct: the portal appends `org=<handle>` to it, and a provider with a sub-organization model reads that parameter to scope the login session to the matching sub-organization.
+
+The handle is the URL slug in `/{handle}/views/{viewName}`, so it becomes part of every portal URL. Choose it with that in mind—and note that the portal normalizes it to lowercase, though claim matching tolerates any case.
+
+### When your IdP has no organization concept
+
+A single Keycloak realm, an Auth0 tenant, or an Okta org has one user population and nothing organization-shaped to assert. Add a custom claim to the token whose value is the portal's organization handle, and map that claim:
+
+```toml
+[api_portal.organization]
+handle = "default"
+
+[api_portal.auth.claim_mappings]
+organization = "org_id"    # your custom claim, emitted with the constant value "default"
+```
+
+Configure the claim in the IdP as a constant—Keycloak calls this a hardcoded claim mapper, Auth0 an action that adds a custom claim. A fixed value is the accurate thing to assert here: the IdP serves one user population, the portal serves one organization, and the claim says which organization a token is for.
+
+!!! important "A constant claim asserts nothing about isolation"
+    Every token the IdP issues then carries the value the portal expects, so the organization check passes for every user the IdP will authenticate. That's the intended outcome for a single-population IdP. It is not what you want from a provider serving several organizations through one shared application—there, set the handle to the asserted identifier instead, as described above, and let the check do its job.
 
 ## Step 6: Restart and verify
 
@@ -196,7 +231,7 @@ If sign-in fails, the mismatch is usually one of these:
 - `callback_url` differs from the redirect URL registered in the IdP.
 - `issuer` doesn't match the token's `iss` claim, or `audience` doesn't match its `aud` claim.
 - The ID token carries organization or roles claims under names `[api_portal.auth.claim_mappings]` doesn't name.
-- The organization claim's value doesn't match the organization's IDP reference ID.
+- The organization claim's value is neither the organization handle nor its display name, so it resolves to no organization the instance serves.
 - The IdP issues opaque access tokens rather than JWTs, which fails Bearer-token requests to `/api/v0.9` while browser login still works.
 
 Set `[api_portal.logging] level = "debug"` to see which claim or check fails.
@@ -228,4 +263,4 @@ The roles claim is the one that most often differs. These paths are known to wor
 - [Set up Asgardeo as your identity provider](../../tutorials/asgardeo-as-idp.md): these steps applied to Asgardeo, including `dp:*` scope registration
 - [Authentication in the API Portal & MCP Hub](overview.md): how identity provider authentication compares with local authentication
 - [Configurations](../../references/configurations.md): every `config.toml` key, and how interpolation tokens deliver values into it
-- [Organization settings](../../admin-settings/organization-settings.md): where administrators edit the IDP reference ID
+- [Organization settings](../../admin-settings/organization-settings.md): the organization's display name and references, as administrators see them

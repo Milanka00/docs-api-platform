@@ -30,7 +30,7 @@ The **Organization** tab in the API Portal's Settings page manages the details o
 | **Business owner** | Contact name for the organization owner |
 | **Business owner contact** | The owner's phone number or other contact string |
 | **Business owner email** | The owner's email address |
-| **IDP reference ID** | The organization claim value your identity provider (IDP) asserts at single sign-on (SSO) login. The portal matches an authenticated user's organization claim against this value to resolve which organization they belong to |
+| **IDP reference ID** | The organization claim value your identity provider (IDP) asserts at single sign-on (SSO) login, which incoming tokens are resolved against. Effectively read-only—the portal sets it to the organization handle when the organization is created, and saving a different value fails, because it's what every token is matched against. To have an IDP's organization claim resolve here, align it with the handle instead: see [Connect an identity provider](../setting-up/authentication/connect-an-identity-provider.md#step-5-make-the-organization-claim-resolve-to-your-organization) |
 | **Control plane reference ID** | Reference ID included in outbound webhook event payloads (`org.ref_id`). Not used for authentication |
 
 4. Click **Save changes**.

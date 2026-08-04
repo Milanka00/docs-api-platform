@@ -214,17 +214,15 @@ Patterns are glob-matched (minimatch) against the request URL and merged with—
 handle = "default"                       # URL slug: /{handle}/views/{viewName}
 display_name = "Default"                 # Used only when first seeding the organization
 auto_create_subscription_plans = true    # Auto-create Bronze/Silver/Gold/Unlimited/AsyncUnlimited
-# idp_ref_id = "default"                 # IdP org claim; unset means "use the handle". Seed-time only
 ```
 
-These keys describe the organization the instance serves:
+These three keys describe the organization the instance serves:
 
 | Key | Description |
 |---|---|
-| `organization.handle` | The URL slug of the single organization this instance serves, and the pin every route is scoped against. Anything resolving to a different organization is rejected. In local-auth mode it must match the Platform API's organization id. In IDP mode the token's organization claim is matched against the organization's `idpRefId` instead—see the note below |
+| `organization.handle` | The URL slug of the single organization this instance serves, and the pin every route is scoped against. Anything resolving to a different organization is rejected. In local-auth mode it must match the Platform API's organization id. In IDP mode it's also what the token's organization claim has to resolve to—see the note below |
 | `organization.display_name` | Used only when seeding the organization for the first time. Never overwrites an existing name, so an admin's later edit in the settings UI survives restarts. Empty means "use the handle" |
 | `organization.auto_create_subscription_plans` | Seeds Bronze, Silver, Gold, Unlimited, and AsyncUnlimited alongside the organization |
-| `organization.idp_ref_id` | The organization claim value your IdP asserts, which incoming tokens are matched against. Read only when the organization row is seeded, so a later change here has no effect—edit **IDP reference ID** in [Organization settings](../admin-settings/organization-settings.md) instead. Empty means "use the handle". Matched verbatim, so unlike the handle it isn't lowercased |
 
 Seeding runs on startup only if the organization doesn't already exist, so it's idempotent and safe to leave enabled.
 
@@ -232,7 +230,7 @@ Seeding runs on startup only if the organization doesn't already exist, so it's 
     The two authentication modes resolve it differently, so don't assume one claim covers both.
 
     - **Local auth** reads a fixed `org_handle` claim and compares it to `organization.handle`.
-    - **IDP mode** reads the claim named by `auth.claim_mappings.organization` (default `org_name`) and compares it to the organization's `idpRefId`, which admins set in [Organization settings](../admin-settings/organization-settings.md).
+    - **IDP mode** reads the claim named by `auth.claim_mappings.organization` (default `org_name`) and resolves it, accepting the organization's handle or its display name. The organization's IDP reference ID is seeded from `handle` and can't be changed afterwards, so `handle` is the value to align the claim with—see [Make the organization claim resolve to your organization](../setting-up/authentication/connect-an-identity-provider.md#step-5-make-the-organization-claim-resolve-to-your-organization).
 
 
 !!! note
