@@ -8,7 +8,7 @@ tags:
   - ai-workspace
   - quickstart
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-07-31
+last_updated: 2026-08-04
 content_type: "quickstart"
 ---
 
@@ -18,9 +18,11 @@ The AI Workspace lets you manage AI gateways and large language model (LLM) prov
 
 ## Prerequisites
 
-- [Docker](https://docs.docker.com/get-docker/) with the Compose plugin (`docker compose version`)
+- [Docker](https://docs.docker.com/get-docker/) with the Compose plugin, or another Compose-compatible container runtime such as Podman
 - Ports **9643** and **9243** available on your machine. If either one is taken, see [Change the ports AI Workspace uses](setting-up/ports.md).
 - `curl` and `unzip` installed
+
+This guide shows commands with `docker compose`. If you use Podman or another Compose-compatible runtime, run the equivalent compose command instead, such as `podman compose up -d`.
 
 ## Step 1: Download AI Workspace
 
@@ -66,7 +68,14 @@ docker compose up -d
 ```
 
 !!! tip "Port 9643 or 9243 already taken?"
-    Change the host side of the `ports:` mappings in `docker-compose.yaml` before you start—for example `"9743:9643"` for the AI Workspace. Open AI Workspace on the remapped host port in the next step, such as `https://localhost:9743` instead of `https://localhost:9643`. See [Change the ports AI Workspace uses](setting-up/ports.md) for the two config keys that need to match.
+    If `docker compose up -d` fails with a port binding error, identify what is already listening on the default ports:
+
+    ```bash
+    lsof -nP -iTCP:9643 -sTCP:LISTEN
+    lsof -nP -iTCP:9243 -sTCP:LISTEN
+    ```
+
+    Stop the conflicting service if you don't need it. If you need to keep it running, change the host side of the `ports:` mappings in `docker-compose.yaml` before you start, for example `"9743:9643"` for AI Workspace. Open AI Workspace on the remapped host port in the next step, such as `https://localhost:9743` instead of `https://localhost:9643`. See [Change the ports AI Workspace uses](setting-up/ports.md) for the two config keys that need to match.
 
 ## Step 4: Open AI Workspace
 

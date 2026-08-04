@@ -8,7 +8,7 @@ tags:
   - quickstart
   - docker
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-11
+last_updated: 2026-08-04
 content_type: "quickstart"
 ---
 
@@ -26,10 +26,11 @@ Before you begin, ensure you have:
 
 - **wget** or **curl** installed
 - **unzip** installed
-- **Docker** installed and running
-- **Docker Compose** installed
+- A Compose-compatible container runtime, such as Docker Desktop, Podman Desktop or Podman, Rancher Desktop, Colima, or Docker Engine with the Compose plugin
 
-Verify that both `docker` and `docker compose` commands are available:
+These examples use `docker compose`. If you use another Compose-compatible runtime, use the equivalent commands.
+
+Verify the commands for your runtime are available. For Docker:
 
 ```bash
 docker --version
@@ -55,6 +56,18 @@ Navigate to the extracted directory and start the complete gateway stack using D
 cd wso2apip-api-gateway-1.1.0/
 docker compose up -d
 ```
+
+!!! tip "Port 8080, 8443, 9090, or 9094 already taken?"
+    If the start command fails with a port binding error, identify what is already listening on the default ports:
+
+    ```bash
+    lsof -nP -iTCP:8080 -sTCP:LISTEN
+    lsof -nP -iTCP:8443 -sTCP:LISTEN
+    lsof -nP -iTCP:9090 -sTCP:LISTEN
+    lsof -nP -iTCP:9094 -sTCP:LISTEN
+    ```
+
+    Stop the conflicting service if you don't need it. If you need to keep it running, change the host side of the relevant `ports:` mapping in `docker-compose.yaml`, then use the remapped host port in the verification and test commands on this page.
 
 ### Step 3: Verify the Gateway
 
