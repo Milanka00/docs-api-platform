@@ -188,7 +188,7 @@ conn_max_lifetime = 300   # seconds before a connection is recycled
 Recreate the container so it reloads the configuration:
 
 ```bash
-docker compose up -d --force-recreate platform-api
+docker compose up --force-recreate platform-api
 ```
 
 Confirm the service is healthy:

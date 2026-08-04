@@ -190,7 +190,7 @@ In the Docker Compose distribution, set it in the git-ignored `api-platform.env`
 Restart both services so they reload the configuration:
 
 ```bash
-docker compose up -d --force-recreate
+docker compose up --force-recreate
 ```
 
 Open AI Workspace. Instead of the username and password form, you're redirected to your IdP's hosted login page, and land back in the workspace after signing in.

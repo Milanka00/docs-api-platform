@@ -56,7 +56,7 @@ It also prompts you for an **admin username and password**. Press Enter at the p
 ## Step 3: Start the Portal
 
 ```bash
-docker compose up -d
+docker compose up
 ```
 
 This starts the API Portal & MCP Hub backed by SQLite by default. On first boot, the database schema and a default organization (`default`) with a `default` view are created automatically.
