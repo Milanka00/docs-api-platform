@@ -8,7 +8,7 @@ tags:
   - ai-workspace
   - quickstart
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-08-04
+last_updated: 2026-08-05
 content_type: "quickstart"
 ---
 
@@ -70,9 +70,17 @@ docker compose up -d
 !!! tip "Port 9643 or 9243 already taken?"
     If `docker compose up -d` fails with a port binding error, identify what is already listening on the default ports:
 
+    On macOS or Linux, run:
+
     ```bash
     lsof -nP -iTCP:9643 -sTCP:LISTEN
     lsof -nP -iTCP:9243 -sTCP:LISTEN
+    ```
+
+    On Windows PowerShell, run:
+
+    ```powershell
+    Get-NetTCPConnection -State Listen -LocalPort 9643,9243 | Select-Object LocalAddress, LocalPort, OwningProcess
     ```
 
     Stop the conflicting service if you don't need it. If you need to keep it running, change the host side of the `ports:` mappings in `docker-compose.yaml` before you start, for example `"9743:9643"` for AI Workspace. Open AI Workspace on the remapped host port in the next step, such as `https://localhost:9743` instead of `https://localhost:9643`. See [Change the ports AI Workspace uses](setting-up/ports.md) for the two config keys that need to match.
