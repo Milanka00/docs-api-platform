@@ -127,7 +127,7 @@ curl -ik https://localhost:8443/reading-list/v1.0/books
   Get-NetTCPConnection -State Listen -LocalPort 8080,8443,9090,9094 | Select-Object LocalAddress, LocalPort, OwningProcess
   ```
 
-    Stop the conflicting service if you don't need it. If you need to keep it running, change the host side of the relevant `ports:` mapping in `docker-compose.yaml`, then use the remapped host port in the verification and test commands on this page.
+    Stop the conflicting service if you don't need it. If you need to keep it running, change the host-side value of the relevant `ports:` mapping in `docker-compose.yaml`. Then use the remapped host port in the verification and test commands on this page.
 
 !!! note "Running on Windows"
     The commands above assume a Linux/macOS shell. On Windows, run the one-time setup with the PowerShell script instead — it takes the same flags and provisions the same files:

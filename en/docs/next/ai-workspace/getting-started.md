@@ -83,7 +83,7 @@ docker compose up -d
     Get-NetTCPConnection -State Listen -LocalPort 9643,9243 | Select-Object LocalAddress, LocalPort, OwningProcess
     ```
 
-    Stop the conflicting service if you don't need it. If you need to keep it running, change the host side of the `ports:` mappings in `docker-compose.yaml` before you start, for example `"9743:9643"` for AI Workspace. Open AI Workspace on the remapped host port in the next step, such as `https://localhost:9743` instead of `https://localhost:9643`. See [Change the ports AI Workspace uses](setting-up/ports.md) for the two config keys that need to match.
+    Stop the conflicting service if you don't need it. If you need to keep it running, change the host-side `ports:` mapping in `docker-compose.yaml` before you start. For example, use `"9743:9643"` for AI Workspace. Open AI Workspace on the remapped host port in the next step. For example, use `https://localhost:9743` instead of `https://localhost:9643`. See [Change the ports AI Workspace uses](setting-up/ports.md) for the two config keys that need to match.
 
 ## Step 4: Open AI Workspace
 
