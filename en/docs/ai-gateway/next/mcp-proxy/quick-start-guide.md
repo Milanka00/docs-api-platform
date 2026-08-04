@@ -48,10 +48,10 @@ docker compose version
 
 ```bash
 # Download distribution.
-wget https://github.com/wso2/api-platform/releases/download/ai-gateway/v1.2.0-rc/wso2apip-ai-gateway-1.2.0-rc.zip
+wget https://github.com/wso2/api-platform/releases/download/ai-gateway/v1.2.0-rc2/wso2apip-ai-gateway-1.2.0-rc2.zip
 
 # Unzip the downloaded distribution.
-unzip wso2apip-ai-gateway-1.2.0-rc.zip
+unzip wso2apip-ai-gateway-1.2.0-rc2.zip
 
 cd wso2apip-ai-gateway-1.2.0/
 
