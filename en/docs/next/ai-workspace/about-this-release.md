@@ -215,7 +215,6 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
 
     - **File-based authentication**: Validate credentials against a hashed user list in configuration, with no identity provider required, for local use and demos.
     - **Identity provider authentication**: Delegate login to an OpenID Connect (OIDC) identity provider for production.
-    - **Tested identity providers**: Set up Asgardeo or Microsoft Entra ID with a documented procedure.
     - **Role assignment**: Assign roles per user to control what each person can do.
 
     **[Learn more](setting-up/authentication/overview.md)**
@@ -228,11 +227,22 @@ AI Workspace deploys artifacts to the AI Gateway and shares a control plane with
 |---------|--------------------|
 | WSO2 AI Gateway | 1.2.0 |
 | WSO2 API Portal | 1.0.0 |
-| `ap` CLI | 1.0.0 |
+
+## Key changes
+
+None. There is no earlier release to migrate a deployment from.
+
+## Improvements
+
+None. This is the first release, so there is no earlier behavior to improve on.
+
+## Deprecations
+
+None.
 
 ## Fixed issues
 
-- [WSO2 API Platform](https://github.com/wso2/api-platform/issues?q=is%3Aissue%20state%3Aclosed%20label%3AArea%2FAIWorkspace)
+None recorded against a released version, since this is the first release.
 
 ## Known issues
 
