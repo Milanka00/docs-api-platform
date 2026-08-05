@@ -39,15 +39,15 @@ Check your IdP against these requirements before you start:
 | OIDC endpoints | Exposes authorization, token, userinfo, JWKS, and end-session endpoints. You supply each URL individually. |
 | Confidential client | Issues a client secret, and accepts PKCE on the authorization code exchange. |
 | Authorization code and refresh token grants | Both enabled on the application. The portal refreshes an expired access token before failing a Management API request. |
-| JWT access tokens | Access tokens are signed JWTs. The portal verifies a Bearer token's signature against the JWKS endpoint, so opaque tokens don't work for machine clients calling `/api/v0.9`. |
+| JWT access tokens | Access tokens are signed JWTs. The portal verifies a Bearer token's signature against the JWKS endpoint, so opaque tokens don't work for machine clients calling `/api-portal/api/v0.9`. |
 | Custom claims | Emits the organization identifier and the user's roles in the ID token. Claim names are configurable; the claims themselves are required. |
 
 ## Step 1: Register the portal as a confidential client
 
 In your IdP, create a confidential OIDC application. Replace `<your-domain>` with the address users reach the portal at, including the port when it isn't 443, and `<org-handle>` with the value of `[api_portal.organization] handle`—`default` in the packaged configuration.
 
-1. Set the authorized redirect URL to `https://<your-domain>/<org-handle>/callback`.
-2. Set the post-logout redirect URL to `https://<your-domain>/<org-handle>`. Most IdPs validate `post_logout_redirect_uri` against the same list as the login callback, so add both URLs there.
+1. Set the authorized redirect URL to `https://<your-domain>/api-portal/<org-handle>/callback`.
+2. Set the post-logout redirect URL to `https://<your-domain>/api-portal/<org-handle>`. Most IdPs validate `post_logout_redirect_uri` against the same list as the login callback, so add both URLs there.
 3. Enable the **Authorization Code** and **Refresh Token** grants.
 4. Set the access token type to **JWT**.
 5. Configure the IdP to emit `given_name`, `family_name`, `email`, `roles`, and the claim carrying the organization identifier **in the ID token**. The portal reads user and organization identity from the ID token, not the access token, so a claim released only on the access token or the userinfo endpoint won't be seen.
@@ -73,7 +73,7 @@ The portal also reads these fixed claims, whose names aren't configurable: `sub`
 
 ## Step 3: Choose how privileges reach the token
 
-The portal's Management API (`/api/v0.9`) guards each operation with a `dp:*` scope. `[api_portal.auth.authorization] mode` decides where a request's effective scopes come from. Pick the one that matches what your IdP can put in a token.
+The portal's Management API (`/api-portal/api/v0.9`) guards each operation with a `dp:*` scope. `[api_portal.auth.authorization] mode` decides where a request's effective scopes come from. Pick the one that matches what your IdP can put in a token.
 
 **Role mode** (`mode = "role"`, the default) expands the token's roles claim through a YAML grant table and ignores the token's own scope claim entirely. Your IdP only has to emit role names, which most products do out of the box, and a caller can't widen a role's grant by requesting extra scopes. Set `role_to_scope_mapping` to the path of the table; the image ships an editable copy, which `docker-compose.yaml` mounts at `/etc/api-portal/role-to-scope-mapping.yaml`. It defines two roles:
 
@@ -123,9 +123,9 @@ jwks_url            = "https://idp.example.com/oauth2/jwks"
 client_id           = "<portal-client-id>"
 client_secret       = '{{ env "APIP_AP_AUTH_IDP_CLIENT_SECRET" }}'
 audience            = "<portal-client-id>"                              # expected "aud" claim
-callback_url        = "https://<your-domain>/<org-handle>/callback"
+callback_url        = "https://<your-domain>/api-portal/<org-handle>/callback"
 logout_url          = "https://idp.example.com/oidc/logout"
-logout_redirect_uri = "https://<your-domain>/<org-handle>"
+logout_redirect_uri = "https://<your-domain>/api-portal/<org-handle>"
 scope               = "openid profile email roles"
 
 # Which token claim carries each field. A sibling of [api_portal.auth.idp], not
@@ -198,7 +198,7 @@ organization = "org_name"
 
 This is the option to prefer when it's available to you. The claim keeps carrying a real organization identity, so a token minted for a different organization still resolves elsewhere and is still refused. It also keeps the authorization request correct: the portal appends `org=<handle>` to it, and a provider with a sub-organization model reads that parameter to scope the login session to the matching sub-organization.
 
-The handle is the URL slug in `/{handle}/views/{viewName}`, so it becomes part of every portal URL. Choose it with that in mind—and note that the portal normalizes it to lowercase, though claim matching tolerates any case.
+The handle is the URL slug in `/api-portal/{handle}/views/{viewName}`, so it becomes part of every portal URL. Choose it with that in mind—and note that the portal normalizes it to lowercase, though claim matching tolerates any case.
 
 ### When your IdP has no organization concept
 
@@ -233,7 +233,7 @@ If sign-in fails, the mismatch is usually one of these:
 - `issuer` doesn't match the token's `iss` claim, or `audience` doesn't match its `aud` claim.
 - The ID token doesn't carry the claim names configured in `[api_portal.auth.claim_mappings]`, so the organization or roles claim is never found.
 - The organization claim's value is neither the organization handle nor its display name, so it resolves to no organization the instance serves.
-- The IdP issues opaque access tokens rather than JWTs, which fails Bearer-token requests to `/api/v0.9` while browser login still works.
+- The IdP issues opaque access tokens rather than JWTs, which fails Bearer-token requests to `/api-portal/api/v0.9` while browser login still works.
 
 Set `[api_portal.logging] level = "debug"` to see which claim or check fails.
 

@@ -25,7 +25,7 @@ The database schema itself is multi-organization—one shared database can hold 
 The handle appears in every portal URL:
 
 ```
-https://<host>/<orgHandle>/views/<viewName>
+https://<host>/api-portal/<orgHandle>/views/<viewName>
 ```
 
 In local-auth mode it must match the organization ID the Platform API asserts in the `org_handle` claim. In IDP mode the token's organization claim has to resolve to this same handle. See [Connect an identity provider](setting-up/authentication/connect-an-identity-provider.md#step-5-make-the-organization-claim-resolve-to-your-organization).
@@ -37,7 +37,7 @@ A **view** is a filtered, branded subset of the organization's APIs and Model Co
 Each view has its own URL:
 
 ```
-https://<host>/<orgHandle>/views/<viewName>
+https://<host>/api-portal/<orgHandle>/views/<viewName>
 ```
 
 See [Manage Views](admin-settings/manage-views.md).

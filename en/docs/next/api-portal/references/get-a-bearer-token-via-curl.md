@@ -15,7 +15,7 @@ content_type: "how-to"
 
 # Getting a bearer token via curl (IDP mode)
 
-When the API Portal & MCP Hub is configured with an external IDP (e.g. Asgardeo), REST API calls to `/api/v0.9/*` must include an `Authorization: Bearer <token>` header. This guide obtains that token from the terminal, without going through the portal UI. One step still opens a browser: the identity provider's own login and redirect.
+When the API Portal & MCP Hub is configured with an external IDP (e.g. Asgardeo), REST API calls to `/api-portal/api/v0.9/*` must include an `Authorization: Bearer <token>` header. This guide obtains that token from the terminal, without going through the portal UI. One step still opens a browser: the identity provider's own login and redirect.
 
 !!! note
     If you're running in **local auth mode** instead (the default for local development), get a token from the Platform API directly—see [Getting Started](../getting-started.md)—no PKCE flow needed.
@@ -119,7 +119,7 @@ echo "TOKEN=$TOKEN"
 ```bash
 # The org is resolved from the token's org claim (set via ORGANIZATION_IDENTIFIER
 # during login in Step 3) — no org identifier needed in the request itself.
-BASE="https://localhost:9543/api/v0.9"
+BASE="https://localhost:9543/api-portal/api/v0.9"
 
 curl -sk "${BASE}/apis" -H "Authorization: Bearer $TOKEN" | jq .
 curl -sk "${BASE}/applications" -H "Authorization: Bearer $TOKEN" | jq .

@@ -42,8 +42,8 @@ The API Portal & MCP Hub is a server-side application that can hold a client sec
 1. In the root organization, go to **Applications > New Application**.
 2. Choose **Traditional Web Application** and name it `API Portal & MCP Hub`.
 3. Under **Authorized redirect URLs**, add both, replacing `<org-handle>` with the sub-organization handle you settle on in step 5:
-      - `https://<your-domain>/<org-handle>/callback`—the login callback
-      - `https://<your-domain>/<org-handle>`—the post-logout redirect (Asgardeo validates `post_logout_redirect_uri` against this same list)
+      - `https://<your-domain>/api-portal/<org-handle>/callback`—the login callback
+      - `https://<your-domain>/api-portal/<org-handle>`—the post-logout redirect (Asgardeo validates `post_logout_redirect_uri` against this same list)
 
     This single shared URI pair is the only one you register. It matches the `callback_url` and `logout_redirect_uri` you set in step 4—after the callback, the portal uses the session's stored return path to route the user to the correct organization, so no per-organization redirect URLs are needed.
 4. Enable **Share with all organizations** so users in sub-organizations can log in.
@@ -91,9 +91,9 @@ jwks_url          = "https://api.asgardeo.io/t/<your-tenant>/oauth2/jwks"
 client_id         = "<api-portal-app-client-id>"
 client_secret     = '{{ env "APIP_AP_AUTH_IDP_CLIENT_SECRET" }}'
 audience          = "<api-portal-app-client-id>"   # Asgardeo sets the client ID as the aud claim
-callback_url      = "https://<your-domain>/<org-handle>/callback"
+callback_url      = "https://<your-domain>/api-portal/<org-handle>/callback"
 logout_url        = "https://api.asgardeo.io/t/<your-tenant>/oidc/logout"
-logout_redirect_uri = "https://<your-domain>/<org-handle>"
+logout_redirect_uri = "https://<your-domain>/api-portal/<org-handle>"
 scope             = "openid profile email roles"
 
 # Which token claim carries each field. Asgardeo B2B puts the sub-org handle in org_name.
@@ -141,7 +141,7 @@ display_name = "Acme"
 
 Set this before the portal first starts. The handle is what the portal writes into the organization's **IDP reference ID** when it seeds the organization row, and that field is fixed afterward—the Management API rejects a request that changes it. Changing the handle later means seeding a new organization.
 
-The handle is also the URL slug in `/{handle}/views/{viewName}`, so it appears in every portal URL. The portal normalizes it to lowercase, though the claim match itself tolerates any case.
+The handle is also the URL slug in `/api-portal/{handle}/views/{viewName}`, so it appears in every portal URL. The portal normalizes it to lowercase, though the claim match itself tolerates any case.
 
 With the two aligned, the login flow closes:
 
@@ -208,7 +208,7 @@ Keep the claim names consistent between the Asgardeo token attributes and the `[
 
 The script registers an API resource representing the portal, with all `dp:*` scopes under it. For local testing, its default `ASGARDEO_RESOURCE_IDENTIFIER=https://localhost:9543` works unchanged. The system application is only needed to run the script, and can be deleted afterward.
 
-In scope mode, browser sessions are preauthorized: the portal skips the per-operation scope check for a user signed in through Asgardeo, and page role gating is the authorization that applies to them. The `dp:*` scopes then govern machine clients calling `/api/v0.9` with a Bearer token.
+In scope mode, browser sessions are preauthorized: the portal skips the per-operation scope check for a user signed in through Asgardeo, and page role gating is the authorization that applies to them. The `dp:*` scopes then govern machine clients calling `/api-portal/api/v0.9` with a Bearer token.
 
 ## Related topics
 

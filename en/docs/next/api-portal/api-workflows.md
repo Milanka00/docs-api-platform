@@ -47,7 +47,7 @@ An Arazzo workflow opens with its description above the interactive viewer:
 An Arazzo workflow names its source APIs in `sourceDescriptions`. Those are the APIs you'll be calling, and each one's own documentation gives you the base URL, the operations, and the authentication it expects. To fetch the raw specification for tooling that reads Arazzo, request it directly:
 
 ```text
-GET /{orgName}/views/{viewName}/api-workflows/{handle}/arazzo.json
+GET /api-portal/{orgName}/views/{viewName}/api-workflows/{handle}/arazzo.json
 ```
 
 ## Hand a workflow to an AI agent
@@ -77,11 +77,11 @@ An agent that hasn't been handed a prompt finds workflows through the portal's m
 
 | Endpoint | Returns |
 |---|---|
-| `/{orgName}/views/{viewName}/llms.txt` | The portal index. Its **API Workflows** section lists every agent-visible workflow with its description, each linking to the workflow's own Markdown |
-| `/{orgName}/views/{viewName}/api-workflows.md` | A Markdown list of every agent-visible workflow, each linking to `/api-workflows/{handle}.md` |
-| `/{orgName}/views/{viewName}/api-workflows/{handle}.md` | One workflow in Markdown. For an Arazzo workflow: status, description, source APIs linked to their documentation, guidance on each source's authentication, and the full Arazzo specification inlined. For a Markdown workflow: the content the admin authored, as written |
-| `/{orgName}/views/{viewName}/api-workflows/{handle}/arazzo.json` | The raw Arazzo specification. Returns `404` for a Markdown-authored workflow |
-| `/{orgName}/views/{viewName}/api-workflows/{handle}/prompt` | A JSON object with the workflow's agent prompt, description, raw content, and source APIs |
+| `/api-portal/{orgName}/views/{viewName}/llms.txt` | The portal index. Its **API Workflows** section lists every agent-visible workflow with its description, each linking to the workflow's own Markdown |
+| `/api-portal/{orgName}/views/{viewName}/api-workflows.md` | A Markdown list of every agent-visible workflow, each linking to `/api-workflows/{handle}.md` |
+| `/api-portal/{orgName}/views/{viewName}/api-workflows/{handle}.md` | One workflow in Markdown. For an Arazzo workflow: status, description, source APIs linked to their documentation, guidance on each source's authentication, and the full Arazzo specification inlined. For a Markdown workflow: the content the admin authored, as written |
+| `/api-portal/{orgName}/views/{viewName}/api-workflows/{handle}/arazzo.json` | The raw Arazzo specification. Returns `404` for a Markdown-authored workflow |
+| `/api-portal/{orgName}/views/{viewName}/api-workflows/{handle}/prompt` | A JSON object with the workflow's agent prompt, description, raw content, and source APIs |
 
 A typical agent flow is: read `llms.txt` or `api-workflows.md` to see what exists, fetch `{handle}.md` for the workflow that matches the task, follow its links to each source API's documentation for endpoints and security schemes, then execute the steps in order, passing outputs between them.
 

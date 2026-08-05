@@ -177,7 +177,7 @@ Five keys govern how a request's permissions are resolved:
 
 | Key | Default | Description |
 |---|---|---|
-| `authorization.enabled` | `true` | Master switch for Management API (`/api/v0.9`) authorization. With `false`, any authenticated caller satisfies every operation's scope list—a development opt-out that logs a startup warning |
+| `authorization.enabled` | `true` | Master switch for Management API (`/api-portal/api/v0.9`) authorization. With `false`, any authenticated caller satisfies every operation's scope list—a development opt-out that logs a startup warning |
 | `authorization.mode` | `role` | How a request's effective scopes are derived. `role` expands the token's roles claim through the mapping table and ignores the scope claim entirely, so a caller can't widen a role's grant by asking for extra scopes. `scope` reads the token's own scope claim—use it when the issuer mints `dp:*` scopes directly. Validated even when `enabled = false`, so a typo surfaces immediately |
 | `authorization.role_to_scope_mapping` | `./resources/role-to-scope-mapping.yaml` | Path to the YAML grant table. Required when `mode = "role"`. Validated at startup against the portal's OpenAPI spec whenever it's set—an undeclared `dp:*` scope fails startup rather than surfacing later as a role that logs in and is denied every request |
 | `authorization.page_role_validation` | `false` | Per-page role-tier gating. Separate from `enabled`, which governs REST scopes—one switch for both would mean turning page gating off also silently disabled REST enforcement |
@@ -209,7 +209,7 @@ Patterns are glob-matched (minimatch) against the request URL and merged with—
 
 ```toml
 [api_portal.organization]
-handle = "default"                       # URL slug: /{handle}/views/{viewName}
+handle = "default"                       # URL slug: /api-portal/{handle}/views/{viewName}
 display_name = "Default"                 # Used only when first seeding the organization
 auto_create_subscription_plans = true    # Auto-create Bronze/Silver/Gold/Unlimited/AsyncUnlimited
 ```
