@@ -8,13 +8,15 @@ tags:
   - ai-workspace
   - release-notes
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-08-04
+last_updated: 2026-08-05
 content_type: "reference"
 ---
 
 # About this release
 
-AI Workspace is the control plane for managing how your applications access AI services. From one console you connect AI Gateway runtimes, configure large language model (LLM) providers and proxies, attach AI policies, manage credentials, and deploy those configurations to your gateways.
+This page is for platform teams and developers who run AI Workspace and manage AI traffic through it.
+
+AI Workspace is the control plane for managing how your applications access AI services. From one console, you connect [AI Gateway runtimes](ai-gateways/setting-up.md) and configure large language model (LLM) [providers](llm-providers/overview.md) and [proxies](llm-proxies/overview.md). You also attach [AI policies](policies/overview.md), manage [credentials](secrets-management.md), and deploy those configurations to your gateways.
 
 **WSO2 AI Workspace 1.0.0** is the first AI Workspace release.
 
@@ -30,11 +32,11 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
 
     AI Workspace separates AI configuration from AI traffic. You manage artifacts and policies in the workspace, and the AI Gateway enforces them at request time.
 
-    - **Central configuration**: Manage LLM providers, App LLM proxies, MCP proxies, policies, and secrets from one console instead of configuring each gateway separately.
+    - **Central configuration**: Manage LLM providers, App LLM proxies, Model Context Protocol (MCP) proxies, policies, and secrets from one console instead of configuring each gateway separately.
     - **Explicit deployment**: Changes take effect on live traffic only when you deploy them to a gateway.
     - **Deployment tracking**: See which artifacts are deployed to which gateways, deploy one artifact to several gateways, and serve several artifacts from one gateway.
 
-    **[Learn more](overview.md)**
+    **[AI Workspace overview](overview.md)**
 
 ??? note "AI Gateway registration and management"
 
@@ -44,7 +46,7 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
     - **Status monitoring**: Track whether each registered gateway is active.
     - **Multi-gateway deployment**: Target one or more gateways when you deploy an artifact.
 
-    **[Learn more](ai-gateways/setting-up.md)**
+    **[Set up an AI Gateway](ai-gateways/setting-up.md)**
 
 ??? note "LLM providers for seven AI services"
 
@@ -52,10 +54,10 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
 
     - **Built-in provider support**: Connect OpenAI, Azure OpenAI, Azure AI Foundry, Anthropic, Google Gemini, Mistral AI, and AWS Bedrock.
     - **Centralized credentials**: Store upstream API keys as secrets rather than in artifact configuration.
-    - **Reusable configuration**: Back multiple proxies with a single provider without duplicating credentials.
-    - **Direct invocation**: Call a provider endpoint directly when you don't need application-specific controls.
+    - **Reusable configuration**: Support multiple proxies with a single provider without duplicating credentials.
+    - **Direct invocation**: If you don't need application-specific controls, call a provider endpoint directly.
 
-    **[Learn more](llm-providers/overview.md)**
+    **[LLM providers overview](llm-providers/overview.md)**
 
 ??? note "LLM provider templates for custom services"
 
@@ -66,29 +68,29 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
     - **Versioning**: Keep multiple versions of a custom template, and see the most recent version on each template card.
     - **Provider type selector integration**: Custom templates appear alongside built-in providers when you add a provider.
 
-    **[Learn more](llm-provider-templates/overview.md)**
+    **[LLM provider templates overview](llm-provider-templates/overview.md)**
 
 ??? note "App LLM proxies"
 
-    An App LLM proxy adds an application-facing endpoint on top of a provider when a specific GenAI application or agent needs its own controls.
+    An App LLM proxy adds an application-facing endpoint on top of a provider when a specific generative AI (GenAI) application or agent needs its own controls.
 
     - **Isolated configuration**: Give each application, agent, team, or environment its own guardrails, access keys, and exposed resources.
     - **Resource control**: Choose which API paths the proxy exposes, and enable or disable them without changing the upstream provider.
     - **Per-proxy authentication**: Require an API key that the workspace generates for that proxy.
-    - **Provider switching**: Swap the underlying provider without client changes, as long as the new provider preserves the client-facing contract.
+    - **Provider switching**: If the new provider preserves the client-facing contract, swap the underlying provider without client changes.
 
-    **[Learn more](llm-proxies/overview.md)**
+    **[App LLM proxies overview](llm-proxies/overview.md)**
 
 ??? note "MCP proxies"
 
-    An MCP proxy puts the gateway in front of an upstream Model Context Protocol (MCP) server, so MCP clients call a managed endpoint instead of the server directly.
+    An MCP proxy routes requests through the gateway to an upstream MCP server, so MCP clients call a managed endpoint instead of the server directly.
 
     - **Managed MCP endpoints**: Expose an upstream MCP server through a gateway endpoint over streamable HTTP.
     - **Security**: Authenticate and authorize the callers of MCP traffic.
     - **Policy enforcement**: Attach policies that control the MCP traffic passing through the gateway.
     - **Observability**: See which tools and servers are called, and which calls fail.
 
-    **[Learn more](mcp-proxies/overview.md)**
+    **[MCP proxies overview](mcp-proxies/overview.md)**
 
 ??? note "AI guardrails"
 
@@ -100,31 +102,31 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
     - **Validation**: Word count, sentence count, content length, JSON schema, regex, and URL guardrails.
     - **Tool filtering**: Semantic tool filtering, which limits the tools exposed to a model by relevance to the user query.
 
-    **[Learn more](policies/overview.md#guardrails)**
+    **[Guardrail policies](policies/overview.md#guardrails)**
 
 ??? note "Rate limiting for requests, tokens, and spend"
 
     AI services bill per token, so AI Workspace caps several different measures of traffic.
 
-    - **Rate limit - basic**: Caps request count within a time window.
-    - **Rate limit - advanced**: Caps request count with multi-dimensional and weighted quotas, a choice of the generic cell rate algorithm (GCRA) or fixed window, and in-memory or Redis counters.
+    - **Rate limit: basic**: Caps request count within a time window.
+    - **Rate limit: advanced**: Caps request count with multi-dimensional and weighted quotas, a choice of the generic cell rate algorithm (GCRA) or fixed window, and in-memory or Redis counters.
     - **Token-based rate limit**: Caps prompt, completion, or total tokens, independently or in combination.
     - **LLM cost and LLM cost-based rate limit**: Calculate the monetary cost of each call, and cap spend in USD.
     - **Built-in provider limits**: Cap requests and tokens from the **Rate Limiting** tab of a provider without attaching a policy.
 
-    **[Learn more](policies/overview.md#rate-limiting)**
+    **[Rate limiting policies](policies/overview.md#rate-limiting)**
 
 ??? note "Traffic, prompt, and provider transformation policies"
 
     These policies shape how requests are routed, composed, and translated.
 
     - **Model routing**: Model round robin and model weighted round robin distribute requests across models.
-    - **Header-based routing**: The LLM header router selects the target provider from a request header, so one OpenAI-shaped endpoint fans out to several providers.
+    - **Header-based routing**: The LLM header router selects the target provider from a request header, so one OpenAI-shaped endpoint routes requests to several providers.
     - **Prompt handling**: Prompt decorator, prompt template, and prompt compressor.
     - **Response handling**: Semantic caching for semantically similar requests, and the respond policy for mocking and short-circuit logic.
     - **Provider transformation**: Translate an OpenAI Chat Completions request into the Anthropic, Azure OpenAI, AWS Bedrock Converse, Gemini, or Mistral API shape, and translate the response back.
 
-    **[Learn more](policies/overview.md#traffic-management-and-prompt-policies)**
+    **[Traffic management and prompt policies](policies/overview.md#traffic-management-and-prompt-policies)**
 
 ??? note "Custom AI policies"
 
@@ -134,7 +136,7 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
     - **Gateway packaging**: Build a gateway image that includes your policies.
     - **Attachment**: Attach a custom policy to a provider or proxy the same way as a built-in policy.
 
-    **[Learn more](policies/writing-an-ai-policy.md)**
+    **[Write an AI policy](policies/writing-an-ai-policy.md)**
 
 ??? note "Secrets management"
 
@@ -142,20 +144,20 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
 
     - **Encryption at rest**: Secrets are encrypted with AES-GCM-256. Plaintext values are never written to the database and never returned in an API response, including the creation response.
     - **Placeholder references**: Reference a secret from LLM provider configurations, MCP proxy configurations, and API backend settings, and the gateway resolves it at request time.
-    - **Automatic secret creation**: Upstream API keys entered in the AI Workspace UI are converted to secrets and replaced with a placeholder before the artifact is saved.
+    - **Automatic secret creation**: Upstream API keys entered in the AI Workspace user interface (UI) become secrets. AI Workspace replaces each key with a placeholder before it saves the artifact.
     - **Rotation without redeployment**: Update the secret value by handle, and referencing artifacts need no change.
 
-    **[Learn more](secrets-management.md)**
+    **[Secrets management](secrets-management.md)**
 
 ??? note "Inbound authentication with API keys"
 
     The gateway checks an API key on every incoming client request to a deployed provider or proxy.
 
     - **Workspace-generated keys**: The workspace generates each key, shows it once, and sets a 90-day validity period.
-    - **Configurable header name**: Send the key in `X-API-Key` by default, or in a header name that suits your SDK.
+    - **Configurable header name**: Send the key in `X-API-Key` by default, or in a header name that suits your software development kit (SDK).
     - **Independent of upstream credentials**: Inbound keys are separate from the upstream API key the gateway uses to call the AI service.
 
-    **[Learn more](configure-inbound-auth.md)**
+    **[Configure inbound authentication](configure-inbound-auth.md)**
 
 ??? note "SDK invocation"
 
@@ -164,50 +166,50 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
     - **Supported SDKs**: OpenAI, Anthropic, Google Gemini, Mistral, Azure OpenAI, and LangChain.
     - **Same code path for providers and proxies**: The Invoke URL is the only difference between calling a provider and calling a proxy.
 
-    **[Learn more](using-sdks.md)**
+    **[Invoke providers and proxies with AI SDKs](using-sdks.md)**
 
 ??? note "Management of gateway-deployed AI artifacts"
 
-    Artifacts created directly on a gateway sync up to AI Workspace, which is the reverse of the usual top-down flow.
+    Artifacts created directly on a gateway sync up to AI Workspace, which reverses the usual flow from AI Workspace to the gateway.
 
-    - **Automatic sync**: LLM provider templates, LLM providers, LLM proxies, and MCP proxies created on a gateway appear in the workspace, and it's on by default.
+    - **Automatic sync**: Automatic sync is enabled by default. LLM provider templates, LLM providers, LLM proxies, and MCP proxies created on a gateway appear in the workspace.
     - **Gateway ownership**: Deployment fields stay read-only in the workspace, because the gateway owns them.
     - **Editable metadata**: Descriptions, documentation, OpenAPI definitions, and template connection details remain editable.
     - **Independent operation**: These artifacts keep serving traffic when AI Workspace is unavailable.
 
-    **[Learn more](sync-gateway-created-artifacts.md)**
+    **[Sync gateway-created artifacts](sync-gateway-created-artifacts.md)**
 
-??? note "Git-based CI/CD with the ap CLI"
+??? note "Git-based CI/CD with the `ap` CLI"
 
-    Manage AI Workspace artifacts as version-controlled project files instead of relying only on UI changes.
+    Git-based continuous integration and continuous delivery (CI/CD) lets you manage AI Workspace artifacts as version-controlled project files. You run each step with the `ap` command-line interface (CLI) instead of making changes in the UI.
 
     - **Declarative project files**: Describe an artifact in `metadata.yaml`, `runtime.yaml`, and `definition.yaml`, and commit them to source control.
     - **Supported artifact types**: LLM providers, App LLM proxies, and MCP proxies.
     - **Validate and apply**: Validate an artifact with `ap ai-workspace build`, apply it with `ap ai-workspace apply`, and deploy the runtime artifact with `ap gateway apply -f runtime.yaml`.
     - **Synchronous operations**: Each step runs from the project files, so the control plane and the gateway runtime don't depend on each other during artifact application.
 
-    **[Learn more](ci-cd/overview.md)**
+    **[Git-based CI/CD overview](ci-cd/overview.md)**
 
 ??? note "Insights through Moesif"
 
-    The gateway runtime publishes AI traffic telemetry to [Moesif](https://www.moesif.com/), an AI-native API analytics platform.
+    The gateway runtime publishes AI traffic telemetry to [Moesif](https://www.moesif.com/), an API analytics platform.
 
     - **Published telemetry**: Requests, token usage, latency, cost, and guardrail events.
     - **Single configuration step**: Set the `MOESIF_KEY` environment variable on the gateway runtime, and no workspace change is required.
-    - **Insights page**: Open your Moesif workspace from the AI Workspace left navigation menu.
+    - **Insights page**: Select **Insights** in the AI Workspace left navigation menu to open your Moesif workspace.
 
-    **[Learn more](insights.md)**
+    **[Insights through Moesif](insights.md)**
 
 ??? note "Deployment configuration"
 
     AI Workspace and the Platform API read their settings from a single `config.toml` file.
 
     - **Interpolation tokens**: Pull values in from environment variables and mounted files, so sensitive values stay out of configuration files.
-    - **Setup script**: Provision the TLS certificate, JWT signing keypair, encryption keys, session secret, and admin credentials with `./scripts/setup.sh`, which fails closed rather than generating weaker values.
+    - **Setup script**: Provision the Transport Layer Security (TLS) certificate, JSON Web Token (JWT) signing keypair, encryption keys, session secret, and admin credentials with `./scripts/setup.sh`. The script stops without generating weaker values.
     - **Configurable ports**: Remap the published host port, or change the port each service listens on.
     - **Database options**: Store artifacts in SQLite, which is the default, PostgreSQL, or Microsoft SQL Server, with TLS and connection pool settings.
 
-    **[Learn more](setting-up/configuration.md)**
+    **[Deployment configuration reference](setting-up/configuration.md)**
 
 ??? note "User authentication modes"
 
@@ -217,11 +219,11 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
     - **Identity provider authentication**: Delegate login to an OpenID Connect (OIDC) identity provider for production.
     - **Role assignment**: Assign roles per user to control what each person can do.
 
-    **[Learn more](setting-up/authentication/overview.md)**
+    **[User authentication overview](setting-up/authentication/overview.md)**
 
 ## Compatible product versions
 
-AI Workspace deploys artifacts to the AI Gateway and shares a control plane with the API Portal. The following table lists the versions this release is tested with:
+AI Workspace deploys artifacts to the AI Gateway and shares a control plane with the API Portal. The following table lists the product versions tested with this release:
 
 | Product | Compatible version |
 |---------|--------------------|
@@ -246,4 +248,4 @@ None recorded against a released version, since this is the first release.
 
 ## Known issues
 
-- [WSO2 API Platform](https://github.com/wso2/api-platform/issues?q=is%3Aissue%20state%3Aopen%20label%3AArea%2FAIWorkspace)
+- [Open AI Workspace issues in GitHub](https://github.com/wso2/api-platform/issues?q=is%3Aissue%20state%3Aopen%20label%3AArea%2FAIWorkspace)
