@@ -147,6 +147,8 @@ curl -sk -X POST https://localhost:9543/api-portal/api/v0.9/webhook-subscribers 
 
 The Platform API's webhook receiver ships disabled, and the shipped `configs/config.toml` has no `[platform_api.webhook]` section wiring in a secret—setting `APIP_CP_WEBHOOK_SECRET` alone does nothing. Enable the receiver and point it at the same secret, then set the value in `api-platform.env` and restart the Platform API so both changes take effect:
 
+{% raw %}
+
 ```bash
 cd ../wso2apip-api-portal-1.0.0
 
@@ -161,6 +163,8 @@ echo "APIP_CP_WEBHOOK_SECRET=$WEBHOOK_SECRET" >> api-platform.env
 chmod 600 api-platform.env
 docker compose up -d platform-api
 ```
+
+{% endraw %}
 
 !!! important "Without this, every delivery fails with a plain 404"
     The route isn't conditionally rejecting the request—it's never registered on the server at all while `enabled` is `false`, so any delivery attempt gets a bare 404 with no error detail to explain why.
