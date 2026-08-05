@@ -8,46 +8,159 @@ tags:
   - api-portal
   - release-notes
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-08-03
+last_updated: 2026-08-04
 content_type: "release-notes"
 ---
 
 # About this release
 
-API Portal & MCP Hub 1.0.0 is the first release of a self-hosted portal for APIs and Model Context Protocol (MCP) servers. API publishers expose APIs and MCP servers, and developers discover, subscribe to, and consume them. Because this is the first release, every capability below is available for the first time.
+The API Portal & MCP Hub is a web application that serves a catalog of APIs, Model Context Protocol (MCP) servers, and API workflows. Publishers register artifacts in it, and developers browse them, subscribe to plans, generate credentials, and call the APIs. It runs as a standalone distribution alongside the Platform API control plane, keeps its own database, and reaches gateways through signed webhook events rather than a fixed control-plane binding.
 
-New to the portal? Start with the [Overview](overview.md), then the [Getting Started](getting-started.md) guide.
+**API Portal & MCP Hub 1.0.0** is the first **API Portal & MCP Hub release**. Every capability listed below is available for the first time, so there is no predecessor to upgrade from.
 
-## Catalog and discovery
+For more information on the API Portal & MCP Hub, see the [overview](overview.md).
 
-- **API and MCP server catalog:** Browse, document, and consume APIs alongside MCP servers, organized into [views](admin-settings/manage-views.md) with [labels](admin-settings/manage-labels.md). The portal doubles as an MCP Hub, making MCP servers first-class catalog entries next to APIs. See [Discover APIs](discover-apis/api-search.md) and [MCP Servers](mcp-servers/overview.md).
-- **API workflows:** Publish multi-step, guided API workflows as a first-class catalog artifact, alongside APIs and MCP servers. See [API Workflows](api-workflows.md).
-- **MCP registry:** A programmatic MCP Server Registry API lets agents and tooling discover the MCP servers the portal publishes. See the [MCP Registry API](mcp-servers/mcp-registry.md).
-- **AI-ready by design:** MCP-enabled servers pair with `llms.txt` entry points at the portal root and per view. Together, they let artificial intelligence (AI) agents discover the available APIs, MCP servers, and workflows programmatically. See [AI Agent Discovery](discover-apis/ai-agent-discovery.md) and [LLM Instructions](admin-settings/llm-instructions.md).
+## Downloads
 
-## Consumption
+Download the standalone distribution from the WSO2 API Platform release page:
 
-- **Applications, subscriptions, and API keys:** Consumers create [applications](manage-applications.md), [subscribe to plans](manage-subscriptions.md), and generate and manage [API keys](manage-api-keys.md) and subscription tokens. A browser-based **Try It** console calls APIs directly from the catalog. See [Consume an API](consume-an-api/overview.md).
+```bash
+curl -sLO https://github.com/wso2/api-platform/releases/download/api-portal%2Fv1.0.0-rc2/wso2apip-api-portal-1.0.0-rc2.zip && \
+unzip wso2apip-api-portal-1.0.0-rc2.zip
+```
 
-## Authentication
+To install and run it, follow the [Getting started](getting-started.md) guide.
 
-- **Platform API-backed local authentication:** The built-in login form authenticates against the Platform API sidecar and receives a signed JSON Web Token (JWT).
-- **OIDC authentication:** OpenID Connect (OIDC) login runs alongside local authentication, with configurable per-token role-to-scope and group-to-scope mapping. See [Authentication](setting-up/authentication/overview.md).
+## New features
 
-## Customization
+??? note "API and MCP server catalog"
 
-- **Theming:** Customize the portal's colors, styling, logo, and page layouts, and apply custom styling to individual API landing pages. See [Theming](theming.md) and [Apply a Theme](admin-settings/theming.md).
-- **Design mode:** A file-based, database-free local preview renders the whole portal—APIs, MCP servers, applications, and theming—straight from sample files on disk. Use it for content authoring and theming without standing up the full stack. See [Design Mode](setting-up/design-mode.md).
+    A single catalog serves APIs and MCP servers side by side, so the portal doubles as an MCP Hub with MCP servers as first-class entries rather than a secondary artifact type.
 
-## Integration and administration
+    - **Unified browsing and search**: Find APIs and MCP servers by name, description, label, or view.
+    - **Views**: Group artifacts into separate catalog surfaces, each with its own theme and audience.
+    - **Labels**: Tag and filter artifacts across views.
+    - **Per-artifact documentation**: Publish specifications, guides, and custom content next to each entry.
 
-- **Webhook-based event outbox:** The portal emits signed delivery events for API key, application, and subscription plan changes, so it doesn't depend on a specific gateway or control plane. Receivers react to these events to provision, revoke, or sync resources in downstream systems. See [Webhook Integration](admin-settings/webhook-integration.md) and the [Webhook Event Catalog](references/webhook-event-catalog.md).
-- **Admin UI:** A dedicated administrative user interface (UI) manages the organization, views, labels, the API and MCP catalog, API workflows, subscription plans, key managers, and webhook subscribers. See [Admin Settings](admin-settings/organization-settings.md).
+    **[Learn more](discover-apis/api-search.md)**
 
-## Known issues and limitations
+??? note "API workflows"
 
-There are no known issues recorded for this release.
+    Multi-step, guided API workflows are a first-class catalog artifact alongside APIs and MCP servers, so a sequence of calls that achieves one outcome can be published as a single discoverable unit.
 
-## Get started
+    - **Guided consumption**: Present an ordered sequence of API calls with the context a consumer needs at each step.
+    - **Catalog parity**: Workflows carry the same views, labels, and documentation as APIs.
+    - **Selective serving**: Include or exclude workflows per instance through `[api_portal.artifacts] enabled_types`.
 
-To install and run the portal, follow the [Getting Started](getting-started.md) guide.
+    **[Learn more](api-workflows.md)**
+
+??? note "MCP Server Registry API"
+
+    A programmatic registry lets agents and tooling enumerate the MCP servers a portal publishes, without scraping the catalog UI.
+
+    - **Machine-readable discovery**: Query published MCP servers and their connection details over HTTP.
+    - **Agent-oriented**: Intended for MCP clients and agent frameworks that resolve servers at runtime.
+
+    **[Learn more](mcp-servers/mcp-registry.md)**
+
+??? note "AI agent discovery"
+
+    The portal publishes `llms.txt` entry points at its root and per view, pairing with the MCP registry so an AI agent can discover what a portal offers programmatically.
+
+    - **`llms.txt` entry points**: Machine-readable indexes of the APIs, MCP servers, and workflows a view serves.
+    - **Administrator-authored guidance**: Supply instructions that shape how large language models (LLMs) interpret the catalog.
+
+    **[Learn more](discover-apis/ai-agent-discovery.md)**
+
+??? note "Applications, subscriptions, and API keys"
+
+    Consumers self-serve the credentials they need, from creating an application through calling a secured API in the browser.
+
+    - **Applications**: Create and manage applications that hold credentials.
+    - **Subscriptions**: Subscribe applications to artifacts under a chosen subscription plan.
+    - **API keys and subscription tokens**: Generate, view, and revoke both credential types.
+    - **Try It console**: Call an API from the catalog page, through a same-origin proxy that avoids per-backend cross-origin resource sharing (CORS) configuration.
+
+    **[Learn more](consume-an-api/overview.md)**
+
+??? note "Local and OIDC authentication"
+
+    The portal authenticates users in one of two modes, selected by `[api_portal.auth] mode`, so an evaluation needs no identity provider while production delegates login to one.
+
+    - **Platform API-backed local authentication**: The built-in login form validates credentials against the Platform API control plane and receives a signed JSON Web Token (JWT).
+    - **OpenID Connect (OIDC) authentication**: Delegate login to any OIDC-compliant identity provider, with the portal acting as a confidential client.
+    - **Configurable claim mappings**: Name the claims that carry organization, role, and group information, including dot-separated paths into nested claims.
+    - **Role or scope authorization**: Expand a token's roles through a grant table, or read `dp:*` scopes the identity provider mints directly.
+
+    **[Learn more](setting-up/authentication/overview.md)**
+
+??? note "Theming"
+
+    Portal appearance is operator-controlled, from global styling down to individual API landing pages.
+
+    - **Global theming**: Set colors, styling, and logos for the portal.
+    - **Per-view layouts**: Upload page layouts that apply to a single view.
+    - **Per-API styling**: Apply custom styling to an individual API's landing page.
+
+    **[Learn more](theming.md)**
+
+??? note "Design mode"
+
+    A file-based preview renders the whole portal from sample files on disk, opening no database connection and making no Platform API calls.
+
+    - **No infrastructure**: Preview APIs, MCP servers, applications, and theming without standing up the full stack.
+    - **Content and theme authoring**: Iterate on layouts and catalog content directly from disk.
+
+    **[Learn more](setting-up/design-mode.md)**
+
+??? note "Webhook-based event integration"
+
+    The portal emits signed events for credential and plan changes rather than holding gateway-specific logic. Most deployments subscribe the Platform API control plane, which propagates each change to the gateways the API is deployed to.
+
+    - **Signed delivery**: Events for API key, application, and subscription plan changes carry a signature the subscriber verifies, and credential fields arrive encrypted.
+    - **Control plane integration**: Register the Platform API as a subscriber and it persists each credential and pushes it out to every gateway serving the API. A gateway or a handler of your own can subscribe directly instead.
+    - **Per-organization subscribers**: Register receivers through the Settings UI or the Management API rather than static configuration, so your own handler can subscribe alongside the control plane.
+
+    **[Learn more](admin-settings/webhook-integration.md)**
+
+??? note "Admin UI and Management API"
+
+    A dedicated administrative interface, backed by a documented REST API, manages everything an operator configures at runtime.
+
+    - **Organization and catalog administration**: Manage the organization, views, labels, the API and MCP server catalog, and API workflows.
+    - **Consumption policy**: Manage subscription plans, key managers, and webhook subscribers.
+    - **Management API**: Drive the same operations programmatically, guarded per operation by `dp:*` scopes.
+
+    **[Learn more](admin-settings/organization-settings.md)**
+
+## Improvements
+
+None. This is the first release, so there is no earlier behavior to improve on.
+
+## Compatible versions and requirements
+
+The distribution bundles the Platform API control plane, so the two are versioned and shipped together—no separate compatibility check is needed. Verify the following in your own environment:
+
+| Component | Supported |
+|---|---|
+| Database | SQLite, PostgreSQL, or Microsoft SQL Server. See [Set up the database](setting-up/database.md) |
+| Container runtime | Docker with the Compose plugin |
+| Identity provider | Any OIDC-compliant provider issuing JWT access tokens. See [Connect an identity provider](setting-up/authentication/connect-an-identity-provider.md) |
+
+Full prerequisites are listed in the [Getting started](getting-started.md) guide.
+
+## Key changes
+
+None. There is no earlier release to migrate a deployment from.
+
+## Deprecations
+
+None.
+
+## Fixed issues
+
+None recorded against a released version, since this is the first release.
+
+## Known issues
+
+- [API Portal & MCP Hub](https://github.com/wso2/api-platform/issues?q=is%3Aissue+is%3Aopen+label%3AArea%2FDeveloperPortal)

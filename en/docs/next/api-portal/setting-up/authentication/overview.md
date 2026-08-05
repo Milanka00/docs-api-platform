@@ -62,15 +62,15 @@ For production, configure the portal to delegate login to an identity provider (
 
 | Requirement | Details |
 |-------------|---------|
-| OIDC endpoints | The IdP exposes authorization, token, and (optionally) userinfo endpoints, discoverable from its `/.well-known/openid-configuration` |
+| OIDC endpoints | The IdP exposes authorization, token, userinfo, and end-session endpoints. You configure each URL individually; the portal doesn't read `/.well-known/openid-configuration` |
 | JSON Web Token (JWT) access tokens | Access tokens are JWTs, not opaque tokens |
-| Signature verification | The IdP exposes a JSON Web Key Set (JWKS) endpoint, or you supply its X.509 certificate, so the portal can verify token signatures |
+| Signature verification | The IdP exposes a JSON Web Key Set (JWKS) endpoint, so the portal can verify the signature on a Bearer token |
 | Confidential client | The portal is registered as a confidential client with a client secret (a server-side Traditional Web Application), not a public single-page application |
 | Claims | Tokens carry the organization identifier and the user's roles as claims (claim names are configurable) |
 
 When `mode = "idp"`, the portal reads the `[api_portal.auth.idp]` block for the OIDC endpoints and client credentials, and the `[api_portal.auth.claim_mappings]` block for the claim names that carry organization and role information.
 
-[Set up Asgardeo as your identity provider](asgardeo-setup.md) walks through a complete configuration using WSO2 Asgardeo. The same concepts apply to any OIDC-compliant IdP.
+[Connect an identity provider to the API Portal](connect-an-identity-provider.md) covers the configuration every IdP needs. For a worked example against one specific provider, see [Set up Asgardeo as your identity provider](../../tutorials/asgardeo-as-idp.md).
 
 ## Authorization is configured separately
 
