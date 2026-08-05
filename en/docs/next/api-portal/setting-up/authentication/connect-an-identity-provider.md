@@ -39,7 +39,7 @@ Check your IdP against these requirements before you start:
 | OIDC endpoints | Exposes authorization, token, userinfo, JWKS, and end-session endpoints. You supply each URL individually. |
 | Confidential client | Issues a client secret, and accepts PKCE on the authorization code exchange. |
 | Authorization code and refresh token grants | Both enabled on the application. The portal refreshes an expired access token before failing a Management API request. |
-| JWT access tokens | Access tokens are signed JWTs. The portal verifies a Bearer token's signature against the JWKS endpoint, so opaque tokens don't work for machine clients calling `/api-portal/api/v0.9`. |
+| JSON Web Token (JWT) access tokens | Access tokens are signed JWTs. The portal verifies a Bearer token's signature against the JWKS endpoint, so opaque tokens don't work for machine clients calling `/api-portal/api/v0.9`. |
 | Custom claims | Emits the organization identifier and the user's roles in the ID token. Claim names are configurable; the claims themselves are required. |
 
 ## Step 1: Register the portal as a confidential client

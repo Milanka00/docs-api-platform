@@ -113,7 +113,7 @@ To publish an API of your own instead, continue below.
 
 ## Step 6: Publish your first API
 
-Publish an API by uploading a manifest and an OpenAPI definition. This example uses a **Books API**, whose backend is already hosted, so it works without deploying a gateway of your own.
+Publish an API by uploading a manifest and an OpenAPI definition. This example uses a Books API, whose backend is already hosted, so it works without deploying a gateway of your own.
 
 Create the API manifest:
 
@@ -240,7 +240,7 @@ curl -k -X POST "https://localhost:9543/api-portal/api/v0.9/apis" \
   -F "definition=@definition.yaml;type=application/yaml"
 ```
 
-Refresh the portal—the Books API now appears in the catalog. Click it to view its documentation and try-out console.
+Refresh the portal—the **Books API** now appears in the catalog. Select the **Books API** card to open its documentation and **Try It** console.
 
 ## What's next
 

@@ -14,7 +14,7 @@ content_type: "how-to"
 
 # Manage views
 
-A **view** is a filtered, branded subset of an organization's APIs—for example, `public` for external developers and `internal` for internal teams. Each view has its own URL (`/api-portal/<orgHandle>/views/<viewName>`) and shows only the APIs tagged with its assigned labels. [LLM Instructions](llm-instructions.md) and [API Workflows](managing-api-workflows.md) are also configured per view.
+A **view** is a filtered, branded subset of APIs—for example, `public` for external developers and `internal` for internal teams. Each view has its own URL (`/api-portal/<orgHandle>/views/<viewName>`) and shows only the APIs tagged with its assigned labels. [LLM Instructions](llm-instructions.md) and [API Workflows](managing-api-workflows.md) are also configured per view.
 
 ## Adding a view
 

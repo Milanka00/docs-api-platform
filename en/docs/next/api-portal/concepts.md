@@ -104,7 +104,7 @@ An **API key** is a simple token bound to a specific API or MCP server, used to 
 API keys can be generated, regenerated (rotated), or revoked. Each of those publishes a webhook event, so a handler in front of your API Gateway can enforce the change once it receives the event—see the [Webhook Event Catalog](references/webhook-event-catalog.md). See [Manage API Keys](manage-api-keys.md).
 
 !!! note
-    The portal generates keys through the UI for REST, WebSocket, and WebSub APIs whose definition declares API-key security. Keys for GraphQL and SOAP APIs exist solely through the [API Keys](rest-api/api-keys.md) Management API, and keys for MCP servers through [MCP Server Keys](rest-api/mcp-server-keys.md).
+    The portal generates keys through the UI for REST, WebSocket, and WebSub APIs whose definition declares API-key security. Keys for GraphQL and SOAP APIs exist solely through the [API Keys](rest-api/api-keys.md) Management API. Keys for MCP servers exist only through the [MCP Server Keys](rest-api/mcp-server-keys.md) Management API.
 
 ## OAuth2 credentials
 

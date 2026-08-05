@@ -234,7 +234,7 @@ curl -sk -X POST https://localhost:9543/api-portal/api/v0.9/apis \
   -F "definition=@definition.yaml;type=application/yaml"
 ```
 
-Open `https://localhost:9543/api-portal/default/views/default/apis` and the API is in the catalog with its plan showing.
+Open `https://localhost:9543/api-portal/default/views/default/apis`. The API appears in the catalog with its plan.
 
 ## Step 6: Get both credentials in the portal
 

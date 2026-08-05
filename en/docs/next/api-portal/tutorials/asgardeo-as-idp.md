@@ -208,7 +208,7 @@ Keep the claim names consistent between the Asgardeo token attributes and the `[
 
 The script registers an API resource representing the portal, with all `dp:*` scopes under it. For local testing, its default `ASGARDEO_RESOURCE_IDENTIFIER=https://localhost:9543` works unchanged. The system application is only needed to run the script, and can be deleted afterward.
 
-In scope mode, browser sessions are preauthorized: the portal skips the per-operation scope check for a user signed in through Asgardeo, and page role gating is the authorization that applies to them. The `dp:*` scopes then govern machine clients calling `/api-portal/api/v0.9` with a Bearer token.
+In scope mode, browser sessions are preauthorized. For a user signed in through Asgardeo, the portal skips the per-operation scope check. Page role gating is the authorization that applies to them instead. The `dp:*` scopes then govern machine clients that call `/api-portal/api/v0.9` with a Bearer token.
 
 ## Related topics
 

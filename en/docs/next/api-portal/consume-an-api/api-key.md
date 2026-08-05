@@ -14,7 +14,7 @@ content_type: "how-to"
 
 # Consume an API secured with an API key
 
-An API key is bound to one API or MCP server. You generate it from that artifact's own **API Keys** page, and it authenticates your requests to that artifact only. No key manager is involved, and an application is optional—you can associate a key with one for usage analytics, which changes nothing about how the key works.
+An API key is bound to one API or Model Context Protocol (MCP) server. You generate it from that artifact's own **API Keys** page, and it authenticates your requests to that artifact only. No key manager is involved, and an application is optional—you can associate a key with one for usage analytics, which changes nothing about how the key works.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ An API key is bound to one API or MCP server. You generate it from that artifact
 - You have a key. See [Manage API Keys](../manage-api-keys.md) for the generate, rotate, and revoke lifecycle.
 
     !!! note
-        The portal generates keys for REST, WebSocket, and WebSub APIs only. GraphQL, SOAP, and MCP artifacts get no **API Keys** button even when their specification declares an `apiKey` scheme—for those, obtain the key from whoever operates the API and send it the same way.
+        The portal generates keys for REST, WebSocket, and WebSub APIs whose specification declares API key security. GraphQL, SOAP, and MCP artifacts get no **API Keys** button even when their specification declares an `apiKey` scheme—for those, obtain the key from whoever operates the API and send it the same way.
 
 - If the API has subscription plans, [subscribe to one](../manage-subscriptions.md). The subscription is a separate credential from the key, and you send both.
 
