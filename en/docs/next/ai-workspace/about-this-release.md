@@ -14,13 +14,11 @@ content_type: "reference"
 
 # About this release
 
-This page is for platform teams and developers who run AI Workspace and manage artificial intelligence (AI) traffic through it.
+AI Workspace is the control plane for managing how applications access artificial intelligence (AI) services. Platform teams register [AI Gateway runtimes](ai-gateways/setting-up.md) in it, configure large language model (LLM) [providers](llm-providers/overview.md) and [proxies](llm-proxies/overview.md), attach [AI policies](policies/overview.md), and manage [credentials](secrets-management.md). Developers then point their applications and agents at the deployed endpoints. It runs as a distribution you deploy yourself, keeps its own database, and reaches gateways through explicit deployment rather than automatic propagation.
 
-AI Workspace is the control plane for managing how your applications access AI services. From one console, you connect [AI Gateway runtimes](ai-gateways/setting-up.md) and configure large language model (LLM) [providers](llm-providers/overview.md) and [proxies](llm-proxies/overview.md). You also attach [AI policies](policies/overview.md), manage [credentials](secrets-management.md), and deploy those configurations to your gateways.
+**WSO2 AI Workspace 1.0.0** is the first AI Workspace release. Every capability listed below is available for the first time, so there is no predecessor to upgrade from.
 
-**WSO2 AI Workspace 1.0.0** is the first AI Workspace release.
-
-For an introduction to the product, see the [AI Workspace overview](overview.md).
+For more information on AI Workspace, see the [AI Workspace overview](overview.md).
 
 ## Downloads
 
@@ -56,6 +54,8 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
     - **Centralized credentials**: Store upstream API keys as secrets rather than in artifact configuration.
     - **Reusable configuration**: Support multiple proxies with a single provider without duplicating credentials.
     - **Direct invocation**: If you don't need application-specific controls, call a provider endpoint directly.
+    - **Inbound authentication with API keys**: The gateway checks an API key on every incoming client request to a deployed provider. The workspace generates each key, shows it once, and sets a 90-day validity period. Send the key in `X-API-Key` by default, or in a header name that suits your software development kit (SDK). Inbound keys are separate from the upstream API key the gateway uses to call the AI service. See [Configure inbound authentication](configure-inbound-auth.md).
+    - **SDK invocation**: Applications call a deployed provider through its Invoke URL using the OpenAI, Anthropic, Google Gemini, Mistral, Azure OpenAI, and LangChain SDKs. See [Invoke providers and proxies with AI SDKs](using-sdks.md).
 
     **[LLM providers overview](llm-providers/overview.md)**
 
@@ -76,8 +76,9 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
 
     - **Isolated configuration**: Give each application, agent, team, or environment its own guardrails, access keys, and exposed resources.
     - **Resource control**: Choose which API paths the proxy exposes, and enable or disable them without changing the upstream provider.
-    - **Per-proxy authentication**: Require an API key that the workspace generates for that proxy.
     - **Provider switching**: If the replacement provider preserves the client-facing contract, swap the underlying provider without client changes.
+    - **Inbound authentication with API keys**: Require an API key that the workspace generates for that proxy, independently of the keys on the underlying provider. The same header name and 90-day validity rules apply. See [Configure inbound authentication](configure-inbound-auth.md).
+    - **SDK invocation**: Applications call a deployed proxy with the same AI SDKs and the same code path as a provider. The Invoke URL is the only difference. See [Invoke providers and proxies with AI SDKs](using-sdks.md).
 
     **[App LLM proxies overview](llm-proxies/overview.md)**
 
@@ -92,41 +93,38 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
 
     **[MCP proxies overview](mcp-proxies/overview.md)**
 
-??? note "AI guardrails"
+??? note "AI policies for content, traffic, and cost"
 
-    Guardrails inspect and act on request and response content. Attach them to a provider as a baseline, or to a proxy for one application or agent.
+    Policies run on the gateway at request time. Attach a policy to a provider as a baseline, or to a proxy for one application or agent.
 
-    - **Content safety**: Azure content safety moderation, NVIDIA NeMo Guard content safety classification, and AWS Bedrock guardrails.
-    - **Prompt protection**: Semantic prompt guard for similarity-based allow and block lists, and IBM Granite Guardian for prompt injection and jailbreak detection.
-    - **PII protection**: Regex-based masking of personally identifiable information (PII), with restoration in the response.
-    - **Validation**: Word count, sentence count, content length, JSON schema, regex, and URL guardrails.
-    - **Tool filtering**: Semantic tool filtering, which limits the tools exposed to a model by relevance to the user query.
+    - **Guardrails** inspect and act on request and response content:
 
-    **[Guardrail policies](policies/overview.md#guardrails)**
+        - **Content safety**: Azure content safety moderation, NVIDIA NeMo Guard content safety classification, and AWS Bedrock guardrails.
+        - **Prompt protection**: Semantic prompt guard for similarity-based allow and block lists, and IBM Granite Guardian for prompt injection and jailbreak detection.
+        - **PII protection**: Regex-based masking of personally identifiable information (PII), with restoration in the response.
+        - **Validation**: Word count, sentence count, content length, JSON schema, regex, and URL guardrails.
+        - **Tool filtering**: Semantic tool filtering, which limits the tools exposed to a model by relevance to the user query.
+        - See [Guardrail policies](policies/overview.md#guardrails).
 
-??? note "Rate limiting for requests, tokens, and spend"
+    - **Rate limiting** caps several different measures of traffic, because many AI services bill per token:
 
-    Many AI services bill per token, so AI Workspace caps several different measures of traffic.
+        - **Rate limit: basic**: Caps request count within a time window.
+        - **Rate limit: advanced**: Caps request count with multi-dimensional and weighted quotas, a choice of the generic cell rate algorithm (GCRA) or fixed window, and in-memory or Redis counters.
+        - **Token-based rate limit**: Caps prompt, completion, or total tokens, independently or in combination.
+        - **LLM cost and LLM cost-based rate limit**: Calculate the monetary cost of each call, and cap spend in US dollars (USD).
+        - **Built-in provider limits**: Cap requests and tokens from the **Rate Limiting** tab of a provider without attaching a policy.
+        - See [Rate limiting policies](policies/overview.md#rate-limiting).
 
-    - **Rate limit: basic**: Caps request count within a time window.
-    - **Rate limit: advanced**: Caps request count with multi-dimensional and weighted quotas, a choice of the generic cell rate algorithm (GCRA) or fixed window, and in-memory or Redis counters.
-    - **Token-based rate limit**: Caps prompt, completion, or total tokens, independently or in combination.
-    - **LLM cost and LLM cost-based rate limit**: Calculate the monetary cost of each call, and cap spend in US dollars (USD).
-    - **Built-in provider limits**: Cap requests and tokens from the **Rate Limiting** tab of a provider without attaching a policy.
+    - **Traffic, prompt, and provider transformation** shape how requests are routed, composed, and translated:
 
-    **[Rate limiting policies](policies/overview.md#rate-limiting)**
+        - **Model routing**: Model round robin and model weighted round robin distribute requests across models.
+        - **Header-based routing**: The LLM header router selects the target provider from a request header, so one OpenAI-shaped endpoint routes requests to several providers.
+        - **Prompt handling**: Prompt decorator, prompt template, and prompt compressor.
+        - **Response handling**: Semantic caching for semantically similar requests, and the respond policy for mocking and short-circuit logic.
+        - **Provider transformation**: Translate an OpenAI Chat Completions request into the Anthropic, Azure OpenAI, AWS Bedrock Converse, Gemini, or Mistral API shape, and translate the response back.
+        - See [Traffic management and prompt policies](policies/overview.md#traffic-management-and-prompt-policies).
 
-??? note "Traffic, prompt, and provider transformation policies"
-
-    These policies shape how requests are routed, composed, and translated.
-
-    - **Model routing**: Model round robin and model weighted round robin distribute requests across models.
-    - **Header-based routing**: The LLM header router selects the target provider from a request header, so one OpenAI-shaped endpoint routes requests to several providers.
-    - **Prompt handling**: Prompt decorator, prompt template, and prompt compressor.
-    - **Response handling**: Semantic caching for semantically similar requests, and the respond policy for mocking and short-circuit logic.
-    - **Provider transformation**: Translate an OpenAI Chat Completions request into the Anthropic, Azure OpenAI, AWS Bedrock Converse, Gemini, or Mistral API shape, and translate the response back.
-
-    **[Traffic management and prompt policies](policies/overview.md#traffic-management-and-prompt-policies)**
+    **[AI policies overview](policies/overview.md)**
 
 ??? note "Custom AI policies"
 
@@ -148,25 +146,6 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
     - **Rotation without redeployment**: Update the secret value by handle, and referencing artifacts need no change.
 
     **[Secrets management](secrets-management.md)**
-
-??? note "Inbound authentication with API keys"
-
-    The gateway checks an API key on every incoming client request to a deployed provider or proxy.
-
-    - **Workspace-generated keys**: The workspace generates each key, shows it once, and sets a 90-day validity period.
-    - **Configurable header name**: Send the key in `X-API-Key` by default, or in a header name that suits your software development kit (SDK).
-    - **Independent of upstream credentials**: Inbound keys are separate from the upstream API key the gateway uses to call the AI service.
-
-    **[Configure inbound authentication](configure-inbound-auth.md)**
-
-??? note "SDK invocation"
-
-    Applications call a deployed provider or proxy through its Invoke URL using standard AI SDKs.
-
-    - **Supported SDKs**: OpenAI, Anthropic, Google Gemini, Mistral, Azure OpenAI, and LangChain.
-    - **Same code path for providers and proxies**: The Invoke URL is the only difference between calling a provider and calling a proxy.
-
-    **[Invoke providers and proxies with AI SDKs](using-sdks.md)**
 
 ??? note "Management of gateway-deployed AI artifacts"
 
