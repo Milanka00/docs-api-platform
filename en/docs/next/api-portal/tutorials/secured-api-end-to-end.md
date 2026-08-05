@@ -42,7 +42,7 @@ The API Portal distribution ships the Platform API alongside it, so one compose 
 ```bash
 curl -sLO https://github.com/wso2/api-platform/releases/download/api-portal%2Fv1.0.0-rc3/wso2apip-api-portal-1.0.0-rc3.zip
 unzip wso2apip-api-portal-1.0.0-rc3.zip
-cd wso2apip-api-portal-1.0.0-rc3
+cd wso2apip-api-portal-1.0.0
 ./scripts/setup.sh
 docker compose up -d
 ```
@@ -148,7 +148,7 @@ curl -sk -X POST https://localhost:9543/api-portal/api/v0.9/webhook-subscribers 
 The Platform API's webhook receiver ships disabled, and the shipped `configs/config.toml` has no `[platform_api.webhook]` section wiring in a secret—setting `APIP_CP_WEBHOOK_SECRET` alone does nothing. Enable the receiver and point it at the same secret, then set the value in `api-platform.env` and restart the Platform API so both changes take effect:
 
 ```bash
-cd ../wso2apip-api-portal-1.0.0-rc3
+cd ../wso2apip-api-portal-1.0.0
 
 cat >> configs/config.toml <<'EOF'
 
