@@ -14,7 +14,7 @@ content_type: "reference"
 
 # About this release
 
-This page is for platform teams and developers who run AI Workspace and manage AI traffic through it.
+This page is for platform teams and developers who run AI Workspace and manage artificial intelligence (AI) traffic through it.
 
 AI Workspace is the control plane for managing how your applications access AI services. From one console, you connect [AI Gateway runtimes](ai-gateways/setting-up.md) and configure large language model (LLM) [providers](llm-providers/overview.md) and [proxies](llm-proxies/overview.md). You also attach [AI policies](policies/overview.md), manage [credentials](secrets-management.md), and deploy those configurations to your gateways.
 
@@ -65,19 +65,19 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
 
     - **Built-in templates**: Use the read-only templates shipped for the seven supported services, and enable or disable each one.
     - **Custom templates**: Define a template for any AI service that has no built-in template, from scratch or as a new version of a built-in template.
-    - **Versioning**: Keep multiple versions of a custom template, and see the most recent version on each template card.
+    - **Versioning**: Keep multiple versions of a custom template, and see the highest-numbered version on each template card.
     - **Provider type selector integration**: Custom templates appear alongside built-in providers when you add a provider.
 
     **[LLM provider templates overview](llm-provider-templates/overview.md)**
 
 ??? note "App LLM proxies"
 
-    An App LLM proxy adds an application-facing endpoint on top of a provider when a specific generative AI (GenAI) application or agent needs its own controls.
+    If a specific generative AI (GenAI) application or agent needs its own controls, an App LLM proxy adds an application-facing endpoint on top of a provider.
 
     - **Isolated configuration**: Give each application, agent, team, or environment its own guardrails, access keys, and exposed resources.
     - **Resource control**: Choose which API paths the proxy exposes, and enable or disable them without changing the upstream provider.
     - **Per-proxy authentication**: Require an API key that the workspace generates for that proxy.
-    - **Provider switching**: If the new provider preserves the client-facing contract, swap the underlying provider without client changes.
+    - **Provider switching**: If the replacement provider preserves the client-facing contract, swap the underlying provider without client changes.
 
     **[App LLM proxies overview](llm-proxies/overview.md)**
 
@@ -106,12 +106,12 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
 
 ??? note "Rate limiting for requests, tokens, and spend"
 
-    AI services bill per token, so AI Workspace caps several different measures of traffic.
+    Many AI services bill per token, so AI Workspace caps several different measures of traffic.
 
     - **Rate limit: basic**: Caps request count within a time window.
     - **Rate limit: advanced**: Caps request count with multi-dimensional and weighted quotas, a choice of the generic cell rate algorithm (GCRA) or fixed window, and in-memory or Redis counters.
     - **Token-based rate limit**: Caps prompt, completion, or total tokens, independently or in combination.
-    - **LLM cost and LLM cost-based rate limit**: Calculate the monetary cost of each call, and cap spend in USD.
+    - **LLM cost and LLM cost-based rate limit**: Calculate the monetary cost of each call, and cap spend in US dollars (USD).
     - **Built-in provider limits**: Cap requests and tokens from the **Rate Limiting** tab of a provider without attaching a policy.
 
     **[Rate limiting policies](policies/overview.md#rate-limiting)**
@@ -175,7 +175,7 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
     - **Automatic sync**: Automatic sync is enabled by default. LLM provider templates, LLM providers, LLM proxies, and MCP proxies created on a gateway appear in the workspace.
     - **Gateway ownership**: Deployment fields stay read-only in the workspace, because the gateway owns them.
     - **Editable metadata**: Descriptions, documentation, OpenAPI definitions, and template connection details remain editable.
-    - **Independent operation**: These artifacts keep serving traffic when AI Workspace is unavailable.
+    - **Independent operation**: If AI Workspace is unavailable, these artifacts keep serving traffic.
 
     **[Sync gateway-created artifacts](sync-gateway-created-artifacts.md)**
 
