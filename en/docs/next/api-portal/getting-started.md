@@ -78,7 +78,7 @@ curl -fk https://localhost:9243/health
 Navigate to:
 
 ```
-https://localhost:9543/default/views/default
+https://localhost:9543/api-portal/default/views/default
 ```
 
 You'll see the API Portal home page.
@@ -113,7 +113,7 @@ To publish an API of your own instead, continue below.
 
 ## Step 6: Publish your first API
 
-Publish an API by uploading a manifest and an OpenAPI definition. This example uses the **Reading List API**, whose backend is already hosted, so it works without deploying a gateway of your own.
+Publish an API by uploading a manifest and an OpenAPI definition. This example uses a **Books API**, whose backend is already hosted, so it works without deploying a gateway of your own.
 
 Create the API manifest:
 
@@ -123,15 +123,15 @@ apiVersion: api-portal.api-platform.wso2.com/v1
 kind: RestApi
 
 metadata:
-  name: reading-list-api-v1.0
+  name: books-api-v1.0
 
 spec:
   type: REST
-  displayName: Reading List API
+  displayName: Books API
   version: v1.0
   description: Sample reading-list API for tracking books and their reading status. Open access — no API key or subscription required.
   status: PUBLISHED
-  referenceId: reading-list-api-v1.0
+  referenceId: books-api-v1.0
 
   tags:
     - reading-list
@@ -163,7 +163,7 @@ Create the OpenAPI definition:
 # definition.yaml
 openapi: 3.0.1
 info:
-  title: Reading List API
+  title: Books API
   version: v1.0
   description: |
     Track a personal reading list — add books, update their reading status, and
@@ -234,13 +234,13 @@ TOKEN=$(curl -sk -X POST "https://localhost:9243/api/portal/v0.9/auth/login" \
   -d "username=<admin-username>&password=<admin-password>" | jq -r .token)
 
 # Publish the API — the login is scoped to the "default" organization
-curl -k -X POST "https://localhost:9543/api/v0.9/apis" \
+curl -k -X POST "https://localhost:9543/api-portal/api/v0.9/apis" \
   -H "Authorization: Bearer $TOKEN" \
   -F "metadata=@api.yaml;type=application/yaml" \
   -F "definition=@definition.yaml;type=application/yaml"
 ```
 
-Refresh the portal—the Reading List API now appears in the catalog. Click it to view its documentation and try-out console.
+Refresh the portal—the Books API now appears in the catalog. Click it to view its documentation and try-out console.
 
 ## What's next
 
