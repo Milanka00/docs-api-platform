@@ -111,11 +111,6 @@ pool_request_timeout_ms = 30000         # MSSQL only — per-query execution tim
 [api_portal.security]
 encryption_key = ""     # 64-char hex — AES-256-GCM key for encrypting secrets at rest
 session_secret = ""     # 64-char hex — express-session signing secret
-
-[api_portal.security.service_api_key]
-enabled = true
-header_name = "x-wso2-api-key"
-value = ""
 ```
 
 `encryption_key` and `session_secret` are required—the portal fails closed at startup if either doesn't resolve to a 64-character hex string. Generate one with `openssl rand -hex 32`.
@@ -136,22 +131,25 @@ platform_api_url = ""
 public_key_path = ""    # path to the Platform API's RS256 public key PEM
 tls_skip_verify = false
 
+# The [api_portal.auth.idp] endpoints describe your own identity provider and have
+# no default. issuer, authorization_url, token_url, client_id, and callback_url are
+# required when mode = "idp"; the portal refuses to start without them.
 [api_portal.auth.idp]
-name = "IS"
-issuer = "https://localhost:9443/oauth2/token"
-authorization_url = "https://localhost:9443/oauth2/authorize"
-token_url = "https://localhost:9443/oauth2/token"
-user_info_url = "https://localhost:9443/oauth2/userinfo"
+name = "my-idp"        # friendly name, used in logs
+issuer = ""
+authorization_url = ""
+token_url = ""
+user_info_url = ""
 client_id = ""
 client_secret = ""
 audience = ""
-callback_url = "http://localhost:9543/default/callback"
+callback_url = ""
 scope = "openid profile email"
 sign_up_url = ""
-logout_url = "https://localhost:9443/oidc/logout"
-logout_redirect_uri = "http://localhost:9543/default"
+logout_url = ""
+logout_redirect_uri = ""
 certificate = ""
-jwks_url = "https://localhost:9443/oauth2/jwks"
+jwks_url = ""
 token_refresh_timeout_ms = 10000
 silent_sso = true      # Enable silent SSO
 org_callback = false   # Redirect to the org's own landing page after login

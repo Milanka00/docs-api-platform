@@ -22,7 +22,7 @@ An API key is bound to one API or MCP server. You generate it from that artifact
 - You have a key. See [Manage API Keys](../manage-api-keys.md) for the generate, rotate, and revoke lifecycle.
 
     !!! note
-        The portal generates keys for REST and WebSocket APIs only. GraphQL, SOAP, and MCP artifacts get no **API Keys** button even when their specification declares an `apiKey` scheme—for those, obtain the key from whoever operates the API and send it the same way.
+        The portal generates keys for REST, WebSocket, and WebSub APIs only. GraphQL, SOAP, and MCP artifacts get no **API Keys** button even when their specification declares an `apiKey` scheme—for those, obtain the key from whoever operates the API and send it the same way.
 
 - If the API has subscription plans, [subscribe to one](../manage-subscriptions.md). The subscription is a separate credential from the key, and you send both.
 

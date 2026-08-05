@@ -40,8 +40,8 @@ API Portal  ──signed webhook──▶  Platform API  ──control plane─�
 The API Portal distribution ships the Platform API alongside it, so one compose file gives you both.
 
 ```bash
-curl -sLO https://github.com/wso2/api-platform/releases/download/api-portal%2Fv1.0.0-rc2/wso2apip-api-portal-1.0.0-rc2.zip
-unzip wso2apip-api-portal-1.0.0-rc2.zip
+curl -sLO https://github.com/wso2/api-platform/releases/download/api-portal%2Fv1.0.0-rc3/wso2apip-api-portal-1.0.0-rc3.zip
+unzip wso2apip-api-portal-1.0.0-rc3.zip
 cd wso2apip-api-portal-1.0.0
 ./scripts/setup.sh
 docker compose up -d
@@ -93,7 +93,7 @@ Download the gateway distribution and run its setup:
 cd ..
 curl -sLO https://github.com/wso2/api-platform/releases/download/gateway%2Fv1.2.0-rc/wso2apip-api-gateway-1.2.0-rc.zip
 unzip wso2apip-api-gateway-1.2.0-rc.zip
-cd wso2apip-api-gateway-1.2.0
+cd wso2apip-api-gateway-1.2.0-rc
 ./scripts/setup.sh
 ```
 
