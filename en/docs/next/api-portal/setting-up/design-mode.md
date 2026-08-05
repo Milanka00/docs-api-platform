@@ -9,7 +9,7 @@ tags:
   - theming
   - design-mode
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-07-24
+last_updated: 2026-08-05
 content_type: "how-to"
 ---
 
@@ -44,10 +44,10 @@ applications_path = "./samples/applications.yaml"
 
 The sample paths are relative to the app's working directory, where the bundled `samples/` already lives—leave them as they are unless you're pointing at your own sample set.
 
-Then start the portal normally:
+Then restart the API Portal:
 
 ```bash
-npm start
+docker compose restart api-portal
 ```
 
 Visit `http://localhost:9543/api-portal/views/default`.
@@ -211,11 +211,17 @@ Design mode turns off everything that needs a database or an identity provider:
 
 ## Turning design mode off
 
-Set `enabled = false` (or remove the section entirely) and restart:
+Set `enabled = false` (or remove the section entirely) in `configs/config.toml`:
 
 ```toml
 [api_portal.design_mode]
 enabled = false
+```
+
+Then restart:
+
+```bash
+docker compose restart api-portal
 ```
 
 The portal returns to production mode, requiring a database and (if configured) an IDP.
