@@ -25,7 +25,7 @@ The database schema itself is multi-organization—one shared database can hold 
 The handle appears in every portal URL:
 
 ```
-https://<host>/<orgHandle>/views/<viewName>
+https://<host>/api-portal/<orgHandle>/views/<viewName>
 ```
 
 In local-auth mode it must match the organization ID the Platform API asserts in the `org_handle` claim. In IDP mode the token's organization claim has to resolve to this same handle. See [Connect an identity provider](setting-up/authentication/connect-an-identity-provider.md#step-5-make-the-organization-claim-resolve-to-your-organization).
@@ -37,7 +37,7 @@ A **view** is a filtered, branded subset of the organization's APIs and Model Co
 Each view has its own URL:
 
 ```
-https://<host>/<orgHandle>/views/<viewName>
+https://<host>/api-portal/<orgHandle>/views/<viewName>
 ```
 
 See [Manage Views](admin-settings/manage-views.md).
@@ -104,7 +104,7 @@ An **API key** is a simple token bound to a specific API or MCP server, used to 
 API keys can be generated, regenerated (rotated), or revoked. Each of those publishes a webhook event, so a handler in front of your API Gateway can enforce the change once it receives the event—see the [Webhook Event Catalog](references/webhook-event-catalog.md). See [Manage API Keys](manage-api-keys.md).
 
 !!! note
-    The portal generates keys through the UI for REST and WebSocket APIs only. Keys for GraphQL and SOAP APIs exist solely through the [API Keys](rest-api/api-keys.md) Management API, and keys for MCP servers through [MCP Server Keys](rest-api/mcp-server-keys.md).
+    The portal generates keys through the UI for REST, WebSocket, and WebSub APIs whose definition declares API-key security. Keys for GraphQL and SOAP APIs exist solely through the [API Keys](rest-api/api-keys.md) Management API. Keys for MCP servers exist only through the [MCP Server Keys](rest-api/mcp-server-keys.md) Management API.
 
 ## OAuth2 credentials
 

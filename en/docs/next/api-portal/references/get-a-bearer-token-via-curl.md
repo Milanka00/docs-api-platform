@@ -1,6 +1,6 @@
 ---
-title: "Get a Bearer token via curl (IDP mode)"
-description: "Obtain a Bearer token for the API Portal REST API from the terminal, without a browser, when running in external IDP mode."
+title: "Get a Bearer token via curl (IdP mode)"
+description: "Obtain a Bearer token for the API Portal REST API from the terminal, without a browser, when running in external IdP mode."
 canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/references/get-a-bearer-token-via-curl/
 md_url: https://wso2.com/api-platform/docs/cloud/api-portal/references/get-a-bearer-token-via-curl.md
 tags:
@@ -13,18 +13,18 @@ last_updated: 2026-07-24
 content_type: "how-to"
 ---
 
-# Getting a bearer token via curl (IDP mode)
+# Getting a bearer token via curl (IdP mode)
 
-When the API Portal & MCP Hub is configured with an external IDP (e.g. Asgardeo), REST API calls to `/api/v0.9/*` must include an `Authorization: Bearer <token>` header. This guide obtains that token from the terminal, without going through the portal UI. One step still opens a browser: the identity provider's own login and redirect.
+When the API Portal & MCP Hub is configured with an external identity provider (IdP) such as Asgardeo, REST API calls to `/api-portal/api/v0.9/*` must include an `Authorization: Bearer <token>` header. This guide obtains that token from the terminal, without going through the portal UI. One step still opens a browser: the IdP's own login and redirect.
 
 !!! note
     If you're running in **local auth mode** instead (the default for local development), get a token from the Platform API directly—see [Getting Started](../getting-started.md)—no PKCE flow needed.
 
 ## Prerequisites
 
-- An identity provider (IDP) is configured, with `api_portal.auth.idp.client_id` set in `config.toml`—see [Authentication](../setting-up/authentication/overview.md)
+- An IdP is configured, with `api_portal.auth.idp.client_id` set in `config.toml`—see [Authentication](../setting-up/authentication/overview.md)
 - Your user carries the privileges the operations need: a role the portal's grant table names when `auth.authorization.mode = "role"`, or the `dp:*` scopes themselves when it's `"scope"`—see [Choose how privileges reach the token](../setting-up/authentication/connect-an-identity-provider.md#step-3-choose-how-privileges-reach-the-token)
-- You have the **client ID** and **client secret** from your IDP application
+- You have the **client ID** and **client secret** from your IdP application
 - You know your org's identifier (the `ORGANIZATION_IDENTIFIER` value used to scope the login, e.g. `sub`)
 
 ## Flow: Authorization code + Proof Key for Code Exchange (PKCE)
@@ -50,7 +50,7 @@ echo "CODE_CHALLENGE=$CODE_CHALLENGE"
 
 ## Step 2—start a local redirect listener
 
-The IDP redirects back to a callback URI with the authorization code. Use `nc` to capture it:
+The IdP redirects back to a callback URI with the authorization code. Use `nc` to capture it:
 
 ```bash
 PORT=8080
@@ -59,7 +59,7 @@ NC_PID=$!
 ```
 
 !!! note
-    Register `http://localhost:8080` as an authorized redirect URI in your IDP application before proceeding.
+    Register `http://localhost:8080` as an authorized redirect URI in your IdP application before proceeding.
 
 ## Step 3—build the authorization URL and open it
 
@@ -119,7 +119,7 @@ echo "TOKEN=$TOKEN"
 ```bash
 # The org is resolved from the token's org claim (set via ORGANIZATION_IDENTIFIER
 # during login in Step 3) — no org identifier needed in the request itself.
-BASE="https://localhost:9543/api/v0.9"
+BASE="https://localhost:9543/api-portal/api/v0.9"
 
 curl -sk "${BASE}/apis" -H "Authorization: Bearer $TOKEN" | jq .
 curl -sk "${BASE}/applications" -H "Authorization: Bearer $TOKEN" | jq .
@@ -138,10 +138,10 @@ See the [Management API](../rest-api/overview.md) for the full set of available 
 |---|---|---|
 | `403 Missing organization claim in token` | Token has no org claim | Log in with `org=<ORGANIZATION_IDENTIFIER>` in the auth URL |
 | `403 Forbidden` (organization) | Token's org claim doesn't resolve to the organization this portal serves. Unknown and foreign organizations return the same status, so the response can't be used to discover which organizations exist | Verify `ORGANIZATION_IDENTIFIER` matches the portal's `[api_portal.organization] handle` |
-| `403 Forbidden` (scope error) | The request's effective scopes don't cover the operation | In `mode = "role"`, assign the user a role the portal's grant table names. In `mode = "scope"`, grant the operation's `dp:*` scope to the application in the IDP |
+| `403 Forbidden` (scope error) | The request's effective scopes don't cover the operation | In `mode = "role"`, assign the user a role the portal's grant table names. In `mode = "scope"`, grant the operation's `dp:*` scope to the application in the IdP |
 | `401 Authentication required` | Token expired or invalid | Re-run steps 1–5 for a fresh token |
 | Token carries no `dp:*` scopes | Expected in `mode = "role"`—the portal derives scopes from the roles claim and ignores the token's own scope claim, so an absent `dp:*` scope isn't the fault | Check the roles claim instead. In the Asgardeo console, assign `dp_admin` for full access, or `dp_subscriber`. Only `mode = "scope"` requires the scopes in the token |
-| `nc` gets no output | Redirect URI not registered in IDP | Add `http://localhost:8080` to authorized redirect URIs |
+| `nc` gets no output | Redirect URI not registered in IdP | Add `http://localhost:8080` to authorized redirect URIs |
 
 ## Token lifetime
 

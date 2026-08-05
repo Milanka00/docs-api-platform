@@ -40,8 +40,8 @@ API Portal  ──signed webhook──▶  Platform API  ──control plane─�
 The API Portal distribution ships the Platform API alongside it, so one compose file gives you both.
 
 ```bash
-curl -sLO https://github.com/wso2/api-platform/releases/download/api-portal%2Fv1.0.0-rc2/wso2apip-api-portal-1.0.0-rc2.zip
-unzip wso2apip-api-portal-1.0.0-rc2.zip
+curl -sLO https://github.com/wso2/api-platform/releases/download/api-portal%2Fv1.0.0-rc3/wso2apip-api-portal-1.0.0-rc3.zip
+unzip wso2apip-api-portal-1.0.0-rc3.zip
 cd wso2apip-api-portal-1.0.0
 ./scripts/setup.sh
 docker compose up -d
@@ -53,7 +53,7 @@ Confirm both are up:
 
 ```bash
 curl -fsk https://localhost:9243/health && echo " platform-api ok"
-curl -fsk -o /dev/null https://localhost:9543/default/views/default && echo "api-portal ok"
+curl -fsk -o /dev/null https://localhost:9543/api-portal/default/views/default && echo "api-portal ok"
 ```
 
 Now get a Platform API token and create a project to hold the API. Every Platform API call below uses this token, and the portal accepts the same one—it verifies it against the shared public key.
@@ -93,7 +93,7 @@ Download the gateway distribution and run its setup:
 cd ..
 curl -sLO https://github.com/wso2/api-platform/releases/download/gateway%2Fv1.2.0-rc/wso2apip-api-gateway-1.2.0-rc.zip
 unzip wso2apip-api-gateway-1.2.0-rc.zip
-cd wso2apip-api-gateway-1.2.0
+cd wso2apip-api-gateway-1.2.0-rc
 ./scripts/setup.sh
 ```
 
@@ -123,7 +123,7 @@ This is the seam. Two things have to be true before a portal-issued credential c
 **First, link the portal's organization to the control plane.** The Platform API resolves each incoming event's organization by handle, read from `org.ref_id`, which comes from the portal organization's `cpRefId`:
 
 ```bash
-curl -sk -X PUT https://localhost:9543/api/v0.9/organizations/default \
+curl -sk -X PUT https://localhost:9543/api-portal/api/v0.9/organizations/default \
   -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' \
   -d '{"id":"default","displayName":"Default","cpRefId":"default"}'
 ```
@@ -133,7 +133,7 @@ curl -sk -X PUT https://localhost:9543/api/v0.9/organizations/default \
 ```bash
 export WEBHOOK_SECRET=$(openssl rand -hex 32)
 
-curl -sk -X POST https://localhost:9543/api/v0.9/webhook-subscribers \
+curl -sk -X POST https://localhost:9543/api-portal/api/v0.9/webhook-subscribers \
   -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' \
   -d "{\"id\":\"platform-api\",\"displayName\":\"Platform API\",
        \"targetUrl\":\"https://platform-api:9243/api/portal/v0.9/webhooks/events\",
@@ -218,7 +218,7 @@ The Platform API resolves each event's API and plan by **handle**, so the portal
 Sync the plan:
 
 ```bash
-curl -sk -X PUT https://localhost:9543/api/v0.9/subscription-plans \
+curl -sk -X PUT https://localhost:9543/api-portal/api/v0.9/subscription-plans \
   -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' \
   -d "[{\"id\":\"$PLAN\",\"displayName\":\"$PLAN\",\"refId\":\"$PLAN\",
         \"limits\":[{\"limitType\":\"REQUEST_COUNT\",\"limitCount\":10000,
@@ -228,13 +228,13 @@ curl -sk -X PUT https://localhost:9543/api/v0.9/subscription-plans \
 Then publish the API to the portal with `referenceId` set to the Platform API handle, and its specification attached. Write `api.yaml` and `definition.yaml` as shown in [Getting Started](../getting-started.md#step-6-publish-your-first-api), setting `referenceId` to the value of `$API_ID` and listing `$PLAN` under `subscriptionPlans`, then:
 
 ```bash
-curl -sk -X POST https://localhost:9543/api/v0.9/apis \
+curl -sk -X POST https://localhost:9543/api-portal/api/v0.9/apis \
   -H "Authorization: Bearer $TOKEN" \
   -F "metadata=@api.yaml;type=application/yaml" \
   -F "definition=@definition.yaml;type=application/yaml"
 ```
 
-Open `https://localhost:9543/default/views/default/apis` and the API is in the catalog with its plan showing.
+Open `https://localhost:9543/api-portal/default/views/default/apis`. The API appears in the catalog with its plan.
 
 ## Step 6: Get both credentials in the portal
 

@@ -25,7 +25,7 @@ The **Organization** tab in the API Portal's Settings page manages the details o
 | Field | Description |
 |---|---|
 | **Name** | The display name shown throughout the portal UI |
-| **Handle** | The URL-safe identifier used in every portal URL (`/<orgHandle>/views/<viewName>`). Read-only—it can't be changed after the organization is created |
+| **Handle** | The URL-safe identifier used in every portal URL (`/api-portal/<orgHandle>/views/<viewName>`). Read-only—it can't be changed after the organization is created |
 | **Artifact types served** | Read-only. Shows which artifact types the portal serves—APIs, Model Context Protocol (MCP) servers, and API workflows. Set by the operator in the `[api_portal.artifacts]` config, not from this pane; pages for a type that isn't served return 404. See [Artifact types](../artifact-types.md) |
 | **Business owner** | Contact name for the organization owner |
 | **Business owner contact** | The owner's phone number or other contact string |

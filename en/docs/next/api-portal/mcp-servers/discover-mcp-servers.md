@@ -75,9 +75,9 @@ Every MCP server in the catalog is exposed through the portal's machine-readable
 
 | Endpoint | Returns |
 |---|---|
-| `/{orgName}/views/{viewName}/mcps.md` | Every agent-visible MCP server as one Markdown document |
-| `/{orgName}/views/{viewName}/mcp/{apiHandle}.md` | One server in Markdown: metadata, plans, attached documents, and its full tool, resource, and prompt list |
-| `/{orgName}/views/{viewName}/mcp/{apiHandle}/docs/specification.json` | The raw tool, resource, and prompt schema |
+| `/api-portal/{orgName}/views/{viewName}/mcps.md` | Every agent-visible MCP server as one Markdown document |
+| `/api-portal/{orgName}/views/{viewName}/mcp/{apiHandle}.md` | One server in Markdown: metadata, plans, attached documents, and its full tool, resource, and prompt list |
+| `/api-portal/{orgName}/views/{viewName}/mcp/{apiHandle}/docs/specification.json` | The raw tool, resource, and prompt schema |
 
 Servers also appear in the portal's `llms.txt` index, under an **MCPs** section. See [AI Agent Discovery](../discover-apis/ai-agent-discovery.md).
 
