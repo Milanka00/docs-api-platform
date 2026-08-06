@@ -109,13 +109,13 @@ Download the AI Workspace distribution from the [WSO2 API Platform releases page
     - **Rate limiting** caps several different measures of traffic, because many AI services bill per token:
 
         - **Rate limit: basic**: Caps request count within a time window.
-        - **Rate limit: advanced**: Caps request count with multi-dimensional and weighted quotas, a choice of the generic cell rate algorithm (GCRA) or fixed window, and in-memory or Redis counters.
+        - **Rate limit: advanced**: Caps request count with multi-dimensional and weighted quotas. Offers a choice of the generic cell rate algorithm (GCRA) or fixed window, and in-memory or Redis counters.
         - **Token-based rate limit**: Caps prompt, completion, or total tokens, independently or in combination.
         - **LLM cost and LLM cost-based rate limit**: Calculate the monetary cost of each call, and cap spend in US dollars (USD).
         - **Built-in provider limits**: Cap requests and tokens from the **Rate Limiting** tab of a provider without attaching a policy.
         - See [Rate limiting policies](policies/overview.md#rate-limiting).
 
-    - **Traffic, prompt, and provider transformation** shape how requests are routed, composed, and translated:
+    - **Traffic, prompt, and provider transformations** shape how requests are routed, composed, and translated:
 
         - **Model routing**: Model round robin and model weighted round robin distribute requests across models.
         - **Header-based routing**: The LLM header router selects the target provider from a request header, so one OpenAI-shaped endpoint routes requests to several providers.
