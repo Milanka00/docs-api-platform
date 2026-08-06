@@ -37,7 +37,16 @@ Public pages (the API catalog and documentation) are always accessible without a
 
 Local authentication delegates credential validation to the Platform API control plane. It requires no external identity provider, which makes it the default for local development and quick trials.
 
-When `[api_portal.auth] mode = "local"`, the portal renders a username and password form and validates the credentials against the Platform API. Users, bcrypt-hashed passwords, and scopes are defined in the Platform API's own configuration, under `[[platform_api.auth.file.users]]`.
+When `[api_portal.auth] mode = "local"`, the portal renders a username and password form and validates the credentials against the Platform API. Users, bcrypt-hashed passwords, and roles are defined in the Platform API's own configuration, under `[[platform_api.auth.file.users]]`:
+
+```toml
+[[platform_api.auth.file.users]]
+username      = "admin"
+password_hash = "..."
+roles         = ["ap_admin"]
+```
+
+Those role names are what the portal authorizes against. The Platform API mints them into the `roles` claim of the token it issues, and because `authorization.mode = "role"` is the default, the portal expands that claim through its grant table—which aliases `ap_admin` and `ap_subscriber` onto its own `dp_admin` and `dp_subscriber` grants for exactly this reason. The shipped setup therefore works unchanged. See [Choose how privileges reach the token](connect-an-identity-provider.md#step-3-choose-how-privileges-reach-the-token) for what each role grants.
 
 ```toml
 [api_portal.auth]

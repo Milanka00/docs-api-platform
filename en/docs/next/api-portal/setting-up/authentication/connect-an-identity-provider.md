@@ -84,6 +84,8 @@ The portal's Management API (`/api-portal/api/v0.9`) guards each operation with 
 
 The table also aliases `ap_admin` and `ap_subscriber` onto those same grants, because those are the role names the Platform API mints. Map your IdP's groups onto any of the four names, or add an entry of your own for a narrower grant. The portal validates every scope in the table against its OpenAPI specification at startup, so an undeclared `dp:*` scope fails startup rather than surfacing later as a role that logs in and is denied every request.
 
+When a token carries several roles, the effective scopes are the union of every matching entry—most permissive wins. A role name the table doesn't list contributes nothing, so the failure mode of a mistyped or unmapped role is a denied request, never an unintended grant.
+
 **Scope mode** (`mode = "scope"`) reads the access token's own `scope` claim. Use it when the IdP mints `dp:*` scopes directly, which means registering all of them in the IdP and granting them to the application. Browser sessions are preauthorized in this mode—the per-operation check is skipped, and page role gating is the authorization that applies to them.
 
 Role mode is the lighter integration of the two. Editing the mapping file needs a restart, since the portal reads it at startup.
