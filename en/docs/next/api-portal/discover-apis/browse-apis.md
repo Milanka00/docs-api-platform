@@ -1,8 +1,8 @@
 ---
 title: "Browse APIs in the API Portal & MCP Hub"
 description: "Browse and search published APIs in the API Portal & MCP Hub by name, version, type, description, tags, or documentation content."
-canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/discover-apis/api-search/
-md_url: https://wso2.com/api-platform/docs/cloud/api-portal/discover-apis/api-search.md
+canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/discover-apis/browse-apis/
+md_url: https://wso2.com/api-platform/docs/cloud/api-portal/discover-apis/browse-apis.md
 tags:
   - cloud
   - api-portal

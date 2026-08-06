@@ -85,7 +85,7 @@ Before wiring the server into an agent, confirm the credentials work: open the s
 
 ## Related
 
-- [Browse MCP Servers](discover-mcp-servers.md): find a server and read its tools
+- [Browse MCP Servers](browse-mcp-servers.md): find a server and read its tools
 - [Manage Subscriptions](../manage-subscriptions.md): plans, tokens, switching, and unsubscribing
 - [Consume an API Secured with OAuth2](../consume-an-api/oauth2.md): the full token-generation sequence
 - [Manage Applications](../manage-applications.md): where client IDs live

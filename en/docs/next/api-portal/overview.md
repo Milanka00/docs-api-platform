@@ -30,7 +30,7 @@ Browse and search REST, GraphQL, SOAP, WebSocket, and WebSub APIs, as well as MC
 - Per-API documentation, landing page content, icons, and banners
 - Machine-readable discovery (`llms.txt`, per-API Markdown, OpenAPI/AsyncAPI specs) built for AI agent consumption
 
-Learn more in [Discover APIs](discover-apis/api-search.md), [MCP Servers](mcp-servers/overview.md), and [AI Agent Discovery](discover-apis/ai-agent-discovery.md).
+Learn more in [Discover APIs](discover-apis/browse-apis.md), [MCP Servers](mcp-servers/overview.md), and [AI Agent Discovery](discover-apis/ai-agent-discovery.md).
 
 ### MCP servers
 
@@ -83,7 +83,7 @@ The **Settings** page is where admins configure everything above from one place:
 | [Manage MCP Servers](admin-settings/manage-mcp-servers.md) | Add, edit, publish, deprecate, and delete MCP servers |
 | [Webhook Integration](admin-settings/webhook-integration.md) | Endpoints notified when API keys or subscriptions change |
 | [LLM Instructions](admin-settings/llm-instructions.md) | Portal-level context published to `llms.txt` for AI agents |
-| [Managing API Workflows](admin-settings/managing-api-workflows.md) | Author, publish, and control visibility of API workflows |
+| [Managing API Workflows](admin-settings/manage-api-workflows.md) | Author, publish, and control visibility of API workflows |
 | [Apply a Theme](admin-settings/theming.md) | Upload, download, and reset a view's custom theme |
 
 ## Gateway-agnostic, unified developer experience

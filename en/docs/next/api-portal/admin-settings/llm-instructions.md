@@ -74,6 +74,6 @@ Only your name and description are editable. Everything below them—the API Wor
 ## Related
 
 - [AI Agent Discovery](../discover-apis/ai-agent-discovery.md): every agent-facing endpoint, and what `llms.txt` contains
-- [Managing API Workflows](managing-api-workflows.md): per-workflow agent visibility
+- [Managing API Workflows](manage-api-workflows.md): per-workflow agent visibility
 - [Make an API AI-Ready](../../../cloud/develop-api-proxy/make-api-ai-ready.md): per-API agent visibility, and writing descriptions agents can use
 - [Manage Views](manage-views.md): why these settings are per-view

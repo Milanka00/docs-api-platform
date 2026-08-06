@@ -42,7 +42,7 @@ To install and run it, follow the [Getting started](getting-started.md) guide.
     - **Labels**: Tag and filter artifacts across views.
     - **Per-artifact documentation**: Publish specifications, guides, and custom content next to each entry.
 
-    **[Learn more](discover-apis/api-search.md)**
+    **[Learn more](discover-apis/browse-apis.md)**
 
 ??? note "API workflows"
 

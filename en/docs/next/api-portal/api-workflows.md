@@ -31,7 +31,7 @@ Each card carries:
 Click a card to open the workflow.
 
 !!! note
-    The gallery lists only workflows an admin has published; drafts appear nowhere. Admins also get a button into the authoring page—**Manage workflows** in the header, or **Create workflow** when the gallery is empty. See [Managing API Workflows](admin-settings/managing-api-workflows.md).
+    The gallery lists only workflows an admin has published; drafts appear nowhere. Admins also get a button into the authoring page—**Manage workflows** in the header, or **Create workflow** when the gallery is empty. See [Managing API Workflows](admin-settings/manage-api-workflows.md).
 
 ## Read a workflow
 
@@ -98,13 +98,13 @@ Two independent settings decide who sees a workflow:
 | Status | Draft, Published | Draft workflows appear nowhere. Publishing puts a workflow in the gallery for the view it belongs to |
 | Agent visibility | Visible, Hidden | A hidden workflow stays in the gallery for people, but drops out of `llms.txt`, `api-workflows.md`, and every per-workflow endpoint, and loses its **Try with AI** button |
 
-Hiding a workflow from agents is how you publish it for human developers while it's still being validated for automated execution. Admins set both, per workflow—see [Managing API Workflows](admin-settings/managing-api-workflows.md).
+Hiding a workflow from agents is how you publish it for human developers while it's still being validated for automated execution. Admins set both, per workflow—see [Managing API Workflows](admin-settings/manage-api-workflows.md).
 
 Turning off **Portal is AI-discoverable** under [LLM Instructions](admin-settings/llm-instructions.md) makes every machine-readable workflow endpoint return `404`, whatever each workflow's own setting says.
 
 ## Related
 
-- [Managing API Workflows](admin-settings/managing-api-workflows.md): author, publish, and set the visibility of workflows
+- [Managing API Workflows](admin-settings/manage-api-workflows.md): author, publish, and set the visibility of workflows
 - [AI Agent Discovery](discover-apis/ai-agent-discovery.md): the portal's full set of agent-facing endpoints
 - [Consume an API](consume-an-api/overview.md): the credentials you'll need for the APIs a workflow calls
 - [Artifact types](artifact-types.md): whether this deployment serves API workflows at all

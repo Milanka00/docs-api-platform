@@ -74,7 +74,7 @@ An **MCP server** is a Model Context Protocol server published in the portal alo
 
 ## API workflow
 
-An **API workflow** is a published, multi-step sequence of API calls defined in [Arazzo format](https://spec.openapis.org/arazzo/latest.html). Workflows are authored by admins and published per view for both human developers and AI agents to discover and follow. See [Managing API Workflows](admin-settings/managing-api-workflows.md) and [API Workflows](api-workflows.md).
+An **API workflow** is a published, multi-step sequence of API calls defined in [Arazzo format](https://spec.openapis.org/arazzo/latest.html). Workflows are authored by admins and published per view for both human developers and AI agents to discover and follow. See [Managing API Workflows](admin-settings/manage-api-workflows.md) and [API Workflows](api-workflows.md).
 
 ## Subscription plan
 

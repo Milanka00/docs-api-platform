@@ -65,7 +65,7 @@ The same artifact can be created programmatically, which is the route automation
 
 ## Where to go next
 
-- [Browse APIs](api-search.md): search the catalog, open an API, and read its specification
+- [Browse APIs](browse-apis.md): search the catalog, open an API, and read its specification
 - [Which Credentials You Need](../consume-an-api/overview.md): work out what an API expects before you call it
 
 ## Related

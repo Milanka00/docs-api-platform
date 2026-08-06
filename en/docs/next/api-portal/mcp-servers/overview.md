@@ -56,7 +56,7 @@ See [MCP Registry API](mcp-registry.md).
 
 ## Where to go next
 
-- [Browse MCP Servers](discover-mcp-servers.md): browse the catalog, read a server's tools, and try them in the playground
+- [Browse MCP Servers](browse-mcp-servers.md): browse the catalog, read a server's tools, and try them in the playground
 - [Connect to an MCP Server](connect-to-an-mcp-server.md): subscribe, get credentials, and point an MCP client at the server
 - [MCP Registry API](mcp-registry.md): the discovery and publishing endpoints
 
