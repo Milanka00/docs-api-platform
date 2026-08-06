@@ -217,6 +217,6 @@ Use the registry when you want MCP-standard tooling to interoperate with the hub
 ## Related
 
 - [MCP Servers](overview.md): how registry-published servers behave in the catalog
-- [Discover MCP Servers](discover-mcp-servers.md): the same servers, in the portal UI
+- [Browse MCP Servers](discover-mcp-servers.md): the same servers, in the portal UI
 - [MCP Servers (Management API)](../rest-api/mcp-servers.md): the portal's own CRUD API
 - [Authentication](../rest-api/authentication.md): how to get a bearer token for the write endpoints

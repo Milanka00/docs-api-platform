@@ -112,7 +112,7 @@ A typical agent discovery flow looks like this:
 5. **Fetch the specification separately.** When the agent needs the specification as a parseable file rather than as inlined text, it retrieves the `specification.*` endpoint for the API's type.
 6. **Follow a workflow.** If a published workflow matches the task, the agent retrieves the Arazzo specification and agent prompt, then follows a vetted, step-by-step call sequence instead of reasoning from scratch.
 
-The **Try with AI** button on an [API's overview page](api-overview.md) hands this flow to an agent directly. It produces a prompt that points the agent at that API's `.md` URL and asks it to summarize the API before doing anything else.
+The **Try with AI** button on an [API's overview page](api-search.md#open-an-api) hands this flow to an agent directly. It produces a prompt that points the agent at that API's `.md` URL and asks it to summarize the API before doing anything else.
 
 ## Visibility controls
 

@@ -33,7 +33,7 @@ Read the API's own specification—it's authoritative, and the portal derives it
 3. Read the `security` entries for what it *requires*. A root-level `security` block applies to every operation; an operation can override it with its own. A scheme that's defined but never referenced isn't required.
 4. Check for a subscription-key parameter. When the specification declares one, the portal shows a subscription token after you subscribe, along with the header to send it in.
 
-Two shortcuts on the API's [overview page](../discover-apis/api-overview.md) tell you the same thing faster:
+Two shortcuts on the API's [overview page](../discover-apis/api-search.md#open-an-api) tell you the same thing faster:
 
 - An **API Keys** button appears for REST, WebSocket, and WebSub APIs whose specification declares API key security. The portal offers no key generation in the UI for GraphQL, SOAP, or MCP artifacts, even when their specification declares an `apiKey` scheme. For those, use the Management API: [API Keys](../rest-api/api-keys.md) for GraphQL and SOAP APIs, and [MCP Server Keys](../rest-api/mcp-server-keys.md) for MCP servers.
 - A **Subscription plans** panel appears only for APIs with plans, which is what a subscription token comes from.
@@ -58,7 +58,7 @@ This one needs the most setup, because the OAuth application lives in a key mana
 
 ## Try before you wire it up
 
-For REST APIs, the **Try It** console on the [documentation page](../discover-apis/api-documentations.md) sends real requests from your browser. Paste the same credentials you'd use from code—it's the fastest way to confirm you have the right header names before writing a client.
+For REST APIs, the **Try It** console on the [documentation page](../discover-apis/api-search.md#read-the-specification-and-try-it) sends real requests from your browser. Paste the same credentials you'd use from code—it's the fastest way to confirm you have the right header names before writing a client.
 
 ## Related
 

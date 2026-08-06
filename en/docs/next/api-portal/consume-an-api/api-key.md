@@ -54,7 +54,7 @@ The two answer different questions: the key says who you are, and the subscripti
 
 ## Check it before writing code
 
-Open the API's [documentation page](../discover-apis/api-documentations.md) and use the **Try It** console on a REST API, or **Tryout** on a GraphQL API, which has a dedicated **API Key** tab with fields for the header name and value. A call that succeeds there confirms both the header names and the key itself.
+Open the API's [documentation page](../discover-apis/api-search.md#read-the-specification-and-try-it) and use the **Try It** console on a REST API, or **Tryout** on a GraphQL API, which has a dedicated **API Key** tab with fields for the header name and value. A call that succeeds there confirms both the header names and the key itself.
 
 ## Related
 

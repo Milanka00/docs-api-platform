@@ -244,7 +244,7 @@ Refresh the portal—the **Books API** now appears in the catalog. Select the **
 
 ## What's next
 
-- [Search APIs](discover-apis/api-search.md): browse and search the catalog
+- [Browse APIs](discover-apis/api-search.md): browse and search the catalog
 - [MCP Servers](mcp-servers/overview.md): publish and connect to Model Context Protocol servers
 - [AI Agent Discovery](discover-apis/ai-agent-discovery.md): the `llms.txt` and Markdown endpoints agents use
 - [Manage Applications](manage-applications.md): set up a container for OAuth2 credentials

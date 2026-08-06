@@ -1,5 +1,5 @@
 ---
-title: "Discover MCP servers in the API Portal & MCP Hub"
+title: "Browse MCP servers in the API Portal & MCP Hub"
 description: "Browse and search the MCP catalog, read a server's tools, resources, and prompts, and invoke them from the MCP Playground."
 canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/mcp-servers/discover-mcp-servers/
 md_url: https://wso2.com/api-platform/docs/cloud/api-portal/mcp-servers/discover-mcp-servers.md
@@ -12,7 +12,7 @@ last_updated: 2026-07-31
 content_type: "how-to"
 ---
 
-# Discover MCP servers
+# Browse MCP servers
 
 MCP servers have their own catalog, separate from the API listing but laid out the same way.
 
@@ -31,7 +31,7 @@ Click a card to open the server.
 
 ## Search
 
-Type a term into the search bar and press <kbd>Enter</kbd>. Search works exactly as it does for APIs—one free-text term matched against the server's metadata and tags, and on PostgreSQL against its attached documents too. See [Search APIs](../discover-apis/api-search.md#what-a-search-term-matches) for the details and the per-database differences.
+Type a term into the search bar and press <kbd>Enter</kbd>. Search works exactly as it does for APIs—one free-text term matched against the server's metadata and tags, and on PostgreSQL against its attached documents too. See [Browse APIs](../discover-apis/api-search.md#what-a-search-term-matches) for the details and the per-database differences.
 
 Like the API listing, a catalog covers one [view](../admin-settings/manage-views.md), and a server appears only if one of its labels is mapped to that view.
 
@@ -67,7 +67,7 @@ Click **Documentation** on a server to open its documentation page. The left pan
 
 The playground connects to the server's URL and lets you list and invoke its tools interactively. It expects a bearer token, so have one ready—see [Connect to an MCP Server](connect-to-an-mcp-server.md).
 
-Attached documents render in the same pane, exactly as they do for an API. See [API Documentation](../discover-apis/api-documentations.md) for how that pane works.
+Attached documents render in the same pane, exactly as they do for an API. See [API Documentation](../discover-apis/api-search.md#read-the-specification-and-try-it) for how that pane works.
 
 ## What agents see
 
@@ -87,5 +87,5 @@ For programmatic discovery in the Model Context Protocol registry format, use th
 
 - [Connect to an MCP Server](connect-to-an-mcp-server.md): credentials and client configuration
 - [MCP Servers](overview.md): what an MCP server is and how it reaches the catalog
-- [Search APIs](../discover-apis/api-search.md): how catalog search matches terms
+- [Browse APIs](../discover-apis/api-search.md): how catalog search matches terms
 - [AI Agent Discovery](../discover-apis/ai-agent-discovery.md): the full set of agent-facing endpoints

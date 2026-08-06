@@ -14,7 +14,7 @@ content_type: "how-to"
 
 # Customize an API's content
 
-By default, an API's [overview page](../discover-apis/api-overview.md) is generated from its specification—Endpoints, Resources, Scopes, and the subscription plans panel. **API content** lets you replace that body with your own, per API, and attach the images and documents that go with it.
+By default, an API's [overview page](../discover-apis/api-search.md#open-an-api) is generated from its specification—Endpoints, Resources, Scopes, and the subscription plans panel. **API content** lets you replace that body with your own, per API, and attach the images and documents that go with it.
 
 This is narrower than [theming](../theming.md): a theme restyles every page in a view, while API content changes one API's overview body and leaves everything else alone.
 
@@ -67,7 +67,7 @@ Without it, the portal falls back to a generated avatar showing the first two le
 
 ## Attach documents
 
-Files under `docs/` become the documents listed on the API's [documentation page](../discover-apis/api-documentations.md), and are served to AI agents as raw Markdown.
+Files under `docs/` become the documents listed on the API's [documentation page](../discover-apis/api-search.md#read-the-specification-and-try-it), and are served to AI agents as raw Markdown.
 
 The **first-level directory name becomes the section heading** in the documentation navigation. Files placed directly in `docs/` land in a section called **Other**:
 
@@ -114,8 +114,8 @@ samples/apis/my-api-v1.0/
 
 ## Related
 
-- [API Overview](../discover-apis/api-overview.md): the generated page your content replaces
-- [API Documentation](../discover-apis/api-documentations.md): where `docs/` files surface
+- [API Overview](../discover-apis/api-search.md#open-an-api): the generated page your content replaces
+- [API Documentation](../discover-apis/api-search.md#read-the-specification-and-try-it): where `docs/` files surface
 - [Theming](../theming.md): restyle every page in a view, rather than one API's body
 - [Manage APIs](manage-apis.md): the wizard this is the last step of
 - [API Content](../rest-api/api-content.md): upload, replace, and delete content through the Management API

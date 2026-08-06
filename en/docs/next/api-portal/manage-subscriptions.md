@@ -76,7 +76,7 @@ Cancelling invalidates the subscription token. Anything calling the API with it 
 
 Not every API has subscription plans. When an API doesn't, its overview page shows no **Subscription plans** panel and no **Subscribe** button, and there's nothing to subscribe to—call it with whatever authentication its specification requires.
 
-To try an API before wiring it into your code, use the **Try It** console on the [documentation page](discover-apis/api-documentations.md) rather than looking for a subscription.
+To try an API before wiring it into your code, use the **Try It** console on the [documentation page](discover-apis/api-search.md#read-the-specification-and-try-it) rather than looking for a subscription.
 
 ## Subscription plans
 
@@ -85,7 +85,7 @@ Plans set how much of an API you can consume. The API publisher decides which pl
 ## Related
 
 - [Consume an API](consume-an-api/overview.md): which credentials an API expects, and how they combine
-- [API Overview](discover-apis/api-overview.md): where the subscription plans panel lives
+- [API Overview](discover-apis/api-search.md#open-an-api): where the subscription plans panel lives
 - [Manage API Keys](manage-api-keys.md): generate an API key for a subscribed API
 - [Subscription Plans](admin-settings/subscription-plans.md): admin guide for defining plans
 - [Webhook Event Catalog](references/webhook-event-catalog.md): the `subscription.*` events subscribing, switching, and unsubscribing publish
