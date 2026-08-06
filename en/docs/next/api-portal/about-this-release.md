@@ -137,17 +137,15 @@ To install and run it, follow the [Getting started](getting-started.md) guide.
 
 None. This is the first release, so there is no earlier behavior to improve on.
 
-## Compatible versions and requirements
+## Compatible product versions
 
-The distribution bundles the Platform API control plane, so the two are versioned and shipped together—no separate compatibility check is needed. Verify the following in your own environment:
+The API Portal & MCP Hub shares a control plane with AI Workspace. The following product version was tested with this release:
 
-| Component | Supported |
-|---|---|
-| Database | SQLite, PostgreSQL, or Microsoft SQL Server. See [Set up the database](setting-up/database.md) |
-| Container runtime | Docker with the Compose plugin |
-| Identity provider | Any OIDC-compliant provider issuing JWT access tokens. See [Connect an identity provider](setting-up/authentication/connect-an-identity-provider.md) |
+| Product | Compatible version |
+|---------|--------------------|
+| WSO2 AI Workspace | 1.0.0 |
 
-Full prerequisites are listed in the [Getting started](getting-started.md) guide.
+The distribution bundles the Platform API control plane, so the two are versioned and shipped together—no separate compatibility check is needed. Full prerequisites are listed in the [Getting started](getting-started.md) guide.
 
 ## Key changes
 
