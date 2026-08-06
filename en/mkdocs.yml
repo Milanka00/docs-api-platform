@@ -764,6 +764,7 @@ nav:
         - Configurations: next/api-portal/references/configurations.md
   - AI Workspace:
     - Overview: next/ai-workspace/overview.md
+    - About this Release: next/ai-workspace/about-this-release.md
     - Getting Started: next/ai-workspace/getting-started.md
     # Set up the workspace itself.
     - Setting Up:
