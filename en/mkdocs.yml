@@ -712,12 +712,14 @@ nav:
     - Theming: next/api-portal/theming.md
     - Tutorials:
         - Secured API End to End: next/api-portal/tutorials/secured-api-end-to-end.md
-        - Set up Asgardeo: next/api-portal/tutorials/asgardeo-as-idp.md
     - Setting Up:
+        - Configuration & Interpolation: next/api-portal/setting-up/configuration.md
+        - Ports: next/api-portal/setting-up/ports.md
+        - Database: next/api-portal/setting-up/database.md
         - Authentication:
           - Overview: next/api-portal/setting-up/authentication/overview.md
           - Connect an Identity Provider: next/api-portal/setting-up/authentication/connect-an-identity-provider.md
-        - Set up the Database: next/api-portal/setting-up/database.md
+          - Set up Asgardeo: next/api-portal/tutorials/asgardeo-as-idp.md
         - Artifact types: next/api-portal/artifact-types.md
         - Design Mode: next/api-portal/setting-up/design-mode.md
     - Admin Settings:

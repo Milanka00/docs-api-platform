@@ -14,42 +14,11 @@ content_type: "reference"
 
 # Configurations
 
-The API Portal & MCP Hub reads its configuration from `configs/config.toml`, layered over built-in defaults (`src/config/configDefaults.js`). This page explains how that file is loaded, how environment values are injected through interpolation tokens, and gives the full reference of every supported key.
+The API Portal & MCP Hub reads its configuration from `configs/config.toml`, layered over built-in defaults (`src/config/configDefaults.js`). This page is the full reference of every supported key.
+
+For how that file is loaded, how environment values and mounted files are injected through interpolation tokens, and how to keep sensitive values out of the file, see [Configuration and environment interpolation](../setting-up/configuration.md).
 
 {% raw %}
-
-## How configuration is loaded
-
-Precedence, lowest to highest:
-
-1. Built-in defaults (`src/config/configDefaults.js`)
-2. `configs/config.toml`, with any `{{ env }}` / `{{ file }}` references resolved
-
-`configs/config-template.toml` documents every supported key with its default value as plain literals—a reference copy, not the file the portal actually reads.
-
-!!! important "Environment variables do not override config keys directly"
-    There is no automatic `APIP_AP_*` prefix that maps environment variables onto config keys. An environment value reaches a setting **only** through an explicit interpolation token written into `config.toml`, resolved when the file loads. A field with no token always takes its literal TOML value (or the built-in default).
-
-## Interpolation tokens
-
-| Token | Behavior |
-|---|---|
-| `{{ env "NAME" }}` | Substitutes the value of environment variable `NAME`. **Fails closed** (aborts startup) if `NAME` is unset or empty—it does not fall through to a default. |
-| `{{ env "NAME" "default" }}` | Substitutes `NAME`'s value if set and non-empty, else the literal `"default"`. |
-| `{{ file "/path" }}` | Reads a secret value from a mounted file at `/path`, trimmed. Always required—a missing, unreadable, oversized, or disallowed path is a hard startup error. |
-
-An example from the shipped `config.toml`:
-
-```toml
-[api_portal.security]
-encryption_key = '{{ env "APIP_AP_SECURITY_ENCRYPTION_KEY" }}'
-session_secret = '{{ env "APIP_AP_SECURITY_SESSION_SECRET" }}'
-```
-
-Partial substitution works too—`'foo-{{ env "X" }}'` resolves to `"foo-bar"` if `X=bar`.
-
-!!! note "`{{ file }}` path allowlist"
-    `{{ file "/path" }}` only reads from `/etc/api-portal` or `/secrets/api-portal` by default. Override with the `APIP_CONFIG_FILE_SOURCE_ALLOWLIST` environment variable (comma-separated directories)—read directly from the process environment rather than through `{{ env }}`, since it gates interpolation itself.
 
 ## Server
 
