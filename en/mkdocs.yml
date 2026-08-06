@@ -407,6 +407,7 @@ nav:
           - Overview: api-gateway/next/performance/overview.md
           - Gateway runtime with two CPUs: api-gateway/next/performance/gateway-runtime-with-two-cpus.md
           - Gateway runtime with four CPUs: api-gateway/next/performance/gateway-runtime-with-four-cpus.md
+        - About this release: api-gateway/next/about-this-release.md
     - "1.1.0":
         - Overview: api-gateway/1.1.0/overview.md
         - Setup:
@@ -593,6 +594,7 @@ nav:
             - Overview: ai-gateway/next/performance/overview.md
             - AI Gateway runtime with two CPUs: ai-gateway/next/performance/ai-gateway-runtime-with-two-cpus.md
             - AI Gateway runtime with four CPUs: ai-gateway/next/performance/ai-gateway-runtime-with-four-cpus.md
+        - About this release: ai-gateway/next/about-this-release.md
     - "1.1.0":
         - Overview: ai-gateway/1.1.0/overview.md
         - LLM Proxy:
