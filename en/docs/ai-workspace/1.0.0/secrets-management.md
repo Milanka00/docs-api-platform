@@ -15,7 +15,7 @@ content_type: "how-to"
 
 # Secrets management
 
-AI Workspace lets you store sensitive credentials as **secrets** and reference them securely in artifact configurations. Secrets are encrypted at rest using AES-256-GCM. Plaintext values are never written to the database and are **never returned in any API response**—not even the creation response.
+AI Workspace lets you store sensitive credentials as **secrets** and reference them securely in artifact configurations. Secrets are encrypted at rest using the Advanced Encryption Standard with 256-bit keys in Galois/Counter Mode (AES-256-GCM). Plaintext values are never written to the database and are **never returned in any API response**—not even the creation response.
 
 Use secrets to keep raw API keys, tokens, and passwords out of your artifact configurations. They apply to the following:
 

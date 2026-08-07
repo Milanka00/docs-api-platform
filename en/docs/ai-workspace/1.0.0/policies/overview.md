@@ -108,7 +108,7 @@ AI services bill per token, so uncontrolled usage turns into unexpected cost. AI
 | [Rate limit - advanced](#rate-limit-advanced) | Request count, with multi-dimensional and weighted quotas | [Policy Hub](https://wso2.com/api-platform/policy-hub/policies/advanced-ratelimit) |
 | [Token-based rate limit](#token-based-rate-limit) | Prompt, completion, or total tokens | [Policy Hub](https://wso2.com/api-platform/policy-hub/policies/token-based-ratelimit) |
 | [LLM cost](#llm-cost) | Nothing on its own—calculates the cost other policies spend against | [Policy Hub](https://wso2.com/api-platform/policy-hub/policies/llm-cost) |
-| [LLM cost-based rate limit](#llm-cost-based-rate-limit) | Monetary spend in USD | [Policy Hub](https://wso2.com/api-platform/policy-hub/policies/llm-cost-based-ratelimit) |
+| [LLM cost-based rate limit](#llm-cost-based-rate-limit) | Monetary spend in US dollars (USD) | [Policy Hub](https://wso2.com/api-platform/policy-hub/policies/llm-cost-based-ratelimit) |
 
 You attach all of them through the **Guardrails** tab of an LLM provider or App LLM proxy. LLM providers also have a built-in **Rate Limiting** tab that caps requests and tokens without attaching a policy. See [Rate limiting on a provider](../llm-providers/manage-provider.md#rate-limiting) for that tab. Use a policy when you need a per-route cap, token categories counted separately, or a spending budget.
 

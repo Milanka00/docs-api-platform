@@ -59,30 +59,30 @@ AI Workspace and the Platform API communicate using `ap:*` scopes. Register thes
 3. Note the client ID and client secret.
 4. Download the scope registration script from a pinned release tag rather than the `main` branch, so the content can't change between the checksum you verify and the code you run. Replace `<release-tag>` with the tag you're deploying:
 
-```bash
-RELEASE_TAG=<release-tag>
-curl -fsSLO "https://raw.githubusercontent.com/wso2/api-platform/${RELEASE_TAG}/portals/ai-workspace/production/scripts/register_asgardeo_scopes.sh"
-```
+    ```bash
+    RELEASE_TAG=<release-tag>
+    curl -fsSLO "https://raw.githubusercontent.com/wso2/api-platform/${RELEASE_TAG}/portals/ai-workspace/production/scripts/register_asgardeo_scopes.sh"
+    ```
 
-`--fail` makes `curl` exit non-zero on an HTTP error, so a 404 from a mistyped tag doesn't leave an error page saved as the script.
+    `--fail` makes `curl` exit non-zero on an HTTP error, so a 404 from a mistyped tag doesn't leave an error page saved as the script.
 
 5. Verify the download against the checksum published with that release, and read the script before you run it:
 
-```bash
-shasum -a 256 register_asgardeo_scopes.sh
-```
+    ```bash
+    shasum -a 256 register_asgardeo_scopes.sh
+    ```
 
 6. Run the script only after the checksum matches:
 
-```bash
-chmod +x register_asgardeo_scopes.sh
+    ```bash
+    chmod +x register_asgardeo_scopes.sh
 
-ASGARDEO_TENANT=<your-tenant> \
-ASGARDEO_CLIENT_ID=<system-app-client-id> \
-ASGARDEO_CLIENT_SECRET=<system-app-client-secret> \
-ASGARDEO_RESOURCE_IDENTIFIER=https://<platform-api-host> \
-./register_asgardeo_scopes.sh
-```
+    ASGARDEO_TENANT=<your-tenant> \
+    ASGARDEO_CLIENT_ID=<system-app-client-id> \
+    ASGARDEO_CLIENT_SECRET=<system-app-client-secret> \
+    ASGARDEO_RESOURCE_IDENTIFIER=https://<platform-api-host> \
+    ./register_asgardeo_scopes.sh
+    ```
 
 This registers an API resource in Asgardeo that represents the Platform API, with all `ap:*` scopes registered under it. For local testing, the default `ASGARDEO_RESOURCE_IDENTIFIER=https://localhost:9243` works without changes.
 

@@ -61,7 +61,7 @@ Create the database and the user the Platform API connects as. Don't grant the u
     GRANT CONNECT ON DATABASE platform_api TO platform_api;
     ```
 
-    Then connect to the `platform_api` database as an administrator and revoke the ability to create objects in the `public` schema, which PostgreSQL grants to every user before version 15:
+    Then connect to the `platform_api` database as an administrator. Revoke the ability to create objects in the `public` schema. PostgreSQL grants that ability to every user before version 15:
 
     ```sql
     REVOKE CREATE ON SCHEMA public FROM platform_api;
@@ -149,7 +149,7 @@ ssl_mode = "require"
 For SQL Server, set `driver = "sqlserver"` and `port = 1433`.
 
 !!! warning "Never write the database password as a literal"
-    The {% raw %}`{{ file }}`{% endraw %} token above reads it from a mounted file, which is the right choice in production—resolution fails closed, so a missing or unreadable file aborts startup rather than connecting with an empty password. Mount the secret at that path and add the mount to the `platform-api` service in `docker-compose.yaml`. To read it from `api-platform.env` instead, swap the token for {% raw %}`'{{ env "APIP_CP_DATABASE_PASSWORD" }}'`{% endraw %}.
+    The {% raw %}`{{ file }}`{% endraw %} token above reads it from a mounted file, which is the right choice in production. Resolution fails closed, so a missing or unreadable file aborts startup rather than connecting with an empty password. Mount the secret at that path and add the mount to the `platform-api` service in `docker-compose.yaml`. To read it from `api-platform.env` instead, swap the token for {% raw %}`'{{ env "APIP_CP_DATABASE_PASSWORD" }}'`{% endraw %}.
 
 ## Step 4: Secure the connection with TLS
 

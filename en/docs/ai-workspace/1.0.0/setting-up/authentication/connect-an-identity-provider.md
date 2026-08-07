@@ -98,7 +98,7 @@ mode = "idp"
 [platform_api.auth.idp]
 name     = "my-idp"                                    # friendly name, used in logs
 jwks_url = "https://idp.example.com/oauth2/jwks"
-issuer   = ["https://idp.example.com/oauth2token"]                # accepted "iss" values
+issuer   = ["https://idp.example.com"]                 # accepted "iss" values
 audience = ["<ai-workspace-client-id>"]                # accepted "aud" values; empty skips the check
 
 [platform_api.auth.authorization]

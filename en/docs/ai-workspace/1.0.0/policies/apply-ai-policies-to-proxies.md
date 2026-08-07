@@ -90,7 +90,7 @@ Once synced, a custom AI policy is attached the same way for LLM providers, App 
 2. Go to the **Guardrails & Policies** tab (MCP proxies use a **Policies** tab).
 3. Click **+ Add Guardrail** / **+ Add Policy** in the section for the scope you want:
     - **Global Guardrails** or **Global Policies**—applies to every endpoint or capability of the resource.
-    - A specific endpoint or capability card (expand it first) — applies only there.
+    - A specific endpoint or capability card (expand it first)—applies only there.
 4. Select your custom AI policy from the sidebar — it's listed alongside the built-in policies — and configure its parameters.
 5. Click **Add** or **Submit** to attach it, then deploy or redeploy the resource to the gateway to apply the changes.
 

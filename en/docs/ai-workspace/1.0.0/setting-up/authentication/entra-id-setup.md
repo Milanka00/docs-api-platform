@@ -165,7 +165,7 @@ The default roles are:
 1. Go to **App registrations > AI Workspace > Token configuration**.
 2. Select **Add optional claim**.
 3. Select **Access** as the token type.
-4. Add the `preferred_username` and `email` claims. Both also depend on the `profile` and `email` scopes, which the application requests already.
+4. Add the `email` claim. Entra ID includes `preferred_username` in a v2.0 access token from the `profile` scope, which the application requests already. The `email` claim depends on the `email` scope and is absent for a user who has no email address recorded.
 
 Don't add `tid` or `oid` here. Entra ID includes both in a v2.0 access token without any optional-claim configuration.
 

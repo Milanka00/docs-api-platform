@@ -80,7 +80,7 @@ The services bind to different ports themselves. Choose this when something insi
     controlplane_host = "<gateway-reachable-host>:8244"
     ```
 
-    As in the previous approach, `host.docker.internal:8244` works for a gateway in another container on the same machine, automatically under Docker Desktop on macOS and Windows, and on Linux once you map it with `extra_hosts`.
+    As in the previous approach, `host.docker.internal:8244` works for a gateway in another container on the same machine. Docker Desktop maps that hostname automatically on macOS and Windows. On Linux, map it yourself with `extra_hosts`.
 
 4. In `docker-compose.yaml`, update both sides of each mapping, and the health check URLs, which run inside the container against the new listener ports:
 
@@ -112,7 +112,7 @@ Both approaches touch `url` and `controlplane_host`, which sit either side of th
 
 Nothing in AI Workspace connects to `controlplane_host`. The value is display-only: the workspace substitutes it into the gateway setup commands the **Get Started** section shows an admin, such as the `APIP_GW_CONTROLLER_CONTROLPLANE_HOST` line and the Helm `--set gateway.controller.controlPlane.host` flag. The admin then copies those commands to the machine running the gateway, which is what makes the connection.
 
-So a wrong value leaves AI Workspace working normally and breaks the gateway instead: the printed commands look right, but the gateway they configure can't reach the control plane and never registers. Give the key an address that's reachable **from the gateway's** network—`host.docker.internal` for a gateway in another container on the same machine, or the machine's hostname or IP address from anywhere else. A gateway outside the stack can't resolve `platform-api`.
+So a wrong value leaves AI Workspace working normally and breaks the gateway instead. The printed commands look right, but the gateway they configure can't reach the control plane and never registers. Give the key an address that's reachable **from the gateway's** network. Use `host.docker.internal` for a gateway in another container on the same machine, or the machine's hostname or IP address from anywhere else. A gateway outside the stack can't resolve `platform-api`.
 
 ## Apply the change
 
@@ -123,7 +123,7 @@ docker compose up --force-recreate
 ```
 
 !!! note "Ports in an OpenID Connect (OIDC) setup"
-    OIDC redirect URLs carry the port. Update `redirect_url` and `post_logout_redirect_url` under `[ai_workspace.auth.oidc]` in `configs/config.toml`, or the environment variables those keys interpolate, and update the matching URLs registered in your identity provider. See [Connect an identity provider](authentication/connect-an-identity-provider.md).
+    OIDC redirect URLs carry the port. Update `redirect_url` and `post_logout_redirect_url` under `[ai_workspace.auth.oidc]` in `configs/config.toml`, and update the matching URLs registered in your identity provider. See [Connect an identity provider](authentication/connect-an-identity-provider.md).
 
 ## Related
 
