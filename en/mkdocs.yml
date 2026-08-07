@@ -548,7 +548,7 @@ nav:
             - Setting Up the Database: ai-gateway/next/setup/database-setup.md
         - LLM Proxy:
             - Quick Start Guide: ai-gateway/next/llm-proxy/quick-start-guide.md
-            - Provider Templates: ai-gateway/next/llm-proxy/llm-templates.md
+            - LLM Provider Templates: ai-gateway/next/llm-proxy/llm-templates.md
             - Multi-Provider Routing: ai-gateway/next/llm-proxy/multi-provider-routing.md
             - Guardrails:
                 - AWS Bedrock Guardrail: ai-gateway/next/llm-proxy/guardrails/aws-bedrock-guardrail.md
@@ -595,6 +595,11 @@ nav:
             - AI Gateway runtime with two CPUs: ai-gateway/next/performance/ai-gateway-runtime-with-two-cpus.md
             - AI Gateway runtime with four CPUs: ai-gateway/next/performance/ai-gateway-runtime-with-four-cpus.md
         - About this release: ai-gateway/next/about-this-release.md
+    - "1.2.0":
+        - Overview: ai-gateway/1.2.0/overview.md
+        - LLM Proxy:
+            - LLM Provider Templates: ai-gateway/1.2.0/llm-proxy/llm-templates.md
+        - Configure an AWS Bedrock LLM Provider: ai-gateway/1.2.0/llm-proxy/configure-aws-bedrock-provider.md
     - "1.1.0":
         - Overview: ai-gateway/1.1.0/overview.md
         - LLM Proxy:
