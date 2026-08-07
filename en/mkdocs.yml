@@ -741,6 +741,14 @@ nav:
                 - Theming: api-portal/next/admin-settings/theming.md
                 - Apply a Theme to a View: api-portal/next/admin-settings/apply-a-theme.md
                 - Design Mode: api-portal/next/admin-settings/design-mode.md
+        # Take it to production.
+        - Deployment:
+            - Overview: api-portal/next/deployment/overview.md
+            - Security Hardening: api-portal/next/deployment/security-hardening.md
+            - Database Configuration: api-portal/next/deployment/database-configuration.md
+            - Resources & Scaling: api-portal/next/deployment/resources-and-scaling.md
+            - Deploy & Verify: api-portal/next/deployment/deploy-and-verify.md
+            - Control Plane Connection: api-portal/next/deployment/control-plane-connection.md
         - References:
             - Management API:
                 - Overview: api-portal/next/rest-api/overview.md
@@ -822,6 +830,14 @@ nav:
                 - Theming: api-portal/1.0.0/admin-settings/theming.md
                 - Apply a Theme to a View: api-portal/1.0.0/admin-settings/apply-a-theme.md
                 - Design Mode: api-portal/1.0.0/admin-settings/design-mode.md
+        # Take it to production.
+        - Deployment:
+            - Overview: api-portal/1.0.0/deployment/overview.md
+            - Security Hardening: api-portal/1.0.0/deployment/security-hardening.md
+            - Database Configuration: api-portal/1.0.0/deployment/database-configuration.md
+            - Resources & Scaling: api-portal/1.0.0/deployment/resources-and-scaling.md
+            - Deploy & Verify: api-portal/1.0.0/deployment/deploy-and-verify.md
+            - Control Plane Connection: api-portal/1.0.0/deployment/control-plane-connection.md
         - References:
             - Management API:
                 - Overview: api-portal/1.0.0/rest-api/overview.md
