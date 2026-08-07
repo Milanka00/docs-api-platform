@@ -775,6 +775,17 @@ nav:
             - Connect an Identity Provider: next/ai-workspace/setting-up/authentication/connect-an-identity-provider.md
             - Set up Asgardeo: next/ai-workspace/setting-up/authentication/asgardeo-setup.md
             - Set up Microsoft Entra ID: next/ai-workspace/setting-up/authentication/entra-id-setup.md
+    # Take the same workspace to production, on a VM or on Kubernetes.
+    - Production Deployment:
+        - Overview: next/ai-workspace/production/overview.md
+        - Deploy to Production: next/ai-workspace/production/deploy.md
+        - Provision Secrets and Keys: next/ai-workspace/production/secrets-and-keys.md
+        - Secure Traffic with TLS: next/ai-workspace/production/tls.md
+        - Expose AI Workspace: next/ai-workspace/production/expose-the-workspace.md
+        - Run in High Availability: next/ai-workspace/production/high-availability.md
+        - Harden the Deployment: next/ai-workspace/production/harden.md
+        - Connect AI Gateways: next/ai-workspace/production/connect-gateways.md
+        - Operate the Deployment: next/ai-workspace/production/operate.md
     # Build the artifacts, in the order you create them.
     - AI Gateways:
         - Setting Up: next/ai-workspace/ai-gateways/setting-up.md
