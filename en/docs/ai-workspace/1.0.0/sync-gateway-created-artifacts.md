@@ -103,7 +103,7 @@ The examples below use these conventions:
     export GW_USER='<username>' GW_PASSWORD='<password>'
     ```
 
-- **Body:** `--data-binary '@<file>.yaml'` uploads a manifest file as-is.
+- **Body:** `--data-binary '@<file>.yaml'` uploads a manifest file as-is. `--data-binary '@-'` reads the manifest from standard input instead, which lets you substitute placeholder values as you upload.
 
 ## Create the artifacts on the gateway
 
@@ -163,14 +163,20 @@ spec:
   # ... accessControl + policies omitted; see gateway/examples/llm-provider.yaml
 ```
 
-!!! warning "Use placeholders, not real credentials"
-    The manifests in this guide use placeholders such as `<upstream-api-key>`. Replace them with your own values at apply time, and keep manifests that hold real credentials out of source control. Reference a secret instead. See [Secrets management](secrets-management.md).
+!!! warning "Substitute the placeholders, and keep credentials out of the file"
+    The manifests in this guide carry placeholders such as `<upstream-api-key>`. The gateway stores whatever you send, so substitute your own values before each request. The commands below pipe the manifest through `sed` and post the result, which leaves the placeholders in the file on disk and keeps real credentials out of source control. To avoid holding the value in your shell as well, reference a secret. See [Secrets management](secrets-management.md).
+
+Set your upstream values, then substitute them as you post the manifest:
 
 ```bash
-curl --location 'http://localhost:9090/api/management/v1/llm-providers' \
-  --header 'Content-Type: text/yaml' \
-  --user "$GW_USER:$GW_PASSWORD" \
-  --data-binary '@llm-provider.yaml'
+export UPSTREAM_URL='<your-upstream-url>' UPSTREAM_API_KEY='<your-upstream-api-key>'
+
+sed -e "s|<upstream-url>|$UPSTREAM_URL|" \
+    -e "s|<upstream-api-key>|$UPSTREAM_API_KEY|" llm-provider.yaml |
+  curl --location 'http://localhost:9090/api/management/v1/llm-providers' \
+    --header 'Content-Type: text/yaml' \
+    --user "$GW_USER:$GW_PASSWORD" \
+    --data-binary '@-'
 ```
 
 ### Step 3: Create the LLM proxy
@@ -195,10 +201,13 @@ spec:
 ```
 
 ```bash
-curl --location 'http://localhost:9090/api/management/v1/llm-proxies' \
-  --header 'Content-Type: text/yaml' \
-  --user "$GW_USER:$GW_PASSWORD" \
-  --data-binary '@llm-proxy.yaml'
+export PROVIDER_API_KEY='<your-provider-api-key>'
+
+sed -e "s|<provider-api-key>|$PROVIDER_API_KEY|" llm-proxy.yaml |
+  curl --location 'http://localhost:9090/api/management/v1/llm-proxies' \
+    --header 'Content-Type: text/yaml' \
+    --user "$GW_USER:$GW_PASSWORD" \
+    --data-binary '@-'
 ```
 
 ### Step 4: Create an MCP proxy
@@ -224,10 +233,14 @@ spec:
 ```
 
 ```bash
-curl --location 'http://localhost:9090/api/management/v1/mcp-proxies' \
-  --header 'Content-Type: text/yaml' \
-  --user "$GW_USER:$GW_PASSWORD" \
-  --data-binary '@mcp-proxy.yaml'
+export MCP_SERVER_URL='<your-mcp-server-url>' MCP_SERVER_API_KEY='<your-mcp-server-api-key>'
+
+sed -e "s|<mcp-server-url>|$MCP_SERVER_URL|" \
+    -e "s|<mcp-server-api-key>|$MCP_SERVER_API_KEY|" mcp-proxy.yaml |
+  curl --location 'http://localhost:9090/api/management/v1/mcp-proxies' \
+    --header 'Content-Type: text/yaml' \
+    --user "$GW_USER:$GW_PASSWORD" \
+    --data-binary '@-'
 ```
 
 ## View them in AI Workspace
