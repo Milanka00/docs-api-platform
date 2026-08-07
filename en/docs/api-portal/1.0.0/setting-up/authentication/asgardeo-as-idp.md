@@ -66,7 +66,7 @@ The portal recognizes two personas: whoever administers it, and whoever consumes
 2. Under the **Roles** tab, create an application role named `dp_admin` and another named `dp_subscriber`.
 3. Assign `dp_admin` **only to administrators**, and `dp_subscriber` to regular users in each sub-organization that needs access.
 
-Step 4 points both `[api_portal.auth.authorization.portal_roles]` entries at these same names, so one pair of Asgardeo roles drives both page access and Management API authorization. To change what either role grants, edit the portal's `role-to-scope-mapping.yaml`—see [Choose how privileges reach the token](connect-an-identity-provider.md#step-3-choose-how-privileges-reach-the-token).
+Step 4 points both `[api_portal.auth.authorization.portal_roles]` entries at these same names, so one pair of Asgardeo roles drives both page access and Management API authorization. (The shipped `config.toml` ships `ap_admin`/`ap_subscriber` there, the role names the Platform API mints for local auth — this tutorial replaces them with the Asgardeo roles you just created.) To change what either role grants, edit the portal's `role-to-scope-mapping.yaml`—see [Choose how privileges reach the token](connect-an-identity-provider.md#step-3-choose-how-privileges-reach-the-token).
 
 !!! note
     Browser login sessions still pass through the per-operation scope check in role mode, which is the gap role mode exists to close: the session's own roles claim is what the portal expands to authorize each Management API request.
@@ -141,7 +141,10 @@ display_name = "Acme"
 
 Set this before the portal first starts. The handle is what the portal writes into the organization's **IDP reference ID** when it seeds the organization row, and that field is fixed afterward—the Management API rejects a request that changes it. Changing the handle later means seeding a new organization.
 
-The handle is also the URL slug in `/api-portal/{handle}/views/{viewName}`, so it appears in every portal URL. The portal normalizes it to lowercase, though the claim match itself tolerates any case.
+The handle is also the URL slug in `/api-portal/{handle}/views/{viewName}`, so it appears in every portal URL, and the portal normalizes it to lowercase.
+
+!!! note "Match the claim value to the handle exactly"
+    Configure Asgardeo to emit `org_name` with the same value as the handle, character for character. The portal matches the claim against the organization's stored **IDP reference ID**, which is seeded from the handle and compared verbatim — so a claim of `Acme` does not match a handle of `acme`.
 
 With the two aligned, the login flow closes:
 
@@ -186,7 +189,7 @@ Keep the claim names consistent between the Asgardeo token attributes and the `[
 
 `mode = "role"` above needs no scope registration in Asgardeo, which is why this tutorial uses it. If you'd rather have Asgardeo issue the portal's `dp:*` scopes directly and set `mode = "scope"`, register them in your tenant first. A helper script does the registration through Asgardeo's own management APIs.
 
-1. Create a new OIDC application in Asgardeo, for example named `DevPortal System`.
+1. Create a new OIDC application in Asgardeo, for example named `API Portal System`.
 2. Under **API Authorization**, add the **API Resource Management API** and the **Application Management API**.
 3. Note its client ID and client secret.
 4. Download the script and run it:

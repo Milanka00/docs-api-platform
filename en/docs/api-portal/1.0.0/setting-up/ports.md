@@ -55,22 +55,14 @@ So one variable moves the published port and the listener together — no Compos
     APIP_AP_SERVER_PORT=8443
     ```
 
-2. Update `base_url` in `configs/config.toml`. **This does not follow the variable** — the shipped file writes it as a plain literal:
+2. Update `base_url` in `configs/config.toml` to match:
 
     ```toml
     [api_portal.server]
     base_url = "https://localhost:8443"
     ```
 
-    Leaving it at `9543` doesn't stop the portal from serving. It only affects the absolute URLs embedded in generated AI-agent prompts, which would point at a port nothing listens on. To drive it from the environment instead, replace the literal with the token the config template ships:
-
-    {% raw %}
-
-    ```toml
-    base_url = '{{ env "APIP_AP_SERVER_BASE_URL" "https://localhost:9543" }}'
-    ```
-
-    {% endraw %}
+    This is the origin the portal embeds in generated AI-agent prompts, so it has to name the port callers actually reach.
 
 3. Recreate the containers, and open the portal on the new port:
 
