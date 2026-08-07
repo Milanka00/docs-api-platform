@@ -407,6 +407,7 @@ nav:
           - Overview: api-gateway/next/performance/overview.md
           - Gateway runtime with two CPUs: api-gateway/next/performance/gateway-runtime-with-two-cpus.md
           - Gateway runtime with four CPUs: api-gateway/next/performance/gateway-runtime-with-four-cpus.md
+        - About this release: api-gateway/next/about-this-release.md
     - "1.1.0":
         - Overview: api-gateway/1.1.0/overview.md
         - Setup:
@@ -542,7 +543,6 @@ nav:
     - "next":
         - Overview: ai-gateway/next/overview.md
         - Quick Start Guide: ai-gateway/next/quick-start-guide.md
-        - Streaming Responses: ai-gateway/next/streaming-responses.md
         - Setup:
             - Configuration & Interpolation: ai-gateway/next/setup/configuration.md
             - Setting Up the Database: ai-gateway/next/setup/database-setup.md
@@ -575,6 +575,7 @@ nav:
                 - MCP Authentication: ai-gateway/next/mcp-proxy/policies/mcp-authentication.md
                 - MCP Authorization: ai-gateway/next/mcp-proxy/policies/mcp-authorization.md
                 - MCP Rewrite: ai-gateway/next/mcp-proxy/policies/mcp-rewrite.md
+        - Real-Time AI Streaming: ai-gateway/next/streaming-responses.md
         - Deployment Modes:
           - Immutable Gateway: ai-gateway/next/deployment-modes/immutable-gateway.md
           - Kubernetes:
@@ -593,9 +594,9 @@ nav:
             - Overview: ai-gateway/next/performance/overview.md
             - AI Gateway runtime with two CPUs: ai-gateway/next/performance/ai-gateway-runtime-with-two-cpus.md
             - AI Gateway runtime with four CPUs: ai-gateway/next/performance/ai-gateway-runtime-with-four-cpus.md
+        - About this release: ai-gateway/next/about-this-release.md
     - "1.1.0":
         - Overview: ai-gateway/1.1.0/overview.md
-        - Streaming Responses: ai-gateway/1.1.0/streaming-responses.md
         - LLM Proxy:
             - Quick Start Guide: ai-gateway/1.1.0/llm-proxy/quick-start-guide.md
             - LLM Provider Templates: ai-gateway/1.1.0/llm-proxy/llm-templates.md
@@ -624,6 +625,7 @@ nav:
                 - MCP Authentication: ai-gateway/1.1.0/mcp-proxy/policies/mcp-authentication.md
                 - MCP Authorization: ai-gateway/1.1.0/mcp-proxy/policies/mcp-authorization.md
                 - MCP Rewrite: ai-gateway/1.1.0/mcp-proxy/policies/mcp-rewrite.md
+        - Real-Time AI Streaming: ai-gateway/1.1.0/streaming-responses.md
         - Deployment Modes:
           - Immutable Gateway: ai-gateway/1.1.0/deployment-modes/immutable-gateway.md
           - Kubernetes:
@@ -710,10 +712,11 @@ nav:
     - Theming: next/api-portal/theming.md
     - Tutorials:
         - Secured API End to End: next/api-portal/tutorials/secured-api-end-to-end.md
+        - Set up Asgardeo: next/api-portal/tutorials/asgardeo-as-idp.md
     - Setting Up:
         - Authentication:
           - Overview: next/api-portal/setting-up/authentication/overview.md
-          - Set up Asgardeo: next/api-portal/setting-up/authentication/asgardeo-setup.md
+          - Connect an Identity Provider: next/api-portal/setting-up/authentication/connect-an-identity-provider.md
         - Set up the Database: next/api-portal/setting-up/database.md
         - Artifact types: next/api-portal/artifact-types.md
         - Design Mode: next/api-portal/setting-up/design-mode.md
@@ -763,6 +766,7 @@ nav:
         - Configurations: next/api-portal/references/configurations.md
   - AI Workspace:
     - Overview: next/ai-workspace/overview.md
+    - About this Release: next/ai-workspace/about-this-release.md
     - Getting Started: next/ai-workspace/getting-started.md
     # Set up the workspace itself.
     - Setting Up:

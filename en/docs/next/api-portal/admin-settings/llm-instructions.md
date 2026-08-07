@@ -62,7 +62,7 @@ The pane beside the fields renders the `llms.txt` your settings produce, and ref
 To fetch it yourself:
 
 ```text
-GET /{orgName}/views/{viewName}/llms.txt
+GET /api-portal/{orgName}/views/{viewName}/llms.txt
 ```
 
 The generated file lists each agent-visible artifact under its own section:

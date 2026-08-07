@@ -111,11 +111,6 @@ pool_request_timeout_ms = 30000         # MSSQL only — per-query execution tim
 [api_portal.security]
 encryption_key = ""     # 64-char hex — AES-256-GCM key for encrypting secrets at rest
 session_secret = ""     # 64-char hex — express-session signing secret
-
-[api_portal.security.service_api_key]
-enabled = true
-header_name = "x-wso2-api-key"
-value = ""
 ```
 
 `encryption_key` and `session_secret` are required—the portal fails closed at startup if either doesn't resolve to a 64-character hex string. Generate one with `openssl rand -hex 32`.
@@ -136,28 +131,31 @@ platform_api_url = ""
 public_key_path = ""    # path to the Platform API's RS256 public key PEM
 tls_skip_verify = false
 
+# The [api_portal.auth.idp] endpoints describe your own identity provider and have
+# no default. issuer, authorization_url, token_url, client_id, and callback_url are
+# required when mode = "idp"; the portal refuses to start without them.
 [api_portal.auth.idp]
-name = "IS"
-issuer = "https://localhost:9443/oauth2/token"
-authorization_url = "https://localhost:9443/oauth2/authorize"
-token_url = "https://localhost:9443/oauth2/token"
-user_info_url = "https://localhost:9443/oauth2/userinfo"
+name = "my-idp"        # friendly name, used in logs
+issuer = ""
+authorization_url = ""
+token_url = ""
+user_info_url = ""
 client_id = ""
 client_secret = ""
 audience = ""
-callback_url = "http://localhost:9543/default/callback"
+callback_url = ""
 scope = "openid profile email"
 sign_up_url = ""
-logout_url = "https://localhost:9443/oidc/logout"
-logout_redirect_uri = "http://localhost:9543/default"
+logout_url = ""
+logout_redirect_uri = ""
 certificate = ""
-jwks_url = "https://localhost:9443/oauth2/jwks"
+jwks_url = ""
 token_refresh_timeout_ms = 10000
 silent_sso = true      # Enable silent SSO
 org_callback = false   # Redirect to the org's own landing page after login
 ```
 
-See [Authentication](../setting-up/authentication/overview.md) for the authentication modes and the Asgardeo identity-provider walkthrough.
+See [Authentication](../setting-up/authentication/overview.md) for the authentication modes, and [Connect an identity provider](../setting-up/authentication/connect-an-identity-provider.md) for the value each `[api_portal.auth.idp]` key has to match in the IdP.
 
 ### Authorization
 
@@ -179,7 +177,7 @@ Five keys govern how a request's permissions are resolved:
 
 | Key | Default | Description |
 |---|---|---|
-| `authorization.enabled` | `true` | Master switch for Management API (`/api/v0.9`) authorization. With `false`, any authenticated caller satisfies every operation's scope list—a development opt-out that logs a startup warning |
+| `authorization.enabled` | `true` | Master switch for Management API (`/api-portal/api/v0.9`) authorization. With `false`, any authenticated caller satisfies every operation's scope list—a development opt-out that logs a startup warning |
 | `authorization.mode` | `role` | How a request's effective scopes are derived. `role` expands the token's roles claim through the mapping table and ignores the scope claim entirely, so a caller can't widen a role's grant by asking for extra scopes. `scope` reads the token's own scope claim—use it when the issuer mints `dp:*` scopes directly. Validated even when `enabled = false`, so a typo surfaces immediately |
 | `authorization.role_to_scope_mapping` | `./resources/role-to-scope-mapping.yaml` | Path to the YAML grant table. Required when `mode = "role"`. Validated at startup against the portal's OpenAPI spec whenever it's set—an undeclared `dp:*` scope fails startup rather than surfacing later as a role that logs in and is denied every request |
 | `authorization.page_role_validation` | `false` | Per-page role-tier gating. Separate from `enabled`, which governs REST scopes—one switch for both would mean turning page gating off also silently disabled REST enforcement |
@@ -211,7 +209,7 @@ Patterns are glob-matched (minimatch) against the request URL and merged with—
 
 ```toml
 [api_portal.organization]
-handle = "default"                       # URL slug: /{handle}/views/{viewName}
+handle = "default"                       # URL slug: /api-portal/{handle}/views/{viewName}
 display_name = "Default"                 # Used only when first seeding the organization
 auto_create_subscription_plans = true    # Auto-create Bronze/Silver/Gold/Unlimited/AsyncUnlimited
 ```
@@ -220,7 +218,7 @@ These three keys describe the organization the instance serves:
 
 | Key | Description |
 |---|---|
-| `organization.handle` | The URL slug of the single organization this instance serves, and the pin every route is scoped against. Anything resolving to a different organization is rejected. In local-auth mode it must match the Platform API's organization id. In IDP mode the token's organization claim is matched against the organization's `idpRefId` instead—see the note below |
+| `organization.handle` | The URL slug of the single organization this instance serves, and the pin every route is scoped against. Anything resolving to a different organization is rejected. In local-auth mode it must match the Platform API's organization id. In IDP mode it's also what the token's organization claim has to resolve to—see the note below |
 | `organization.display_name` | Used only when seeding the organization for the first time. Never overwrites an existing name, so an admin's later edit in the settings UI survives restarts. Empty means "use the handle" |
 | `organization.auto_create_subscription_plans` | Seeds Bronze, Silver, Gold, Unlimited, and AsyncUnlimited alongside the organization |
 
@@ -230,7 +228,7 @@ Seeding runs on startup only if the organization doesn't already exist, so it's 
     The two authentication modes resolve it differently, so don't assume one claim covers both.
 
     - **Local auth** reads a fixed `org_handle` claim and compares it to `organization.handle`.
-    - **IDP mode** reads the claim named by `auth.claim_mappings.organization` (default `org_name`) and compares it to the organization's `idpRefId`, which admins set in [Organization settings](../admin-settings/organization-settings.md).
+    - **IDP mode** reads the claim named by `auth.claim_mappings.organization` (default `org_name`) and resolves it, accepting the organization's handle or its display name. The organization's IDP reference ID is seeded from `handle` and can't be changed afterward, so `handle` is the value to align the claim with—see [Make the organization claim resolve to your organization](../setting-up/authentication/connect-an-identity-provider.md#step-5-make-the-organization-claim-resolve-to-your-organization).
 
 
 !!! note

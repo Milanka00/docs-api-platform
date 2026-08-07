@@ -38,7 +38,7 @@ The header shows the API's icon, name, version, and description, along with tags
 - **Subscribe**: jumps down to the subscription plans. Shown when the API has plans and you aren't subscribed to one yet
 - **Documentation**: opens the API's full documentation. SOAP APIs show a **Download** button for the WSDL file instead
 - **Try with AI**: opens a modal with a ready-made prompt that briefs an AI agent on the API, using its [machine-readable documentation](ai-agent-discovery.md). Shown when the API is agent-visible. From the modal you can copy the prompt, download it as a `.txt` file, or send it straight to an assistant with **Run in Claude**.
-- **API Keys**: opens the API Keys page, where you generate a key. Shown for REST and WebSocket APIs whose specification declares API key security, and never for GraphQL, SOAP, or MCP artifacts.
+- **API Keys**: opens the API Keys page, where you generate a key. Shown for REST, WebSocket, and WebSub APIs whose specification declares API key security, and never for GraphQL, SOAP, or MCP artifacts.
 
 ### Page sections
 
