@@ -685,7 +685,7 @@ nav:
             - Moesif Analytics: ai-gateway/1.0.0/analytics/moesif-analytics.md
             - Analytics Header Filter: ai-gateway/1.0.0/analytics/analytics-header-filter.md
   # In-development 'next' doc sets, only shown in the nav while browsing a
-  - API Portal & MCP Hub:
+  - API Portal:
     - "next":
         - Overview: api-portal/next/overview.md
         - About this Release: api-portal/next/about-this-release.md
@@ -1462,7 +1462,7 @@ extra:
   # here is rendered with a version selector; its direct children must be the
   # version groups (titled with the version string). See nav-item.html / theme.js.
   versioned_sections:
-    API Portal & MCP Hub:
+    API Portal:
       slug: api-portal
       default: "1.0.0"
       versions:
@@ -1512,7 +1512,7 @@ extra:
     - title: Developer Portal
       options:
         - verticle-line
-    - title: API Portal & MCP Hub
+    - title: API Portal
       options:
         - verticle-line
         - divider
@@ -1630,7 +1630,7 @@ extra:
     Developer Portal:
       icon: octicons/book-16
       level: 1
-    API Portal & MCP Hub:
+    API Portal:
       icon: octicons/book-16
       level: 1
     Analytics & Monetization:
