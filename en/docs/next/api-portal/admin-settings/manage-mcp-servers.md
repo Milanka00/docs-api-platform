@@ -53,8 +53,8 @@ MCP servers share the same row-level actions as APIs:
 
 Once published, a server appears in the **MCP Servers** catalog with its tools, resources, and prompts listed, an MCP Playground for trying them, and a client configuration snippet. See [MCP Servers](../mcp-servers/overview.md).
 
-Servers can also be published without the wizard, through the portal's [MCP Registry API](../mcp-servers/mcp-registry.md).
+Servers can also be published without the wizard, through the portal's [MCP Registry API](../mcp-registry.md).
 
 ## Artifact types
 
-If you only want to expose MCP servers (hiding every other API type entirely), or the reverse, see [Artifact types](../artifact-types.md).
+If you only want to expose MCP servers (hiding every other API type entirely), or the reverse, see [Artifact types](../setting-up/artifact-types.md).

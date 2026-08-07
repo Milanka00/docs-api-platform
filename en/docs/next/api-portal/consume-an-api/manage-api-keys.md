@@ -1,8 +1,8 @@
 ---
 title: "Manage API keys"
 description: "Generate, rotate, revoke, and associate API keys for a subscribed API in the API Portal & MCP Hub."
-canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/manage-api-keys/
-md_url: https://wso2.com/api-platform/docs/cloud/api-portal/manage-api-keys.md
+canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/consume-an-api/manage-api-keys/
+md_url: https://wso2.com/api-platform/docs/cloud/api-portal/consume-an-api/manage-api-keys.md
 tags:
   - cloud
   - api-portal
@@ -31,7 +31,7 @@ The API must have API key authentication enabled—check the API's documentation
 7. **Copy the API key immediately.** The key won't be visible in the UI after you close this dialog.
 8. Click **Done**.
 
-Once you have a key, see [Consume an API Secured with an API Key](consume-an-api/api-key.md) for how to use it.
+Once you have a key, see [Consume an API Secured with an API Key](api-key.md) for how to use it.
 
 ## Rotate an API key
 
@@ -87,12 +87,12 @@ When you generate, regenerate, or revoke an API key, the portal publishes a webh
 
 Changing a key's application association publishes `apikey.application_updated`. That's an analytics notification—it doesn't affect whether the key works.
 
-The key itself travels encrypted on `apikey.generated` and `apikey.regenerated`. For the payload of each event, see the [Webhook Event Catalog](references/webhook-event-catalog.md); to register a subscriber, see [Webhook Integration](admin-settings/webhook-integration.md).
+The key itself travels encrypted on `apikey.generated` and `apikey.regenerated`. For the payload of each event, see the [Webhook Event Catalog](../references/webhook-event-catalog.md); to register a subscriber, see [Webhook Integration](../admin-settings/webhook-integration.md).
 
 ## Related
 
 - [Manage Subscriptions](manage-subscriptions.md)—subscribe if the API requires a subscription
-- [Consume an API Secured with an API Key](consume-an-api/api-key.md)—use the key to invoke the API
-- [Consume an API Secured with OAuth2](consume-an-api/oauth2.md)—alternative for OAuth2-secured APIs
+- [Consume an API Secured with an API Key](api-key.md)—use the key to invoke the API
+- [Consume an API Secured with OAuth2](oauth2.md)—alternative for OAuth2-secured APIs
 - [Manage Applications](manage-applications.md)—set up an application to associate keys with
-- [Webhook Event Catalog](references/webhook-event-catalog.md)—the `apikey.*` events this lifecycle publishes
+- [Webhook Event Catalog](../references/webhook-event-catalog.md)—the `apikey.*` events this lifecycle publishes

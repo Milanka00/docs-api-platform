@@ -210,7 +210,7 @@ Seeding runs on startup only if the organization doesn't already exist, so it's 
 enabled_types = ["apis", "mcp-servers", "api-workflows"]
 ```
 
-An allowlist of the artifact types this portal serves. A type left out gets no navigation entry, no landing-page section, and `404`s on its routes. Valid entries are `apis`, `mcp-servers`, and `api-workflows`; an unrecognized entry aborts startup so a typo can't silently drop a type. Omit the section to serve all three. See [Artifact types](../artifact-types.md).
+An allowlist of the artifact types this portal serves. A type left out gets no navigation entry, no landing-page section, and `404`s on its routes. Valid entries are `apis`, `mcp-servers`, and `api-workflows`; an unrecognized entry aborts startup so a typo can't silently drop a type. Omit the section to serve all three. See [Artifact types](../setting-up/artifact-types.md).
 
 ## Uploads
 
@@ -227,7 +227,7 @@ max_depth = 10
 These are the ceilings the Theming panel's "up to 10 MB" hint and the Manage APIs spec upload both derive from. `max_total_bytes`, `max_zip_entries`, and `max_depth` guard archive extraction against a decompression bomb, so raise them only deliberately.
 
 !!! note
-    This section isn't in `config-template.toml`—the values come from the built-in defaults. Add the table to `config.toml` to override them.
+    `config-template.toml` documents this table, but the shipped `config.toml` omits it—so the built-in defaults above apply until you add the table to `config.toml` yourself.
 
 ## Try-out proxy
 
@@ -270,7 +270,7 @@ Two limits hold regardless of these settings: the proxy only calls URLs containe
 # applications_path = "./samples/applications.yaml"
 ```
 
-Disabled by default. See [Design Mode](../setting-up/design-mode.md) for the full field reference and theme-development workflow.
+Disabled by default. See [Design Mode](../admin-settings/design-mode.md) for the full field reference and theme-development workflow.
 
 ## Webhooks
 
@@ -288,8 +288,8 @@ Global delivery tuning only—subscribers themselves are per-organization, manag
 ## Related
 
 - [Authentication](../setting-up/authentication/overview.md)
-- [Artifact types](../artifact-types.md)
-- [Design Mode](../setting-up/design-mode.md)
+- [Artifact types](../setting-up/artifact-types.md)
+- [Design Mode](../admin-settings/design-mode.md)
 - [Webhook Event Catalog](webhook-event-catalog.md)
 - [Get a Bearer Token via curl](get-a-bearer-token-via-curl.md)
 - [Management API](../rest-api/overview.md)

@@ -455,7 +455,7 @@ curl -s -o /dev/null -w '%{http_code}\n' http://localhost:8080/reading-list/v1/b
 
 Once the webhook lands you get **401**—the key is gone from the gateway without anyone touching the gateway. Generate a new key and the call succeeds again.
 
-The same holds for the subscription side, where a rejection reads as **403** rather than 401: suspending the subscription blocks calls, resuming restores them, and regenerating the token invalidates the old one while the new one works. See [Manage Subscriptions](../manage-subscriptions.md).
+The same holds for the subscription side, where a rejection reads as **403** rather than 401: suspending the subscription blocks calls, resuming restores them, and regenerating the token invalidates the old one while the new one works. See [Manage Subscriptions](../consume-an-api/manage-subscriptions.md).
 
 ## Troubleshooting
 
@@ -474,5 +474,5 @@ The same holds for the subscription side, where a rejection reads as **403** rat
 - [Webhook Event Catalog](../references/webhook-event-catalog.md): the events this flow depends on, their payloads, and the signing and encryption scheme
 - [Webhook Integration](../admin-settings/webhook-integration.md): registering a subscriber from the Settings UI
 - [Consume an API](../consume-an-api/overview.md): which credentials an API expects, and how to tell
-- [Manage Subscriptions](../manage-subscriptions.md) and [Manage API Keys](../manage-api-keys.md): the consumer-side lifecycles
+- [Manage Subscriptions](../consume-an-api/manage-subscriptions.md) and [Manage API Keys](../consume-an-api/manage-api-keys.md): the consumer-side lifecycles
 - [Getting Started](../getting-started.md): the portal on its own, without a gateway

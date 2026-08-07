@@ -76,9 +76,9 @@ What the page shows depends on the API type. **Resources** lists every operation
 Two header buttons appear conditionally rather than always:
 
 - **API Keys** — only for REST, WebSocket, and WebSub APIs whose specification declares API key security. Never for GraphQL, SOAP, or MCP artifacts.
-- **Try with AI** — only when the API is agent-visible. It opens a ready-made prompt that briefs an agent on the API using its [machine-readable documentation](ai-agent-discovery.md); copy it, download it as a `.txt` file, or send it straight to an assistant with **Run in Claude**.
+- **Try with AI** — only when the API is agent-visible. It opens a ready-made prompt that briefs an agent on the API using its [machine-readable documentation](../ai-agent-discovery.md); copy it, download it as a `.txt` file, or send it straight to an assistant with **Run in Claude**.
 
-Each plan in the **Subscription plans** panel carries its own **Subscribe** or **View subscription** button — see [Manage Subscriptions](../manage-subscriptions.md) for the full flow.
+Each plan in the **Subscription plans** panel carries its own **Subscribe** or **View subscription** button — see [Manage Subscriptions](../consume-an-api/manage-subscriptions.md) for the full flow.
 
 ## Read the specification and try it
 
@@ -104,6 +104,6 @@ Attached guides render in the same pane and cover what a specification can't: au
 
 - [APIs](overview.md): what an API is in the portal, and the types it publishes
 - [Which Credentials You Need](../consume-an-api/overview.md): work out what an API expects before you call it
-- [Manage Subscriptions](../manage-subscriptions.md): subscribe, switch plans, and manage your subscription token
+- [Manage Subscriptions](../consume-an-api/manage-subscriptions.md): subscribe, switch plans, and manage your subscription token
 - [Customize an API's Content](../admin-settings/api-content.md): replace the generated page body with your own
 - [Manage Views](../admin-settings/manage-views.md): how admins decide which APIs a view lists

@@ -14,7 +14,7 @@ content_type: "release-notes"
 
 # About this release
 
-The API Portal & MCP Hub is a web application that serves a catalog of APIs, Model Context Protocol (MCP) servers, and API workflows. Publishers register artifacts in it, and developers browse them, subscribe to plans, generate credentials, and call the APIs. It runs as a standalone distribution alongside the Platform API control plane, keeps its own database, and reaches gateways through signed webhook events rather than a fixed control-plane binding.
+The API Portal & MCP Hub is a web application that serves a catalog of APIs, Model Context Protocol (MCP) servers, and API workflows. Publishers register artifacts in it, and developers browse them, subscribe to plans, generate credentials, and call the APIs. It is a standalone product: it runs as its own distribution, keeps its own database, authenticates against your identity provider, and reaches gateways through signed webhook events rather than a fixed control-plane binding.
 
 **API Portal & MCP Hub 1.0.0** is the first **API Portal & MCP Hub release**. Every capability listed below is available for the first time, so there is no predecessor to upgrade from.
 
@@ -61,7 +61,7 @@ To install and run it, follow the [Getting started](getting-started.md) guide.
     - **Machine-readable discovery**: Query published MCP servers and their connection details over HTTP.
     - **Agent-oriented**: Intended for MCP clients and agent frameworks that resolve servers at runtime.
 
-    **[Learn more](mcp-servers/mcp-registry.md)**
+    **[Learn more](mcp-registry.md)**
 
 ??? note "AI agent discovery"
 
@@ -70,7 +70,7 @@ To install and run it, follow the [Getting started](getting-started.md) guide.
     - **`llms.txt` entry points**: Machine-readable indexes of the APIs, MCP servers, and workflows a view serves.
     - **Administrator-authored guidance**: Supply instructions that shape how large language models (LLMs) interpret the catalog.
 
-    **[Learn more](discover-apis/ai-agent-discovery.md)**
+    **[Learn more](ai-agent-discovery.md)**
 
 ??? note "Applications, subscriptions, and API keys"
 
@@ -102,7 +102,7 @@ To install and run it, follow the [Getting started](getting-started.md) guide.
     - **Per-view layouts**: Upload page layouts that apply to a single view.
     - **Per-API styling**: Apply custom styling to an individual API's landing page.
 
-    **[Learn more](theming.md)**
+    **[Learn more](admin-settings/theming.md)**
 
 ??? note "Design mode"
 
@@ -111,7 +111,7 @@ To install and run it, follow the [Getting started](getting-started.md) guide.
     - **No infrastructure**: Preview APIs, MCP servers, applications, and theming without standing up the full stack.
     - **Content and theme authoring**: Iterate on layouts and catalog content directly from disk.
 
-    **[Learn more](setting-up/design-mode.md)**
+    **[Learn more](admin-settings/design-mode.md)**
 
 ??? note "Webhook-based event integration"
 
@@ -145,7 +145,7 @@ The API Portal & MCP Hub shares a control plane with AI Workspace. The following
 |---------|--------------------|
 | WSO2 AI Workspace | 1.0.0 |
 
-The distribution bundles the Platform API control plane, so the two are versioned and shipped together—no separate compatibility check is needed. Full prerequisites are listed in the [Getting started](getting-started.md) guide.
+The distribution bundles the Platform API control plane so the local-auth quickstart works out of the box, and the two are versioned and shipped together—no separate compatibility check is needed. A production deployment that authenticates against an identity provider doesn't need it: the portal's only outbound call to a Platform API is the local-auth login. Full prerequisites are listed in the [Getting started](getting-started.md) guide.
 
 ## Key changes
 

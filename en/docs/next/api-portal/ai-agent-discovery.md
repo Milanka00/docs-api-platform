@@ -1,8 +1,8 @@
 ---
 title: "AI agent API discovery"
 description: "Expose published APIs, MCP servers, and workflows through llms.txt and machine-readable Markdown endpoints so AI agents can discover and invoke them."
-canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/discover-apis/ai-agent-discovery/
-md_url: https://wso2.com/api-platform/docs/cloud/api-portal/discover-apis/ai-agent-discovery.md
+canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/ai-agent-discovery/
+md_url: https://wso2.com/api-platform/docs/cloud/api-portal/ai-agent-discovery.md
 tags:
   - cloud
   - api-portal
@@ -18,7 +18,7 @@ The API Portal & MCP Hub has built-in support for AI agent discoverability. Ever
 
 This page explains what those endpoints return and how agents navigate the portal.
 
-Every endpoint below is scoped to an organization handle (`{orgName}`) and a [view](../admin-settings/manage-views.md) (`{viewName}`, which is `default` unless an admin has created more views). Responses are plain text or JSON, so agents can fetch them without authentication, JavaScript rendering, or a browser. Only discovery is unauthenticated—invoking an API or MCP server still requires its credentials, a subscription where one applies, and the scopes it declares.
+Every endpoint below is scoped to an organization handle (`{orgName}`) and a [view](admin-settings/manage-views.md) (`{viewName}`, which is `default` unless an admin has created more views). Responses are plain text or JSON, so agents can fetch them without authentication, JavaScript rendering, or a browser. Only discovery is unauthenticated—invoking an API or MCP server still requires its credentials, a subscription where one applies, and the scopes it declares.
 
 ## `llms.txt`: The entry point for agents
 
@@ -30,7 +30,7 @@ The portal generates an `llms.txt` file on every request—a Markdown index desi
 GET /api-portal/{orgName}/views/{viewName}/llms.txt
 ```
 
-The file opens with the portal's name and description, both configured through [LLM Instructions](../admin-settings/llm-instructions.md). It then lists every agent-visible artifact, grouped into the following sections, with each entry linking to that artifact's own Markdown document:
+The file opens with the portal's name and description, both configured through [LLM Instructions](admin-settings/llm-instructions.md). It then lists every agent-visible artifact, grouped into the following sections, with each entry linking to that artifact's own Markdown document:
 
 | Section | Contains |
 |---|---|
@@ -44,7 +44,7 @@ The file opens with the portal's name and description, both configured through [
 A section is omitted when it holds no agent-visible artifacts. An agent that starts at `llms.txt` therefore learns the full scope of the catalog without crawling the portal, which makes it the standard starting point for LLM-native API consumption.
 
 !!! tip
-    Portal admins set the name and description that head `llms.txt` under [LLM Instructions](../admin-settings/llm-instructions.md). The same page carries the toggle that turns AI discoverability on or off for the whole portal.
+    Portal admins set the name and description that head `llms.txt` under [LLM Instructions](admin-settings/llm-instructions.md). The same page carries the toggle that turns AI discoverability on or off for the whole portal.
 
 ## Machine-readable endpoints
 
@@ -112,21 +112,21 @@ A typical agent discovery flow looks like this:
 5. **Fetch the specification separately.** When the agent needs the specification as a parseable file rather than as inlined text, it retrieves the `specification.*` endpoint for the API's type.
 6. **Follow a workflow.** If a published workflow matches the task, the agent retrieves the Arazzo specification and agent prompt, then follows a vetted, step-by-step call sequence instead of reasoning from scratch.
 
-The **Try with AI** button on an [API's overview page](browse-apis.md#open-an-api) hands this flow to an agent directly. It produces a prompt that points the agent at that API's `.md` URL and asks it to summarize the API before doing anything else.
+The **Try with AI** button on an [API's overview page](discover-apis/browse-apis.md#open-an-api) hands this flow to an agent directly. It produces a prompt that points the agent at that API's `.md` URL and asks it to summarize the API before doing anything else.
 
 ## Visibility controls
 
 Three separate controls decide what agents see:
 
-- **Per-artifact agent visibility.** All published APIs, MCP servers, and workflows are agent-visible by default. Setting an artifact to hidden removes it from `llms.txt`, the catalogs, and every Markdown and specification endpoint, while leaving it visible to human users in the portal. For APIs, see [Make an API AI-Ready](../../../cloud/develop-api-proxy/make-api-ai-ready.md). For workflows, see [Managing API Workflows](../admin-settings/manage-api-workflows.md).
-- **Portal-wide AI discoverability.** Turning off **Portal is AI-discoverable** under [LLM Instructions](../admin-settings/llm-instructions.md) makes every endpoint on this page return `404`, including `llms.txt` itself.
-- **Served artifact types.** A deployment that doesn't serve a given artifact type returns `404` for that type's catalog, Markdown, and specification endpoints. See [Artifact types](../artifact-types.md).
+- **Per-artifact agent visibility.** All published APIs, MCP servers, and workflows are agent-visible by default. Setting an artifact to hidden removes it from `llms.txt`, the catalogs, and every Markdown and specification endpoint, while leaving it visible to human users in the portal. For APIs, see [Make an API AI-Ready](../../cloud/develop-api-proxy/make-api-ai-ready.md). For workflows, see [Managing API Workflows](admin-settings/manage-api-workflows.md).
+- **Portal-wide AI discoverability.** Turning off **Portal is AI-discoverable** under [LLM Instructions](admin-settings/llm-instructions.md) makes every endpoint on this page return `404`, including `llms.txt` itself.
+- **Served artifact types.** A deployment that doesn't serve a given artifact type returns `404` for that type's catalog, Markdown, and specification endpoints. See [Artifact types](setting-up/artifact-types.md).
 
 ## Related
 
-- [LLM Instructions](../admin-settings/llm-instructions.md): set the portal name and description at the top of `llms.txt`, and toggle AI discoverability
-- [Managing API Workflows](../admin-settings/manage-api-workflows.md): publish workflows that guide agents through common multi-step use cases
-- [API Workflows](../api-workflows.md): how agents discover and follow published workflows
-- [Make an API AI-Ready](../../../cloud/develop-api-proxy/make-api-ai-ready.md): publisher guidance on descriptions, specifications, and visibility settings
-- [MCP Servers](../mcp-servers/overview.md): how MCP servers are published, discovered, and connected to
-- [MCP Registry API](../mcp-servers/mcp-registry.md): discover the same servers in the Model Context Protocol registry format
+- [LLM Instructions](admin-settings/llm-instructions.md): set the portal name and description at the top of `llms.txt`, and toggle AI discoverability
+- [Managing API Workflows](admin-settings/manage-api-workflows.md): publish workflows that guide agents through common multi-step use cases
+- [API Workflows](api-workflows.md): how agents discover and follow published workflows
+- [Make an API AI-Ready](../../cloud/develop-api-proxy/make-api-ai-ready.md): publisher guidance on descriptions, specifications, and visibility settings
+- [MCP Servers](mcp-servers/overview.md): how MCP servers are published, discovered, and connected to
+- [MCP Registry API](mcp-registry.md): discover the same servers in the Model Context Protocol registry format

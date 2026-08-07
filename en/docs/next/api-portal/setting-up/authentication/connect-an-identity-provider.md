@@ -15,7 +15,7 @@ content_type: "how-to"
 
 # Connect an identity provider to the API Portal
 
-The API Portal & MCP Hub delegates user login to any identity provider (IdP) that speaks OpenID Connect (OIDC). This guide is written for the administrator who deploys the portal, and it covers the configuration every IdP needs. For a worked example of these steps against one specific IdP, see [Set up Asgardeo as your identity provider](../../tutorials/asgardeo-as-idp.md).
+The API Portal & MCP Hub delegates user login to any identity provider (IdP) that speaks OpenID Connect (OIDC). This guide is written for the administrator who deploys the portal, and it covers the configuration every IdP needs. For a worked example of these steps against one specific IdP, see [Set up Asgardeo as your identity provider](asgardeo-as-idp.md).
 
 For how identity provider authentication compares with local authentication, see [Authentication in the API Portal & MCP Hub](overview.md).
 
@@ -263,7 +263,7 @@ The roles claim is the one that most often differs. These paths are known to wor
 
 ## Related topics
 
-- [Set up Asgardeo as your identity provider](../../tutorials/asgardeo-as-idp.md): these steps apply to Asgardeo, including `dp:*` scope registration
+- [Set up Asgardeo as your identity provider](asgardeo-as-idp.md): these steps apply to Asgardeo, including `dp:*` scope registration
 - [Authentication in the API Portal & MCP Hub](overview.md): how identity provider authentication compares with local authentication
 - [Configurations](../../references/configurations.md): every `config.toml` key, and how interpolation tokens deliver values into it
 - [Organization settings](../../admin-settings/organization-settings.md): the organization's display name and references, as administrators see them

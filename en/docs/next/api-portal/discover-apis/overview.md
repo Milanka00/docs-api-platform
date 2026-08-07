@@ -46,10 +46,10 @@ An MCP server is another artifact in the same catalog, so most of what you know 
 | Subscribed | Through an application that holds the credentials | Directly, without an application |
 | Agent visibility | The publisher sets it per API | Always agent-visible; the catalog marks every server **AI Ready** |
 
-Everything else works the same way. APIs carry tags, labels, icons, subscription plans, and attached documents, and appear in the portal's [machine-readable endpoints](ai-agent-discovery.md) when the publisher marks them agent-visible.
+Everything else works the same way. APIs carry tags, labels, icons, subscription plans, and attached documents, and appear in the portal's [machine-readable endpoints](../ai-agent-discovery.md) when the publisher marks them agent-visible.
 
 !!! note
-    A portal only serves APIs when its operator lists `apis` in `enabled_types`. Leave it out and the sidebar entry, the catalog, and every API route disappear. See [Artifact types](../artifact-types.md).
+    A portal only serves APIs when its operator lists `apis` in `enabled_types`. Leave it out and the sidebar entry, the catalog, and every API route disappear. See [Artifact types](../setting-up/artifact-types.md).
 
 ## How APIs reach the catalog
 
@@ -72,6 +72,6 @@ The same artifact can be created programmatically, which is the route automation
 
 - [Manage APIs](../admin-settings/manage-apis.md): the admin side of adding and publishing APIs
 - [MCP Servers](../mcp-servers/overview.md): the other half of the catalog
-- [AI Agent Discovery](ai-agent-discovery.md): the machine-readable endpoints that expose APIs to agents
-- [Artifact types](../artifact-types.md): whether this deployment serves APIs
+- [AI Agent Discovery](../ai-agent-discovery.md): the machine-readable endpoints that expose APIs to agents
+- [Artifact types](../setting-up/artifact-types.md): whether this deployment serves APIs
 - [Concepts](../concepts.md): how APIs fit alongside MCP servers, plans, subscriptions, and keys

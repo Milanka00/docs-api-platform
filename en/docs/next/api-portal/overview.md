@@ -30,31 +30,31 @@ Browse and search REST, GraphQL, SOAP, WebSocket, and WebSub APIs, as well as MC
 - Per-API documentation, landing page content, icons, and banners
 - Machine-readable discovery (`llms.txt`, per-API Markdown, OpenAPI/AsyncAPI specs) built for AI agent consumption
 
-Learn more in [Discover APIs](discover-apis/browse-apis.md), [MCP Servers](mcp-servers/overview.md), and [AI Agent Discovery](discover-apis/ai-agent-discovery.md).
+Learn more in [Discover APIs](discover-apis/browse-apis.md), [MCP Servers](mcp-servers/overview.md), and [AI Agent Discovery](ai-agent-discovery.md).
 
 ### MCP servers
 
 Publish Model Context Protocol servers alongside your APIs, each with its tools, resources, and prompts listed, an MCP Playground for invoking them, and a ready-made client configuration snippet. Servers arrive either through the admin UI or through the portal's implementation of the MCP registry specification.
 
-Learn more in [MCP Servers](mcp-servers/overview.md) and the [MCP Registry API](mcp-servers/mcp-registry.md).
+Learn more in [MCP Servers](mcp-servers/overview.md) and the [MCP Registry API](mcp-registry.md).
 
 ### Developer applications
 
 Logical containers for OAuth2 credentials. A developer can create multiple applications—for example, one per client or environment—each linked to independent OAuth2 client IDs.
 
-Learn more in [Manage Applications](manage-applications.md).
+Learn more in [Manage Applications](consume-an-api/manage-applications.md).
 
 ### Subscriptions and plans
 
 Developers subscribe directly to an API or MCP server under a named plan (for example, Gold or Bronze) that enforces rate limits and quotas. No application is required to subscribe.
 
-Learn more in [Manage Subscriptions](manage-subscriptions.md) and, for admins, [Subscription Plans](admin-settings/subscription-plans.md).
+Learn more in [Manage Subscriptions](consume-an-api/manage-subscriptions.md) and, for admins, [Subscription Plans](admin-settings/subscription-plans.md).
 
 ### API keys and OAuth2 credentials
 
 Generate, rotate, and revoke API keys bound to a specific API or MCP server. For OAuth2-secured APIs, link a client ID created in a key manager to an application and generate access tokens through the portal.
 
-Learn more in [Manage API Keys](manage-api-keys.md), [Consume an API Secured with OAuth2](consume-an-api/oauth2.md), and, for admins, [Key Manager Integration](admin-settings/key-manager-integration.md).
+Learn more in [Manage API Keys](consume-an-api/manage-api-keys.md), [Consume an API Secured with OAuth2](consume-an-api/oauth2.md), and, for admins, [Key Manager Integration](admin-settings/key-manager-integration.md).
 
 ### API workflows
 
@@ -66,7 +66,7 @@ Learn more in [API Workflows](api-workflows.md).
 
 Give a view its own colors, page shell, header, footer, and page markup by uploading a theme. A theme is a partial copy of the default template tree, so a re-color is one file and everything you omit falls back to the default.
 
-Learn more in [Theming](theming.md), and [Apply a Theme](admin-settings/theming.md) for the upload panel.
+Learn more in [Theming](admin-settings/theming.md), and [Apply a Theme](admin-settings/theming.md) for the upload panel.
 
 ### Admin settings
 
@@ -110,8 +110,8 @@ Beyond the Docker Compose quick start, a production deployment typically needs:
 | Topic | Covers |
 |---|---|
 | [Authentication](setting-up/authentication/overview.md) | Local and OIDC authentication modes, with an Asgardeo identity-provider walkthrough |
-| [Artifact types](artifact-types.md) | Choose which artifact types—APIs, MCP servers, and API workflows—the portal serves |
-| [Design Mode](setting-up/design-mode.md) | Develop and preview themes/layouts offline, without a database or IDP |
+| [Artifact types](setting-up/artifact-types.md) | Choose which artifact types—APIs, MCP servers, and API workflows—the portal serves |
+| [Design Mode](admin-settings/design-mode.md) | Develop and preview themes/layouts offline, without a database or IDP |
 
 ## References
 

@@ -79,7 +79,7 @@ For production, configure the portal to delegate login to an identity provider (
 
 When `mode = "idp"`, the portal reads the `[api_portal.auth.idp]` block for the OIDC endpoints and client credentials, and the `[api_portal.auth.claim_mappings]` block for the claim names that carry organization and role information.
 
-[Connect an identity provider to the API Portal](connect-an-identity-provider.md) covers the configuration every IdP needs. For a worked example against one specific provider, see [Set up Asgardeo as your identity provider](../../tutorials/asgardeo-as-idp.md).
+[Connect an identity provider to the API Portal](connect-an-identity-provider.md) covers the configuration every IdP needs. For a worked example against one specific provider, see [Set up Asgardeo as your identity provider](asgardeo-as-idp.md).
 
 ## Authorization is configured separately
 

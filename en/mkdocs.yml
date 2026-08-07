@@ -701,9 +701,8 @@ nav:
         - Authentication:
             - Overview: next/api-portal/setting-up/authentication/overview.md
             - Connect an Identity Provider: next/api-portal/setting-up/authentication/connect-an-identity-provider.md
-            - Set up Asgardeo: next/api-portal/tutorials/asgardeo-as-idp.md
-        - Artifact Types: next/api-portal/artifact-types.md
-        - Design Mode: next/api-portal/setting-up/design-mode.md
+            - Set up Asgardeo: next/api-portal/setting-up/authentication/asgardeo-as-idp.md
+        - Artifact Types: next/api-portal/setting-up/artifact-types.md
     # What a consumer does in the portal, in the order they do it.
     - Discover APIs:
         - Overview: next/api-portal/discover-apis/overview.md
@@ -713,13 +712,13 @@ nav:
         - Browse MCP Servers: next/api-portal/mcp-servers/browse-mcp-servers.md
         - Connect to an MCP Server: next/api-portal/mcp-servers/connect-to-an-mcp-server.md
     - API Workflows: next/api-portal/api-workflows.md
-    - AI Agent Discovery: next/api-portal/discover-apis/ai-agent-discovery.md
-    - MCP Registry API: next/api-portal/mcp-servers/mcp-registry.md
+    - AI Agent Discovery: next/api-portal/ai-agent-discovery.md
+    - MCP Registry API: next/api-portal/mcp-registry.md
     - Applications and Credentials:
         - Which Credentials You Need: next/api-portal/consume-an-api/overview.md
-        - Manage Applications: next/api-portal/manage-applications.md
-        - Manage Subscriptions: next/api-portal/manage-subscriptions.md
-        - Manage API Keys: next/api-portal/manage-api-keys.md
+        - Manage Applications: next/api-portal/consume-an-api/manage-applications.md
+        - Manage Subscriptions: next/api-portal/consume-an-api/manage-subscriptions.md
+        - Manage API Keys: next/api-portal/consume-an-api/manage-api-keys.md
         - Call an OAuth2-Secured API: next/api-portal/consume-an-api/oauth2.md
         - Call an API-Key-Secured API: next/api-portal/consume-an-api/api-key.md
     # Configure the portal at runtime, once it is serving.
@@ -739,8 +738,9 @@ nav:
             - Key Manager Integration: next/api-portal/admin-settings/key-manager-integration.md
             - Webhook Integration: next/api-portal/admin-settings/webhook-integration.md
         - Appearance:
-            - Theming: next/api-portal/theming.md
-            - Apply a Theme to a View: next/api-portal/admin-settings/theming.md
+            - Theming: next/api-portal/admin-settings/theming.md
+            - Apply a Theme to a View: next/api-portal/admin-settings/apply-a-theme.md
+            - Design Mode: next/api-portal/admin-settings/design-mode.md
     - References:
         - Management API:
             - Overview: next/api-portal/rest-api/overview.md
@@ -965,6 +965,16 @@ plugins:
         # API Portal: overview + documentation pages merged into Browse APIs
         next/api-portal/discover-apis/api-overview.md: next/api-portal/discover-apis/browse-apis.md
         next/api-portal/discover-apis/api-documentations.md: next/api-portal/discover-apis/browse-apis.md
+        # API Portal: files relocated to match their nav sections
+        next/api-portal/discover-apis/ai-agent-discovery.md: next/api-portal/ai-agent-discovery.md
+        next/api-portal/mcp-servers/mcp-registry.md: next/api-portal/mcp-registry.md
+        next/api-portal/theming.md: next/api-portal/admin-settings/theming.md
+        next/api-portal/artifact-types.md: next/api-portal/setting-up/artifact-types.md
+        next/api-portal/manage-applications.md: next/api-portal/consume-an-api/manage-applications.md
+        next/api-portal/manage-subscriptions.md: next/api-portal/consume-an-api/manage-subscriptions.md
+        next/api-portal/manage-api-keys.md: next/api-portal/consume-an-api/manage-api-keys.md
+        next/api-portal/setting-up/design-mode.md: next/api-portal/admin-settings/design-mode.md
+        next/api-portal/tutorials/asgardeo-as-idp.md: next/api-portal/setting-up/authentication/asgardeo-as-idp.md
         # API Portal: filenames aligned with page titles
         next/api-portal/discover-apis/api-search.md: next/api-portal/discover-apis/browse-apis.md
         next/api-portal/mcp-servers/discover-mcp-servers.md: next/api-portal/mcp-servers/browse-mcp-servers.md

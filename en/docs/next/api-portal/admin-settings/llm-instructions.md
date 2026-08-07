@@ -69,11 +69,11 @@ The generated file lists each agent-visible artifact under its own section:
 
 ![Generated llms.txt showing an API Workflows section with workflow names, descriptions, and links](../../../assets/img/devportal/llms-txt.png)
 
-Only your name and description are editable. Everything below them—the API Workflows, APIs, MCPs, GraphQL, WebSocket, and WebSub sections—is generated from the catalog and reflects each artifact's own agent visibility. See [AI Agent Discovery](../discover-apis/ai-agent-discovery.md) for how that index is built.
+Only your name and description are editable. Everything below them—the API Workflows, APIs, MCPs, GraphQL, WebSocket, and WebSub sections—is generated from the catalog and reflects each artifact's own agent visibility. See [AI Agent Discovery](../ai-agent-discovery.md) for how that index is built.
 
 ## Related
 
-- [AI Agent Discovery](../discover-apis/ai-agent-discovery.md): every agent-facing endpoint, and what `llms.txt` contains
+- [AI Agent Discovery](../ai-agent-discovery.md): every agent-facing endpoint, and what `llms.txt` contains
 - [Managing API Workflows](manage-api-workflows.md): per-workflow agent visibility
 - [Make an API AI-Ready](../../../cloud/develop-api-proxy/make-api-ai-ready.md): per-API agent visibility, and writing descriptions agents can use
 - [Manage Views](manage-views.md): why these settings are per-view

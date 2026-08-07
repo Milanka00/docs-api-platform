@@ -72,4 +72,4 @@ You can read delivery history, including failures and their HTTP status, through
 - [Webhook Event Catalog](../references/webhook-event-catalog.md): every event's payload, headers, signing, and encryption
 - [Webhook Subscribers](../rest-api/webhook-subscribers.md): manage subscribers through the Management API
 - [Webhook Events](../rest-api/webhook-events.md): read delivery history through the Management API
-- [Manage API Keys](../manage-api-keys.md): the lifecycle behind the `apikey.*` events
+- [Manage API Keys](../consume-an-api/manage-api-keys.md): the lifecycle behind the `apikey.*` events

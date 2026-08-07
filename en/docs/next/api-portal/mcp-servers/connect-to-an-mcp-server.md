@@ -27,7 +27,7 @@ If the server has subscription plans, subscribe before you connect:
 
 The subscription is created immediately and a dialog shows your **subscription token**. Copy it before closing—send it as the `Subscription-Key` header when calling the server.
 
-Subscriptions to MCP servers work exactly as they do for APIs: one per server, switchable between plans without changing the token, suspendable, and manageable from **Subscriptions** in the sidebar. See [Manage Subscriptions](../manage-subscriptions.md).
+Subscriptions to MCP servers work exactly as they do for APIs: one per server, switchable between plans without changing the token, suspendable, and manageable from **Subscriptions** in the sidebar. See [Manage Subscriptions](../consume-an-api/manage-subscriptions.md).
 
 Servers with no plans need no subscription. Connect with whatever authentication the server itself expects.
 
@@ -35,7 +35,7 @@ Servers with no plans need no subscription. Connect with whatever authentication
 
 The configuration snippet expects an OAuth2 access token in an `Authorization: Bearer` header. Get one the same way you would for an OAuth2-secured API:
 
-1. [Create an application](../manage-applications.md) in the portal.
+1. [Create an application](../consume-an-api/manage-applications.md) in the portal.
 2. Link a client ID from your key manager to it under **Manage Keys**.
 3. Generate an access token from the **Generate Token** tab, or with the ready-made command on the **cURL** tab.
 
@@ -86,6 +86,6 @@ Before wiring the server into an agent, confirm the credentials work: open the s
 ## Related
 
 - [Browse MCP Servers](browse-mcp-servers.md): find a server and read its tools
-- [Manage Subscriptions](../manage-subscriptions.md): plans, tokens, switching, and unsubscribing
+- [Manage Subscriptions](../consume-an-api/manage-subscriptions.md): plans, tokens, switching, and unsubscribing
 - [Consume an API Secured with OAuth2](../consume-an-api/oauth2.md): the full token-generation sequence
-- [Manage Applications](../manage-applications.md): where client IDs live
+- [Manage Applications](../consume-an-api/manage-applications.md): where client IDs live

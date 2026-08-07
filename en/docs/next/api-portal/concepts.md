@@ -48,11 +48,11 @@ A **label** is a tag you assign to an API or MCP server to control which views e
 
 ## Layout
 
-A **layout** is a custom Handlebars template that defines the structure of a view's pages. It's one part of a **theme**—a partial copy of the portal's default template tree, holding only the styles, layouts, partials, and page templates you want to change. Anything a theme omits is served from the default. See [Theming](theming.md), and [Design Mode](setting-up/design-mode.md) for building one offline.
+A **layout** is a custom Handlebars template that defines the structure of a view's pages. It's one part of a **theme**—a partial copy of the portal's default template tree, holding only the styles, layouts, partials, and page templates you want to change. Anything a theme omits is served from the default. See [Theming](admin-settings/theming.md), and [Design Mode](admin-settings/design-mode.md) for building one offline.
 
 ## Artifact types
 
-The portal serves three kinds of artifact: **APIs**, **MCP servers**, and **API workflows**. Which of them a given portal exposes is an operator setting—the `enabled_types` allowlist in the `[api_portal.artifacts]` config. A type that isn't enabled gets no navigation entry and no landing-page section, and its routes return `404`. See [Artifact types](artifact-types.md).
+The portal serves three kinds of artifact: **APIs**, **MCP servers**, and **API workflows**. Which of them a given portal exposes is an operator setting—the `enabled_types` allowlist in the `[api_portal.artifacts]` config. A type that isn't enabled gets no navigation entry and no landing-page section, and its routes return `404`. See [Artifact types](setting-up/artifact-types.md).
 
 ## API
 
@@ -86,7 +86,7 @@ Plans can define rate limits—a request count (or event count, for async APIs) 
 
 An **application** is a logical container—representing a mobile app, web app, device, or script—that a developer creates in the portal. For OAuth2-secured APIs, an application holds the client ID(s) that link to OAuth applications created directly in a key manager; the portal never generates or stores consumer key/secret pairs.
 
-A developer can have multiple applications, each with independent OAuth2 client IDs. See [Manage Applications](manage-applications.md).
+A developer can have multiple applications, each with independent OAuth2 client IDs. See [Manage Applications](consume-an-api/manage-applications.md).
 
 !!! note
     Applications are not required for subscriptions or API key generation. Subscriptions are made directly to an API or MCP server, and API keys are bound to an API or MCP server—not to an application.
@@ -95,13 +95,13 @@ A developer can have multiple applications, each with independent OAuth2 client 
 
 A **subscription** is a developer's access grant to a specific API or MCP server under a chosen subscription plan. The plan determines the developer's rate limits and quota for that artifact.
 
-Subscriptions are made directly to the artifact—no application is involved. Once subscribed, the developer can invoke it under the terms of the chosen plan. See [Manage Subscriptions](manage-subscriptions.md).
+Subscriptions are made directly to the artifact—no application is involved. Once subscribed, the developer can invoke it under the terms of the chosen plan. See [Manage Subscriptions](consume-an-api/manage-subscriptions.md).
 
 ## API key
 
 An **API key** is a simple token bound to a specific API or MCP server, used to authenticate requests to artifacts that use API key-based authentication. API keys are generated per artifact—not per application or per subscription.
 
-API keys can be generated, regenerated (rotated), or revoked. Each of those publishes a webhook event, so a handler in front of your API Gateway can enforce the change once it receives the event—see the [Webhook Event Catalog](references/webhook-event-catalog.md). See [Manage API Keys](manage-api-keys.md).
+API keys can be generated, regenerated (rotated), or revoked. Each of those publishes a webhook event, so a handler in front of your API Gateway can enforce the change once it receives the event—see the [Webhook Event Catalog](references/webhook-event-catalog.md). See [Manage API Keys](consume-an-api/manage-api-keys.md).
 
 !!! note
     The portal generates keys through the UI for REST, WebSocket, and WebSub APIs whose definition declares API-key security. Keys for GraphQL and SOAP APIs exist solely through the [API Keys](rest-api/api-keys.md) Management API. Keys for MCP servers exist only through the [MCP Server Keys](rest-api/mcp-server-keys.md) Management API.

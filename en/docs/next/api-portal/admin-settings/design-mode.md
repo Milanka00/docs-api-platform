@@ -1,8 +1,8 @@
 ---
 title: "Design Mode"
 description: "Develop and preview API Portal layouts and themes offline, without a running database or identity provider."
-canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/setting-up/design-mode/
-md_url: https://wso2.com/api-platform/docs/cloud/api-portal/setting-up/design-mode.md
+canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/admin-settings/design-mode/
+md_url: https://wso2.com/api-platform/docs/cloud/api-portal/admin-settings/design-mode.md
 tags:
   - cloud
   - api-portal
@@ -24,7 +24,7 @@ Design mode lets you develop and preview API page layouts and org-level themes w
 
 Use design mode when you want to:
 
-- Iterate on a [theme](../theming.md)—styles, layout, partials, or page templates—and see each change on reload
+- Iterate on a [theme](theming.md)—styles, layout, partials, or page templates—and see each change on reload
 - Work on a page design without standing up a database, an identity provider, or a gateway
 - Demo the portal against a fixed set of sample APIs, MCP servers, and applications
 
@@ -81,9 +81,9 @@ enabled = true
 path_to_layout = "./my-theme/"
 ```
 
-To preview the example theme from [Theming](../theming.md#example-a-teal-and-coral-theme), use `./samples/layouts/green-theme/`.
+To preview the example theme from [Theming](theming.md#example-a-teal-and-coral-theme), use `./samples/layouts/green-theme/`.
 
-For what a theme contains, which files you can override, how the color tokens work, and how to package one for upload, see [Theming](../theming.md). Design mode and the production theme upload use the same directory structure, so a theme built here deploys without conversion.
+For what a theme contains, which files you can override, how the color tokens work, and how to package one for upload, see [Theming](theming.md). Design mode and the production theme upload use the same directory structure, so a theme built here deploys without conversion.
 
 ## Sample APIs and MCP servers
 
@@ -228,6 +228,6 @@ The portal returns to production mode, requiring a database and (if configured) 
 
 ## Related
 
-- [Theming](../theming.md): what a theme contains, the color tokens, and how to package one
+- [Theming](theming.md): what a theme contains, the color tokens, and how to package one
 - [Apply a Theme](../admin-settings/theming.md): upload a finished theme to a view
 - [Configurations](../references/configurations.md): the full `config.toml` reference

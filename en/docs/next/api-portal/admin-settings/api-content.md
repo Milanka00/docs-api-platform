@@ -16,7 +16,7 @@ content_type: "how-to"
 
 By default, an API's [overview page](../discover-apis/browse-apis.md#open-an-api) is generated from its specification—Endpoints, Resources, Scopes, and the subscription plans panel. **API content** lets you replace that body with your own, per API, and attach the images and documents that go with it.
 
-This is narrower than [theming](../theming.md): a theme restyles every page in a view, while API content changes one API's overview body and leaves everything else alone.
+This is narrower than [theming](theming.md): a theme restyles every page in a view, while API content changes one API's overview body and leaves everything else alone.
 
 ## What you can upload
 
@@ -95,11 +95,11 @@ Uploading is immediate and independent of **Save changes** on the other steps.
 Files are merged rather than replaced wholesale: a file whose name matches one already stored overwrites it, and everything else is added. To remove a file, delete it through the [API Content](../rest-api/api-content.md) Management API.
 
 !!! note "The wrapper directory is optional here"
-    A single top-level folder containing `web/` and `docs/` is fine, and so is `web/` and `docs/` sitting at the ZIP root—the portal accepts both. This differs from a [theme ZIP](../theming.md#package-the-theme), which requires the wrapper.
+    A single top-level folder containing `web/` and `docs/` is fine, and so is `web/` and `docs/` sitting at the ZIP root—the portal accepts both. This differs from a [theme ZIP](theming.md#package-the-theme), which requires the wrapper.
 
 ## Preview before uploading
 
-In [design mode](../setting-up/design-mode.md), an API's content lives beside its manifest in the samples directory, so you can iterate on the body with a browser reload:
+In [design mode](design-mode.md), an API's content lives beside its manifest in the samples directory, so you can iterate on the body with a browser reload:
 
 ```text
 samples/apis/my-api-v1.0/
@@ -116,6 +116,6 @@ samples/apis/my-api-v1.0/
 
 - [API Overview](../discover-apis/browse-apis.md#open-an-api): the generated page your content replaces
 - [API Documentation](../discover-apis/browse-apis.md#read-the-specification-and-try-it): where `docs/` files surface
-- [Theming](../theming.md): restyle every page in a view, rather than one API's body
+- [Theming](theming.md): restyle every page in a view, rather than one API's body
 - [Manage APIs](manage-apis.md): the wizard this is the last step of
 - [API Content](../rest-api/api-content.md): upload, replace, and delete content through the Management API

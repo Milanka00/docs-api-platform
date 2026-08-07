@@ -19,12 +19,12 @@ An API key is bound to one API or Model Context Protocol (MCP) server. You gener
 ## Prerequisites
 
 - The API declares API key security. Look for a `securitySchemes` entry of type `apiKey` in the API's specification.
-- You have a key. See [Manage API Keys](../manage-api-keys.md) for the generate, rotate, and revoke lifecycle.
+- You have a key. See [Manage API Keys](manage-api-keys.md) for the generate, rotate, and revoke lifecycle.
 
     !!! note
         The portal generates keys for REST, WebSocket, and WebSub APIs whose specification declares API key security. GraphQL, SOAP, and MCP artifacts get no **API Keys** button even when their specification declares an `apiKey` scheme—for those, obtain the key from whoever operates the API and send it the same way.
 
-- If the API has subscription plans, [subscribe to one](../manage-subscriptions.md). The subscription is a separate credential from the key, and you send both.
+- If the API has subscription plans, [subscribe to one](manage-subscriptions.md). The subscription is a separate credential from the key, and you send both.
 
 ## Invoke the API
 
@@ -59,6 +59,6 @@ Open the API's [documentation page](../discover-apis/browse-apis.md#read-the-spe
 ## Related
 
 - [Consume an API](overview.md): which credentials an API expects, and how to tell
-- [Manage API Keys](../manage-api-keys.md): generate, rotate, revoke, and associate keys with an application
-- [Manage Subscriptions](../manage-subscriptions.md): get a subscription token
+- [Manage API Keys](manage-api-keys.md): generate, rotate, revoke, and associate keys with an application
+- [Manage Subscriptions](manage-subscriptions.md): get a subscription token
 - [Consume an API Secured with OAuth2](oauth2.md): the alternative for OAuth2-secured APIs

@@ -21,8 +21,8 @@ OAuth2-secured APIs expect a bearer token issued by a key manager. The OAuth app
 Three things have to exist before you can generate a token:
 
 1. **An OAuth application in a key manager.** Ask your admin which key managers your organization has connected and how to create an OAuth application in the one you need. For the admin side, see [Key Manager Integration](../admin-settings/key-manager-integration.md).
-2. **An application in the portal.** This is the container that holds the client ID. See [Manage Applications](../manage-applications.md).
-3. **A subscription, if the API has plans.** Subscriptions are made directly to the API, independently of your application. See [Manage Subscriptions](../manage-subscriptions.md).
+2. **An application in the portal.** This is the container that holds the client ID. See [Manage Applications](manage-applications.md).
+3. **A subscription, if the API has plans.** Subscriptions are made directly to the API, independently of your application. See [Manage Subscriptions](manage-subscriptions.md).
 
 ## Link a client ID
 
@@ -106,7 +106,7 @@ Two things it doesn't do: it doesn't deregister or delete the OAuth application 
 ## Related
 
 - [Consume an API](overview.md): which credentials an API expects, and how to tell
-- [Manage Applications](../manage-applications.md): the container for client IDs
-- [Manage Subscriptions](../manage-subscriptions.md): subscribe before generating credentials
+- [Manage Applications](manage-applications.md): the container for client IDs
+- [Manage Subscriptions](manage-subscriptions.md): subscribe before generating credentials
 - [Consume an API Secured with an API Key](api-key.md): the alternative for API-key-secured APIs
 - [Key Manager Integration](../admin-settings/key-manager-integration.md): admin guide for key manager setup

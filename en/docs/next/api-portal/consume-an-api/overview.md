@@ -44,17 +44,17 @@ The per-API Markdown document at `/api-portal/{orgName}/views/{viewName}/api/{ap
 
 ### Subscription token
 
-[Subscribe to the API](../manage-subscriptions.md) under a plan. The portal shows the token once, in a dialog, right after the subscription is created.
+[Subscribe to the API](manage-subscriptions.md) under a plan. The portal shows the token once, in a dialog, right after the subscription is created.
 
 You can come back to it later: on the API's overview page, click **View subscription** on the plan you hold, then reveal or copy the token. The same dialog lets you regenerate the token—which invalidates the old one immediately—suspend the subscription, or unsubscribe.
 
 ### API key
 
-Generate one from the **API Keys** page for that API, reachable from the **API Keys** button on the overview page or the sidebar submenu. See [Manage API Keys](../manage-api-keys.md) for the generate, rotate, and revoke lifecycle, and [Consume an API Secured with an API Key](api-key.md) for using it in a request.
+Generate one from the **API Keys** page for that API, reachable from the **API Keys** button on the overview page or the sidebar submenu. See [Manage API Keys](manage-api-keys.md) for the generate, rotate, and revoke lifecycle, and [Consume an API Secured with an API Key](api-key.md) for using it in a request.
 
 ### OAuth2 access token
 
-This one needs the most setup, because the OAuth application lives in a key manager rather than in the portal. In outline: create the OAuth application in your key manager, [create an application](../manage-applications.md) in the portal, link the client ID to it, then generate a token. See [Consume an API Secured with OAuth2](oauth2.md) for the full sequence.
+This one needs the most setup, because the OAuth application lives in a key manager rather than in the portal. In outline: create the OAuth application in your key manager, [create an application](manage-applications.md) in the portal, link the client ID to it, then generate a token. See [Consume an API Secured with OAuth2](oauth2.md) for the full sequence.
 
 ## Try before you wire it up
 
@@ -64,6 +64,6 @@ For REST APIs, the **Try It** console on the [documentation page](../discover-ap
 
 - [Consume an API Secured with OAuth2](oauth2.md)
 - [Consume an API Secured with an API Key](api-key.md)
-- [Manage Subscriptions](../manage-subscriptions.md): where the subscription token comes from
-- [Manage API Keys](../manage-api-keys.md): generate, rotate, and revoke keys
-- [Manage Applications](../manage-applications.md): the container for OAuth2 client IDs
+- [Manage Subscriptions](manage-subscriptions.md): where the subscription token comes from
+- [Manage API Keys](manage-api-keys.md): generate, rotate, and revoke keys
+- [Manage Applications](manage-applications.md): the container for OAuth2 client IDs

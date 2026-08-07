@@ -239,12 +239,12 @@ Three events cover an application's lifecycle:
 | `application.updated` | Its name or description changes | All of the above |
 | `application.deleted` | An application is deleted | `application_id`, `display_name`, `handle` |
 
-Deleting an application also fires one `apikey.application_updated` per key that was associated with it, each with `application: null`. The keys themselves stay valid—see [Manage Applications](../manage-applications.md).
+Deleting an application also fires one `apikey.application_updated` per key that was associated with it, each with `application: null`. The keys themselves stay valid—see [Manage Applications](../consume-an-api/manage-applications.md).
 
 ## Related
 
 - [Webhook Integration](../admin-settings/webhook-integration.md): register a subscriber and pick its events
 - [Webhook Subscribers](../rest-api/webhook-subscribers.md): manage subscribers through the Management API
 - [Webhook Events](../rest-api/webhook-events.md): read delivery history through the Management API
-- [Manage API Keys](../manage-api-keys.md): the lifecycle behind the `apikey.*` events
-- [Manage Subscriptions](../manage-subscriptions.md): the lifecycle behind the `subscription.*` events
+- [Manage API Keys](../consume-an-api/manage-api-keys.md): the lifecycle behind the `apikey.*` events
+- [Manage Subscriptions](../consume-an-api/manage-subscriptions.md): the lifecycle behind the `subscription.*` events

@@ -1,6 +1,6 @@
 ---
 title: "API Portal configuration and environment interpolation"
-description: "How the API Portal & MCP Hub and the Platform API load their config.toml files, inject environment values and mounted files through interpolation tokens, and keep sensitive values out of the config file."
+description: "How the API Portal & MCP Hub loads its config.toml, injects environment values and mounted files through interpolation tokens, and keeps sensitive values out of the config file."
 canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/setting-up/configuration/
 md_url: https://wso2.com/api-platform/docs/cloud/api-portal/setting-up/configuration.md
 tags:
@@ -15,7 +15,7 @@ content_type: "reference"
 
 # API Portal configuration and environment interpolation
 
-The API Portal stack has two services: the API Portal & MCP Hub itself and the Platform API control plane it authenticates against. Each reads its configuration from a TOML file (`config.toml`) layered over built-in defaults.
+The API Portal & MCP Hub reads its configuration from a TOML file (`config.toml`) layered over built-in defaults. The quickstart runs it alongside a Platform API, which reads the same file, so both are covered here — a standalone production deployment needs only the portal's own section.
 
 This page explains how each service loads its config file. It also covers how environment values and mounted files are injected through interpolation tokens, and how to keep sensitive values out of the file. For the full reference of every supported key, see [Configurations](../references/configurations.md). For provisioning the keys, certificates, and credentials those tokens resolve to, see [Getting started](../getting-started.md).
 

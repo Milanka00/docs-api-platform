@@ -109,5 +109,5 @@ Click the trash icon to delete a workflow. Deleting removes it from the gallery 
 
 - [API Workflows](../api-workflows.md): what consumers and agents see, and the endpoints they use
 - [LLM Instructions](llm-instructions.md): the portal-wide AI discoverability toggle and the `llms.txt` header
-- [AI Agent Discovery](../discover-apis/ai-agent-discovery.md): every agent-facing endpoint the portal serves
-- [Artifact types](../artifact-types.md): whether this deployment serves API workflows at all
+- [AI Agent Discovery](../ai-agent-discovery.md): every agent-facing endpoint the portal serves
+- [Artifact types](../setting-up/artifact-types.md): whether this deployment serves API workflows at all

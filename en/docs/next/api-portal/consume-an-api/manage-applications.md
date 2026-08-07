@@ -1,8 +1,8 @@
 ---
 title: "Manage applications in the API Portal & MCP Hub"
 description: "Create an application to hold OAuth2 client IDs, edit its name and description, associate API keys for analytics, and delete it."
-canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/manage-applications/
-md_url: https://wso2.com/api-platform/docs/cloud/api-portal/manage-applications.md
+canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/consume-an-api/manage-applications/
+md_url: https://wso2.com/api-platform/docs/cloud/api-portal/consume-an-api/manage-applications.md
 tags:
   - cloud
   - api-portal
@@ -52,7 +52,7 @@ Both fields edit in place on the detail page:
 
 ## Link OAuth2 credentials
 
-The **Manage Keys** section is where you paste a client ID from your key manager and generate access tokens against it. That's the whole reason applications exist—see [Consume an API Secured with OAuth2](consume-an-api/oauth2.md) for the full sequence.
+The **Manage Keys** section is where you paste a client ID from your key manager and generate access tokens against it. That's the whole reason applications exist—see [Consume an API Secured with OAuth2](oauth2.md) for the full sequence.
 
 ## Associate an API key
 
@@ -80,8 +80,8 @@ Deleting is irreversible, and it's narrower than the confirmation dialog suggest
 
 ## Related
 
-- [Consume an API Secured with OAuth2](consume-an-api/oauth2.md): link a client ID and generate an access token
+- [Consume an API Secured with OAuth2](oauth2.md): link a client ID and generate an access token
 - [Manage Subscriptions](manage-subscriptions.md): subscriptions are made directly to an API, not through an application
 - [Manage API Keys](manage-api-keys.md): generate a key and optionally associate it with an application
-- [Key Manager Integration](admin-settings/key-manager-integration.md): admin guide for connecting key managers
-- [Webhook Event Catalog](references/webhook-event-catalog.md): the `application.*` events, and what deletion does to associated keys
+- [Key Manager Integration](../admin-settings/key-manager-integration.md): admin guide for connecting key managers
+- [Webhook Event Catalog](../references/webhook-event-catalog.md): the `application.*` events, and what deletion does to associated keys

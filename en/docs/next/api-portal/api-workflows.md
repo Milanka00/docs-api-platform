@@ -87,7 +87,7 @@ A typical agent flow is: read `llms.txt` or `api-workflows.md` to see what exist
 
 When a workflow's source URL points at an API published in this same portal, the portal rewrites that link to the API's Markdown documentation, so an agent stays inside the machine-readable surface instead of being sent to a rendered page.
 
-For the portal's full set of agent-facing endpoints, see [AI Agent Discovery](discover-apis/ai-agent-discovery.md).
+For the portal's full set of agent-facing endpoints, see [AI Agent Discovery](ai-agent-discovery.md).
 
 ## Workflow visibility
 
@@ -105,6 +105,6 @@ Turning off **Portal is AI-discoverable** under [LLM Instructions](admin-setting
 ## Related
 
 - [Managing API Workflows](admin-settings/manage-api-workflows.md): author, publish, and set the visibility of workflows
-- [AI Agent Discovery](discover-apis/ai-agent-discovery.md): the portal's full set of agent-facing endpoints
+- [AI Agent Discovery](ai-agent-discovery.md): the portal's full set of agent-facing endpoints
 - [Consume an API](consume-an-api/overview.md): the credentials you'll need for the APIs a workflow calls
-- [Artifact types](artifact-types.md): whether this deployment serves API workflows at all
+- [Artifact types](setting-up/artifact-types.md): whether this deployment serves API workflows at all

@@ -79,13 +79,13 @@ Every MCP server in the catalog is exposed through the portal's machine-readable
 | `/api-portal/{orgName}/views/{viewName}/mcp/{apiHandle}.md` | One server in Markdown: metadata, plans, attached documents, and its full tool, resource, and prompt list |
 | `/api-portal/{orgName}/views/{viewName}/mcp/{apiHandle}/docs/specification.json` | The raw tool, resource, and prompt schema |
 
-Servers also appear in the portal's `llms.txt` index, under an **MCPs** section. See [AI Agent Discovery](../discover-apis/ai-agent-discovery.md).
+Servers also appear in the portal's `llms.txt` index, under an **MCPs** section. See [AI Agent Discovery](../ai-agent-discovery.md).
 
-For programmatic discovery in the Model Context Protocol registry format, use the [MCP Registry API](mcp-registry.md) instead.
+For programmatic discovery in the Model Context Protocol registry format, use the [MCP Registry API](../mcp-registry.md) instead.
 
 ## Related
 
 - [Connect to an MCP Server](connect-to-an-mcp-server.md): credentials and client configuration
 - [MCP Servers](overview.md): what an MCP server is and how it reaches the catalog
 - [Browse APIs](../discover-apis/browse-apis.md): how catalog search matches terms
-- [AI Agent Discovery](../discover-apis/ai-agent-discovery.md): the full set of agent-facing endpoints
+- [AI Agent Discovery](../ai-agent-discovery.md): the full set of agent-facing endpoints

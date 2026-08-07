@@ -31,10 +31,10 @@ An MCP server is stored as another artifact in the same catalog, so most of what
 | Consumed by | Application code you write | An MCP client, configured with the server's URL |
 | Agent visibility | Publisher sets it per API | Always agent-visible; the catalog marks every server **AI Ready** |
 
-Everything else works the same way. MCP servers carry tags, labels, icons, subscription plans, and attached documents, appear in the portal's [machine-readable endpoints](../discover-apis/ai-agent-discovery.md), and are subscribed to directly rather than through an application.
+Everything else works the same way. MCP servers carry tags, labels, icons, subscription plans, and attached documents, appear in the portal's [machine-readable endpoints](../ai-agent-discovery.md), and are subscribed to directly rather than through an application.
 
 !!! note
-    A portal only serves MCP servers when its operator lists `mcp-servers` in `enabled_types`. Leave it out and the sidebar entry, the catalog, and every MCP route disappear. See [Artifact types](../artifact-types.md).
+    A portal only serves MCP servers when its operator lists `mcp-servers` in `enabled_types`. Leave it out and the sidebar entry, the catalog, and every MCP route disappear. See [Artifact types](../setting-up/artifact-types.md).
 
 ## How servers reach the hub
 
@@ -52,17 +52,17 @@ A client posts the server to the portal's registry API, an implementation of the
 
 Registry-published servers are identified by a reverse-DNS name such as `example.com/travel-assistant` rather than by a gateway reference, and they get one entry per version. Their generated Markdown documentation also omits the authentication walkthrough that other artifacts carry, because the registry payload doesn't describe a security scheme.
 
-See [MCP Registry API](mcp-registry.md).
+See [MCP Registry API](../mcp-registry.md).
 
 ## Where to go next
 
 - [Browse MCP Servers](browse-mcp-servers.md): browse the catalog, read a server's tools, and try them in the playground
 - [Connect to an MCP Server](connect-to-an-mcp-server.md): subscribe, get credentials, and point an MCP client at the server
-- [MCP Registry API](mcp-registry.md): the discovery and publishing endpoints
+- [MCP Registry API](../mcp-registry.md): the discovery and publishing endpoints
 
 ## Related
 
 - [Manage MCP Servers](../admin-settings/manage-mcp-servers.md): the admin side of adding and publishing servers
-- [AI Agent Discovery](../discover-apis/ai-agent-discovery.md): the machine-readable endpoints that expose MCP servers to agents
-- [Artifact types](../artifact-types.md): whether this deployment serves MCP servers
+- [AI Agent Discovery](../ai-agent-discovery.md): the machine-readable endpoints that expose MCP servers to agents
+- [Artifact types](../setting-up/artifact-types.md): whether this deployment serves MCP servers
 - [Concepts](../concepts.md): how MCP servers fit alongside APIs, plans, subscriptions, and keys

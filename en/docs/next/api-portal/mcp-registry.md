@@ -1,8 +1,8 @@
 ---
 title: "MCP Registry API"
 description: "Discover and publish MCP servers through the API Portal & MCP Hub's implementation of the Model Context Protocol registry specification."
-canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/mcp-servers/mcp-registry/
-md_url: https://wso2.com/api-platform/docs/cloud/api-portal/mcp-servers/mcp-registry.md
+canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/mcp-registry/
+md_url: https://wso2.com/api-platform/docs/cloud/api-portal/mcp-registry.md
 tags:
   - cloud
   - api-portal
@@ -204,19 +204,19 @@ Both take `{"status": "active" | "deprecated" | "deleted"}`. The first changes o
 
 The portal exposes MCP servers through two different APIs, and they aren't interchangeable:
 
-| | MCP Registry API | [Management API](../rest-api/mcp-servers.md) |
+| | MCP Registry API | [Management API](rest-api/mcp-servers.md) |
 |---|---|---|
 | Path | `/api-portal/registry/{orgHandle}/v0.1` | `/api-portal/api/v0.9` |
 | Shape | Model Context Protocol registry specification | The portal's own resource model |
 | Discovery auth | None | Bearer token |
 | Identified by | Reverse-DNS name plus version | Portal handle |
-| Also manages | Nothing else | Content, documents, and [keys](../rest-api/mcp-server-keys.md) |
+| Also manages | Nothing else | Content, documents, and [keys](rest-api/mcp-server-keys.md) |
 
 Use the registry when you want MCP-standard tooling to interoperate with the hub. Use the Management API when you're automating the portal itself.
 
 ## Related
 
 - [MCP Servers](overview.md): how registry-published servers behave in the catalog
-- [Browse MCP Servers](browse-mcp-servers.md): the same servers, in the portal UI
-- [MCP Servers (Management API)](../rest-api/mcp-servers.md): the portal's own CRUD API
-- [Authentication](../rest-api/authentication.md): how to get a bearer token for the write endpoints
+- [Browse MCP Servers](mcp-servers/browse-mcp-servers.md): the same servers, in the portal UI
+- [MCP Servers (Management API)](rest-api/mcp-servers.md): the portal's own CRUD API
+- [Authentication](rest-api/authentication.md): how to get a bearer token for the write endpoints

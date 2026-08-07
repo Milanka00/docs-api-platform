@@ -1,8 +1,8 @@
 ---
 title: "Manage subscriptions in the API Portal & MCP Hub"
 description: "Subscribe to an API under a plan, use the subscription token it issues, and switch, suspend, or cancel the subscription later."
-canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/manage-subscriptions/
-md_url: https://wso2.com/api-platform/docs/cloud/api-portal/manage-subscriptions.md
+canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/consume-an-api/manage-subscriptions/
+md_url: https://wso2.com/api-platform/docs/cloud/api-portal/consume-an-api/manage-subscriptions.md
 tags:
   - cloud
   - api-portal
@@ -41,7 +41,7 @@ curl -X GET "https://api.example.com/orders/v1/orders" \
   -H "Subscription-Key: <YOUR_SUBSCRIPTION_TOKEN>"
 ```
 
-The subscription token is not a substitute for authentication. Most APIs also expect an API key or an OAuth2 access token, and you send both headers together. See [Consume an API](consume-an-api/overview.md) for which credentials an API expects and how to tell.
+The subscription token is not a substitute for authentication. Most APIs also expect an API key or an OAuth2 access token, and you send both headers together. See [Consume an API](overview.md) for which credentials an API expects and how to tell.
 
 ## View and manage a subscription
 
@@ -76,16 +76,16 @@ Cancelling invalidates the subscription token. Anything calling the API with it 
 
 Not every API has subscription plans. When an API doesn't, its overview page shows no **Subscription plans** panel and no **Subscribe** button, and there's nothing to subscribe to—call it with whatever authentication its specification requires.
 
-To try an API before wiring it into your code, use the **Try It** console on the [documentation page](discover-apis/browse-apis.md#read-the-specification-and-try-it) rather than looking for a subscription.
+To try an API before wiring it into your code, use the **Try It** console on the [documentation page](../discover-apis/browse-apis.md#read-the-specification-and-try-it) rather than looking for a subscription.
 
 ## Subscription plans
 
-Plans set how much of an API you can consume. The API publisher decides which plans an API offers, and each plan's rate limit appears on its card. For how admins define them, see [Subscription Plans](admin-settings/subscription-plans.md).
+Plans set how much of an API you can consume. The API publisher decides which plans an API offers, and each plan's rate limit appears on its card. For how admins define them, see [Subscription Plans](../admin-settings/subscription-plans.md).
 
 ## Related
 
-- [Consume an API](consume-an-api/overview.md): which credentials an API expects, and how they combine
-- [API Overview](discover-apis/browse-apis.md#open-an-api): where the subscription plans panel lives
+- [Consume an API](overview.md): which credentials an API expects, and how they combine
+- [API Overview](../discover-apis/browse-apis.md#open-an-api): where the subscription plans panel lives
 - [Manage API Keys](manage-api-keys.md): generate an API key for a subscribed API
-- [Subscription Plans](admin-settings/subscription-plans.md): admin guide for defining plans
-- [Webhook Event Catalog](references/webhook-event-catalog.md): the `subscription.*` events subscribing, switching, and unsubscribing publish
+- [Subscription Plans](../admin-settings/subscription-plans.md): admin guide for defining plans
+- [Webhook Event Catalog](../references/webhook-event-catalog.md): the `subscription.*` events subscribing, switching, and unsubscribing publish

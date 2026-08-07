@@ -1,8 +1,8 @@
 ---
 title: "Set up Asgardeo as your identity provider"
 description: "Configure WSO2 Asgardeo as the OIDC identity provider for a production API Portal deployment, from application registration to config.toml."
-canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/tutorials/asgardeo-as-idp/
-md_url: https://wso2.com/api-platform/docs/cloud/api-portal/tutorials/asgardeo-as-idp.md
+canonical_url: https://wso2.com/api-platform/docs/cloud/api-portal/setting-up/authentication/asgardeo-as-idp/
+md_url: https://wso2.com/api-platform/docs/cloud/api-portal/setting-up/authentication/asgardeo-as-idp.md
 tags:
   - cloud
   - api-portal
@@ -15,7 +15,7 @@ content_type: "tutorial"
 
 # Set up Asgardeo as your identity provider
 
-This tutorial walks you through configuring WSO2 Asgardeo as the identity provider for a production API Portal deployment. It's one worked example of the general procedure in [Connect an identity provider to the API Portal](../setting-up/authentication/connect-an-identity-provider.md)—read that first if you're integrating a different provider. For how identity provider authentication compares with local authentication, see [Authentication in the API Portal & MCP Hub](../setting-up/authentication/overview.md).
+This tutorial walks you through configuring WSO2 Asgardeo as the identity provider for a production API Portal deployment. It's one worked example of the general procedure in [Connect an identity provider to the API Portal](connect-an-identity-provider.md)—read that first if you're integrating a different provider. For how identity provider authentication compares with local authentication, see [Authentication in the API Portal & MCP Hub](overview.md).
 
 The API Portal & MCP Hub uses Asgardeo's sub-organization model: each API Portal organization maps to one Asgardeo sub-organization. A single Asgardeo application, shared across every portal organization, handles login, and each session is scoped to one sub-organization:
 
@@ -66,7 +66,7 @@ The portal recognizes two personas: whoever administers it, and whoever consumes
 2. Under the **Roles** tab, create an application role named `dp_admin` and another named `dp_subscriber`.
 3. Assign `dp_admin` **only to administrators**, and `dp_subscriber` to regular users in each sub-organization that needs access.
 
-Step 4 points both `[api_portal.auth.authorization.portal_roles]` entries at these same names, so one pair of Asgardeo roles drives both page access and Management API authorization. To change what either role grants, edit the portal's `role-to-scope-mapping.yaml`—see [Choose how privileges reach the token](../setting-up/authentication/connect-an-identity-provider.md#step-3-choose-how-privileges-reach-the-token).
+Step 4 points both `[api_portal.auth.authorization.portal_roles]` entries at these same names, so one pair of Asgardeo roles drives both page access and Management API authorization. To change what either role grants, edit the portal's `role-to-scope-mapping.yaml`—see [Choose how privileges reach the token](connect-an-identity-provider.md#step-3-choose-how-privileges-reach-the-token).
 
 !!! note
     Browser login sessions still pass through the per-operation scope check in role mode, which is the gap role mode exists to close: the session's own roles claim is what the portal expands to authorize each Management API request.
@@ -155,7 +155,7 @@ Two consequences worth knowing:
 - Protected pages (applications, subscriptions, API keys) need a token whose `org_name` matches, so a user reaching a different portal organization has to log out and log in again there.
 
 !!! note "If the handle can't match"
-    When the sub-org handle isn't a name you want in your portal URLs, the alternative is to have Asgardeo emit a separate claim carrying the portal handle as a constant, and map `organization` to that claim instead. Doing so drops the sub-organization distinction from the check—every sub-org's token then carries the same value—so choose it only for a tenant with a single sub-organization. See [when your IdP has no organization concept](../setting-up/authentication/connect-an-identity-provider.md#when-your-idp-has-no-organization-concept).
+    When the sub-org handle isn't a name you want in your portal URLs, the alternative is to have Asgardeo emit a separate claim carrying the portal handle as a constant, and map `organization` to that claim instead. Doing so drops the sub-organization distinction from the check—every sub-org's token then carries the same value—so choose it only for a tenant with a single sub-organization. See [when your IdP has no organization concept](connect-an-identity-provider.md#when-your-idp-has-no-organization-concept).
 
 ## Step 6: Restart and verify
 
@@ -180,7 +180,7 @@ The Asgardeo token carries these claims through to the API Portal & MCP Hub:
 Keep the claim names consistent between the Asgardeo token attributes and the `[api_portal.auth.claim_mappings]` table.
 
 !!! important "Two retired keys abort startup"
-    Earlier versions configured roles under `[api_portal.auth.idp.roles]`, with a third `super_admin` tier. That section is retired, along with `auth.role_validation`, and leaving either in `config.toml` fails startup rather than silently applying a default. Use `[api_portal.auth.authorization.portal_roles]` and `auth.authorization.page_role_validation` instead—see [Authorization](../references/configurations.md#authorization).
+    Earlier versions configured roles under `[api_portal.auth.idp.roles]`, with a third `super_admin` tier. That section is retired, along with `auth.role_validation`, and leaving either in `config.toml` fails startup rather than silently applying a default. Use `[api_portal.auth.authorization.portal_roles]` and `auth.authorization.page_role_validation` instead—see [Authorization](../../references/configurations.md#authorization).
 
 ## Alternative: let Asgardeo mint the `dp:*` scopes
 
@@ -212,7 +212,7 @@ In scope mode, browser sessions are preauthorized. For a user signed in through 
 
 ## Related topics
 
-- [Connect an identity provider to the API Portal](../setting-up/authentication/connect-an-identity-provider.md): the general procedure this tutorial is one example of
-- [Authentication in the API Portal & MCP Hub](../setting-up/authentication/overview.md): how identity provider authentication compares with local authentication
-- [Get a bearer token via curl](../references/get-a-bearer-token-via-curl.md): calling the Management API with a token from your IdP
-- [Configurations](../references/configurations.md): every `config.toml` key
+- [Connect an identity provider to the API Portal](connect-an-identity-provider.md): the general procedure this tutorial is one example of
+- [Authentication in the API Portal & MCP Hub](overview.md): how identity provider authentication compares with local authentication
+- [Get a bearer token via curl](../../references/get-a-bearer-token-via-curl.md): calling the Management API with a token from your IdP
+- [Configurations](../../references/configurations.md): every `config.toml` key
