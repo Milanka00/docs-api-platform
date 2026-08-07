@@ -8,7 +8,7 @@ tags:
   - security
   - authentication
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-16
+last_updated: 2026-08-07
 content_type: "how-to"
 ---
 
@@ -34,7 +34,7 @@ Gateway Controller routes are protected using **local roles** (for example `admi
 - If **`roles_claim` IS configured**, you **must** also configure **`role_mapping`**. Without a mapping, the controller cannot translate IDP roles → local roles, and requests will be denied.
 
 ## Configuration
-In the umbrella gateway config, these settings live under `gateway_controller.auth`. (If you run the controller standalone, the same structure applies under the controller’s config root.)
+In the umbrella gateway config, these settings live under `controller.auth`. (If you run the controller standalone, the same structure applies under the controller’s config root.)
 
 ### Option A: Basic Auth (local users)
 ```yaml

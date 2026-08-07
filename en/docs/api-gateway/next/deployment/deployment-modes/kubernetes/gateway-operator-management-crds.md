@@ -9,7 +9,7 @@ tags:
   - deployment
   - operator
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-17
+last_updated: 2026-08-07
 content_type: "reference"
 ---
 
@@ -72,7 +72,7 @@ Apply `ApiKey` CRs up front. The LLM-parent ApiKeys (`demo-llmprovider-apikey`, 
 
 ```sh
 kubectl apply -f - <<'EOF'
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: ApiKey
 metadata:
   name: demo-llmprovider-apikey
@@ -91,7 +91,7 @@ spec:
     duration: 30
     unit: days
 ---
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: ApiKey
 metadata:
   name: demo-llmproxy-apikey
@@ -118,7 +118,7 @@ kubectl get apikey
 
 ```sh
 kubectl apply -f - <<'EOF'
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: LlmProviderTemplate
 metadata:
   name: openai-test
@@ -145,7 +145,7 @@ spec:
     location: payload
     identifier: $.model
 ---
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: LlmProvider
 metadata:
   name: demo-llm-provider-apikey
@@ -181,7 +181,7 @@ spec:
             name: httproute-demo-policy-credentials
             key: llm-upstream-authorization
 ---
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: LlmProxy
 metadata:
   name: demo-llm-proxy-apikey
@@ -280,7 +280,7 @@ Wait for the Deployment to be `Ready` before proceeding.
 
 ```sh
 kubectl apply -f - <<'EOF'
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: Mcp
 metadata:
   name: everything-mcp-v1.0
@@ -349,7 +349,7 @@ Expected result: initialize returns success JSON-RPC response; `tools/call` retu
 
 ```sh
 kubectl apply -f - <<'EOF'
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: RestApi
 metadata:
   name: hello-normal-api-policy
@@ -433,7 +433,7 @@ Wait for the Deployment to be `Ready` before proceeding.
 
 ```sh
 kubectl apply -f - <<'EOF'
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: RestApi
 metadata:
   name: hello-apikey-api
@@ -456,7 +456,7 @@ spec:
     - method: GET
       path: /test
 ---
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: ApiKey
 metadata:
   name: demo-restapi-apikey
@@ -501,7 +501,7 @@ curl --request GET \
 
 ```sh
 kubectl apply -f - <<'EOF'
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: RestApi
 metadata:
   name: hello-sub-api
@@ -527,7 +527,7 @@ spec:
     - method: GET
       path: /new
 ---
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: SubscriptionPlan
 metadata:
   name: demo-plan
@@ -540,7 +540,7 @@ spec:
   throttleLimitCount: 1000
   throttleLimitUnit: Min
 ---
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: Subscription
 metadata:
   name: demo-subscription
@@ -669,7 +669,7 @@ stringData:
 
 Reference in RestApi:
 ```yaml
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: RestApi
 metadata:
   name: protected-api
@@ -704,7 +704,7 @@ Update the Secret anytime; the operator automatically redeploys with the new val
 
 Reference in ApiKey (using `name` and `key` directly):
 ```yaml
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: ApiKey
 metadata:
   name: my-api-key

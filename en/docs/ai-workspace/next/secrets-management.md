@@ -9,7 +9,7 @@ tags:
   - secrets
   - security
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-26
+last_updated: 2026-08-07
 content_type: "how-to"
 ---
 
@@ -36,7 +36,7 @@ Use secrets to keep raw API keys, tokens, and passwords out of your artifact con
    ```
 {% endraw %}
 3. When an artifact that contains a placeholder is deployed, the gateway resolves it with the decrypted value at runtime — the plaintext never appears in the control-plane database or configuration files.
-4. To rotate a credential, call `PUT /api/v0.9/secrets/{handle}` with the new value. Because artifacts reference the secret by handle, no artifact changes or redeployment are required.
+4. To rotate a credential, call `PUT /api/v0.9/secrets/{secretId}` with the new value. Because artifacts reference the secret by handle, no artifact changes or redeployment are required.
 
 ## Automatic encryption in the AI Workspace UI
 
@@ -77,11 +77,11 @@ Stores a new encrypted secret. The plaintext value is never returned — not eve
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `handle` | Yes | Unique identifier within the organization. Used in {% raw %}`{{ secret "handle" }}`{% endraw %} references. Immutable after creation. |
-| `name` | Yes | Human-readable display name for the secret. |
+| `displayName` | Yes | Human-readable display name for the secret. |
 | `value` | Yes | The sensitive value to encrypt and store. |
+| `id` | No | Handle (slug) that identifies the secret within the organization. Used in {% raw %}`{{ secret "id" }}`{% endraw %} references. Generated from `displayName` when omitted, and immutable after creation. |
 | `description` | No | Optional description. |
-| `type` | No | Secret type. `GENERIC` (default) for API keys and tokens. |
+| `type` | No | Secret type, either `GENERIC` (default) for API keys and tokens, or `CERTIFICATE`. |
 
 **Example request**
 
@@ -91,11 +91,11 @@ Authorization: Bearer <JWT>
 Content-Type: multipart/form-data; boundary=----FormBoundary
 
 ------FormBoundary
-Content-Disposition: form-data; name="handle"
+Content-Disposition: form-data; name="id"
 
 wso2-openai-key
 ------FormBoundary
-Content-Disposition: form-data; name="name"
+Content-Disposition: form-data; name="displayName"
 
 WSO2 OpenAI API Key
 ------FormBoundary
@@ -117,9 +117,10 @@ sk-xxx
 
 ```json
 {
-  "uuid": "a1b2c3d4-...",
-  "handle": "wso2-openai-key",
-  "name": "WSO2 OpenAI API Key",
+  "id": "wso2-openai-key",
+  "displayName": "WSO2 OpenAI API Key",
+  "createdBy": "john.doe",
+  "updatedBy": "john.doe",
   "createdAt": "2026-01-12T10:00:00Z",
   "updatedAt": "2026-01-12T10:00:00Z"
 }
@@ -132,7 +133,7 @@ The response doesn't include the `value`. Store the plaintext in a secure locati
 | Status | Reason |
 |--------|--------|
 | 400 | Missing required fields or invalid request |
-| 409 | A secret with the same `handle` already exists in the organization |
+| 409 | A secret with the same `id` already exists in the organization |
 
 ### List secrets
 
@@ -146,27 +147,32 @@ Returns metadata for all secrets in the organization. Plaintext values are never
 
 | Parameter | Default | Max | Description |
 |-----------|---------|-----|-------------|
-| `limit` | 25 | 100 | Maximum number of results to return |
+| `limit` | 20 | 100 | Maximum number of results to return |
 | `offset` | 0 | — | Number of results to skip for pagination |
+| `updatedAfter` | — | — | RFC 3339 timestamp. Returns only secrets updated after this time. |
 
 **Response — 200 OK**
 
 ```json
 {
+  "count": 1,
   "list": [
     {
-      "uuid": "a1b2c3d4-...",
-      "handle": "wso2-openai-key",
-      "name": "WSO2 OpenAI API Key",
+      "id": "wso2-openai-key",
+      "displayName": "WSO2 OpenAI API Key",
+      "description": "API key for WSO2 OpenAI integration",
       "type": "GENERIC",
       "provider": "IN_BUILT",
+      "status": "ACTIVE",
+      "hash": "hmac-sha256:b94d27b9934d3e08a52e52d7da7dabfac484efe04294e576d4b3d4c57e3f428a",
+      "createdBy": "john.doe",
       "createdAt": "2026-01-12T10:00:00Z",
       "updatedAt": "2026-01-12T10:00:00Z"
     }
   ],
   "pagination": {
     "total": 1,
-    "limit": 25,
+    "limit": 20,
     "offset": 0
   }
 }
@@ -175,7 +181,7 @@ Returns metadata for all secrets in the organization. Plaintext values are never
 ### Get secret metadata
 
 ```http
-GET /api/v0.9/secrets/{handle}
+GET /api/v0.9/secrets/{secretId}
 ```
 
 Returns metadata for a single secret. The plaintext value isn't included.
@@ -184,11 +190,14 @@ Returns metadata for a single secret. The plaintext value isn't included.
 
 ```json
 {
-  "uuid": "a1b2c3d4-...",
-  "handle": "wso2-openai-key",
-  "name": "WSO2 OpenAI API Key",
+  "id": "wso2-openai-key",
+  "displayName": "WSO2 OpenAI API Key",
+  "description": "API key for WSO2 OpenAI integration",
   "type": "GENERIC",
   "provider": "IN_BUILT",
+  "status": "ACTIVE",
+  "hash": "hmac-sha256:b94d27b9934d3e08a52e52d7da7dabfac484efe04294e576d4b3d4c57e3f428a",
+  "createdBy": "john.doe",
   "createdAt": "2026-01-12T10:00:00Z",
   "updatedAt": "2026-01-12T10:00:00Z"
 }
@@ -203,19 +212,20 @@ Returns metadata for a single secret. The plaintext value isn't included.
 ### Rotate a secret
 
 ```http
-PUT /api/v0.9/secrets/{handle}
+PUT /api/v0.9/secrets/{secretId}
 Content-Type: multipart/form-data
 ```
 
-Re-encrypts and stores a new value. Because `handle` is immutable, all {% raw %}`{{ secret "handle" }}`{% endraw %} placeholders across existing resources remain valid without modification. The plaintext value isn't returned in the response.
+Re-encrypts and stores a new value. Because `id` is immutable, all {% raw %}`{{ secret "id" }}`{% endraw %} placeholders across existing resources remain valid without modification. The plaintext value isn't returned in the response.
 
 **Request fields**
 
 | Field | Required | Description |
 |-------|----------|-------------|
+| `displayName` | Yes | Display name for the secret. |
 | `value` | Yes | The new sensitive value to encrypt and store. |
-| `name` | No | Updated display name. |
 | `description` | No | Updated description. |
+| `id` | No | Secret handle. When supplied it must match the path parameter, otherwise the request fails with `400`. The handle cannot be changed by an update. |
 
 **Example request**
 
@@ -229,7 +239,7 @@ Content-Disposition: form-data; name="value"
 
 sk-new-value
 ------FormBoundary
-Content-Disposition: form-data; name="name"
+Content-Disposition: form-data; name="displayName"
 
 WSO2 OpenAI API Key (rotated)
 ------FormBoundary
@@ -243,9 +253,10 @@ Rotated on 2026-06-26 — old key decommissioned
 
 ```json
 {
-  "uuid": "a1b2c3d4-...",
-  "handle": "wso2-openai-key",
-  "name": "WSO2 OpenAI API Key (rotated)",
+  "id": "wso2-openai-key",
+  "displayName": "WSO2 OpenAI API Key (rotated)",
+  "createdBy": "john.doe",
+  "updatedBy": "john.doe",
   "createdAt": "2026-01-12T10:00:00Z",
   "updatedAt": "2026-06-26T11:30:00Z"
 }
@@ -265,7 +276,7 @@ Rotated on 2026-06-26 — old key decommissioned
 ### Delete a secret
 
 ```http
-DELETE /api/v0.9/secrets/{handle}
+DELETE /api/v0.9/secrets/{secretId}
 ```
 
 Soft-deletes a secret by setting its status to `DEPRECATED`. Deletion is blocked with `409 Conflict` if any artifact references the secret — either in its saved configuration or in a snapshot deployed to a gateway.
@@ -283,13 +294,23 @@ Soft-deletes a secret by setting its status to `DEPRECATED`. Deletion is blocked
 
 ```json
 {
-  "error": "secret is referenced by active resources",
-  "references": [
-    { "type": "llm_provider", "handle": "openai-provider", "name": "OpenAI Provider" },
-    { "type": "mcp_proxy",    "handle": "my-mcp-proxy",    "name": "My MCP Proxy" }
-  ]
+  "status": "error",
+  "code": "SECRET_IN_USE",
+  "message": "The secret is referenced by one or more active resources.",
+  "details": {
+    "references": [
+      { "type": "llm_provider", "handle": "openai-provider", "name": "OpenAI Provider" },
+      { "type": "mcp_proxy",    "handle": "my-mcp-proxy",    "name": "My MCP Proxy" }
+    ]
+  }
 }
 ```
+
+Every Platform API error uses this shape: a literal `status` of `error`, a stable machine-readable
+`code`, a human-readable `message`, and — depending on the condition — `errors`, `details`, or a
+`trackingId`. Branch on `code`, not on the HTTP status.
+
+---
 
 ## Reference a secret in an artifact configuration
 
@@ -322,7 +343,7 @@ When creating or updating any resource that contains {% raw %}`{{ secret "..." }
 
 To rotate a credential without touching artifact configurations:
 
-1. Call `PUT /api/v0.9/secrets/{handle}` with the new value.
+1. Call `PUT /api/v0.9/secrets/{secretId}` with the new value.
 2. The gateway picks up the updated secret on the next sync cycle.
 
 No artifact changes or redeployment are required because resources reference the secret by handle, not by value.
@@ -334,11 +355,11 @@ Deleting a secret that's still in use returns HTTP 409. To remove it cleanly:
 1. Inspect the `references` list in the 409 response.
 2. Update each referencing artifact to remove or replace the {% raw %}`{{ secret "handle" }}`{% endraw %} reference.
 3. Redeploy the updated artifacts to the gateway.
-4. Retry `DELETE /api/v0.9/secrets/{handle}`.
+4. Retry `DELETE /api/v0.9/secrets/{secretId}`.
 
 ## Encryption key
 
-Secrets are encrypted at rest with the Platform API's at-rest encryption key, which also protects subscription tokens and WebSub hash-based message authentication code (HMAC) secrets. The setup script provisions this key for Docker Compose deployments. For how to generate, mount, and reference it, see [Provision the at-rest encryption key manually](./getting-started.md#provision-the-at-rest-encryption-key-manually).
+Secrets are encrypted at rest with the Platform API's at-rest encryption key, which also protects subscription tokens. The setup script provisions this key for Docker Compose deployments. For how to generate, mount, and reference it, see [Provision the at-rest encryption key manually](./getting-started.md#provision-the-at-rest-encryption-key-manually).
 
 !!! warning
     Use the same encryption key across restarts and across all replicas. Changing or rotating it makes previously-encrypted secrets unreadable.
