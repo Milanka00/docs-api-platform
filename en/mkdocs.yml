@@ -407,6 +407,79 @@ nav:
           - Overview: api-gateway/next/performance/overview.md
           - Gateway runtime with two CPUs: api-gateway/next/performance/gateway-runtime-with-two-cpus.md
           - Gateway runtime with four CPUs: api-gateway/next/performance/gateway-runtime-with-four-cpus.md
+        - About this release: api-gateway/next/about-this-release.md
+    - "1.2.0":
+        - Overview: api-gateway/1.2.0/overview.md
+        - Quick Start Guide: api-gateway/1.2.0/quick-start-guide.md
+        - Setup:
+          - Configuration & Interpolation: api-gateway/1.2.0/setup/configuration.md
+          - Setting Up the Database: api-gateway/1.2.0/setup/database-setup.md
+          - Artifact Templating: api-gateway/1.2.0/setup/artifact-templating.md
+        - Resiliency:
+          - Timeouts: api-gateway/1.2.0/resiliency/timeouts.md
+        - Policies:
+          - Overview: api-gateway/1.2.0/policies/overview.md
+          - Custom Policies:
+            - Writing a Custom Policy: api-gateway/1.2.0/policies/custom-policies/writing-a-custom-policy.md
+            - Building Gateway with Custom Policies: api-gateway/1.2.0/policies/custom-policies/building-gateway-with-custom-policies.md
+        - Deployment:
+          - Deployment Modes:
+            - Immutable Gateway: api-gateway/1.2.0/deployment/deployment-modes/immutable-gateway.md
+            - Kubernetes:
+              - Overview: api-gateway/1.2.0/deployment/deployment-modes/kubernetes/overview.md
+              - Standalone Mode: api-gateway/1.2.0/deployment/deployment-modes/kubernetes/kubernetes-standalone.md
+              - Kubernetes Operator Mode: api-gateway/1.2.0/deployment/deployment-modes/kubernetes/gateway-operator.md
+              - Management CRDs: api-gateway/1.2.0/deployment/deployment-modes/kubernetes/gateway-operator-management-crds.md
+          - High-Availability Production Deployment:
+            - Overview: api-gateway/1.2.0/deployment/high-availability-production-deployment.md
+            - Security Hardening: api-gateway/1.2.0/deployment/production-deployment/security-hardening.md
+            - Database Configuration: api-gateway/1.2.0/deployment/production-deployment/database-configuration.md
+            - Resources & Scaling: api-gateway/1.2.0/deployment/production-deployment/resources-and-scaling.md
+            - Deploy & Verify: api-gateway/1.2.0/deployment/production-deployment/deploy-and-verify.md
+            - Control Plane Connection: api-gateway/1.2.0/deployment/production-deployment/control-plane-connection.md
+          - Deploying APIs:
+            - Bottom-Up Deployment: api-gateway/1.2.0/deployment/deploying-apis/bottom-up-api-deployment.md
+        - Observability:
+          - Logging:
+            - Centralized Logging: api-gateway/1.2.0/observability/logging.md
+            - Traffic Logging: api-gateway/1.2.0/observability/traffic-logging.md
+          - Tracing:
+            - Overview: api-gateway/1.2.0/observability/tracing/overview.md
+            - Enabling and Disabling Tracing: api-gateway/1.2.0/observability/tracing/enabling-tracing.md
+            - Viewing Traces in Jaeger: api-gateway/1.2.0/observability/tracing/viewing-traces-in-jaeger.md
+            - Tracing Configuration: api-gateway/1.2.0/observability/tracing/configuration.md
+            - Alternative Tracing Backends: api-gateway/1.2.0/observability/tracing/alternative-backends.md
+            - Best Practices and Troubleshooting: api-gateway/1.2.0/observability/tracing/best-practices-and-troubleshooting.md
+          - Metrics:
+            - Overview: api-gateway/1.2.0/observability/metrics/overview.md
+            - Enabling and Disabling Metrics: api-gateway/1.2.0/observability/metrics/enabling-metrics.md
+            - Viewing Metrics in Grafana: api-gateway/1.2.0/observability/metrics/viewing-metrics-in-grafana.md
+            - Prometheus Queries: api-gateway/1.2.0/observability/metrics/prometheus-queries.md
+            - Configuration Options: api-gateway/1.2.0/observability/metrics/configuration.md
+            - Alternative Metrics Backends: api-gateway/1.2.0/observability/metrics/alternative-backends.md
+            - Metric Reference: api-gateway/1.2.0/observability/metrics/metric-reference.md
+            - Best Practices and Troubleshooting: api-gateway/1.2.0/observability/metrics/best-practices-and-troubleshooting.md
+        - Analytics:
+          - Analytics Header Filter: api-gateway/1.2.0/analytics/analytics-header-filter.md
+          - Moesif Analytics: api-gateway/1.2.0/analytics/moesif-analytics.md
+        - Management API:
+          - Overview: api-gateway/1.2.0/gateway-controller-management-api/overview.md
+          - Authentication: api-gateway/1.2.0/gateway-controller-management-api/authentication.md
+          - Rest API Management: api-gateway/1.2.0/gateway-controller-management-api/rest-api-management.md
+          - MCP Proxy Management: api-gateway/1.2.0/gateway-controller-management-api/mcp-proxy-management.md
+          - Certificate Management: api-gateway/1.2.0/gateway-controller-management-api/certificate-management.md
+          - LLM Provider Template Management: api-gateway/1.2.0/gateway-controller-management-api/llm-provider-template-management.md
+          - LLM Provider Management: api-gateway/1.2.0/gateway-controller-management-api/llm-provider-management.md
+          - LLM Proxy Management: api-gateway/1.2.0/gateway-controller-management-api/llm-proxy-management.md
+          - Secrets Management: api-gateway/1.2.0/gateway-controller-management-api/secrets-management.md
+          - WebSub API Management: api-gateway/1.2.0/gateway-controller-management-api/websub-api-management.md
+          - WebBroker API Management: api-gateway/1.2.0/gateway-controller-management-api/webbroker-api-management.md
+          - Schemas: api-gateway/1.2.0/gateway-controller-management-api/schemas.md
+        - Performance:
+          - Overview: api-gateway/1.2.0/performance/overview.md
+          - Gateway runtime with two CPUs: api-gateway/1.2.0/performance/gateway-runtime-with-two-cpus.md
+          - Gateway runtime with four CPUs: api-gateway/1.2.0/performance/gateway-runtime-with-four-cpus.md
+        - About this release: api-gateway/1.2.0/about-this-release.md
     - "1.1.0":
         - Overview: api-gateway/1.1.0/overview.md
         - Setup:
@@ -593,6 +666,64 @@ nav:
             - Overview: ai-gateway/next/performance/overview.md
             - AI Gateway runtime with two CPUs: ai-gateway/next/performance/ai-gateway-runtime-with-two-cpus.md
             - AI Gateway runtime with four CPUs: ai-gateway/next/performance/ai-gateway-runtime-with-four-cpus.md
+        - About this release: ai-gateway/next/about-this-release.md
+    - "1.2.0":
+        - Overview: ai-gateway/1.2.0/overview.md
+        - Quick Start Guide: ai-gateway/1.2.0/quick-start-guide.md
+        - Setup:
+            - Configuration & Interpolation: ai-gateway/1.2.0/setup/configuration.md
+            - Setting Up the Database: ai-gateway/1.2.0/setup/database-setup.md
+        - LLM Proxy:
+            - Quick Start Guide: ai-gateway/1.2.0/llm-proxy/quick-start-guide.md
+            - LLM Provider Templates: ai-gateway/1.2.0/llm-proxy/llm-templates.md
+            - Multi-Provider Routing: ai-gateway/1.2.0/llm-proxy/multi-provider-routing.md
+            - Guardrails:
+                - AWS Bedrock Guardrail: ai-gateway/1.2.0/llm-proxy/guardrails/aws-bedrock-guardrail.md
+                - Azure Content Safety: ai-gateway/1.2.0/llm-proxy/guardrails/azure-content-safety.md
+                - Content Length Guardrail: ai-gateway/1.2.0/llm-proxy/guardrails/content-length.md
+                - JSON Schema Guardrail: ai-gateway/1.2.0/llm-proxy/guardrails/json-schema.md
+                - PII Masking Regex Guardrail: ai-gateway/1.2.0/llm-proxy/guardrails/pii-masking-regex.md
+                - Regex Guardrail: ai-gateway/1.2.0/llm-proxy/guardrails/regex.md
+                - Semantic Prompt Guardrail: ai-gateway/1.2.0/llm-proxy/guardrails/semantic-prompt-guard.md
+                - Sentence Count Guardrail: ai-gateway/1.2.0/llm-proxy/guardrails/sentence-count.md
+                - URL Guardrail: ai-gateway/1.2.0/llm-proxy/guardrails/url.md
+                - Word Count Guardrail: ai-gateway/1.2.0/llm-proxy/guardrails/word-count.md
+            - Load Balancing:
+                - Model Round Robin: ai-gateway/1.2.0/llm-proxy/load-balancing/model-round-robin.md
+                - Model Weighted Round Robin: ai-gateway/1.2.0/llm-proxy/load-balancing/model-weighted-round-robin.md
+            - Prompt Management:
+                - Prompt Decorator: ai-gateway/1.2.0/llm-proxy/prompt-management/prompt-decorator.md
+                - Prompt Template: ai-gateway/1.2.0/llm-proxy/prompt-management/prompt-template.md
+            - Semantic Caching: ai-gateway/1.2.0/llm-proxy/semantic-caching.md
+        - MCP Proxy:
+            - Quick Start Guide: ai-gateway/1.2.0/mcp-proxy/quick-start-guide.md
+            - Policies:
+                - MCP Access Control List: ai-gateway/1.2.0/mcp-proxy/policies/mcp-acl-list.md
+                - MCP Authentication: ai-gateway/1.2.0/mcp-proxy/policies/mcp-authentication.md
+                - MCP Authorization: ai-gateway/1.2.0/mcp-proxy/policies/mcp-authorization.md
+                - MCP Rewrite: ai-gateway/1.2.0/mcp-proxy/policies/mcp-rewrite.md
+        - Real-Time AI Streaming: ai-gateway/1.2.0/streaming-responses.md
+        - Deployment Modes:
+          - Immutable Gateway: ai-gateway/1.2.0/deployment-modes/immutable-gateway.md
+          - Kubernetes:
+            - Overview: ai-gateway/1.2.0/deployment-modes/kubernetes/overview.md
+            - Standalone Mode: ai-gateway/1.2.0/deployment-modes/kubernetes/kubernetes-standalone.md
+            - Kubernetes Operator Mode: ai-gateway/1.2.0/deployment-modes/kubernetes/gateway-operator.md
+        - Resiliency:
+            - Timeouts: ai-gateway/1.2.0/resiliency/timeouts.md
+        - Observability:
+            - Logging: ai-gateway/1.2.0/observability/logging.md
+            - Tracing: ai-gateway/1.2.0/observability/tracing.md
+        - Analytics:
+            - Moesif Analytics: ai-gateway/1.2.0/analytics/moesif-analytics.md
+            - Analytics Header Filter: ai-gateway/1.2.0/analytics/analytics-header-filter.md
+        - Performance:
+            - Overview: ai-gateway/1.2.0/performance/overview.md
+            - AI Gateway runtime with two CPUs: ai-gateway/1.2.0/performance/ai-gateway-runtime-with-two-cpus.md
+            - AI Gateway runtime with four CPUs: ai-gateway/1.2.0/performance/ai-gateway-runtime-with-four-cpus.md
+        - AI Gateway Rest API:
+            - Authentication: ai-gateway/1.2.0/ai-gateway-rest-api/authentication.md
+        - About this release: ai-gateway/1.2.0/about-this-release.md
     - "1.1.0":
         - Overview: ai-gateway/1.1.0/overview.md
         - LLM Proxy:
@@ -683,147 +814,301 @@ nav:
             - Moesif Analytics: ai-gateway/1.0.0/analytics/moesif-analytics.md
             - Analytics Header Filter: ai-gateway/1.0.0/analytics/analytics-header-filter.md
   # In-development 'next' doc sets, only shown in the nav while browsing a
-  # /next/ (or <component>/next/) URL — see extra.version_scoped_navs.
-  - API Portal & MCP Hub:
-    - Overview: next/api-portal/overview.md
-    - About this Release: next/api-portal/about-this-release.md
-    - Getting Started: next/api-portal/getting-started.md
-    - Concepts: next/api-portal/concepts.md
-    - Discover APIs:
-        - Search APIs: next/api-portal/discover-apis/api-search.md
-        - API Overview: next/api-portal/discover-apis/api-overview.md
-        - API Documentation: next/api-portal/discover-apis/api-documentations.md
-        - AI Agent Discovery: next/api-portal/discover-apis/ai-agent-discovery.md
-    - MCP Servers:
-        - Overview: next/api-portal/mcp-servers/overview.md
-        - Discover MCP Servers: next/api-portal/mcp-servers/discover-mcp-servers.md
-        - Connect to an MCP Server: next/api-portal/mcp-servers/connect-to-an-mcp-server.md
-        - MCP Registry API: next/api-portal/mcp-servers/mcp-registry.md
-    - API Workflows: next/api-portal/api-workflows.md
-    - Consume an API:
-        - Overview: next/api-portal/consume-an-api/overview.md
-        - OAuth2-Secured APIs: next/api-portal/consume-an-api/oauth2.md
-        - API-Key-Secured APIs: next/api-portal/consume-an-api/api-key.md
-    - Manage Applications: next/api-portal/manage-applications.md
-    - Manage Subscriptions: next/api-portal/manage-subscriptions.md
-    - Manage API Keys: next/api-portal/manage-api-keys.md
-    - Theming: next/api-portal/theming.md
-    - Tutorials:
-        - Secured API End to End: next/api-portal/tutorials/secured-api-end-to-end.md
-    - Setting Up:
-        - Authentication:
-          - Overview: next/api-portal/setting-up/authentication/overview.md
-          - Set up Asgardeo: next/api-portal/setting-up/authentication/asgardeo-setup.md
-        - Set up the Database: next/api-portal/setting-up/database.md
-        - Artifact types: next/api-portal/artifact-types.md
-        - Design Mode: next/api-portal/setting-up/design-mode.md
-    - Admin Settings:
-        - Organization:
-            - Organization Settings: next/api-portal/admin-settings/organization-settings.md
-            - Manage Views: next/api-portal/admin-settings/manage-views.md
-            - Manage Labels: next/api-portal/admin-settings/manage-labels.md
-            - Subscription Plans: next/api-portal/admin-settings/subscription-plans.md
-            - Key Manager Integration: next/api-portal/admin-settings/key-manager-integration.md
-        - Content:
-            - Manage APIs: next/api-portal/admin-settings/manage-apis.md
-            - Manage MCP Servers: next/api-portal/admin-settings/manage-mcp-servers.md
-            - API Content: next/api-portal/admin-settings/api-content.md
-        - Integrations:
-            - Webhook Integration: next/api-portal/admin-settings/webhook-integration.md
-        - AI & Discovery:
-            - LLM Instructions: next/api-portal/admin-settings/llm-instructions.md
-            - Managing API Workflows: next/api-portal/admin-settings/managing-api-workflows.md
-        - Appearance:
-            - Apply a Theme: next/api-portal/admin-settings/theming.md
-    - References:
-        - Management API:
-            - Overview: next/api-portal/rest-api/overview.md
-            - Authentication: next/api-portal/rest-api/authentication.md
-            - Organizations: next/api-portal/rest-api/organizations.md
-            - Organization Content: next/api-portal/rest-api/organization-content.md
-            - Views: next/api-portal/rest-api/views.md
-            - Labels: next/api-portal/rest-api/labels.md
-            - Subscription Plans: next/api-portal/rest-api/subscription-plans.md
-            - Key Managers: next/api-portal/rest-api/key-managers.md
-            - APIs: next/api-portal/rest-api/apis.md
-            - API Content: next/api-portal/rest-api/api-content.md
-            - MCP Servers: next/api-portal/rest-api/mcp-servers.md
-            - MCP Server Content: next/api-portal/rest-api/mcp-server-content.md
-            - MCP Server Keys: next/api-portal/rest-api/mcp-server-keys.md
-            - Applications: next/api-portal/rest-api/applications.md
-            - Application Keys: next/api-portal/rest-api/application-keys.md
-            - Subscriptions: next/api-portal/rest-api/subscriptions.md
-            - API Keys: next/api-portal/rest-api/api-keys.md
-            - API Workflows: next/api-portal/rest-api/api-workflows.md
-            - Webhook Subscribers: next/api-portal/rest-api/webhook-subscribers.md
-            - Webhook Events: next/api-portal/rest-api/webhook-events.md
-            - Schemas: next/api-portal/rest-api/schemas.md
-        - Webhook Event Catalog: next/api-portal/references/webhook-event-catalog.md
-        - Get a Bearer Token via curl: next/api-portal/references/get-a-bearer-token-via-curl.md
-        - Configurations: next/api-portal/references/configurations.md
+  - API Portal:
+    - "next":
+        - Overview: api-portal/next/overview.md
+        - About this Release: api-portal/next/about-this-release.md
+        - Concepts: api-portal/next/concepts.md
+        # Stand the portal up, in the order an operator does it.
+        - Getting Started: api-portal/next/getting-started.md
+        - Tutorials:
+            - Secured API End to End: api-portal/next/tutorials/secured-api-end-to-end.md
+        - Setting Up:
+            - Configuration & Interpolation: api-portal/next/setting-up/configuration.md
+            - Ports: api-portal/next/setting-up/ports.md
+            - Database: api-portal/next/setting-up/database.md
+            - Authentication:
+                - Overview: api-portal/next/setting-up/authentication/overview.md
+                - Connect an Identity Provider: api-portal/next/setting-up/authentication/connect-an-identity-provider.md
+                - Set up Asgardeo: api-portal/next/setting-up/authentication/asgardeo-as-idp.md
+            - Artifact Types: api-portal/next/setting-up/artifact-types.md
+        # What a consumer does in the portal, in the order they do it.
+        - Discover APIs:
+            - Overview: api-portal/next/discover-apis/overview.md
+            - Browse APIs: api-portal/next/discover-apis/browse-apis.md
+        - Discover MCP Servers:
+            - Overview: api-portal/next/mcp-servers/overview.md
+            - Browse MCP Servers: api-portal/next/mcp-servers/browse-mcp-servers.md
+            - Connect to an MCP Server: api-portal/next/mcp-servers/connect-to-an-mcp-server.md
+        - API Workflows: api-portal/next/api-workflows.md
+        - AI Agent Discovery: api-portal/next/ai-agent-discovery.md
+        - MCP Registry API: api-portal/next/mcp-registry.md
+        - Applications and Credentials:
+            - Which Credentials You Need: api-portal/next/consume-an-api/overview.md
+            - Manage Applications: api-portal/next/consume-an-api/manage-applications.md
+            - Manage Subscriptions: api-portal/next/consume-an-api/manage-subscriptions.md
+            - Manage API Keys: api-portal/next/consume-an-api/manage-api-keys.md
+            - Call an OAuth2-Secured API: api-portal/next/consume-an-api/oauth2.md
+            - Call an API-Key-Secured API: api-portal/next/consume-an-api/api-key.md
+        # Configure the portal at runtime, once it is serving.
+        - Admin Settings:
+            - Organization:
+                - Organization Settings: api-portal/next/admin-settings/organization-settings.md
+                - Manage Views: api-portal/next/admin-settings/manage-views.md
+                - Manage Labels: api-portal/next/admin-settings/manage-labels.md
+                - Subscription Plans: api-portal/next/admin-settings/subscription-plans.md
+            - Content:
+                - Manage APIs: api-portal/next/admin-settings/manage-apis.md
+                - Manage MCP Servers: api-portal/next/admin-settings/manage-mcp-servers.md
+                - Manage API Workflows: api-portal/next/admin-settings/manage-api-workflows.md
+                - API Content: api-portal/next/admin-settings/api-content.md
+                - LLM Instructions: api-portal/next/admin-settings/llm-instructions.md
+            - Integrations:
+                - Key Manager Integration: api-portal/next/admin-settings/key-manager-integration.md
+                - Webhook Integration: api-portal/next/admin-settings/webhook-integration.md
+            - Appearance:
+                - Theming: api-portal/next/admin-settings/theming.md
+                - Apply a Theme to a View: api-portal/next/admin-settings/apply-a-theme.md
+                - Design Mode: api-portal/next/admin-settings/design-mode.md
+        # Take it to production.
+        - Deployment:
+            - Overview: api-portal/next/deployment/overview.md
+            - Security Hardening: api-portal/next/deployment/security-hardening.md
+            - Database Configuration: api-portal/next/deployment/database-configuration.md
+            - Resources & Scaling: api-portal/next/deployment/resources-and-scaling.md
+            - Deploy & Verify: api-portal/next/deployment/deploy-and-verify.md
+            - Control Plane Connection: api-portal/next/deployment/control-plane-connection.md
+        - References:
+            - Management API:
+                - Overview: api-portal/next/rest-api/overview.md
+                - Authentication: api-portal/next/rest-api/authentication.md
+                - Organizations: api-portal/next/rest-api/organizations.md
+                - Organization Content: api-portal/next/rest-api/organization-content.md
+                - Views: api-portal/next/rest-api/views.md
+                - Labels: api-portal/next/rest-api/labels.md
+                - Subscription Plans: api-portal/next/rest-api/subscription-plans.md
+                - Key Managers: api-portal/next/rest-api/key-managers.md
+                - APIs: api-portal/next/rest-api/apis.md
+                - API Content: api-portal/next/rest-api/api-content.md
+                - API Keys: api-portal/next/rest-api/api-keys.md
+                - MCP Servers: api-portal/next/rest-api/mcp-servers.md
+                - MCP Server Content: api-portal/next/rest-api/mcp-server-content.md
+                - MCP Server Keys: api-portal/next/rest-api/mcp-server-keys.md
+                - Applications: api-portal/next/rest-api/applications.md
+                - Application Keys: api-portal/next/rest-api/application-keys.md
+                - Subscriptions: api-portal/next/rest-api/subscriptions.md
+                - API Workflows: api-portal/next/rest-api/api-workflows.md
+                - Webhook Subscribers: api-portal/next/rest-api/webhook-subscribers.md
+                - Webhook Events: api-portal/next/rest-api/webhook-events.md
+                - Schemas: api-portal/next/rest-api/schemas.md
+            - Webhook Event Catalog: api-portal/next/references/webhook-event-catalog.md
+            - Get a Bearer Token via curl: api-portal/next/references/get-a-bearer-token-via-curl.md
+            - Configurations: api-portal/next/references/configurations.md
+    - "1.0.0":
+        - Overview: api-portal/1.0.0/overview.md
+        - About this Release: api-portal/1.0.0/about-this-release.md
+        - Concepts: api-portal/1.0.0/concepts.md
+        # Stand the portal up, in the order an operator does it.
+        - Getting Started: api-portal/1.0.0/getting-started.md
+        - Tutorials:
+            - Secured API End to End: api-portal/1.0.0/tutorials/secured-api-end-to-end.md
+        - Setting Up:
+            - Configuration & Interpolation: api-portal/1.0.0/setting-up/configuration.md
+            - Ports: api-portal/1.0.0/setting-up/ports.md
+            - Database: api-portal/1.0.0/setting-up/database.md
+            - Authentication:
+                - Overview: api-portal/1.0.0/setting-up/authentication/overview.md
+                - Connect an Identity Provider: api-portal/1.0.0/setting-up/authentication/connect-an-identity-provider.md
+                - Set up Asgardeo: api-portal/1.0.0/setting-up/authentication/asgardeo-as-idp.md
+            - Artifact Types: api-portal/1.0.0/setting-up/artifact-types.md
+        # What a consumer does in the portal, in the order they do it.
+        - Discover APIs:
+            - Overview: api-portal/1.0.0/discover-apis/overview.md
+            - Browse APIs: api-portal/1.0.0/discover-apis/browse-apis.md
+        - Discover MCP Servers:
+            - Overview: api-portal/1.0.0/mcp-servers/overview.md
+            - Browse MCP Servers: api-portal/1.0.0/mcp-servers/browse-mcp-servers.md
+            - Connect to an MCP Server: api-portal/1.0.0/mcp-servers/connect-to-an-mcp-server.md
+        - API Workflows: api-portal/1.0.0/api-workflows.md
+        - AI Agent Discovery: api-portal/1.0.0/ai-agent-discovery.md
+        - MCP Registry API: api-portal/1.0.0/mcp-registry.md
+        - Applications and Credentials:
+            - Which Credentials You Need: api-portal/1.0.0/consume-an-api/overview.md
+            - Manage Applications: api-portal/1.0.0/consume-an-api/manage-applications.md
+            - Manage Subscriptions: api-portal/1.0.0/consume-an-api/manage-subscriptions.md
+            - Manage API Keys: api-portal/1.0.0/consume-an-api/manage-api-keys.md
+            - Call an OAuth2-Secured API: api-portal/1.0.0/consume-an-api/oauth2.md
+            - Call an API-Key-Secured API: api-portal/1.0.0/consume-an-api/api-key.md
+        # Configure the portal at runtime, once it is serving.
+        - Admin Settings:
+            - Organization:
+                - Organization Settings: api-portal/1.0.0/admin-settings/organization-settings.md
+                - Manage Views: api-portal/1.0.0/admin-settings/manage-views.md
+                - Manage Labels: api-portal/1.0.0/admin-settings/manage-labels.md
+                - Subscription Plans: api-portal/1.0.0/admin-settings/subscription-plans.md
+            - Content:
+                - Manage APIs: api-portal/1.0.0/admin-settings/manage-apis.md
+                - Manage MCP Servers: api-portal/1.0.0/admin-settings/manage-mcp-servers.md
+                - Manage API Workflows: api-portal/1.0.0/admin-settings/manage-api-workflows.md
+                - API Content: api-portal/1.0.0/admin-settings/api-content.md
+                - LLM Instructions: api-portal/1.0.0/admin-settings/llm-instructions.md
+            - Integrations:
+                - Key Manager Integration: api-portal/1.0.0/admin-settings/key-manager-integration.md
+                - Webhook Integration: api-portal/1.0.0/admin-settings/webhook-integration.md
+            - Appearance:
+                - Theming: api-portal/1.0.0/admin-settings/theming.md
+                - Apply a Theme to a View: api-portal/1.0.0/admin-settings/apply-a-theme.md
+                - Design Mode: api-portal/1.0.0/admin-settings/design-mode.md
+        # Take it to production.
+        - Deployment:
+            - Overview: api-portal/1.0.0/deployment/overview.md
+            - Security Hardening: api-portal/1.0.0/deployment/security-hardening.md
+            - Database Configuration: api-portal/1.0.0/deployment/database-configuration.md
+            - Resources & Scaling: api-portal/1.0.0/deployment/resources-and-scaling.md
+            - Deploy & Verify: api-portal/1.0.0/deployment/deploy-and-verify.md
+            - Control Plane Connection: api-portal/1.0.0/deployment/control-plane-connection.md
+        - References:
+            - Management API:
+                - Overview: api-portal/1.0.0/rest-api/overview.md
+                - Authentication: api-portal/1.0.0/rest-api/authentication.md
+                - Organizations: api-portal/1.0.0/rest-api/organizations.md
+                - Organization Content: api-portal/1.0.0/rest-api/organization-content.md
+                - Views: api-portal/1.0.0/rest-api/views.md
+                - Labels: api-portal/1.0.0/rest-api/labels.md
+                - Subscription Plans: api-portal/1.0.0/rest-api/subscription-plans.md
+                - Key Managers: api-portal/1.0.0/rest-api/key-managers.md
+                - APIs: api-portal/1.0.0/rest-api/apis.md
+                - API Content: api-portal/1.0.0/rest-api/api-content.md
+                - API Keys: api-portal/1.0.0/rest-api/api-keys.md
+                - MCP Servers: api-portal/1.0.0/rest-api/mcp-servers.md
+                - MCP Server Content: api-portal/1.0.0/rest-api/mcp-server-content.md
+                - MCP Server Keys: api-portal/1.0.0/rest-api/mcp-server-keys.md
+                - Applications: api-portal/1.0.0/rest-api/applications.md
+                - Application Keys: api-portal/1.0.0/rest-api/application-keys.md
+                - Subscriptions: api-portal/1.0.0/rest-api/subscriptions.md
+                - API Workflows: api-portal/1.0.0/rest-api/api-workflows.md
+                - Webhook Subscribers: api-portal/1.0.0/rest-api/webhook-subscribers.md
+                - Webhook Events: api-portal/1.0.0/rest-api/webhook-events.md
+                - Schemas: api-portal/1.0.0/rest-api/schemas.md
+            - Webhook Event Catalog: api-portal/1.0.0/references/webhook-event-catalog.md
+            - Get a Bearer Token via curl: api-portal/1.0.0/references/get-a-bearer-token-via-curl.md
+            - Configurations: api-portal/1.0.0/references/configurations.md
   - AI Workspace:
-    - Overview: next/ai-workspace/overview.md
-    - About this Release: next/ai-workspace/about-this-release.md
-    - Getting Started: next/ai-workspace/getting-started.md
-    # Set up the workspace itself.
-    - Setting Up:
-        - Configuration & Interpolation: next/ai-workspace/setting-up/configuration.md
-        - Ports: next/ai-workspace/setting-up/ports.md
-        - Database: next/ai-workspace/setting-up/database.md
-        - Authentication:
-            - Overview: next/ai-workspace/setting-up/authentication/overview.md
-            - Connect an Identity Provider: next/ai-workspace/setting-up/authentication/connect-an-identity-provider.md
-            - Set up Asgardeo: next/ai-workspace/setting-up/authentication/asgardeo-setup.md
-            - Set up Microsoft Entra ID: next/ai-workspace/setting-up/authentication/entra-id-setup.md
-    # Take the same workspace to production, on a VM or on Kubernetes.
-    - Production Deployment:
-        - Overview: next/ai-workspace/production/overview.md
-        - Deploy to Production: next/ai-workspace/production/deploy.md
-        - Provision Secrets and Keys: next/ai-workspace/production/secrets-and-keys.md
-        - Secure Traffic with TLS: next/ai-workspace/production/tls.md
-        - Expose AI Workspace: next/ai-workspace/production/expose-the-workspace.md
-        - Run in High Availability: next/ai-workspace/production/high-availability.md
-        - Harden the Deployment: next/ai-workspace/production/harden.md
-        - Connect AI Gateways: next/ai-workspace/production/connect-gateways.md
-        - Operate the Deployment: next/ai-workspace/production/operate.md
-    # Build the artifacts, in the order you create them.
-    - AI Gateways:
-        - Setting Up: next/ai-workspace/ai-gateways/setting-up.md
-    - LLM Providers:
-        - Overview: next/ai-workspace/llm-providers/overview.md
-        - Configure Provider: next/ai-workspace/llm-providers/configure-provider.md
-        - Manage Provider: next/ai-workspace/llm-providers/manage-provider.md
-    - LLM Provider Templates:
-        - Overview: next/ai-workspace/llm-provider-templates/overview.md
-        - Create a Custom Template: next/ai-workspace/llm-provider-templates/configure-template.md
-        - Manage Templates: next/ai-workspace/llm-provider-templates/manage-template.md
-    - App LLM Proxies:
-        - Overview: next/ai-workspace/llm-proxies/overview.md
-        - Configure App LLM Proxy: next/ai-workspace/llm-proxies/configure-proxy.md
-        - Manage App LLM Proxy: next/ai-workspace/llm-proxies/manage-proxy.md
-    - MCP Proxies:
-        - Overview: next/ai-workspace/mcp-proxies/overview.md
-        - Configure Proxy: next/ai-workspace/mcp-proxies/configure-proxy.md
-        - Apply Policies: next/ai-workspace/mcp-proxies/apply-policies.md
-    # Credentials the artifacts above reference.
-    - Secrets Management: next/ai-workspace/secrets-management.md
-    # The other two ways artifacts get created.
-    - Manage Gateway-deployed AI artifacts: next/ai-workspace/sync-gateway-created-artifacts.md
-    - CI/CD:
-        - Overview: next/ai-workspace/ci-cd/overview.md
-        - Configure CI/CD Workflow: next/ai-workspace/ci-cd/configure-ci-cd-workflow.md
-    # Govern what you built.
-    - Policies:
-        - Overview: next/ai-workspace/policies/overview.md
-        - Custom Policies:
-            - Writing an AI Policy: next/ai-workspace/policies/writing-an-ai-policy.md
-            - Building the Gateway with AI Policies: next/ai-workspace/policies/build-gateway-with-ai-policies.md
-            - Apply AI Policies to Proxies: next/ai-workspace/policies/apply-ai-policies-to-proxies.md
-    - Insights: next/ai-workspace/insights.md
-    # Consume it from an application.
-    - GenAI Applications: next/ai-workspace/genai-applications.md
-    - Configure Inbound Auth: next/ai-workspace/configure-inbound-auth.md
-    - Invoke via SDKs: next/ai-workspace/using-sdks.md
+    - "next":
+      - Overview: ai-workspace/next/overview.md
+      - About this Release: ai-workspace/next/about-this-release.md
+      - Getting Started: ai-workspace/next/getting-started.md
+      # Set up the workspace itself.
+      - Setting Up:
+          - Configuration & Interpolation: ai-workspace/next/setting-up/configuration.md
+          - Ports: ai-workspace/next/setting-up/ports.md
+          - Database: ai-workspace/next/setting-up/database.md
+          - Authentication:
+              - Overview: ai-workspace/next/setting-up/authentication/overview.md
+              - Connect an Identity Provider: ai-workspace/next/setting-up/authentication/connect-an-identity-provider.md
+              - Set up Asgardeo: ai-workspace/next/setting-up/authentication/asgardeo-setup.md
+              - Set up Microsoft Entra ID: ai-workspace/next/setting-up/authentication/entra-id-setup.md
+      # Take the same workspace to production, on a VM or on Kubernetes.
+      - Production Deployment:
+          - Overview: ai-workspace/next/production/overview.md
+          - Deploy to Production: ai-workspace/next/production/deploy.md
+          - Provision Secrets and Keys: ai-workspace/next/production/secrets-and-keys.md
+          - Secure Traffic with TLS: ai-workspace/next/production/tls.md
+          - Expose AI Workspace: ai-workspace/next/production/expose-the-workspace.md
+          - Run in High Availability: ai-workspace/next/production/high-availability.md
+          - Harden the Deployment: ai-workspace/next/production/harden.md
+          - Connect AI Gateways: ai-workspace/next/production/connect-gateways.md
+          - Operate the Deployment: ai-workspace/next/production/operate.md
+      # Build the artifacts, in the order you create them.
+      - AI Gateways:
+          - Setting Up: ai-workspace/next/ai-gateways/setting-up.md
+      - LLM Providers:
+          - Overview: ai-workspace/next/llm-providers/overview.md
+          - Configure Provider: ai-workspace/next/llm-providers/configure-provider.md
+          - Manage Provider: ai-workspace/next/llm-providers/manage-provider.md
+      - LLM Provider Templates:
+          - Overview: ai-workspace/next/llm-provider-templates/overview.md
+          - Create a Custom Template: ai-workspace/next/llm-provider-templates/configure-template.md
+          - Manage Templates: ai-workspace/next/llm-provider-templates/manage-template.md
+      - App LLM Proxies:
+          - Overview: ai-workspace/next/llm-proxies/overview.md
+          - Configure App LLM Proxy: ai-workspace/next/llm-proxies/configure-proxy.md
+          - Manage App LLM Proxy: ai-workspace/next/llm-proxies/manage-proxy.md
+      - MCP Proxies:
+          - Overview: ai-workspace/next/mcp-proxies/overview.md
+          - Configure Proxy: ai-workspace/next/mcp-proxies/configure-proxy.md
+          - Apply Policies: ai-workspace/next/mcp-proxies/apply-policies.md
+      # Credentials the artifacts above reference.
+      - Secrets Management: ai-workspace/next/secrets-management.md
+      # The other two ways artifacts get created.
+      - Manage Gateway-deployed AI artifacts: ai-workspace/next/sync-gateway-created-artifacts.md
+      - CI/CD:
+          - Overview: ai-workspace/next/ci-cd/overview.md
+          - Configure CI/CD Workflow: ai-workspace/next/ci-cd/configure-ci-cd-workflow.md
+      # Govern what you built.
+      - Policies:
+          - Overview: ai-workspace/next/policies/overview.md
+          - Custom Policies:
+              - Writing an AI Policy: ai-workspace/next/policies/writing-an-ai-policy.md
+              - Building the Gateway with AI Policies: ai-workspace/next/policies/build-gateway-with-ai-policies.md
+              - Apply AI Policies to Proxies: ai-workspace/next/policies/apply-ai-policies-to-proxies.md
+      - Insights: ai-workspace/next/insights.md
+      # Consume it from an application.
+      - GenAI Applications: ai-workspace/next/genai-applications.md
+      - Configure Inbound Auth: ai-workspace/next/configure-inbound-auth.md
+      - Invoke via SDKs: ai-workspace/next/using-sdks.md
+    - "1.0.0":
+      - Overview: ai-workspace/1.0.0/overview.md
+      - About this Release: ai-workspace/1.0.0/about-this-release.md
+      - Getting Started: ai-workspace/1.0.0/getting-started.md
+      # Set up the workspace itself.
+      - Setting Up:
+          - Configuration & Interpolation: ai-workspace/1.0.0/setting-up/configuration.md
+          - Ports: ai-workspace/1.0.0/setting-up/ports.md
+          - Database: ai-workspace/1.0.0/setting-up/database.md
+          - Authentication:
+              - Overview: ai-workspace/1.0.0/setting-up/authentication/overview.md
+              - Connect an Identity Provider: ai-workspace/1.0.0/setting-up/authentication/connect-an-identity-provider.md
+              - Set up Asgardeo: ai-workspace/1.0.0/setting-up/authentication/asgardeo-setup.md
+              - Set up Microsoft Entra ID: ai-workspace/1.0.0/setting-up/authentication/entra-id-setup.md
+      # Build the artifacts, in the order you create them.
+      - AI Gateways:
+          - Setting Up: ai-workspace/1.0.0/ai-gateways/setting-up.md
+      - LLM Providers:
+          - Overview: ai-workspace/1.0.0/llm-providers/overview.md
+          - Configure Provider: ai-workspace/1.0.0/llm-providers/configure-provider.md
+          - Manage Provider: ai-workspace/1.0.0/llm-providers/manage-provider.md
+      - LLM Provider Templates:
+          - Overview: ai-workspace/1.0.0/llm-provider-templates/overview.md
+          - Create a Custom Template: ai-workspace/1.0.0/llm-provider-templates/configure-template.md
+          - Manage Templates: ai-workspace/1.0.0/llm-provider-templates/manage-template.md
+      - App LLM Proxies:
+          - Overview: ai-workspace/1.0.0/llm-proxies/overview.md
+          - Configure App LLM Proxy: ai-workspace/1.0.0/llm-proxies/configure-proxy.md
+          - Manage App LLM Proxy: ai-workspace/1.0.0/llm-proxies/manage-proxy.md
+      - MCP Proxies:
+          - Overview: ai-workspace/1.0.0/mcp-proxies/overview.md
+          - Configure Proxy: ai-workspace/1.0.0/mcp-proxies/configure-proxy.md
+          - Apply Policies: ai-workspace/1.0.0/mcp-proxies/apply-policies.md
+      # Credentials the artifacts above reference.
+      - Secrets Management: ai-workspace/1.0.0/secrets-management.md
+      # The other two ways artifacts get created.
+      - Manage gateway-deployed AI artifacts: ai-workspace/1.0.0/sync-gateway-created-artifacts.md
+      - CI/CD:
+          - Overview: ai-workspace/1.0.0/ci-cd/overview.md
+          - Configure CI/CD Workflow: ai-workspace/1.0.0/ci-cd/configure-ci-cd-workflow.md
+      # Govern what you built.
+      - Policies:
+          - Overview: ai-workspace/1.0.0/policies/overview.md
+          - Custom Policies:
+              - Writing an AI Policy: ai-workspace/1.0.0/policies/writing-an-ai-policy.md
+              - Building the Gateway with AI Policies: ai-workspace/1.0.0/policies/build-gateway-with-ai-policies.md
+              - Apply AI Policies to Proxies: ai-workspace/1.0.0/policies/apply-ai-policies-to-proxies.md
+      - Insights: ai-workspace/1.0.0/insights.md
+      # Consume it from an application.
+      - GenAI Applications: ai-workspace/1.0.0/genai-applications.md
+      - Configure Inbound Auth: ai-workspace/1.0.0/configure-inbound-auth.md
+      - Invoke via SDKs: ai-workspace/1.0.0/using-sdks.md
   - Analytics:
     - Overview: analytics/overview.md
   - Monetization:
@@ -914,6 +1199,23 @@ plugins:
   - markdownextradata: {}
   - redirects:
       redirect_maps:
+        # API Portal: overview + documentation pages merged into Browse APIs
+        api-portal/next/discover-apis/api-overview.md: api-portal/next/discover-apis/browse-apis.md
+        api-portal/next/discover-apis/api-documentations.md: api-portal/next/discover-apis/browse-apis.md
+        # API Portal: files relocated to match their nav sections
+        api-portal/next/discover-apis/ai-agent-discovery.md: api-portal/next/ai-agent-discovery.md
+        api-portal/next/mcp-servers/mcp-registry.md: api-portal/next/mcp-registry.md
+        api-portal/next/theming.md: api-portal/next/admin-settings/theming.md
+        api-portal/next/artifact-types.md: api-portal/next/setting-up/artifact-types.md
+        api-portal/next/manage-applications.md: api-portal/next/consume-an-api/manage-applications.md
+        api-portal/next/manage-subscriptions.md: api-portal/next/consume-an-api/manage-subscriptions.md
+        api-portal/next/manage-api-keys.md: api-portal/next/consume-an-api/manage-api-keys.md
+        api-portal/next/setting-up/design-mode.md: api-portal/next/admin-settings/design-mode.md
+        api-portal/next/tutorials/asgardeo-as-idp.md: api-portal/next/setting-up/authentication/asgardeo-as-idp.md
+        # API Portal: filenames aligned with page titles
+        api-portal/next/discover-apis/api-search.md: api-portal/next/discover-apis/browse-apis.md
+        api-portal/next/mcp-servers/discover-mcp-servers.md: api-portal/next/mcp-servers/browse-mcp-servers.md
+        api-portal/next/admin-settings/managing-api-workflows.md: api-portal/next/admin-settings/manage-api-workflows.md
         # AI/API Gateway versioning restructuring (per-product Cloud/Self-Hosted variants)
         ai-gateway/ai-gateway-rest-api/authentication.md: ai-gateway/1.1.0/ai-gateway-rest-api/authentication.md
         ai-gateway/analytics/analytics-header-filter.md: ai-gateway/1.1.0/analytics/analytics-header-filter.md
@@ -997,6 +1299,44 @@ plugins:
         api-gateway/setup/artifact-templating.md: api-gateway/1.1.0/setup/artifact-templating.md
         api-gateway/setup/storage-and-backends.md: api-gateway/1.1.0/setup/storage-and-backends.md
         api-gateway/setup/upstream-timeouts.md: api-gateway/1.1.0/setup/upstream-timeouts.md
+        # AI Workspace self-hosted docs moved from next/ai-workspace to the
+        # versioned ai-workspace/<version> layout; 1.0.0 is the latest release.
+        next/ai-workspace/index.md: ai-workspace/1.0.0/overview.md
+        next/ai-workspace/about-this-release.md: ai-workspace/1.0.0/about-this-release.md
+        next/ai-workspace/ai-gateways/setting-up.md: ai-workspace/1.0.0/ai-gateways/setting-up.md
+        next/ai-workspace/ci-cd/configure-ci-cd-workflow.md: ai-workspace/1.0.0/ci-cd/configure-ci-cd-workflow.md
+        next/ai-workspace/ci-cd/overview.md: ai-workspace/1.0.0/ci-cd/overview.md
+        next/ai-workspace/configure-inbound-auth.md: ai-workspace/1.0.0/configure-inbound-auth.md
+        next/ai-workspace/genai-applications.md: ai-workspace/1.0.0/genai-applications.md
+        next/ai-workspace/getting-started.md: ai-workspace/1.0.0/getting-started.md
+        next/ai-workspace/insights.md: ai-workspace/1.0.0/insights.md
+        next/ai-workspace/llm-provider-templates/configure-template.md: ai-workspace/1.0.0/llm-provider-templates/configure-template.md
+        next/ai-workspace/llm-provider-templates/manage-template.md: ai-workspace/1.0.0/llm-provider-templates/manage-template.md
+        next/ai-workspace/llm-provider-templates/overview.md: ai-workspace/1.0.0/llm-provider-templates/overview.md
+        next/ai-workspace/llm-providers/configure-provider.md: ai-workspace/1.0.0/llm-providers/configure-provider.md
+        next/ai-workspace/llm-providers/manage-provider.md: ai-workspace/1.0.0/llm-providers/manage-provider.md
+        next/ai-workspace/llm-providers/overview.md: ai-workspace/1.0.0/llm-providers/overview.md
+        next/ai-workspace/llm-proxies/configure-proxy.md: ai-workspace/1.0.0/llm-proxies/configure-proxy.md
+        next/ai-workspace/llm-proxies/manage-proxy.md: ai-workspace/1.0.0/llm-proxies/manage-proxy.md
+        next/ai-workspace/llm-proxies/overview.md: ai-workspace/1.0.0/llm-proxies/overview.md
+        next/ai-workspace/mcp-proxies/apply-policies.md: ai-workspace/1.0.0/mcp-proxies/apply-policies.md
+        next/ai-workspace/mcp-proxies/configure-proxy.md: ai-workspace/1.0.0/mcp-proxies/configure-proxy.md
+        next/ai-workspace/mcp-proxies/overview.md: ai-workspace/1.0.0/mcp-proxies/overview.md
+        next/ai-workspace/overview.md: ai-workspace/1.0.0/overview.md
+        next/ai-workspace/policies/apply-ai-policies-to-proxies.md: ai-workspace/1.0.0/policies/apply-ai-policies-to-proxies.md
+        next/ai-workspace/policies/build-gateway-with-ai-policies.md: ai-workspace/1.0.0/policies/build-gateway-with-ai-policies.md
+        next/ai-workspace/policies/overview.md: ai-workspace/1.0.0/policies/overview.md
+        next/ai-workspace/policies/writing-an-ai-policy.md: ai-workspace/1.0.0/policies/writing-an-ai-policy.md
+        next/ai-workspace/secrets-management.md: ai-workspace/1.0.0/secrets-management.md
+        next/ai-workspace/setting-up/authentication/asgardeo-setup.md: ai-workspace/1.0.0/setting-up/authentication/asgardeo-setup.md
+        next/ai-workspace/setting-up/authentication/connect-an-identity-provider.md: ai-workspace/1.0.0/setting-up/authentication/connect-an-identity-provider.md
+        next/ai-workspace/setting-up/authentication/entra-id-setup.md: ai-workspace/1.0.0/setting-up/authentication/entra-id-setup.md
+        next/ai-workspace/setting-up/authentication/overview.md: ai-workspace/1.0.0/setting-up/authentication/overview.md
+        next/ai-workspace/setting-up/configuration.md: ai-workspace/1.0.0/setting-up/configuration.md
+        next/ai-workspace/setting-up/database.md: ai-workspace/1.0.0/setting-up/database.md
+        next/ai-workspace/setting-up/ports.md: ai-workspace/1.0.0/setting-up/ports.md
+        next/ai-workspace/sync-gateway-created-artifacts.md: ai-workspace/1.0.0/sync-gateway-created-artifacts.md
+        next/ai-workspace/using-sdks.md: ai-workspace/1.0.0/using-sdks.md
         # Administer
         administer/configure-an-external-idp/configure-asgardeo-as-an-external-idp.md: cloud/administer/configure-an-external-idp/configure-asgardeo-as-an-external-idp.md
         administer/configure-an-external-idp/configure-azure-ad-as-an-external-idp.md: cloud/administer/configure-an-external-idp/configure-azure-ad-as-an-external-idp.md
@@ -1043,7 +1383,7 @@ plugins:
         cloud/ai-gateway/llm/ai-tools/codex-configuration-with-ai-gateway.md: guides/ai-and-mcp/ai-coding-assistants/codex-configuration-with-ai-gateway.md
         # AI Workspace policy pages consolidated into the AI Gateway policy reference.
         # AI Workspace keeps only the overview plus rate limiting, which has no AI Gateway equivalent.
-        next/ai-workspace/policies/guardrails/overview.md: next/ai-workspace/policies/overview.md
+        next/ai-workspace/policies/guardrails/overview.md: ai-workspace/1.0.0/policies/overview.md
         next/ai-workspace/policies/guardrails/semantic-prompt-guard.md: cloud/ai-gateway/llm/guardrails/semantic-prompt-guard.md
         next/ai-workspace/policies/guardrails/regex-pii-masking.md: cloud/ai-gateway/llm/guardrails/pii-masking-regex.md
         next/ai-workspace/policies/guardrails/azure-content-safety.md: cloud/ai-gateway/llm/guardrails/azure-content-safety.md
@@ -1055,12 +1395,12 @@ plugins:
         next/ai-workspace/policies/other-policies/semantic-cache.md: cloud/ai-gateway/llm/semantic-caching.md
 
         # The rate limit policy pages merged into the Policies overview page.
-        next/ai-workspace/policies/rate-limit/llm-cost.md: next/ai-workspace/policies/overview.md
-        next/ai-workspace/policies/rate-limit/token-based-rate-limit.md: next/ai-workspace/policies/overview.md
-        next/ai-workspace/policies/rate-limit/llm-cost-based-rate-limit.md: next/ai-workspace/policies/overview.md
-        next/ai-workspace/policies/other-policies/basic-rate-limit.md: next/ai-workspace/policies/overview.md
-        next/ai-workspace/policies/other-policies/token-based-rate-limit.md: next/ai-workspace/policies/overview.md
-        next/ai-workspace/policies/rate-limiting.md: next/ai-workspace/policies/overview.md
+        next/ai-workspace/policies/rate-limit/llm-cost.md: ai-workspace/1.0.0/policies/overview.md
+        next/ai-workspace/policies/rate-limit/token-based-rate-limit.md: ai-workspace/1.0.0/policies/overview.md
+        next/ai-workspace/policies/rate-limit/llm-cost-based-rate-limit.md: ai-workspace/1.0.0/policies/overview.md
+        next/ai-workspace/policies/other-policies/basic-rate-limit.md: ai-workspace/1.0.0/policies/overview.md
+        next/ai-workspace/policies/other-policies/token-based-rate-limit.md: ai-workspace/1.0.0/policies/overview.md
+        next/ai-workspace/policies/rate-limiting.md: ai-workspace/1.0.0/policies/overview.md
 
         # AI Workspace
         ai-workspace/ai-gateways/setting-up.md: cloud/ai-workspace/ai-gateways/setting-up.md
@@ -1185,13 +1525,13 @@ plugins:
         # Developer Portal
         devportal/developer-portal-mode.md: cloud/devportal/developer-portal-mode.md
         devportal/admin-settings/llm-instructions.md: cloud/devportal/admin-settings/llm-instructions.md
-        devportal/admin-settings/managing-api-workflows.md: cloud/devportal/admin-settings/managing-api-workflows.md
+        devportal/admin-settings/manage-api-workflows.md: cloud/devportal/admin-settings/managing-api-workflows.md
         devportal/api-workflows/consuming-api-workflows.md: cloud/devportal/api-workflows/consuming-api-workflows.md
         devportal/consuming-services/consume-an-api-secured-with-api-key.md: cloud/devportal/consuming-services/consume-an-api-secured-with-api-key.md
         devportal/consuming-services/consume-an-api-secured-with-oauth2.md: cloud/devportal/consuming-services/consume-an-api-secured-with-oauth2.md
         devportal/discover-apis/ai-agent-discovery.md: cloud/devportal/discover-apis/ai-agent-discovery.md
         devportal/discover-apis/api-documentations.md: cloud/devportal/discover-apis/api-documentations.md
-        devportal/discover-apis/api-search.md: cloud/devportal/discover-apis/api-search.md
+        devportal/discover-apis/browse-apis.md: cloud/devportal/discover-apis/api-search.md
         devportal/manage-applications/create-an-application.md: cloud/devportal/manage-applications/create-an-application.md
         devportal/manage-subscriptions/subscribe-to-an-api.md: cloud/devportal/manage-subscriptions/subscribe-to-an-api.md
         # Event Gateway
@@ -1262,27 +1602,35 @@ extra:
   # here is rendered with a version selector; its direct children must be the
   # version groups (titled with the version string). See nav-item.html / theme.js.
   versioned_sections:
+    API Portal:
+      slug: api-portal
+      default: "1.0.0"
+      versions:
+        - "1.0.0"
     API Gateway:
       slug: api-gateway
-      default: "1.1.0"
+      default: "1.2.0"
       versions:
+        - "1.2.0"
         - "1.1.0"
         - "1.0.0"
     AI Gateway:
       slug: ai-gateway
-      default: "1.1.0"
+      default: "1.2.0"
       versions:
+        - "1.2.0"
         - "1.1.0"
+        - "1.0.0"
+    AI Workspace:
+      slug: ai-workspace
+      default: "1.0.0"
+      versions:
         - "1.0.0"
   # Top-level nav sections that only apply to a given doc version. They are
   # rendered hidden; theme.js reveals them while the current URL contains the
-  # version as a path segment (e.g. /next/ai-workspace/... or
-  # /api-gateway/next/...). See partials/nav-item.html and theme.js.
-  version_scoped_navs:
-    - title: API Portal & MCP Hub
-      version: "next"
-    - title: AI Workspace
-      version: "next"
+  # version as a path segment (e.g. /next/api-portal/...). See
+  # partials/nav-item.html and theme.js.
+  version_scoped_navs: []
   expanded_navs:
     - title: Cloud
       options:
@@ -1306,15 +1654,17 @@ extra:
     - title: Developer Portal
       options:
         - verticle-line
-    - title: API Portal & MCP Hub
+    - title: API Portal
       options:
         - verticle-line
-    # Root-level (version-scoped) copy only; 'level: 1' keeps the AI Workspace
+        - divider
+    # Root-level (versioned) copy only; 'level: 1' keeps the AI Workspace
     # section nested under Cloud rendering as a regular collapsed item.
     - title: AI Workspace
       level: 1
       options:
         - verticle-line
+        - divider
     - title: API Manager
       options:
         - verticle-line
@@ -1422,7 +1772,7 @@ extra:
     Developer Portal:
       icon: octicons/book-16
       level: 1
-    API Portal & MCP Hub:
+    API Portal:
       icon: octicons/book-16
       level: 1
     Analytics & Monetization:
