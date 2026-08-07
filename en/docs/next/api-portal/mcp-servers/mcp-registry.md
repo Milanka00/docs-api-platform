@@ -24,8 +24,8 @@ A server published through the registry becomes an ordinary catalog artifact: it
 Every endpoint is scoped to an organization handle, and two mount paths serve the same router:
 
 ```text
-/registry/{orgHandle}/v0.1/...
-/{orgHandle}/registry/v0.1/...
+/api-portal/registry/{orgHandle}/v0.1/...
+/api-portal/{orgHandle}/registry/v0.1/...
 ```
 
 Requests naming an organization this instance doesn't serve get a JSON `404`. Responses are JSON throughout, including errors, which take the shape `{"error": "..."}`.
@@ -39,7 +39,7 @@ These three need no authentication.
 ### List servers
 
 ```text
-GET /registry/{orgHandle}/v0.1/servers
+GET /api-portal/registry/{orgHandle}/v0.1/servers
 ```
 
 Four query parameters control paging and filtering:
@@ -68,7 +68,7 @@ Servers come back newest-published first, with servers that have no publish time
 ### List a server's versions
 
 ```text
-GET /registry/{orgHandle}/v0.1/servers/{serverName}/versions
+GET /api-portal/registry/{orgHandle}/v0.1/servers/{serverName}/versions
 ```
 
 Returns every version of one server, newest first. `include_deleted` works as above. URL-encode the slash in `{serverName}`—`example.com/travel-assistant` becomes `example.com%2Ftravel-assistant`.
@@ -76,7 +76,7 @@ Returns every version of one server, newest first. `include_deleted` works as ab
 ### Get one version
 
 ```text
-GET /registry/{orgHandle}/v0.1/servers/{serverName}/versions/{version}
+GET /api-portal/registry/{orgHandle}/v0.1/servers/{serverName}/versions/{version}
 ```
 
 Returns a single version, including its tools, resources, and prompts. Deleted versions return `404` unless you pass `include_deleted=true`.
@@ -125,16 +125,16 @@ These require a bearer token or an authenticated local-auth session, and the sam
 
 | Endpoint | Scope |
 |---|---|
-| `POST /registry/{orgHandle}/v0.1/publish` | `dp:mcp_server:create` to create, `dp:mcp_server:update` to update |
-| `PUT /registry/{orgHandle}/v0.1/servers/{serverName}/versions/{version}` | `dp:mcp_server:update` |
-| `DELETE /registry/{orgHandle}/v0.1/servers/{serverName}/versions/{version}` | `dp:mcp_server:delete` |
-| `PATCH /registry/{orgHandle}/v0.1/servers/{serverName}/versions/{version}/status` | `dp:mcp_server:update` |
-| `PATCH /registry/{orgHandle}/v0.1/servers/{serverName}/status` | `dp:mcp_server:update` |
+| `POST /api-portal/registry/{orgHandle}/v0.1/publish` | `dp:mcp_server:create` to create, `dp:mcp_server:update` to update |
+| `PUT /api-portal/registry/{orgHandle}/v0.1/servers/{serverName}/versions/{version}` | `dp:mcp_server:update` |
+| `DELETE /api-portal/registry/{orgHandle}/v0.1/servers/{serverName}/versions/{version}` | `dp:mcp_server:delete` |
+| `PATCH /api-portal/registry/{orgHandle}/v0.1/servers/{serverName}/versions/{version}/status` | `dp:mcp_server:update` |
+| `PATCH /api-portal/registry/{orgHandle}/v0.1/servers/{serverName}/status` | `dp:mcp_server:update` |
 
 ### Publish a server
 
 ```text
-POST /registry/{orgHandle}/v0.1/publish
+POST /api-portal/registry/{orgHandle}/v0.1/publish
 ```
 
 `publish` is an upsert, keyed on the server name and version. It returns `201` when it creates a server and `200` when it updates one—and it checks the scope for the operation it's actually about to perform, so a token holding only `dp:mcp_server:create` gets `403` when the target version already exists.
@@ -178,7 +178,7 @@ Newly published servers are mapped to the `default` label, so they appear in eve
 ### Update a version
 
 ```text
-PUT /registry/{orgHandle}/v0.1/servers/{serverName}/versions/{version}
+PUT /api-portal/registry/{orgHandle}/v0.1/servers/{serverName}/versions/{version}
 ```
 
 Takes the same body as `publish`, and the `version` field in the body has to match the one in the path—a mismatch returns `400`.
@@ -186,7 +186,7 @@ Takes the same body as `publish`, and the `version` field in the body has to mat
 ### Delete a version
 
 ```text
-DELETE /registry/{orgHandle}/v0.1/servers/{serverName}/versions/{version}
+DELETE /api-portal/registry/{orgHandle}/v0.1/servers/{serverName}/versions/{version}
 ```
 
 A soft delete. The version's status becomes `deleted` and it drops out of the discovery endpoints unless you ask for `include_deleted=true`. The row itself stays.
@@ -194,8 +194,8 @@ A soft delete. The version's status becomes `deleted` and it drops out of the di
 ### Change status
 
 ```text
-PATCH /registry/{orgHandle}/v0.1/servers/{serverName}/versions/{version}/status
-PATCH /registry/{orgHandle}/v0.1/servers/{serverName}/status
+PATCH /api-portal/registry/{orgHandle}/v0.1/servers/{serverName}/versions/{version}/status
+PATCH /api-portal/registry/{orgHandle}/v0.1/servers/{serverName}/status
 ```
 
 Both take `{"status": "active" | "deprecated" | "deleted"}`. The first changes one version; the second changes every version of the server at once. Any other value returns `400`, and so does setting a version to the status it already has.
@@ -206,7 +206,7 @@ The portal exposes MCP servers through two different APIs, and they aren't inter
 
 | | MCP Registry API | [Management API](../rest-api/mcp-servers.md) |
 |---|---|---|
-| Path | `/registry/{orgHandle}/v0.1` | `/api/v0.9` |
+| Path | `/api-portal/registry/{orgHandle}/v0.1` | `/api-portal/api/v0.9` |
 | Shape | Model Context Protocol registry specification | The portal's own resource model |
 | Discovery auth | None | Bearer token |
 | Identified by | Reverse-DNS name plus version | Portal handle |

@@ -27,7 +27,7 @@ The portal generates an `llms.txt` file on every request—a Markdown index desi
 **Endpoint:**
 
 ```text
-GET /{orgName}/views/{viewName}/llms.txt
+GET /api-portal/{orgName}/views/{viewName}/llms.txt
 ```
 
 The file opens with the portal's name and description, both configured through [LLM Instructions](../admin-settings/llm-instructions.md). It then lists every agent-visible artifact, grouped into the following sections, with each entry linking to that artifact's own Markdown document:
@@ -54,17 +54,17 @@ Beyond `llms.txt`, the portal serves its catalog, documentation, and specificati
 
 | Endpoint | Description |
 |---|---|
-| `/{orgName}/views/{viewName}/apis.md` | Every agent-visible API, grouped by type, as a single Markdown document |
-| `/{orgName}/views/{viewName}/mcps.md` | Every agent-visible MCP server as a single Markdown document |
+| `/api-portal/{orgName}/views/{viewName}/apis.md` | Every agent-visible API, grouped by type, as a single Markdown document |
+| `/api-portal/{orgName}/views/{viewName}/mcps.md` | Every agent-visible MCP server as a single Markdown document |
 
 ### Per-API and per-MCP-server documentation
 
 | Endpoint | Description |
 |---|---|
-| `/{orgName}/views/{viewName}/api/{apiHandle}.md` | Full documentation for one API, in Markdown |
-| `/{orgName}/views/{viewName}/mcp/{apiHandle}.md` | Full documentation for one MCP server, in Markdown |
-| `/{orgName}/views/{viewName}/api/{apiHandle}/docs/{docType}/{docName}.md` | One attached document, as the raw Markdown the publisher uploaded |
-| `/{orgName}/views/{viewName}/mcp/{apiHandle}/docs/{docType}/{docName}.md` | The same, for an MCP server |
+| `/api-portal/{orgName}/views/{viewName}/api/{apiHandle}.md` | Full documentation for one API, in Markdown |
+| `/api-portal/{orgName}/views/{viewName}/mcp/{apiHandle}.md` | Full documentation for one MCP server, in Markdown |
+| `/api-portal/{orgName}/views/{viewName}/api/{apiHandle}/docs/{docType}/{docName}.md` | One attached document, as the raw Markdown the publisher uploaded |
+| `/api-portal/{orgName}/views/{viewName}/mcp/{apiHandle}/docs/{docType}/{docName}.md` | The same, for an MCP server |
 
 A per-API Markdown document is self-contained. It carries:
 
@@ -82,11 +82,11 @@ The specification format follows the API type, so each API serves exactly one ex
 
 | API type | Endpoint | Format |
 |---|---|---|
-| REST | `/{orgName}/views/{viewName}/api/{apiHandle}/docs/specification.json` | OpenAPI (JSON) |
-| WebSocket, WebSub | `/{orgName}/views/{viewName}/api/{apiHandle}/docs/specification.json` | AsyncAPI (JSON) |
-| GraphQL | `/{orgName}/views/{viewName}/api/{apiHandle}/docs/specification.graphql` | GraphQL schema (SDL) |
-| SOAP | `/{orgName}/views/{viewName}/api/{apiHandle}/docs/specification.xml` | WSDL (XML) |
-| MCP server | `/{orgName}/views/{viewName}/mcp/{apiHandle}/docs/specification.json` | Tool, resource, and prompt schema (JSON) |
+| REST | `/api-portal/{orgName}/views/{viewName}/api/{apiHandle}/docs/specification.json` | OpenAPI (JSON) |
+| WebSocket, WebSub | `/api-portal/{orgName}/views/{viewName}/api/{apiHandle}/docs/specification.json` | AsyncAPI (JSON) |
+| GraphQL | `/api-portal/{orgName}/views/{viewName}/api/{apiHandle}/docs/specification.graphql` | GraphQL schema (SDL) |
+| SOAP | `/api-portal/{orgName}/views/{viewName}/api/{apiHandle}/docs/specification.xml` | WSDL (XML) |
+| MCP server | `/api-portal/{orgName}/views/{viewName}/mcp/{apiHandle}/docs/specification.json` | Tool, resource, and prompt schema (JSON) |
 
 For REST, WebSocket, and WebSub APIs, the portal substitutes the API's live production and sandbox URLs into the specification it serves, so an agent doesn't have to resolve placeholder server entries.
 
@@ -94,10 +94,10 @@ For REST, WebSocket, and WebSub APIs, the portal substitutes the API's live prod
 
 | Endpoint | Description |
 |---|---|
-| `/{orgName}/views/{viewName}/api-workflows.md` | Every published, agent-visible workflow as a single Markdown document |
-| `/{orgName}/views/{viewName}/api-workflows/{handle}.md` | One workflow rendered as Markdown, including its steps and links to the APIs it calls |
-| `/{orgName}/views/{viewName}/api-workflows/{handle}/arazzo.json` | The raw [Arazzo](https://spec.openapis.org/arazzo/latest.html) specification for one workflow |
-| `/{orgName}/views/{viewName}/api-workflows/{handle}/prompt` | A JSON object holding the workflow's agent prompt, description, raw content, and source APIs |
+| `/api-portal/{orgName}/views/{viewName}/api-workflows.md` | Every published, agent-visible workflow as a single Markdown document |
+| `/api-portal/{orgName}/views/{viewName}/api-workflows/{handle}.md` | One workflow rendered as Markdown, including its steps and links to the APIs it calls |
+| `/api-portal/{orgName}/views/{viewName}/api-workflows/{handle}/arazzo.json` | The raw [Arazzo](https://spec.openapis.org/arazzo/latest.html) specification for one workflow |
+| `/api-portal/{orgName}/views/{viewName}/api-workflows/{handle}/prompt` | A JSON object holding the workflow's agent prompt, description, raw content, and source APIs |
 
 The `arazzo.json` endpoint returns `404` for a non-Arazzo workflow.
 
