@@ -112,7 +112,13 @@ Both approaches touch `url` and `controlplane_host`, which sit either side of th
 
 Nothing in AI Workspace connects to `controlplane_host`. The value is display-only: the workspace substitutes it into the gateway setup commands the **Get Started** section shows an admin, such as the `APIP_GW_CONTROLLER_CONTROLPLANE_HOST` line and the Helm `--set gateway.controller.controlPlane.host` flag. The admin then copies those commands to the machine running the gateway, which is what makes the connection.
 
-So a wrong value leaves AI Workspace working normally and breaks the gateway instead. The printed commands look right, but the gateway they configure can't reach the control plane and never registers. Give the key an address that's reachable **from the gateway's** network. Use `host.docker.internal` for a gateway in another container on the same machine, or the machine's hostname or IP address from anywhere else. A gateway outside the stack can't resolve `platform-api`.
+So a wrong value leaves AI Workspace working normally and breaks the gateway instead. The printed commands look right, but the gateway they configure can't reach the control plane and never registers.
+
+Set `controlplane_host` to an address that's reachable from the gateway's network:
+
+- For a gateway in another container on the same machine, use `host.docker.internal`.
+- For a gateway anywhere else, use the machine's hostname or IP address.
+- Don't use `platform-api`. That name resolves only inside the Compose network, so a gateway outside the stack can't reach it.
 
 ## Apply the change
 

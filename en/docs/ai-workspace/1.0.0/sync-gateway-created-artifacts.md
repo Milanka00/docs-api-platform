@@ -164,15 +164,17 @@ spec:
 ```
 
 !!! warning "Substitute the placeholders, and keep credentials out of the file"
-    The manifests in this guide carry placeholders such as `<upstream-api-key>`. The gateway stores whatever you send, so substitute your own values before each request. The commands below pipe the manifest through `sed` and post the result, which leaves the placeholders in the file on disk and keeps real credentials out of source control. To avoid holding the value in your shell as well, reference a secret. See [Secrets management](secrets-management.md).
+    The manifests in this guide carry placeholders such as `<upstream-api-key>`. The gateway stores whatever you send, so substitute your own values before each request. The commands below pipe the manifest through [`yq`](https://github.com/mikefarah/yq) and post the result. The placeholders stay in the file on disk, which keeps real credentials out of source control. To avoid holding the value in your shell as well, reference a secret. See [Secrets management](secrets-management.md).
+
+    `yq` edits the manifest as YAML, and its `strenv` function assigns each value as a string. A URL or API key that contains `:`, `#`, `{`, or a quotation mark is preserved as a literal value.
 
 Set your upstream values, then substitute them as you post the manifest:
 
 ```bash
 export UPSTREAM_URL='<your-upstream-url>' UPSTREAM_API_KEY='<your-upstream-api-key>'
 
-sed -e "s|<upstream-url>|$UPSTREAM_URL|" \
-    -e "s|<upstream-api-key>|$UPSTREAM_API_KEY|" llm-provider.yaml |
+yq '.spec.upstream.url = strenv(UPSTREAM_URL) |
+    .spec.upstream.auth.value = strenv(UPSTREAM_API_KEY)' llm-provider.yaml |
   curl --location 'http://localhost:9090/api/management/v1/llm-providers' \
     --header 'Content-Type: text/yaml' \
     --user "$GW_USER:$GW_PASSWORD" \
@@ -203,7 +205,7 @@ spec:
 ```bash
 export PROVIDER_API_KEY='<your-provider-api-key>'
 
-sed -e "s|<provider-api-key>|$PROVIDER_API_KEY|" llm-proxy.yaml |
+yq '.spec.provider.auth.value = strenv(PROVIDER_API_KEY)' llm-proxy.yaml |
   curl --location 'http://localhost:9090/api/management/v1/llm-proxies' \
     --header 'Content-Type: text/yaml' \
     --user "$GW_USER:$GW_PASSWORD" \
@@ -235,8 +237,8 @@ spec:
 ```bash
 export MCP_SERVER_URL='<your-mcp-server-url>' MCP_SERVER_API_KEY='<your-mcp-server-api-key>'
 
-sed -e "s|<mcp-server-url>|$MCP_SERVER_URL|" \
-    -e "s|<mcp-server-api-key>|$MCP_SERVER_API_KEY|" mcp-proxy.yaml |
+yq '.spec.upstream.url = strenv(MCP_SERVER_URL) |
+    .spec.upstream.auth.value = strenv(MCP_SERVER_API_KEY)' mcp-proxy.yaml |
   curl --location 'http://localhost:9090/api/management/v1/mcp-proxies' \
     --header 'Content-Type: text/yaml' \
     --user "$GW_USER:$GW_PASSWORD" \
