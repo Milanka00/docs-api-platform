@@ -1,10 +1,10 @@
 ---
 title: "Management API: LLM Proxy Management"
 description: "REST API reference for creating, listing, updating, and deleting LLM proxy configurations and API keys in API Platform Gateway."
-canonical_url: https://wso2.com/api-platform/docs/api-gateway/gateway-controller-management-api/llm-proxy-management/
-md_url: https://wso2.com/api-platform/docs/api-gateway/gateway-controller-management-api/llm-proxy-management.md
+canonical_url: https://wso2.com/api-platform/docs/ai-gateway/gateway-controller-management-api/llm-proxy-management/
+md_url: https://wso2.com/api-platform/docs/ai-gateway/gateway-controller-management-api/llm-proxy-management.md
 tags:
-  - api-gateway
+  - ai-gateway
   - management-api
   - llm
 author: WSO2 API Platform Documentation Team

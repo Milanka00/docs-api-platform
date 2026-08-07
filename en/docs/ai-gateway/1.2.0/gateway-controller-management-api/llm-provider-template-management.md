@@ -1,10 +1,10 @@
 ---
 title: "Management API: LLM Provider Template Management"
 description: "REST API reference for creating, listing, updating, and deleting LLM provider templates in API Platform Gateway."
-canonical_url: https://wso2.com/api-platform/docs/api-gateway/gateway-controller-management-api/llm-provider-template-management/
-md_url: https://wso2.com/api-platform/docs/api-gateway/gateway-controller-management-api/llm-provider-template-management.md
+canonical_url: https://wso2.com/api-platform/docs/ai-gateway/gateway-controller-management-api/llm-provider-template-management/
+md_url: https://wso2.com/api-platform/docs/ai-gateway/gateway-controller-management-api/llm-provider-template-management.md
 tags:
-  - api-gateway
+  - ai-gateway
   - management-api
   - llm
 author: WSO2 API Platform Documentation Team
@@ -74,20 +74,6 @@ Add a new LLM provider template to the Gateway. A template defines token trackin
   }
 }
 ```
-
-!!! note "Using a YAML downloaded from AI Workspace"
-    If you downloaded the template YAML from AI Workspace, you have two options to use it with this endpoint:
-
-    - **Convert to JSON:** Convert the YAML file to JSON before passing it as the request body with `-H 'Content-Type: application/json'`.
-    - **Send as YAML:** Pass the YAML file directly and change the content type header to `application/yaml`:
-
-    ```shell
-    curl -X POST http://localhost:9090/api/management/v1/llm-provider-templates \
-      -u {username}:{password} \
-      -H 'Content-Type: application/yaml' \
-      -H 'Accept: application/json' \
-      --data-binary @template.yaml
-    ```
 
 ### Authentication
 

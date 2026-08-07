@@ -1,10 +1,10 @@
 ---
-title: "Gateway Controller Management API"
-description: "Overview of the API Platform Gateway Controller REST API for managing REST APIs, MCP proxies, LLM providers, certificates, and secrets."
-canonical_url: https://wso2.com/api-platform/docs/api-gateway/gateway-controller-management-api/overview/
-md_url: https://wso2.com/api-platform/docs/api-gateway/gateway-controller-management-api/overview.md
+title: "AI Gateway Controller Management API"
+description: "Overview of the AI Gateway Controller REST API for managing LLM providers, LLM proxies, MCP proxies, certificates, and secrets."
+canonical_url: https://wso2.com/api-platform/docs/ai-gateway/gateway-controller-management-api/overview/
+md_url: https://wso2.com/api-platform/docs/ai-gateway/gateway-controller-management-api/overview.md
 tags:
-  - api-gateway
+  - ai-gateway
   - management-api
 author: WSO2 API Platform Documentation Team
 last_updated: 2026-08-07
@@ -15,10 +15,9 @@ content_type: "overview"
 
 REST API for managing API configurations in the WSO2 API Platform Gateway.
 
-The API exposes the following endpoints:
-
-* `http://localhost:9090/api/management/v1`
-* `http://gateway-controller:9090/api/management/v1`
+Base URLs:
+* <a href="http://localhost:9090/api/management/v1">http://localhost:9090/api/management/v1</a>
+* <a href="http://gateway-controller:9090/api/management/v1">http://gateway-controller:9090/api/management/v1</a>
 
 ## Table of Contents
 
@@ -30,29 +29,6 @@ The API exposes the following endpoints:
 - [Role Mapping Semantics](authentication.md#role-mapping-semantics)
 - [Troubleshooting (What you’ll observe)](authentication.md#troubleshooting-what-youll-observe)
 - [Testing](authentication.md#testing)
-
-### [Rest API Management](rest-api-management.md)
-
-- [Create a new RestAPI](rest-api-management.md#create-a-new-restapi)
-- [List all RestAPIs](rest-api-management.md#list-all-restapis)
-- [Get RestAPI by id](rest-api-management.md#get-restapi-by-id)
-- [Update an existing RestAPI](rest-api-management.md#update-an-existing-restapi)
-- [Delete a RestAPI](rest-api-management.md#delete-a-restapi)
-- [Create a new API key for an API](rest-api-management.md#create-a-new-api-key-for-an-api)
-- [Get the list of API keys for an API](rest-api-management.md#get-the-list-of-api-keys-for-an-api)
-- [Regenerate API key for an API](rest-api-management.md#regenerate-api-key-for-an-api)
-- [Update an API key with a new regenerated value](rest-api-management.md#update-an-api-key-with-a-new-regenerated-value)
-- [Revoke an API key](rest-api-management.md#revoke-an-api-key)
-- [Create a subscription plan](rest-api-management.md#create-a-subscription-plan)
-- [List subscription plans](rest-api-management.md#list-subscription-plans)
-- [Get a subscription plan by ID](rest-api-management.md#get-a-subscription-plan-by-id)
-- [Update a subscription plan](rest-api-management.md#update-a-subscription-plan)
-- [Delete a subscription plan](rest-api-management.md#delete-a-subscription-plan)
-- [Create a subscription](rest-api-management.md#create-a-subscription)
-- [List subscriptions](rest-api-management.md#list-subscriptions)
-- [Get a subscription by ID](rest-api-management.md#get-a-subscription-by-id)
-- [Update a subscription](rest-api-management.md#update-a-subscription)
-- [Delete a subscription](rest-api-management.md#delete-a-subscription)
 
 ### [MCP Proxy Management](mcp-proxy-management.md)
 

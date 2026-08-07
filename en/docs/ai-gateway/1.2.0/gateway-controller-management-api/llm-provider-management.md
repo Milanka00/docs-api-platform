@@ -1,10 +1,10 @@
 ---
-title: "Management API: LLM Proxy Management"
-description: "REST API reference for creating, listing, updating, and deleting LLM proxy configurations and API keys in API Platform Gateway."
-canonical_url: https://wso2.com/api-platform/docs/api-gateway/gateway-controller-management-api/llm-proxy-management/
-md_url: https://wso2.com/api-platform/docs/api-gateway/gateway-controller-management-api/llm-proxy-management.md
+title: "Management API: LLM Provider Management"
+description: "REST API reference for creating, listing, updating, and deleting LLM provider configurations and API keys in API Platform Gateway."
+canonical_url: https://wso2.com/api-platform/docs/ai-gateway/gateway-controller-management-api/llm-provider-management/
+md_url: https://wso2.com/api-platform/docs/ai-gateway/gateway-controller-management-api/llm-provider-management.md
 tags:
-  - api-gateway
+  - ai-gateway
   - management-api
   - llm
 author: WSO2 API Platform Documentation Team
@@ -12,21 +12,21 @@ last_updated: 2026-08-07
 content_type: "reference"
 ---
 
-# LLM Proxy Management
+# LLM Provider Management
 
-CRUD operations for LLM Proxy configurations
+CRUD operations for LLM Provider configurations
 
-## Create a new LLM proxy
+## Create a new LLM provider
 
-<a id="opIdcreateLLMProxy"></a>
+<a id="opIdcreateLLMProvider"></a>
 
-`POST /llm-proxies`
+`POST /llm-providers`
 
 > Code samples
 
 ```shell
 
-curl -X POST http://localhost:9090/api/management/v1/llm-proxies \
+curl -X POST http://localhost:9090/api/management/v1/llm-providers \
   -u {username}:{password} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -34,25 +34,53 @@ curl -X POST http://localhost:9090/api/management/v1/llm-proxies \
 
 ```
 
-Add a new LLM proxy to the Gateway. A proxy defines how to interact with an LLM service deployed in the Gateway, including authentication and policies.
+Add a new LLM provider to the Gateway. A provider defines how to interact with an LLM service, including upstream endpoints, authentication, access control, and policies.
 
 > Payload
 
 ```json
 {
   "apiVersion": "gateway.api-platform.wso2.com/v1",
-  "kind": "LlmProxy",
+  "kind": "LlmProvider",
   "metadata": {
-    "name": "openai-proxy"
+    "name": "wso2-openai-provider"
   },
   "spec": {
-    "displayName": "OpenAI Proxy",
+    "displayName": "OpenAI Provider",
     "version": "v1.0",
-    "context": "/openai-proxy",
-    "provider": {
-      "id": "wso2-openai-provider"
+    "template": "openai",
+    "context": "/openai/latest",
+    "upstream": {
+      "url": "https://api.openai.com/v1",
+      "auth": {
+        "type": "api-key",
+        "header": "Authorization",
+        "value": "Bearer sk-your-api-key"
+      }
     },
-    "policies": []
+    "accessControl": {
+      "mode": "deny_all",
+      "exceptions": [
+        {
+          "path": "/chat/completions",
+          "methods": [
+            "POST"
+          ]
+        },
+        {
+          "path": "/models",
+          "methods": [
+            "GET"
+          ]
+        },
+        {
+          "path": "/models/{modelId}",
+          "methods": [
+            "GET"
+          ]
+        }
+      ]
+    }
   }
 }
 ```
@@ -62,15 +90,15 @@ Add a new LLM proxy to the Gateway. A proxy defines how to interact with an LLM 
 <aside class="warning">
 This operation requires <strong>Basic Auth</strong> authentication.
 
-Required roles: `admin`, `developer`
+Required roles: `admin`
 
 </aside>
 
-<h3 id="create-a-new-llm-proxy-parameters">Parameters</h3>
+<h3 id="create-a-new-llm-provider-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[LLMProxyConfigurationRequest](schemas.md#schemallmproxyconfigurationrequest)|true|LLM proxy in YAML or JSON format|
+|body|body|[LLMProviderConfigurationRequest](schemas.md#schemallmproviderconfigurationrequest)|true|LLM provider in YAML or JSON format|
 
 > Example responses
 >
@@ -79,21 +107,48 @@ Required roles: `admin`, `developer`
 ```json
 {
   "apiVersion": "gateway.api-platform.wso2.com/v1",
-  "kind": "LlmProxy",
+  "kind": "LlmProvider",
   "metadata": {
-    "name": "openai-proxy"
+    "name": "wso2-openai-provider"
   },
   "spec": {
-    "displayName": "OpenAI Proxy",
+    "displayName": "OpenAI Provider",
     "version": "v1.0",
-    "context": "/openai-proxy",
-    "provider": {
-      "id": "wso2-openai-provider"
+    "template": "openai",
+    "context": "/openai/latest",
+    "upstream": {
+      "url": "https://api.openai.com/v1",
+      "auth": {
+        "type": "api-key",
+        "header": "Authorization"
+      }
     },
-    "policies": []
+    "accessControl": {
+      "mode": "deny_all",
+      "exceptions": [
+        {
+          "path": "/chat/completions",
+          "methods": [
+            "POST"
+          ]
+        },
+        {
+          "path": "/models",
+          "methods": [
+            "GET"
+          ]
+        },
+        {
+          "path": "/models/{modelId}",
+          "methods": [
+            "GET"
+          ]
+        }
+      ]
+    }
   },
   "status": {
-    "id": "openai-proxy",
+    "id": "wso2-openai-provider",
     "state": "deployed",
     "createdAt": "2026-04-24T07:21:13Z",
     "updatedAt": "2026-04-24T07:21:13Z",
@@ -102,32 +157,32 @@ Required roles: `admin`, `developer`
 }
 ```
 
-<h3 id="create-a-new-llm-proxy-responses">Responses</h3>
+<h3 id="create-a-new-llm-provider-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|LLM proxy created and deployed successfully|[LLMProxyConfiguration](schemas.md#schemallmproxyconfiguration)|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|LLM provider created and deployed successfully|[LLMProviderConfiguration](schemas.md#schemallmproviderconfiguration)|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid configuration (validation failed)|[ErrorResponse](schemas.md#schemaerrorresponse)|
-|409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|Conflict - Proxy with same name and version already exists|[ErrorResponse](schemas.md#schemaerrorresponse)|
+|409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|Conflict - Provider with same name and version already exists|[ErrorResponse](schemas.md#schemaerrorresponse)|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal server error|[ErrorResponse](schemas.md#schemaerrorresponse)|
 
-## List all LLM proxies
+## List all LLM providers
 
-<a id="opIdlistLLMProxies"></a>
+<a id="opIdlistLLMProviders"></a>
 
-`GET /llm-proxies`
+`GET /llm-providers`
 
 > Code samples
 
 ```shell
 
-curl -X GET http://localhost:9090/api/management/v1/llm-proxies \
+curl -X GET http://localhost:9090/api/management/v1/llm-providers \
   -u {username}:{password} \
   -H 'Accept: application/json'
 
 ```
 
-List LLM proxies registered in the Gateway, optionally filtered by name, version, context, status, or vhost.
+List LLM providers registered in the Gateway, optionally filtered by name, version, context, status, or vhost.
 
 ### Authentication
 
@@ -138,15 +193,15 @@ Required roles: `admin`, `developer`
 
 </aside>
 
-<h3 id="list-all-llm-proxies-parameters">Parameters</h3>
+<h3 id="list-all-llm-providers-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|displayName|query|string|false|Filter by LLM proxy displayName|
-|version|query|string|false|Filter by LLM proxy version|
-|context|query|string|false|Filter by LLM proxy context/path|
+|displayName|query|string|false|Filter by LLM provider display name|
+|version|query|string|false|Filter by LLM provider version|
+|context|query|string|false|Filter by LLM provider context/path|
 |status|query|string|false|Filter by deployment status|
-|vhost|query|string|false|Filter by LLM proxy vhost|
+|vhost|query|string|false|Filter by LLM provider vhost|
 
 #### Enumerated Values
 
@@ -163,24 +218,51 @@ Required roles: `admin`, `developer`
 {
   "status": "success",
   "count": 2,
-  "proxies": [
+  "providers": [
     {
       "apiVersion": "gateway.api-platform.wso2.com/v1",
-      "kind": "LlmProxy",
+      "kind": "LlmProvider",
       "metadata": {
-        "name": "openai-proxy"
+        "name": "wso2-openai-provider"
       },
       "spec": {
-        "displayName": "OpenAI Proxy",
+        "displayName": "OpenAI Provider",
         "version": "v1.0",
-        "context": "/openai-proxy",
-        "provider": {
-          "id": "wso2-openai-provider"
+        "template": "openai",
+        "context": "/openai/latest",
+        "upstream": {
+          "url": "https://api.openai.com/v1",
+          "auth": {
+            "type": "api-key",
+            "header": "Authorization"
+          }
         },
-        "policies": []
+        "accessControl": {
+          "mode": "deny_all",
+          "exceptions": [
+            {
+              "path": "/chat/completions",
+              "methods": [
+                "POST"
+              ]
+            },
+            {
+              "path": "/models",
+              "methods": [
+                "GET"
+              ]
+            },
+            {
+              "path": "/models/{modelId}",
+              "methods": [
+                "GET"
+              ]
+            }
+          ]
+        }
       },
       "status": {
-        "id": "openai-proxy",
+        "id": "wso2-openai-provider",
         "state": "deployed",
         "createdAt": "2026-04-24T07:21:13Z",
         "updatedAt": "2026-04-24T07:21:13Z",
@@ -191,14 +273,14 @@ Required roles: `admin`, `developer`
 }
 ```
 
-<h3 id="list-all-llm-proxies-responses">Responses</h3>
+<h3 id="list-all-llm-providers-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|List of LLM proxies|Inline|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|List of LLM providers|Inline|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal server error|[ErrorResponse](schemas.md#schemaerrorresponse)|
 
-<h3 id="list-all-llm-proxies-responseschema">Response Schema</h3>
+<h3 id="list-all-llm-providers-responseschema">Response Schema</h3>
 
 Status Code **200**
 
@@ -206,32 +288,77 @@ Status Code **200**
 |---|---|---|---|---|
 |status|string|false|none|none|
 |count|integer|false|none|none|
-|proxies|[allOf]|false|none|none|
+|providers|[allOf]|false|none|none|
 
 *allOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|*anonymous*|[LLMProxyConfigurationRequest](schemas.md#schemallmproxyconfigurationrequest)|false|none|none|
-|apiVersion|string|true|none|Proxy specification version|
-|kind|string|true|none|Proxy kind|
+|*anonymous*|[LLMProviderConfigurationRequest](schemas.md#schemallmproviderconfigurationrequest)|false|none|none|
+|apiVersion|string|true|none|Provider specification version|
+|kind|string|true|none|Provider kind|
 |metadata|[Metadata](schemas.md#schemametadata)|true|none|none|
 |name|string|true|none|Unique handle for the resource|
 |labels|object|false|none|Labels are key-value pairs for organizing and selecting APIs. Keys must not contain spaces.|
 |**additionalProperties**|string|false|none|none|
 |annotations|object|false|none|Annotations are arbitrary non-identifying metadata. Use domain-prefixed keys.|
 |**additionalProperties**|string|false|none|none|
-|spec|[LLMProxyConfigData](schemas.md#schemallmproxyconfigdata)|true|none|none|
-|displayName|string|true|none|Human-readable LLM proxy name (must be URL-friendly - only letters, numbers, spaces, hyphens, underscores, and dots allowed)|
-|version|string|true|none|Semantic version of the LLM proxy|
+|spec|[LLMProviderConfigData](schemas.md#schemallmproviderconfigdata)|true|none|none|
+|displayName|string|true|none|Human-readable LLM Provider name|
+|version|string|true|none|Semantic version of the LLM Provider|
 |context|string|false|none|Base path for all API routes (must start with /, no trailing slash)|
 |vhost|string|false|none|Virtual host name used for routing. Supports standard domain names, subdomains, or wildcard domains. Must follow RFC-compliant hostname rules. Wildcards are only allowed in the left-most label (e.g., *.example.com).|
-|provider|[LLMProxyProvider](schemas.md#schemallmproxyprovider)|true|none|none|
-|id|string|true|none|Unique id of a deployed llm provider|
-|auth|[LLMUpstreamAuth](schemas.md#schemallmupstreamauth)|false|none|none|
+|template|string|true|none|Template name to use for this LLM Provider|
+|upstreamDefinitions|[[UpstreamDefinition](schemas.md#schemaupstreamdefinition)]|false|none|List of reusable upstream definitions with optional timeout configurations. Referenced by upstream.ref.|
+|name|string|true|none|Unique identifier for this upstream definition|
+|basePath|string|false|none|Base path prefix for all endpoints in this upstream (e.g., /api/v2). All requests to this upstream will have this path prepended. Must start with '/' and must not end with '/'; omit for root.|
+|timeout|[UpstreamTimeout](schemas.md#schemaupstreamtimeout)|false|none|Timeout configuration for upstream requests|
+|connect|string|false|none|Connection timeout duration (e.g., "5s", "500ms")|
+|upstreams|[object]|true|none|List of backend targets with optional weights for load balancing|
+|url|string(uri)|true|none|Backend URL (host and port only, path comes from basePath)|
+|weight|integer|false|none|Relative weight for load balancing across multiple upstream targets. Reserved for future multi-target load balancing; not applied yet (only the first target is currently used).|
+|upstream|any|true|none|none|
+
+*allOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[Upstream](schemas.md#schemaupstream)|false|none|Upstream backend configuration (single target or reference)|
+|url|string(uri)|false|none|Direct backend URL to route traffic to|
+|ref|string|false|none|Reference to a predefined upstreamDefinition|
+|hostRewrite|string|false|none|Controls how the Host header is handled when routing to the upstream. `auto` delegates host rewriting to Envoy, which rewrites the Host header using the upstream cluster host. `manual` disables automatic rewriting and expects explicit configuration.|
+
+*oneOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|object|false|none|none|
+
+*xor*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|object|false|none|none|
+
+*and*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[UpstreamAuth](schemas.md#schemaupstreamauth)|false|none|none|
+|auth|object|false|none|none|
 |type|string|true|none|none|
 |header|string|false|none|none|
-|value|string|false|write-only|Upstream credential. Write-only: accepted on create/update and never returned by the management API on a read, for any role. An update that omits it inherits the stored value; set `type: none` to remove auth.|
+|value|string|false|write-only|Upstream credential. Write-only: accepted on create/update and never returned by the management API on a read, for any role. Supply either a literal value or a secret reference (e.g. a `secret` template expression); either way the field is omitted from management API response bodies. An update that omits it inherits the stored value; set `type: none` to remove auth.|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|accessControl|[LLMAccessControl](schemas.md#schemallmaccesscontrol)|true|none|none|
+|mode|string|true|none|Access control mode|
+|exceptions|[[RouteException](schemas.md#schemarouteexception)]|false|none|Path exceptions to the access control mode|
+|path|string|true|none|Path pattern|
+|methods|[string]|true|none|HTTP methods|
 |globalPolicies|[[Policy](schemas.md#schemapolicy)]|false|none|Global (api-level) policies applied across ALL operations as one shared scope, evaluated before operation-level policies.|
 |name|string|true|none|Name of the policy|
 |version|string|true|none|Version of the policy. Only major-only version is allowed (e.g., v0, v1). Full semantic version (e.g., v1.0.0) is not accepted and will be rejected. The Gateway Controller resolves the major version to the single matching full version installed in the gateway image.|
@@ -245,14 +372,6 @@ Status Code **200**
 |path|string|true|none|none|
 |methods|[string]|true|none|none|
 |params|object|true|none|JSON Schema describing the parameters accepted by this policy. This itself is a JSON Schema document.|
-|additionalProviders|[[LLMProxyAdditionalProvider](schemas.md#schemallmproxyadditionalprovider)]|false|none|Optional list of additional LLM providers attached to this proxy as selectable upstreams. Policies (e.g. an OpenAI translator) can route requests to any of these by setting the upstream name. The primary `provider` field above remains the default upstream and the FK target.|
-|id|string|true|none|Unique id of a deployed llm provider|
-|as|string|false|none|Logical LLM Provider name used by policies to select this provider. Must be unique within the proxy. Defaults to `id` when omitted.|
-|auth|[LLMUpstreamAuth](schemas.md#schemallmupstreamauth)|false|none|none|
-|transformer|[LLMProxyTransformer](schemas.md#schemallmproxytransformer)|false|none|Request/response translator applied when this provider is the selected upstream. The proxy injects the translator as a conditional policy whose execution condition matches this provider, so it runs only when the provider is selected. The provider's `as` name (defaults to `id`) is passed to the translator as its target upstream.|
-|type|string|true|none|Translator policy name (for example openai-to-anthropic).|
-|version|string|true|none|Major-only translator policy version (for example v1). The Gateway Controller resolves it to the installed full version.|
-|params|object|false|none|Translator-specific parameters (for example model, apiVersion).|
 |policies|[[LLMPolicy](schemas.md#schemallmpolicy)]|false|none|DEPRECATED - use operationPolicies. Still honoured (treated identically to operationPolicies).|
 |name|string|true|none|none|
 |version|string|true|none|none|
@@ -260,7 +379,7 @@ Status Code **200**
 |path|string|true|none|none|
 |methods|[string]|true|none|none|
 |params|object|true|none|JSON Schema describing the parameters accepted by this policy. This itself is a JSON Schema document.|
-|deploymentState|string|false|none|Desired deployment state - 'deployed' (default) or 'undeployed'. When set to 'undeployed', the LLM Proxy is removed from router traffic but configuration and policies are preserved for potential redeployment.|
+|deploymentState|string|false|none|Desired deployment state - 'deployed' (default) or 'undeployed'. When set to 'undeployed', the LLM Provider is removed from router traffic but configuration and policies are preserved for potential redeployment.|
 |resilience|[Resilience](schemas.md#schemaresilience)|false|none|Backend/route timeout configuration. Maps to Envoy RouteAction timeouts. Can be set at the API level (applies to all routes) and/or the operation level (applies to that operation's route). When set at both levels, the operation-level value takes precedence. When unset, the gateway's global route timeout defaults apply.|
 |timeout|string|false|none|Maximum time for the entire route (request to upstream response). "0s" disables the timeout.|
 |idleTimeout|string|false|none|Per-route stream idle timeout (overrides the listener stream idle timeout for this route). "0s" disables the timeout.|
@@ -282,32 +401,36 @@ Status Code **200**
 |Property|Value|
 |---|---|
 |apiVersion|gateway.api-platform.wso2.com/v1|
-|kind|LlmProxy|
+|kind|LlmProvider|
+|hostRewrite|auto|
+|hostRewrite|manual|
 |type|api-key|
 |type|other|
 |type|none|
+|mode|allow_all|
+|mode|deny_all|
 |deploymentState|deployed|
 |deploymentState|undeployed|
 |state|deployed|
 |state|undeployed|
 
-## Get LLM proxy by unique identifier
+## Get LLM provider by identifier
 
-<a id="opIdgetLLMProxyById"></a>
+<a id="opIdgetLLMProviderById"></a>
 
-`GET /llm-proxies/{id}`
+`GET /llm-providers/{id}`
 
 > Code samples
 
 ```shell
 
-curl -X GET http://localhost:9090/api/management/v1/llm-proxies/{id} \
+curl -X GET http://localhost:9090/api/management/v1/llm-providers/{id} \
   -u {username}:{password} \
   -H 'Accept: application/json'
 
 ```
 
-Get an LLM proxy by its ID.
+Get an LLM provider by its ID.
 
 ### Authentication
 
@@ -318,11 +441,11 @@ Required roles: `admin`, `developer`
 
 </aside>
 
-<h3 id="get-llm-proxy-by-unique-identifier-parameters">Parameters</h3>
+<h3 id="get-llm-provider-by-identifier-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string|true|Unique identifier of the LLM proxy|
+|id|path|string|true|Unique identifier of the LLM provider|
 
 > Example responses
 >
@@ -331,21 +454,48 @@ Required roles: `admin`, `developer`
 ```json
 {
   "apiVersion": "gateway.api-platform.wso2.com/v1",
-  "kind": "LlmProxy",
+  "kind": "LlmProvider",
   "metadata": {
-    "name": "openai-proxy"
+    "name": "wso2-openai-provider"
   },
   "spec": {
-    "displayName": "OpenAI Proxy",
+    "displayName": "OpenAI Provider",
     "version": "v1.0",
-    "context": "/openai-proxy",
-    "provider": {
-      "id": "wso2-openai-provider"
+    "template": "openai",
+    "context": "/openai/latest",
+    "upstream": {
+      "url": "https://api.openai.com/v1",
+      "auth": {
+        "type": "api-key",
+        "header": "Authorization"
+      }
     },
-    "policies": []
+    "accessControl": {
+      "mode": "deny_all",
+      "exceptions": [
+        {
+          "path": "/chat/completions",
+          "methods": [
+            "POST"
+          ]
+        },
+        {
+          "path": "/models",
+          "methods": [
+            "GET"
+          ]
+        },
+        {
+          "path": "/models/{modelId}",
+          "methods": [
+            "GET"
+          ]
+        }
+      ]
+    }
   },
   "status": {
-    "id": "openai-proxy",
+    "id": "wso2-openai-provider",
     "state": "deployed",
     "createdAt": "2026-04-24T07:21:13Z",
     "updatedAt": "2026-04-24T07:21:13Z",
@@ -354,25 +504,25 @@ Required roles: `admin`, `developer`
 }
 ```
 
-<h3 id="get-llm-proxy-by-unique-identifier-responses">Responses</h3>
+<h3 id="get-llm-provider-by-identifier-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|LLM proxy details|[LLMProxyConfiguration](schemas.md#schemallmproxyconfiguration)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|LLM proxy not found|[ErrorResponse](schemas.md#schemaerrorresponse)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|LLM provider details|[LLMProviderConfiguration](schemas.md#schemallmproviderconfiguration)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|LLM provider not found|[ErrorResponse](schemas.md#schemaerrorresponse)|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal server error|[ErrorResponse](schemas.md#schemaerrorresponse)|
 
-## Update an existing LLM proxy
+## Update an existing LLM provider
 
-<a id="opIdupdateLLMProxy"></a>
+<a id="opIdupdateLLMProvider"></a>
 
-`PUT /llm-proxies/{id}`
+`PUT /llm-providers/{id}`
 
 > Code samples
 
 ```shell
 
-curl -X PUT http://localhost:9090/api/management/v1/llm-proxies/{id} \
+curl -X PUT http://localhost:9090/api/management/v1/llm-providers/{id} \
   -u {username}:{password} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -380,25 +530,53 @@ curl -X PUT http://localhost:9090/api/management/v1/llm-proxies/{id} \
 
 ```
 
-Update an existing LLM proxy in the Gateway.
+Update an existing LLM provider in the Gateway.
 
 > Payload
 
 ```json
 {
   "apiVersion": "gateway.api-platform.wso2.com/v1",
-  "kind": "LlmProxy",
+  "kind": "LlmProvider",
   "metadata": {
-    "name": "openai-proxy"
+    "name": "wso2-openai-provider"
   },
   "spec": {
-    "displayName": "OpenAI Proxy",
+    "displayName": "OpenAI Provider",
     "version": "v1.0",
-    "context": "/openai-proxy",
-    "provider": {
-      "id": "wso2-openai-provider"
+    "template": "openai",
+    "context": "/openai/latest",
+    "upstream": {
+      "url": "https://api.openai.com/v1",
+      "auth": {
+        "type": "api-key",
+        "header": "Authorization",
+        "value": "Bearer sk-your-api-key"
+      }
     },
-    "policies": []
+    "accessControl": {
+      "mode": "deny_all",
+      "exceptions": [
+        {
+          "path": "/chat/completions",
+          "methods": [
+            "POST"
+          ]
+        },
+        {
+          "path": "/models",
+          "methods": [
+            "GET"
+          ]
+        },
+        {
+          "path": "/models/{modelId}",
+          "methods": [
+            "GET"
+          ]
+        }
+      ]
+    }
   }
 }
 ```
@@ -408,16 +586,16 @@ Update an existing LLM proxy in the Gateway.
 <aside class="warning">
 This operation requires <strong>Basic Auth</strong> authentication.
 
-Required roles: `admin`, `developer`
+Required roles: `admin`
 
 </aside>
 
-<h3 id="update-an-existing-llm-proxy-parameters">Parameters</h3>
+<h3 id="update-an-existing-llm-provider-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string|true|Unique identifier of the LLM proxy|
-|body|body|[LLMProxyConfigurationRequest](schemas.md#schemallmproxyconfigurationrequest)|true|Updated LLM proxy|
+|id|path|string|true|Unique identifier of the LLM provider|
+|body|body|[LLMProviderConfigurationRequest](schemas.md#schemallmproviderconfigurationrequest)|true|Updated LLM provider|
 
 > Example responses
 >
@@ -426,21 +604,48 @@ Required roles: `admin`, `developer`
 ```json
 {
   "apiVersion": "gateway.api-platform.wso2.com/v1",
-  "kind": "LlmProxy",
+  "kind": "LlmProvider",
   "metadata": {
-    "name": "openai-proxy"
+    "name": "wso2-openai-provider"
   },
   "spec": {
-    "displayName": "OpenAI Proxy",
+    "displayName": "OpenAI Provider",
     "version": "v1.0",
-    "context": "/openai-proxy",
-    "provider": {
-      "id": "wso2-openai-provider"
+    "template": "openai",
+    "context": "/openai/latest",
+    "upstream": {
+      "url": "https://api.openai.com/v1",
+      "auth": {
+        "type": "api-key",
+        "header": "Authorization"
+      }
     },
-    "policies": []
+    "accessControl": {
+      "mode": "deny_all",
+      "exceptions": [
+        {
+          "path": "/chat/completions",
+          "methods": [
+            "POST"
+          ]
+        },
+        {
+          "path": "/models",
+          "methods": [
+            "GET"
+          ]
+        },
+        {
+          "path": "/models/{modelId}",
+          "methods": [
+            "GET"
+          ]
+        }
+      ]
+    }
   },
   "status": {
-    "id": "openai-proxy",
+    "id": "wso2-openai-provider",
     "state": "deployed",
     "createdAt": "2026-04-24T07:21:13Z",
     "updatedAt": "2026-04-24T07:21:13Z",
@@ -449,47 +654,47 @@ Required roles: `admin`, `developer`
 }
 ```
 
-<h3 id="update-an-existing-llm-proxy-responses">Responses</h3>
+<h3 id="update-an-existing-llm-provider-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|LLM proxy updated successfully|[LLMProxyConfiguration](schemas.md#schemallmproxyconfiguration)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|LLM provider updated successfully|[LLMProviderConfiguration](schemas.md#schemallmproviderconfiguration)|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid configuration|[ErrorResponse](schemas.md#schemaerrorresponse)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|LLM proxy not found|[ErrorResponse](schemas.md#schemaerrorresponse)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|LLM provider not found|[ErrorResponse](schemas.md#schemaerrorresponse)|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal server error|[ErrorResponse](schemas.md#schemaerrorresponse)|
 
-## Delete an LLM proxy
+## Delete an LLM provider
 
-<a id="opIddeleteLLMProxy"></a>
+<a id="opIddeleteLLMProvider"></a>
 
-`DELETE /llm-proxies/{id}`
+`DELETE /llm-providers/{id}`
 
 > Code samples
 
 ```shell
 
-curl -X DELETE http://localhost:9090/api/management/v1/llm-proxies/{id} \
+curl -X DELETE http://localhost:9090/api/management/v1/llm-providers/{id} \
   -u {username}:{password} \
   -H 'Accept: application/json'
 
 ```
 
-Delete an LLM proxy from the Gateway.
+Delete an LLM provider from the Gateway.
 
 ### Authentication
 
 <aside class="warning">
 This operation requires <strong>Basic Auth</strong> authentication.
 
-Required roles: `admin`, `developer`
+Required roles: `admin`
 
 </aside>
 
-<h3 id="delete-an-llm-proxy-parameters">Parameters</h3>
+<h3 id="delete-an-llm-provider-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string|true|Unique identifier of the LLM proxy|
+|id|path|string|true|Unique identifier of the LLM provider|
 
 > Example responses
 >
@@ -498,20 +703,20 @@ Required roles: `admin`, `developer`
 ```json
 {
   "status": "success",
-  "message": "LLM proxy deleted successfully",
-  "id": "openai-proxy"
+  "message": "LLM provider deleted successfully",
+  "id": "wso2-openai-provider"
 }
 ```
 
-<h3 id="delete-an-llm-proxy-responses">Responses</h3>
+<h3 id="delete-an-llm-provider-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|LLM proxy deleted successfully|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|LLM proxy not found|[ErrorResponse](schemas.md#schemaerrorresponse)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|LLM provider deleted successfully|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|LLM provider not found|[ErrorResponse](schemas.md#schemaerrorresponse)|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal server error|[ErrorResponse](schemas.md#schemaerrorresponse)|
 
-<h3 id="delete-an-llm-proxy-responseschema">Response Schema</h3>
+<h3 id="delete-an-llm-provider-responseschema">Response Schema</h3>
 
 Status Code **200**
 
@@ -521,17 +726,17 @@ Status Code **200**
 |message|string|false|none|none|
 |id|string|false|none|none|
 
-## Create a new API key for an LLM proxy
+## Create a new API key for an LLM provider
 
-<a id="opIdcreateLLMProxyAPIKey"></a>
+<a id="opIdcreateLLMProviderAPIKey"></a>
 
-`POST /llm-proxies/{id}/api-keys`
+`POST /llm-providers/{id}/api-keys`
 
 > Code samples
 
 ```shell
 
-curl -X POST http://localhost:9090/api/management/v1/llm-proxies/{id}/api-keys \
+curl -X POST http://localhost:9090/api/management/v1/llm-providers/{id}/api-keys \
   -u {username}:{password} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -539,7 +744,7 @@ curl -X POST http://localhost:9090/api/management/v1/llm-proxies/{id}/api-keys \
 
 ```
 
-Generate a new API key for an LLM proxy in the Gateway.
+Generate a new API key for an LLM provider in the Gateway.
 
 > Payload
 
@@ -558,11 +763,11 @@ Required roles: `admin`, `consumer`
 
 </aside>
 
-<h3 id="create-a-new-api-key-for-an-llm-proxy-parameters">Parameters</h3>
+<h3 id="create-a-new-api-key-for-an-llm-provider-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string|true|Unique handle of the LLM proxy to generate the key for|
+|id|path|string|true|Unique handle of the LLM provider to generate the key for|
 |body|body|[APIKeyCreationRequest](schemas.md#schemaapikeycreationrequest)|true|none|
 
 > Example responses
@@ -588,33 +793,33 @@ Required roles: `admin`, `consumer`
 }
 ```
 
-<h3 id="create-a-new-api-key-for-an-llm-proxy-responses">Responses</h3>
+<h3 id="create-a-new-api-key-for-an-llm-provider-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|API key created successfully|[APIKeyCreationResponse](schemas.md#schemaapikeycreationresponse)|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid configuration (validation failed)|[ErrorResponse](schemas.md#schemaerrorresponse)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|LLM proxy not found|[ErrorResponse](schemas.md#schemaerrorresponse)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|LLM provider not found|[ErrorResponse](schemas.md#schemaerrorresponse)|
 |409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|Conflict (duplicate key or conflicting update)|[ErrorResponse](schemas.md#schemaerrorresponse)|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal server error|[ErrorResponse](schemas.md#schemaerrorresponse)|
 
-## Get the list of API keys for an LLM proxy
+## Get the list of API keys for an LLM provider
 
-<a id="opIdlistLLMProxyAPIKeys"></a>
+<a id="opIdlistLLMProviderAPIKeys"></a>
 
-`GET /llm-proxies/{id}/api-keys`
+`GET /llm-providers/{id}/api-keys`
 
 > Code samples
 
 ```shell
 
-curl -X GET http://localhost:9090/api/management/v1/llm-proxies/{id}/api-keys \
+curl -X GET http://localhost:9090/api/management/v1/llm-providers/{id}/api-keys \
   -u {username}:{password} \
   -H 'Accept: application/json'
 
 ```
 
-List all API keys for an LLM proxy in the Gateway.
+List all API keys for an LLM provider in the Gateway.
 
 ### Authentication
 
@@ -625,11 +830,11 @@ Required roles: `admin`, `consumer`
 
 </aside>
 
-<h3 id="get-the-list-of-api-keys-for-an-llm-proxy-parameters">Parameters</h3>
+<h3 id="get-the-list-of-api-keys-for-an-llm-provider-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string|true|Unique handle of the LLM proxy to retrieve keys for|
+|id|path|string|true|Unique handle of the LLM provider to retrieve keys for|
 
 > Example responses
 >
@@ -655,25 +860,25 @@ Required roles: `admin`, `consumer`
 }
 ```
 
-<h3 id="get-the-list-of-api-keys-for-an-llm-proxy-responses">Responses</h3>
+<h3 id="get-the-list-of-api-keys-for-an-llm-provider-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|List of API keys|[APIKeyListResponse](schemas.md#schemaapikeylistresponse)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|LLM proxy not found|[ErrorResponse](schemas.md#schemaerrorresponse)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|LLM provider not found|[ErrorResponse](schemas.md#schemaerrorresponse)|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal server error|[ErrorResponse](schemas.md#schemaerrorresponse)|
 
-## Regenerate API key for an LLM proxy
+## Regenerate API key for an LLM provider
 
-<a id="opIdregenerateLLMProxyAPIKey"></a>
+<a id="opIdregenerateLLMProviderAPIKey"></a>
 
-`POST /llm-proxies/{id}/api-keys/{apiKeyName}/regenerate`
+`POST /llm-providers/{id}/api-keys/{apiKeyName}/regenerate`
 
 > Code samples
 
 ```shell
 
-curl -X POST http://localhost:9090/api/management/v1/llm-proxies/{id}/api-keys/{apiKeyName}/regenerate \
+curl -X POST http://localhost:9090/api/management/v1/llm-providers/{id}/api-keys/{apiKeyName}/regenerate \
   -u {username}:{password} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -681,7 +886,7 @@ curl -X POST http://localhost:9090/api/management/v1/llm-proxies/{id}/api-keys/{
 
 ```
 
-Regenerate an existing API key for an LLM proxy in the Gateway.
+Regenerate an existing API key for an LLM provider in the Gateway.
 
 > Payload
 
@@ -698,11 +903,11 @@ Required roles: `admin`, `consumer`
 
 </aside>
 
-<h3 id="regenerate-api-key-for-an-llm-proxy-parameters">Parameters</h3>
+<h3 id="regenerate-api-key-for-an-llm-provider-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string|true|Unique handle of the LLM proxy|
+|id|path|string|true|Unique handle of the LLM provider|
 |apiKeyName|path|string|true|Name of the API key to regenerate|
 |body|body|[APIKeyRegenerationRequest](schemas.md#schemaapikeyregenerationrequest)|true|none|
 
@@ -729,26 +934,26 @@ Required roles: `admin`, `consumer`
 }
 ```
 
-<h3 id="regenerate-api-key-for-an-llm-proxy-responses">Responses</h3>
+<h3 id="regenerate-api-key-for-an-llm-provider-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|API key rotated successfully|[APIKeyCreationResponse](schemas.md#schemaapikeycreationresponse)|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid configuration (validation failed)|[ErrorResponse](schemas.md#schemaerrorresponse)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|LLM proxy or API key not found|[ErrorResponse](schemas.md#schemaerrorresponse)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|LLM provider or API key not found|[ErrorResponse](schemas.md#schemaerrorresponse)|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal server error|[ErrorResponse](schemas.md#schemaerrorresponse)|
 
-## Update an API key for an LLM proxy
+## Update an API key for an LLM provider
 
-<a id="opIdupdateLLMProxyAPIKey"></a>
+<a id="opIdupdateLLMProviderAPIKey"></a>
 
-`PUT /llm-proxies/{id}/api-keys/{apiKeyName}`
+`PUT /llm-providers/{id}/api-keys/{apiKeyName}`
 
 > Code samples
 
 ```shell
 
-curl -X PUT http://localhost:9090/api/management/v1/llm-proxies/{id}/api-keys/{apiKeyName} \
+curl -X PUT http://localhost:9090/api/management/v1/llm-providers/{id}/api-keys/{apiKeyName} \
   -u {username}:{password} \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -775,11 +980,11 @@ Required roles: `admin`, `consumer`
 
 </aside>
 
-<h3 id="update-an-api-key-for-an-llm-proxy-parameters">Parameters</h3>
+<h3 id="update-an-api-key-for-an-llm-provider-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string|true|Unique handle of the LLM proxy|
+|id|path|string|true|Unique handle of the LLM provider|
 |apiKeyName|path|string|true|Name of the API key to update|
 |body|body|[APIKeyUpdateRequest](schemas.md#schemaapikeyupdaterequest)|true|none|
 
@@ -806,27 +1011,27 @@ Required roles: `admin`, `consumer`
 }
 ```
 
-<h3 id="update-an-api-key-for-an-llm-proxy-responses">Responses</h3>
+<h3 id="update-an-api-key-for-an-llm-provider-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|API key updated successfully|[APIKeyCreationResponse](schemas.md#schemaapikeycreationresponse)|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request (validation failed)|[ErrorResponse](schemas.md#schemaerrorresponse)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|LLM proxy or API key not found|[ErrorResponse](schemas.md#schemaerrorresponse)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|LLM provider or API key not found|[ErrorResponse](schemas.md#schemaerrorresponse)|
 |409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|Conflict (duplicate key or conflicting update)|[ErrorResponse](schemas.md#schemaerrorresponse)|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal server error|[ErrorResponse](schemas.md#schemaerrorresponse)|
 
-## Revoke an API key for an LLM proxy
+## Revoke an API key for an LLM provider
 
-<a id="opIdrevokeLLMProxyAPIKey"></a>
+<a id="opIdrevokeLLMProviderAPIKey"></a>
 
-`DELETE /llm-proxies/{id}/api-keys/{apiKeyName}`
+`DELETE /llm-providers/{id}/api-keys/{apiKeyName}`
 
 > Code samples
 
 ```shell
 
-curl -X DELETE http://localhost:9090/api/management/v1/llm-proxies/{id}/api-keys/{apiKeyName} \
+curl -X DELETE http://localhost:9090/api/management/v1/llm-providers/{id}/api-keys/{apiKeyName} \
   -u {username}:{password} \
   -H 'Accept: application/json'
 
@@ -843,11 +1048,11 @@ Required roles: `admin`, `consumer`
 
 </aside>
 
-<h3 id="revoke-an-api-key-for-an-llm-proxy-parameters">Parameters</h3>
+<h3 id="revoke-an-api-key-for-an-llm-provider-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|id|path|string|true|Unique handle of the LLM proxy|
+|id|path|string|true|Unique handle of the LLM provider|
 |apiKeyName|path|string|true|Name of the API key to revoke|
 
 > Example responses
@@ -861,11 +1066,11 @@ Required roles: `admin`, `consumer`
 }
 ```
 
-<h3 id="revoke-an-api-key-for-an-llm-proxy-responses">Responses</h3>
+<h3 id="revoke-an-api-key-for-an-llm-provider-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|API key revoked successfully|[APIKeyRevocationResponse](schemas.md#schemaapikeyrevocationresponse)|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid configuration (validation failed)|[ErrorResponse](schemas.md#schemaerrorresponse)|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|LLM proxy or API key not found|[ErrorResponse](schemas.md#schemaerrorresponse)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|LLM provider or API key not found|[ErrorResponse](schemas.md#schemaerrorresponse)|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal server error|[ErrorResponse](schemas.md#schemaerrorresponse)|
