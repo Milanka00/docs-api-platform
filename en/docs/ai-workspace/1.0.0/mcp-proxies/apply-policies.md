@@ -15,7 +15,7 @@ content_type: "how-to"
 
 # Apply policies to an MCP proxy
 
-Once you create an MCP proxy, open it from **MCP** > **MCP Proxies** and go to its **Policies** tab to apply policies.
+Once you create a Model Context Protocol (MCP) proxy, open it from **MCP** > **MCP Proxies** and go to its **Policies** tab to apply policies.
 
 AI Workspace provides built-in policies that govern how traffic flows through your MCP proxies. A policy applies to the whole proxy by default. Inside an MCP-specific policy you can also define rules per tool or per prompt. Those rules apply the policy at each capability level.
 

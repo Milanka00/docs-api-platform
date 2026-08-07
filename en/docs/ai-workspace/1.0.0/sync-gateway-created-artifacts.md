@@ -1,5 +1,5 @@
 ---
-title: "Manage Gateway-deployed AI artifacts in AI Workspace"
+title: "Manage gateway-deployed AI artifacts in AI Workspace"
 description: "Create an LLM provider template, LLM provider, LLM proxy, or MCP proxy on the AI Gateway and view the read-only copy that syncs up to AI Workspace."
 canonical_url: https://wso2.com/api-platform/docs/ai-workspace/1.0.0/sync-gateway-created-artifacts/
 md_url: https://wso2.com/api-platform/docs/ai-workspace/1.0.0/sync-gateway-created-artifacts.md
@@ -12,7 +12,7 @@ last_updated: 2026-07-31
 content_type: "how-to"
 ---
 
-# Manage Gateway-deployed AI artifacts in AI Workspace
+# Manage gateway-deployed AI artifacts in AI Workspace
 
 You can create four kinds of AI artifact directly on the AI Gateway:
 
@@ -47,11 +47,13 @@ Syncing is controlled by a single gateway setting, `deployment_sync_enabled`, wh
 ```toml
 [controller.controlplane]
 gateway_name = "default"
-insecure_skip_verify = true
+insecure_skip_verify = false
 
 # Sync artifacts with AI Workspace (on by default).
 deployment_sync_enabled = true
 ```
+
+Set `insecure_skip_verify = true` only for local development against a known self-signed certificate. It disables verification of the AI Workspace TLS certificate, so never enable it in production.
 
 Restart the gateway after changing the setting. When it's turned off, the gateway neither syncs its artifacts up nor receives artifacts from AI Workspace.
 
@@ -64,7 +66,7 @@ Create on the gateway ─┬─▶ takes effect immediately (starts serving traf
                        └─▶ synced to AI Workspace ─▶ appears as a read-only copy
 ```
 
-The sync happens automatically in the background — you don't trigger it. A few things to know:
+The sync happens automatically in the background—you don't trigger it. A few things to know:
 
 - **Matched by name.** Each artifact is identified by the name you give it (`metadata.name`). Re-creating an artifact with the same name on the gateway updates the same AI Workspace copy instead of creating a duplicate.
 - **References use names.** An LLM provider names its template, and an LLM proxy names its provider. Create them in order — the template, then the provider, then the proxy — so each reference resolves. MCP proxies stand on their own.
@@ -96,9 +98,11 @@ The examples below use these conventions:
 - **Base URL:** `http://localhost:9090/api/management/v1`
 - **Content type:** `Content-Type: text/yaml` (the API also accepts JSON)
 - **Auth:** HTTP Basic, using a user configured under `[[controller.auth.basic.users]]` in `config.toml`. Pass your own credentials rather than hard-coding them:
-  ```bash
-  export GW_USER='<username>' GW_PASSWORD='<password>'
-  ```
+
+    ```bash
+    export GW_USER='<username>' GW_PASSWORD='<password>'
+    ```
+
 - **Body:** `--data-binary '@<file>.yaml'` uploads a manifest file as-is.
 
 ## Create the artifacts on the gateway
@@ -154,10 +158,13 @@ spec:
   template: my-llm-provider-template   # ← must match the template's metadata.name
   vhost: api.my-llm-provider.local
   upstream:
-    url: https://httpbin.org/anything/v1
-    auth: { type: api-key, header: Authorization, value: api_key_abc123 }
+    url: <upstream-url>
+    auth: { type: api-key, header: Authorization, value: <upstream-api-key> }
   # ... accessControl + policies omitted; see gateway/examples/llm-provider.yaml
 ```
+
+!!! warning "Use placeholders, not real credentials"
+    The manifests in this guide use placeholders such as `<upstream-api-key>`. Replace them with your own values at apply time, and keep manifests that hold real credentials out of source control. Reference a secret instead. See [Secrets management](secrets-management.md).
 
 ```bash
 curl --location 'http://localhost:9090/api/management/v1/llm-providers' \
@@ -183,7 +190,7 @@ spec:
   context: "/project-1/assistant"
   provider:
     id: my-llm-provider   # ← must match the provider's metadata.name
-    auth: { header: X-API-Key, type: api-key, value: adminfoobar }
+    auth: { header: X-API-Key, type: api-key, value: <provider-api-key> }
   # ... policies omitted; see gateway/examples/llm-proxy.yaml
 ```
 
@@ -211,8 +218,8 @@ spec:
   context: "/project-1/everything"
   specVersion: "2025-06-18"
   upstream:
-    url: https://.../mcp-everything-server/v1.0
-    auth: { header: X-Api-Key, type: header, value: admin }
+    url: <mcp-server-url>
+    auth: { header: X-Api-Key, type: header, value: <mcp-server-api-key> }
   # ... policies omitted; see gateway/examples/mcp-proxy.yaml
 ```
 

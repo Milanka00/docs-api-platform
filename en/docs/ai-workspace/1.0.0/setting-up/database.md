@@ -1,6 +1,6 @@
 ---
 title: "Connect a database to the Platform API"
-description: "Move the Platform API off its default SQLite file onto PostgreSQL or SQL Server: create the database, configure the connection, secure it with TLS, and tune the connection pool."
+description: "Move the Platform API from SQLite onto PostgreSQL or SQL Server: create the database, configure the connection, secure it with TLS, and tune the pool."
 canonical_url: https://wso2.com/api-platform/docs/ai-workspace/1.0.0/setting-up/database/
 md_url: https://wso2.com/api-platform/docs/ai-workspace/1.0.0/setting-up/database.md
 tags:
@@ -25,7 +25,7 @@ Set the driver in `[platform_api.database]`. These values are accepted:
 
 | `driver` value | Database |
 |----------------|----------|
-| `sqlite3` | SQLite, the default — a single file, no server to run |
+| `sqlite3` | SQLite, the default—a single file, no server to run |
 | `postgres`, `postgresql`, `pgx` | PostgreSQL |
 | `sqlserver`, `mssql` | Microsoft SQL Server |
 
@@ -59,6 +59,13 @@ Create the database and the user the Platform API connects as. Don't grant the u
     CREATE DATABASE platform_api;
     CREATE USER platform_api WITH PASSWORD '<your-password>';
     GRANT CONNECT ON DATABASE platform_api TO platform_api;
+    ```
+
+    Then connect to the `platform_api` database as an administrator and revoke the ability to create objects in the `public` schema, which PostgreSQL grants to every user before version 15:
+
+    ```sql
+    REVOKE CREATE ON SCHEMA public FROM platform_api;
+    REVOKE CREATE ON SCHEMA public FROM PUBLIC;
     ```
 
 === "SQL Server"
@@ -142,7 +149,7 @@ ssl_mode = "require"
 For SQL Server, set `driver = "sqlserver"` and `port = 1433`.
 
 !!! warning "Never write the database password as a literal"
-    The {% raw %}`{{ file }}`{% endraw %} token above reads it from a mounted file, which is the right choice in production — resolution fails closed, so a missing or unreadable file aborts startup rather than connecting with an empty password. Mount the secret at that path and add the mount to the `platform-api` service in `docker-compose.yaml`. To read it from `api-platform.env` instead, swap the token for {% raw %}`'{{ env "APIP_CP_DATABASE_PASSWORD" }}'`{% endraw %}.
+    The {% raw %}`{{ file }}`{% endraw %} token above reads it from a mounted file, which is the right choice in production—resolution fails closed, so a missing or unreadable file aborts startup rather than connecting with an empty password. Mount the secret at that path and add the mount to the `platform-api` service in `docker-compose.yaml`. To read it from `api-platform.env` instead, swap the token for {% raw %}`'{{ env "APIP_CP_DATABASE_PASSWORD" }}'`{% endraw %}.
 
 ## Step 4: Secure the connection with TLS
 

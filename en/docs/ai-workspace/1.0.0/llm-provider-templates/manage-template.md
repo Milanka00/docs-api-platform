@@ -14,7 +14,7 @@ content_type: "how-to"
 
 # Manage an LLM provider template
 
-This guide shows how to create an LLM provider from a template, and how to edit, enable, disable, and delete templates.
+This guide shows how to create a large language model (LLM) provider from a template, and how to edit, enable, disable, and delete templates.
 
 ## Use a template to create a provider
 
@@ -37,7 +37,7 @@ When [adding an LLM provider](../llm-providers/configure-provider.md):
 
 You can only edit **custom** templates; built-in templates are read-only. There are two ways to make a change:
 
-- Edit a version in place through the [Overview, Connection, and Token Mapping tabs](configure-template.md#configure-the-template) — for example, to update the logo URL, endpoint, or mappings.
+- Edit a version in place through the [**Overview**, **Connection**, and **Token Mapping** tabs](configure-template.md#configure-the-template) — for example, to update the logo URL, endpoint, or mappings.
 - [Create a new version](configure-template.md#versioning) to introduce a different configuration while keeping the existing version available.
 
 Editing a template version doesn't affect the providers already created from it. A provider copies the template configuration at creation time, so template changes apply only to providers created afterward.

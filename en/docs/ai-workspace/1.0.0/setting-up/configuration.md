@@ -1,6 +1,6 @@
 ---
 title: "AI Workspace configuration and environment interpolation"
-description: "How AI Workspace and the Platform API load their config.toml files, inject environment values and mounted files through interpolation tokens, and keep sensitive values out of the config file."
+description: "How AI Workspace and the Platform API load config.toml, inject environment values and mounted files through interpolation tokens, and keep secrets out of it."
 canonical_url: https://wso2.com/api-platform/docs/ai-workspace/1.0.0/setting-up/configuration/
 md_url: https://wso2.com/api-platform/docs/ai-workspace/1.0.0/setting-up/configuration.md
 tags:
@@ -25,7 +25,7 @@ Each service reads a TOML file mounted into its container, layered over that ser
 - **AI Workspace (BFF)** — `/etc/ai-workspace/config.toml`; every key lives under the `[ai_workspace]` table.
 - **Platform API** — `/etc/platform-api/config.toml`; every key lives under the `[platform_api]` table.
 
-The per-service namespacing (`[ai_workspace]`, `[platform_api]`, `[api_portal]`) lets one `config.toml` hold multiple services' sections side by side without their keys colliding — each service reads only its own table.
+The per-service namespacing (`[ai_workspace]`, `[platform_api]`, `[api_portal]`) lets one `config.toml` hold multiple services' sections side by side without their keys colliding—each service reads only its own table.
 
 !!! important "Environment variables don't override config keys directly"
     There is **no prefix that auto-maps environment variables onto config keys.** An environment value reaches a setting **only** through an explicit interpolation token written into the config file, resolved when the file is loaded. A key written as a plain literal — or absent from the file — ignores the matching variable entirely.
@@ -68,7 +68,7 @@ For every configurable option and the tokens the shipped files carry, refer to t
 
 This section covers credentials the services need to start — database passwords, the OpenID Connect (OIDC) client secret, and the at-rest encryption key. It's a separate mechanism from the [AI Workspace secrets](../secrets-management.md) feature, which stores encrypted credentials you reference from artifacts.
 
-Never write a sensitive value as a literal in `config.toml`, and never hardcode one in `docker-compose.yaml`. Reference each with an interpolation token — from an environment variable or, preferably, from a mounted file:
+Never write a sensitive value as a literal in `config.toml`, and never hardcode one in `docker-compose.yaml`. Reference each with an interpolation token—from an environment variable or, preferably, from a mounted file:
 
 {% raw %}
 

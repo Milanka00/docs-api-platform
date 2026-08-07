@@ -14,7 +14,7 @@ content_type: "how-to"
 
 # Apply AI policies to proxies
 
-After [building the AI Gateway with your custom AI policy](build-gateway-with-ai-policies.md) and starting it, the gateway automatically sends its policy manifest to the control plane on connection. You can then sync your custom AI policy to the organization and apply it to your LLM providers, App LLM proxies, and MCP proxies.
+After [building the AI Gateway with your custom AI policy](build-gateway-with-ai-policies.md) and starting it, the gateway automatically sends its policy manifest to the control plane on connection. You can then sync your custom AI policy to the organization and apply it to your large language model (LLM) providers, App LLM proxies, and Model Context Protocol (MCP) proxies.
 
 ## Step 1: View the gateway policies
 
@@ -89,10 +89,10 @@ Once synced, a custom AI policy is attached the same way for LLM providers, App 
 1. Navigate to **AI Workspace** and open the **LLM Providers**, **App LLM Proxies**, or **MCP Proxies** list, then click on the resource you want to configure.
 2. Go to the **Guardrails & Policies** tab (MCP proxies use a **Policies** tab).
 3. Click **+ Add Guardrail** / **+ Add Policy** in the section for the scope you want:
-    - **Global Guardrails**/**Global Policies** — applies to every endpoint or capability of the resource.
+    - **Global Guardrails** or **Global Policies**—applies to every endpoint or capability of the resource.
     - A specific endpoint or capability card (expand it first) — applies only there.
 4. Select your custom AI policy from the sidebar — it's listed alongside the built-in policies — and configure its parameters.
-5. Click **Add**/**Submit** to attach it, then deploy or redeploy the resource to the gateway to apply the changes.
+5. Click **Add** or **Submit** to attach it, then deploy or redeploy the resource to the gateway to apply the changes.
 
 ![Guardrails & Policies sidebar showing the synced custom policy listed alongside built-in policies](../../../assets/img/custom-policies/SyncedCustomPolicyinPoliciesSection.svg)
 

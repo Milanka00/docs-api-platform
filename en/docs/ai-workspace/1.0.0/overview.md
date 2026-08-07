@@ -57,7 +57,7 @@ Changes you make in AI Workspace don't affect live traffic until you deploy them
 
 ## What you can manage
 
-### AI Gateways
+### AI gateways
 
 Connect and manage the AI Gateway runtimes that process your AI traffic. In AI Workspace, you can do the following:
 

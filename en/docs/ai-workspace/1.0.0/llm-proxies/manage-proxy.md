@@ -107,12 +107,12 @@ Configure how client applications authenticate when accessing your proxy endpoin
 
 2. Configure the following authentication settings:
 
-| Field | Description |
-|-------|-------------|
-| **Authentication type** | Select the authentication method from the dropdown. **API Key** is the only available method. |
-| **Key name** | The name of the request header that clients must provide, for example `X-API-Key`. |
-| **Sent in** | Where clients send the key. `header` is the only supported option. |
-| **API Key Value Prefix** | An optional prefix prepended to the value clients must send, for example `Bearer`, so that clients send `Bearer <key>`. |
+    | Field | Description |
+    |-------|-------------|
+    | **Authentication type** | Select the authentication method from the dropdown. **API Key** is the only available method. |
+    | **Key name** | The name of the request header that clients must provide, for example `X-API-Key`. |
+    | **Sent in** | Where clients send the key. `header` is the only supported option. |
+    | **API Key Value Prefix** | An optional prefix prepended to the value clients must send, for example `Bearer`, so that clients send `Bearer <key>`. |
 
 3. Click **Save** to apply the security configuration.
 

@@ -35,7 +35,7 @@ This guide walks you through creating an App LLM proxy, optionally attaching gua
 
     - At least one [configured and deployed LLM provider](../llm-providers/configure-provider.md).
 
-## Create a new App LLM proxy
+## Create an App LLM proxy
 
 1. Navigate to **LLM** > **Proxies** in the left navigation menu.
 
@@ -122,13 +122,13 @@ Select a gateway from the **Gateways** dropdown to see the base URL for calling 
 
 The URL follows the format:
 
-```
+```text
 https://{gateway-host}/{proxy-name}
 ```
 
 To call a specific resource, append the resource path:
 
-```
+```text
 https://{gateway-host}/{proxy-name}/chat/completions
 ```
 

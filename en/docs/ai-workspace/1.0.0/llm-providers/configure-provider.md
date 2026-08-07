@@ -33,7 +33,7 @@ An LLM provider connects an AI service platform such as OpenAI or Anthropic to A
 - At least one [AI Gateway created and set up](../ai-gateways/setting-up.md).
 - API credentials for your LLM provider, such as an API key or an access token.
 
-## Add a new provider
+## Add a provider
 
 1. Navigate to **AI Workspace** in your API Platform dashboard.
 2. Select **LLM Providers** from the menu.

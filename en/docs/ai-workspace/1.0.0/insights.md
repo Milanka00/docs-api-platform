@@ -14,7 +14,7 @@ content_type: "concept"
 
 # Insights
 
-The **Insights** page in the AI Workspace links to your [Moesif](https://www.moesif.com/) analytics workspace, where you can view traffic, token usage, latency, and consumer behavior for the requests flowing through your AI Gateways. Moesif is an AI-native API analytics platform.
+The **Insights** page in the AI Workspace links to your [Moesif](https://www.moesif.com/) analytics workspace, where you can view traffic, token usage, latency, and consumer behavior for the requests flowing through your AI Gateways. Moesif is an external analytics service that stores and displays this data.
 
 AI Workspace doesn't embed or proxy Moesif content. The Insights page provides a button that opens your Moesif workspace in a new tab, and all analytics are viewed in Moesif itself.
 

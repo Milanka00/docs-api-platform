@@ -22,7 +22,7 @@ AI policies use the same `Policy` interface as standard gateway policies. For fu
 The key difference is how you handle LLM request and response bodies, especially:
 
 - JSON responses
-- Streaming responses (SSE)
+- Streaming responses that use server-sent events (SSE)
 
 ## How it works
 
@@ -79,7 +79,7 @@ Choose based on what your policy needs to do:
 
 ### Step 1: Create the policy
 
-Each policy lives in its own Go module. Create a "policies" directory inside your gateway:
+Each policy lives in its own Go module. Create a `policies` directory inside your gateway:
 
 ```text
 /policies/my-ai-policy/
@@ -96,12 +96,16 @@ Each policy lives in its own Go module. Create a "policies" directory inside you
 package myaipolicy
 
 import (
+    "bytes"
     "context"
+    "fmt"
 
     policy "github.com/wso2/api-platform/sdk/core/policy/v1alpha2"
 )
 
-type MyAIPolicy struct{}
+type MyAIPolicy struct {
+    blockThreshold float64
+}
 
 func (p *MyAIPolicy) Mode() policy.ProcessingMode {
     return policy.ProcessingMode{

@@ -88,7 +88,7 @@ These policies shape how requests are routed and composed:
 
 ### Provider transformation policies
 
-These policies translate an OpenAI Chat Completions request into another provider's API shape, and translate the response back. Pair them with the [LLM header router](https://wso2.com/api-platform/policy-hub/policies/llm-header-router) to route one endpoint across several providers, or use one on its own to point a single OpenAI-shaped endpoint at a different provider. For an end-to-end example configured on the gateway, see [Multi-provider routing](../../../ai-gateway/next/llm-proxy/multi-provider-routing.md).
+These policies translate an OpenAI Chat Completions request into another provider's API shape, and translate the response back. Pair them with the [LLM header router](https://wso2.com/api-platform/policy-hub/policies/llm-header-router) to route one endpoint across several providers. Use one on its own to point a single OpenAI-shaped endpoint at a different provider. For an end-to-end example configured on the gateway, see [Multi-provider routing](../../../ai-gateway/next/llm-proxy/multi-provider-routing.md).
 
 | Policy | Target provider |
 |--------|-----------------|
@@ -107,10 +107,10 @@ AI services bill per token, so uncontrolled usage turns into unexpected cost. AI
 | [Rate limit - basic](#rate-limit-basic) | Request count | [Policy Hub](https://wso2.com/api-platform/policy-hub/policies/basic-ratelimit) |
 | [Rate limit - advanced](#rate-limit-advanced) | Request count, with multi-dimensional and weighted quotas | [Policy Hub](https://wso2.com/api-platform/policy-hub/policies/advanced-ratelimit) |
 | [Token-based rate limit](#token-based-rate-limit) | Prompt, completion, or total tokens | [Policy Hub](https://wso2.com/api-platform/policy-hub/policies/token-based-ratelimit) |
-| [LLM cost](#llm-cost) | Nothing on its own — calculates the cost other policies spend against | [Policy Hub](https://wso2.com/api-platform/policy-hub/policies/llm-cost) |
+| [LLM cost](#llm-cost) | Nothing on its own—calculates the cost other policies spend against | [Policy Hub](https://wso2.com/api-platform/policy-hub/policies/llm-cost) |
 | [LLM cost-based rate limit](#llm-cost-based-rate-limit) | Monetary spend in USD | [Policy Hub](https://wso2.com/api-platform/policy-hub/policies/llm-cost-based-ratelimit) |
 
-You attach all of them through the **Guardrails** tab of an LLM provider or App LLM proxy. LLM providers also have a built-in **Rate Limiting** tab that caps requests and tokens without attaching a policy — see [Rate limiting on a provider](../llm-providers/manage-provider.md#rate-limiting) for that tab. Use a policy when you need a per-route cap, token categories counted separately, or a spending budget.
+You attach all of them through the **Guardrails** tab of an LLM provider or App LLM proxy. LLM providers also have a built-in **Rate Limiting** tab that caps requests and tokens without attaching a policy. See [Rate limiting on a provider](../llm-providers/manage-provider.md#rate-limiting) for that tab. Use a policy when you need a per-route cap, token categories counted separately, or a spending budget.
 
 For how attachment scope changes what a counter covers, see [Policy scope: global or per resource](#policy-scope-global-or-per-resource).
 
@@ -173,7 +173,7 @@ Configure at least one of the three categories; any combination is valid. Each e
 | `X-RateLimit-Limit` | Configured token limit |
 | `X-RateLimit-Remaining` | Remaining tokens in the current window |
 | `X-RateLimit-Reset` | Time, in epoch seconds, when the window resets |
-| `RateLimit-*` | IETF equivalents of the above |
+| `RateLimit-*` | Internet Engineering Task Force (IETF) equivalents of the above |
 
 **Example: cap total tokens per minute**
 

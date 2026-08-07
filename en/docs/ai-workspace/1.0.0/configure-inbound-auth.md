@@ -50,10 +50,10 @@ Change the key name to match what your SDK sends natively. For example, setting 
 Authorization: Bearer <your-api-key>
 ```
 
-SDKs such as the OpenAI SDK, Mistral SDK, and Azure OpenAI SDK all send an `Authorization: Bearer` header by default, so with this configuration they work without any additional header setup.
+SDKs such as the OpenAI SDK and the Mistral SDK send an `Authorization: Bearer` header by default, so with this configuration they need no additional header setup. The Azure OpenAI SDK sends `Authorization: Bearer` only when it authenticates with a managed identity or another token credential. When it authenticates with an API key, it sends the `api-key` header instead, so set the key name to `api-key` for that configuration.
 
 !!! note
-    The gateway validates the key value regardless of prefix — it strips a leading `Bearer ` before comparing against the stored key.
+    The gateway validates the key value regardless of prefix. It strips a leading `Bearer` prefix before comparing the value against the stored key.
 
 ## Configure the header name
 

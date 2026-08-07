@@ -14,7 +14,7 @@ content_type: "overview"
 
 # LLM provider templates overview
 
-An LLM provider template is a reusable blueprint that holds everything needed to connect to an upstream LLM service:
+A large language model (LLM) provider template is a reusable blueprint that holds everything needed to connect to an upstream LLM service:
 
 - The upstream **endpoint URL**
 - The **inbound authentication** settings (auth type, header or parameter name, and value prefix)

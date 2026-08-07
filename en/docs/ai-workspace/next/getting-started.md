@@ -29,8 +29,8 @@ This guide shows commands with `docker compose`. If you use Podman or another Co
 Run this command in your terminal to download and unzip AI Workspace:
 
 ```bash
-curl -sLO https://github.com/wso2/api-platform/releases/download/portals/ai-workspace/v1.0.0-rc3/wso2apip-ai-workspace-1.0.0-rc3.zip && \
-unzip wso2apip-ai-workspace-1.0.0-rc3.zip
+curl -sLO https://github.com/wso2/api-platform/releases/download/portals/ai-workspace/v1.0.0/wso2apip-ai-workspace-1.0.0.zip && \
+unzip wso2apip-ai-workspace-1.0.0.zip
 ```
 
 ## Step 2: Run the setup script

@@ -18,9 +18,9 @@ The AI Workspace lets you manage AI gateways and large language model (LLM) prov
 
 ## Prerequisites
 
-- [Docker](https://docs.docker.com/get-docker/) with the Compose plugin, or another Compose-compatible container runtime such as Podman
-- Ports **9643** and **9243** available on your machine. If either one is taken, see [Change the ports AI Workspace uses](setting-up/ports.md).
-- `curl` and `unzip` installed
+- Install [Docker](https://docs.docker.com/get-docker/) with the Compose plugin, or another Compose-compatible container runtime such as Podman.
+- Free up ports **9643** and **9243** on your machine. If either one is taken, see [Change the ports AI Workspace uses](setting-up/ports.md).
+- Install `curl` and `unzip`.
 
 This guide shows commands with `docker compose`. If you use Podman or another Compose-compatible runtime, run the equivalent compose command instead, such as `podman compose up -d`.
 
@@ -29,8 +29,8 @@ This guide shows commands with `docker compose`. If you use Podman or another Co
 Run this command in your terminal to download and unzip AI Workspace:
 
 ```bash
-curl -sLO https://github.com/wso2/api-platform/releases/download/portals/ai-workspace/v1.0.0-rc3/wso2apip-ai-workspace-1.0.0-rc3.zip && \
-unzip wso2apip-ai-workspace-1.0.0-rc3.zip
+curl -sLO https://github.com/wso2/api-platform/releases/download/portals/ai-workspace/v1.0.0/wso2apip-ai-workspace-1.0.0.zip && \
+unzip wso2apip-ai-workspace-1.0.0.zip
 ```
 
 ## Step 2: Run the setup script
@@ -132,7 +132,7 @@ Rerunning `./scripts/setup.sh` is safe. By default it fills in only what's missi
 | `--certs-only` | Generate only the TLS certificate. Skips the keys, the admin credentials, and `api-platform.env`. |
 | `--profiles=<a,b,...>` | Write a different `COMPOSE_PROFILES` value to `.env`, for example `--profiles=platform-api` or `--profiles=platform-api,api-portal`. |
 
-To rotate a single value by hand, delete it from `api-platform.env` — or delete the file under `resources/certificates` or `resources/keys` — and rerun the script.
+To rotate a single value by hand, delete it from `api-platform.env`, or delete the file under `resources/certificates` or `resources/keys`, and rerun the script. Don't delete `resources/keys/encryption.key` or `resources/keys/api-portal-encryption.key` this way. Rerunning the script regenerates a missing encryption key without warning, which makes data encrypted under the old key unreadable. To rotate either encryption key, use `--rotate-encryption-key` and read the warning below first.
 
 !!! warning "Rotating an encryption key destroys encrypted data"
     `--rotate-encryption-key` replaces both encryption keys, which makes everything encrypted under the old keys permanently unreadable. That covers stored [AI Workspace secrets](secrets-management.md), subscription tokens, and WebSub HMAC secrets held by the Platform API. It also covers the API Portal's subscription secrets and webhook secrets. At an interactive terminal the script asks you to type `rotate` to confirm; in a non-interactive run, passing the flag is itself the confirmation. Rotating the JWT keypair with `--force` is milder — it only invalidates issued login tokens, so everyone signs in again.

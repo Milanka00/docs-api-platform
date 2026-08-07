@@ -14,7 +14,7 @@ content_type: "how-to"
 
 # Invoke providers and proxies via SDKs
 
-Deploy an LLM provider or App LLM proxy in the AI Workspace first. You can then invoke it with any supported AI SDK. Point the SDK at the gateway's Invoke URL, and authenticate with your generated API key.
+Deploy a large language model (LLM) provider or App LLM proxy in the AI Workspace first. You can then invoke it with any supported AI software development kit (SDK). Point the SDK at the gateway's Invoke URL, and authenticate with your generated API key.
 
 The examples below apply to both providers and proxies. The only difference between the two is the Invoke URL you supply.
 
@@ -35,7 +35,7 @@ All requests to the gateway must include your API key in the request header name
 
 !!! info "Invoke URL format"
     Append `/v1` to the Invoke URL shown in the console:
-    ```
+    ```text
     https://{gateway-host}/{context}/v1
     ```
 
@@ -270,7 +270,7 @@ Mistral exposes both a native SDK and an OpenAI-compatible API at `/v1`.
 
 === "Mistral SDK"
 
-    **Install:** `pip install mistralai httpx`
+    **Install:** `pip install mistralai==2.4.5 httpx`
 
     !!! note
         The Mistral SDK sends its API key as a `Bearer` token. Since the gateway requires `X-API-Key`, an httpx event hook injects this header on every outgoing request.

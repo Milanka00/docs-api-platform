@@ -14,14 +14,14 @@ content_type: "how-to"
 
 # Configure an MCP proxy
 
-An MCP proxy exposes a managed endpoint that your applications use to reach an MCP server. Once deployed, the proxy handles authentication and other access controls.
+A Model Context Protocol (MCP) proxy exposes a managed endpoint that your applications use to reach an MCP server. Once deployed, the proxy handles authentication and other access controls.
 
 This guide walks you through creating a proxy and deploying it to a gateway.
 
 ## Prerequisites
 
 !!! info "Before you begin"
-    - Access to AI Workspace with **Admin** or **Developer** role
+    - Access to AI Workspace with the **Admin** or **Developer** role.
 
 ## Create a new proxy
 
@@ -99,7 +99,7 @@ Select a gateway from the **Gateways** dropdown to see the base URL for calling 
 
 The URL follows the format:
 
-```
+```text
 https://{gateway-host}/{proxy-context}/mcp
 ```
 

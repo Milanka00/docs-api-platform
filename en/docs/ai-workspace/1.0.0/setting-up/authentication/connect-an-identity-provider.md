@@ -1,6 +1,6 @@
 ---
 title: "Connect an identity provider to AI Workspace"
-description: "Configure AI Workspace and the Platform API to delegate login to any OIDC-compliant identity provider: client registration, claim mappings, scope or role authorization, and the config.toml tables both services read."
+description: "Configure AI Workspace and the Platform API to delegate login to an OIDC identity provider: client registration, claim mappings, and authorization."
 canonical_url: https://wso2.com/api-platform/docs/ai-workspace/1.0.0/setting-up/authentication/connect-an-identity-provider/
 md_url: https://wso2.com/api-platform/docs/ai-workspace/1.0.0/setting-up/authentication/connect-an-identity-provider.md
 tags:
@@ -43,7 +43,7 @@ Check your IdP against these requirements before you start:
 
 ## Step 1: Register AI Workspace as a confidential client
 
-In your IdP, create a confidential OIDC application with these settings. Replace `<your-domain>` with the address users reach AI Workspace at, including the port when it isn't 443 — `localhost:9643` for the Docker Compose quickstart.
+In your IdP, create a confidential OIDC application with these settings. Replace `<your-domain>` with the address users reach AI Workspace at, including the port when it isn't 443—`localhost:9643` for the Docker Compose quickstart.
 
 1. Set the authorized redirect URL to `https://<your-domain>/api/auth/callback`. This is the BFF's own server-side callback route, not a page in the app.
 2. Set the post-logout redirect URL to `https://<your-domain>/login`.
@@ -73,7 +73,7 @@ The Platform API authorizes each request in one of two modes, set in `[platform_
 
 **Scope mode** (`mode = "scope"`, the default) reads the `scope` claim and checks it against the scope each endpoint requires. Your IdP has to issue tokens carrying the platform's `ap:*` scopes, which usually means registering those scopes in the IdP and granting them to the application.
 
-**Role mode** (`mode = "role"`) reads the `roles` claim and expands each role into scopes through a YAML mapping file. Your IdP only has to emit role names, which most products do out of the box. Set `role_to_scope_mapping` to the path of that file — the packs mount an editable copy at `/etc/platform-api/role-to-scope-mapping.yaml`. It ships these roles:
+**Role mode** (`mode = "role"`) reads the `roles` claim and expands each role into scopes through a YAML mapping file. Your IdP only has to emit role names, which most products do out of the box. Set `role_to_scope_mapping` to the path of that file—the packs mount an editable copy at `/etc/platform-api/role-to-scope-mapping.yaml`. It ships these roles:
 
 | Role | Grants |
 |------|--------|
@@ -98,7 +98,7 @@ mode = "idp"
 [platform_api.auth.idp]
 name     = "my-idp"                                    # friendly name, used in logs
 jwks_url = "https://idp.example.com/oauth2/jwks"
-issuer   = ["https://idp.example.com/oauth2/token"]    # accepted "iss" values
+issuer   = ["https://idp.example.com/oauth2token"]                # accepted "iss" values
 audience = ["<ai-workspace-client-id>"]                # accepted "aud" values; empty skips the check
 
 [platform_api.auth.authorization]
@@ -107,7 +107,7 @@ mode    = "role"                                                    # or "scope"
 role_to_scope_mapping = "/etc/platform-api/role-to-scope-mapping.yaml"
 ```
 
-`issuer` takes a list, so a provider that mints tokens under more than one issuer URL is accommodated by naming each. Set `audience` to your client ID rather than leaving it empty, so a token minted for a different application is rejected.
+Set `issuer` to the exact value your IdP puts in the token's `iss` claim. Read it from the `issuer` field of the IdP's `/.well-known/openid-configuration` document rather than assuming it. `issuer` takes a list, so a provider that mints tokens under more than one issuer URL is accommodated by naming each. Set `audience` to your client ID rather than leaving it empty, so a token minted for a different application is rejected.
 
 If your IdP's claim names differ from the defaults in Step 2, override them:
 
@@ -140,7 +140,7 @@ default_org_region = "us"
 mode = "oidc"
 
 [ai_workspace.auth.oidc]
-authority                = "https://idp.example.com/oauth2/token"
+authority                = "https://idp.example.com"
 client_id                = "<ai-workspace-client-id>"
 client_secret            = '{{ env "APIP_AIW_AUTH_OIDC_CLIENT_SECRET" }}'
 redirect_url             = "https://<your-domain>/api/auth/callback"

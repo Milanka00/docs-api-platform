@@ -165,7 +165,9 @@ The default roles are:
 1. Go to **App registrations > AI Workspace > Token configuration**.
 2. Select **Add optional claim**.
 3. Select **Access** as the token type.
-4. Add the `preferred_username`, `tid`, `oid`, and `email` claims.
+4. Add the `preferred_username` and `email` claims. Both also depend on the `profile` and `email` scopes, which the application requests already.
+
+Don't add `tid` or `oid` here. Entra ID includes both in a v2.0 access token without any optional-claim configuration.
 
 ### Step 8: Get the OpenID Connect (OIDC) endpoints
 
@@ -296,7 +298,10 @@ docker compose up --force-recreate
 
 ### Step 13: Verify the access token
 
-Inspect the access token using [jwt.ms](https://jwt.ms). A correctly configured token contains values similar to these:
+!!! warning "Never paste a production token into a web decoder"
+    An access token is a bearer credential.
+
+Decode the access token and check its claims. A correctly configured token contains values similar to these:
 
 ```json
 {

@@ -75,7 +75,7 @@ A **Gateway Registration Token** is displayed at the top of the Get Started sect
     The token is shown only once. Save it securely before you leave this page.
 
 !!! tip "Lost your token?"
-    The registration token is single-use. If you need to reconfigure the gateway, click the **Reconfigure** button to generate a new token. The new token revokes the old one and disconnects the gateway from the control plane.
+    The registration token is single-use. If you need to reconfigure the gateway, click the **Reconfigure** button to generate a replacement token. The replacement token revokes the old one and disconnects the gateway from the control plane.
 
 ### Installation methods
 
@@ -101,7 +101,7 @@ The Get Started section provides setup instructions for multiple deployment opti
     Run this command in your terminal to download the gateway:
 
     ```bash
-    curl -sLO https://github.com/wso2/api-platform/releases/download/ai-gateway/v1.2.0-rc/wso2apip-ai-gateway-1.2.0-rc.zip && \
+    curl -sLO https://github.com/wso2/api-platform/releases/download/ai-gateway/v1.2.0/wso2apip-ai-gateway-1.2.0.zip && \
     unzip wso2apip-ai-gateway-1.2.0.zip
     ```
 
@@ -164,7 +164,7 @@ The Get Started section provides setup instructions for multiple deployment opti
     Run this command in your terminal to download the gateway:
 
     ```bash
-    curl -sLO https://github.com/wso2/api-platform/releases/download/ai-gateway/v1.2.0-rc/wso2apip-ai-gateway-1.2.0-rc.zip && \
+    curl -sLO https://github.com/wso2/api-platform/releases/download/ai-gateway/v1.2.0/wso2apip-ai-gateway-1.2.0.zip && \
     unzip wso2apip-ai-gateway-1.2.0.zip
     ```
 
@@ -194,7 +194,7 @@ The Get Started section provides setup instructions for multiple deployment opti
     ENVFILE
     ```
 
-    Replace both placeholders with the values the Get Started section shows: the control plane address, as `host:port` with no scheme, and this gateway's registration token. The token is single-use — if you need to reconfigure, click **Reconfigure** to generate a new token (this revokes the old token and disconnects the gateway).
+    Replace both placeholders with the values the Get Started section shows: the control plane address, as `host:port` with no scheme, and this gateway's registration token. The token is single-use — if you need to reconfigure, click **Reconfigure** to generate a replacement registration token (this revokes the old token and disconnects the gateway).
 
     **Step 4: Start the gateway**
 
@@ -245,7 +245,7 @@ The Get Started section provides setup instructions for multiple deployment opti
     ENVFILE
     ```
 
-    Replace both placeholders with the values the Get Started section shows: the control plane address, as `host:port` with no scheme, and this gateway's registration token. The token is single-use — if you need to reconfigure, click **Reconfigure** to generate a new token (this revokes the old token and disconnects the gateway).
+    Replace both placeholders with the values the Get Started section shows: the control plane address, as `host:port` with no scheme, and this gateway's registration token. The token is single-use — if you need to reconfigure, click **Reconfigure** to generate a replacement registration token (this revokes the old token and disconnects the gateway).
 
     **Step 4: Start the gateway**
 
@@ -263,7 +263,7 @@ The Get Started section provides setup instructions for multiple deployment opti
     - Kubernetes 1.32+
     - Helm 3.18+
 
-    The registration token is a one-time generated token for this gateway. If you need to install or update the gateway chart again, first reconfigure this gateway to generate a new registration token. Reconfiguring revokes the previous token.
+    The registration token is a one-time generated token for this gateway. If you need to install or update the gateway chart again, first reconfigure this gateway to generate a replacement registration token. Reconfiguring revokes the previous token.
 
     **Create the encryption key secret**
 

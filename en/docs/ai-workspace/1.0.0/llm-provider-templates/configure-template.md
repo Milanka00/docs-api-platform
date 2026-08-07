@@ -14,13 +14,13 @@ content_type: "how-to"
 
 # Configure an LLM provider template
 
-When the built-in templates don't cover the upstream LLM service you want to use, create a custom template for it. This guide shows how to create a custom template, complete its configuration, manage its versions, and deploy it to a gateway.
+When the built-in templates don't cover the upstream large language model (LLM) service you want to use, create a custom template for it. This guide shows how to create a custom template, complete its configuration, manage its versions, and deploy it to a gateway.
 
 ## Prerequisites
 
 - A user whose token carries two scopes: `ap:llm_template:manage` to create, edit, and delete templates, and `ap:llm_template:read` to list them. In the [role-to-scope mapping](../setting-up/authentication/overview.md), `ap_admin` and `ap_operator` grant both scopes. `ap_publisher` and `ap_viewer` grant only `ap:llm_template:read`, which permits listing templates but not modifying them.
-- At least one [AI Gateway created and set up](../ai-gateways/setting-up.md)
-- The endpoint URL and OpenAPI specification of the upstream service
+- At least one [AI Gateway created and set up](../ai-gateways/setting-up.md).
+- The endpoint URL and OpenAPI specification of the upstream service.
 
 ## Create a custom template
 

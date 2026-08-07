@@ -853,7 +853,7 @@ nav:
       # Credentials the artifacts above reference.
       - Secrets Management: ai-workspace/1.0.0/secrets-management.md
       # The other two ways artifacts get created.
-      - Manage Gateway-deployed AI artifacts: ai-workspace/1.0.0/sync-gateway-created-artifacts.md
+      - Manage gateway-deployed AI artifacts: ai-workspace/1.0.0/sync-gateway-created-artifacts.md
       - CI/CD:
           - Overview: ai-workspace/1.0.0/ci-cd/overview.md
           - Configure CI/CD Workflow: ai-workspace/1.0.0/ci-cd/configure-ci-cd-workflow.md

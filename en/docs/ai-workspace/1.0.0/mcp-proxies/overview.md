@@ -16,7 +16,7 @@ content_type: "overview"
 
 ## What is Model Context Protocol?
 
-Model Context Protocol (MCP) is a JSON-RPC-based protocol that standardizes how applications interact with large language models (LLMs). It shares contextual information—such as local files, databases, or APIs—with LLMs, and it lets applications expose tools and capabilities for AI-driven workflows and integrations.
+Model Context Protocol (MCP) is a JSON-RPC-based protocol that standardizes how applications interact with large language models (LLMs). It shares contextual information with LLMs, such as local files, databases, or APIs. It also lets applications expose tools and capabilities for AI-driven workflows and integrations.
 
 MCP follows a host-client-server architecture and supports two transport mechanisms: stdio and streamable HTTP. Use stdio for local communication between a client and a server on the same machine. In most other cases, deploy the server in a remote environment with authorization controls, so LLM applications access the data securely.
 

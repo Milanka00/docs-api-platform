@@ -15,7 +15,7 @@ content_type: "how-to"
 
 # Secrets management
 
-AI Workspace lets you store sensitive credentials as **secrets** and reference them securely in artifact configurations. Secrets are encrypted at rest using AES-GCM-256. Plaintext values are never written to the database and are **never returned in any API response**—not even the creation response.
+AI Workspace lets you store sensitive credentials as **secrets** and reference them securely in artifact configurations. Secrets are encrypted at rest using AES-256-GCM. Plaintext values are never written to the database and are **never returned in any API response**—not even the creation response.
 
 Use secrets to keep raw API keys, tokens, and passwords out of your artifact configurations. They apply to the following:
 
@@ -30,11 +30,15 @@ Use secrets to keep raw API keys, tokens, and passwords out of your artifact con
 
 1. Create a secret via the Platform API with a unique `handle` and the plaintext `value`.
 2. Reference the secret in any artifact configuration using the placeholder syntax:
-{% raw %}
-   ```text
-   {{ secret "your-secret-handle" }}
-   ```
-{% endraw %}
+
+    {% raw %}
+
+    ```text
+    {{ secret "your-secret-handle" }}
+    ```
+
+    {% endraw %}
+
 3. When an artifact that contains a placeholder is deployed, the gateway resolves it with the decrypted value at runtime — the plaintext never appears in the control-plane database or configuration files.
 4. To rotate a credential, call `PUT /api/v0.9/secrets/{handle}` with the new value. Because artifacts reference the secret by handle, no artifact changes or redeployment are required.
 
@@ -296,14 +300,17 @@ Soft-deletes a secret by setting its status to `DEPRECATED`. Deletion is blocked
 Use the following placeholder syntax wherever a configuration field accepts a sensitive string value:
 
 {% raw %}
+
 ```text
 {{ secret "your-secret-handle" }}
 ```
+
 {% endraw %}
 
 **Example — LLM provider upstream API key**
 
 {% raw %}
+
 ```yaml
 spec:
   upstream:
@@ -312,6 +319,7 @@ spec:
       header: Authorization
       value: 'Bearer {{ secret "wso2-openai-key" }}'
 ```
+
 {% endraw %}
 
 **Validation at save time**

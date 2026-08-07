@@ -126,9 +126,10 @@ Your custom AI policy can reside anywhere on the filesystem. Use a relative path
 For example, if your directory layout is:
 
 ```text
-my-ai-gateway/
-├── build.yaml
-└── ../my-ai-policy/   # policy lives outside the gateway directory
+parent-directory/
+├── my-ai-gateway/
+│   └── build.yaml
+└── my-ai-policy/          # policy lives outside the gateway directory
     ├── policy-definition.yaml
     └── myaipolicy.go
 ```

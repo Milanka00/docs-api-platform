@@ -58,6 +58,8 @@ The AI Workspace CLI supports `basic`, `oauth`, and `api-key` authentication. En
 | `oauth` | `WSO2AP_AIWORKSPACE_TOKEN` |
 | `api-key` | `WSO2AP_AIWORKSPACE_API_KEY` |
 
+## Configure the gateway connection
+
 Configure and select the gateway connection.
 
 === "Template"
@@ -299,7 +301,9 @@ Provide the values with an env file during apply.
       --project-id customer-support-project
     ```
 
-The CLI resolves placeholders from the file passed with `--env-file`, the project's `.env` file, or the process environment. Apply fails if a referenced placeholder has no value.
+For `ap ai-workspace apply`, the CLI resolves placeholders from the file passed with `--env-file`, the project's `.env` file, or the process environment. Apply fails if a referenced placeholder has no value.
+
+`ap gateway apply` takes a single `runtime.yaml` rather than a project directory, and the examples in this guide pass no env file to it. Run `ap gateway apply --help` for the placeholder options your CLI version supports. If it offers none, resolve the placeholders in `runtime.yaml` in your pipeline before the apply step, so the gateway receives a file with no unresolved `ENV_CLI_` references.
 
 !!! warning "Don't store secrets in project files"
     `ENV_CLI_` placeholders are intended for environment-specific configuration values that are sent to AI Workspace. Don't use them for API keys, tokens, or other secrets. Use platform-managed secrets for sensitive values.

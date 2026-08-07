@@ -20,7 +20,7 @@ This guide walks you through configuring Asgardeo as the identity provider for a
 
 - An Asgardeo account at [console.asgardeo.io](https://console.asgardeo.io)
 - AI Workspace and Platform API accessible at known hostnames
-- The [`register_asgardeo_scopes.sh`](https://github.com/wso2/api-platform/blob/main/portals/ai-workspace/production/scripts/register_asgardeo_scopes.sh) helper script, downloaded from the WSO2 API Platform GitHub repository
+- The [`register_asgardeo_scopes.sh`](https://github.com/wso2/api-platform/blob/main/portals/ai-workspace/production/scripts/register_asgardeo_scopes.sh) helper script, downloaded from a pinned release tag of the WSO2 API Platform GitHub repository and verified before you run it, as [Step 4](#step-4-register-a-system-application-for-scope-registration) describes
 
 ## Step 1: Set up your organization
 
@@ -57,10 +57,24 @@ AI Workspace and the Platform API communicate using `ap:*` scopes. Register thes
 1. Create a new OIDC application, for example named `AI Platform System`.
 2. Under **API Authorization**, add **API Resource Management API** and **Application Management API**.
 3. Note the client ID and client secret.
-4. Download the scope registration script and run it:
+4. Download the scope registration script from a pinned release tag rather than the `main` branch, so the content can't change between the checksum you verify and the code you run. Replace `<release-tag>` with the tag you're deploying:
 
 ```bash
-curl -sLO https://raw.githubusercontent.com/wso2/api-platform/main/portals/ai-workspace/production/scripts/register_asgardeo_scopes.sh
+RELEASE_TAG=<release-tag>
+curl -fsSLO "https://raw.githubusercontent.com/wso2/api-platform/${RELEASE_TAG}/portals/ai-workspace/production/scripts/register_asgardeo_scopes.sh"
+```
+
+`--fail` makes `curl` exit non-zero on an HTTP error, so a 404 from a mistyped tag doesn't leave an error page saved as the script.
+
+5. Verify the download against the checksum published with that release, and read the script before you run it:
+
+```bash
+shasum -a 256 register_asgardeo_scopes.sh
+```
+
+6. Run the script only after the checksum matches:
+
+```bash
 chmod +x register_asgardeo_scopes.sh
 
 ASGARDEO_TENANT=<your-tenant> \
@@ -155,9 +169,9 @@ export APIP_AIW_AUTH_OIDC_CLIENT_SECRET
 
 Reading the value from a prompt keeps the secret out of your shell history and out of the process list.
 
-Set it in the distribution's git-ignored `api-platform.env` file, which is loaded into both containers.
+In production, supply the secret from a mounted secret file. Swap the token in `config.toml` for {% raw %}`'{{ file "/secrets/ai-workspace/oidc_client_secret" }}'`{% endraw %}, then mount the secret at that path on the AI Workspace service only. That path is one of the BFF's allowed file sources, and the Platform API can't read it. Resolution fails closed, so a missing or unreadable file aborts startup rather than falling back to an empty credential.
 
-In a production deployment, prefer supplying it from a mounted secret file. Swap the token in `config.toml` for {% raw %}`'{{ file "/secrets/ai-workspace/oidc_client_secret" }}'`{% endraw %}, then mount the secret at that path on the AI Workspace service only. That path is one of the BFF's allowed file sources, and the Platform API can't read it. Resolution fails closed, so a missing or unreadable file aborts startup rather than falling back to an empty credential.
+Don't put the client secret in `api-platform.env`. Compose loads that file into every service, so the Platform API and the API Portal would receive a credential only the BFF needs. For local testing, set the variable in the shell you start the stack from, or in an environment file mounted on the `ai-workspace` service alone.
 
 Once configured, opening AI Workspace redirects you to the Asgardeo-hosted login page instead of the file-based login form:
 
