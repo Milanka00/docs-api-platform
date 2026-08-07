@@ -765,57 +765,110 @@ nav:
         - Get a Bearer Token via curl: next/api-portal/references/get-a-bearer-token-via-curl.md
         - Configurations: next/api-portal/references/configurations.md
   - AI Workspace:
-    - Overview: next/ai-workspace/overview.md
-    - About this Release: next/ai-workspace/about-this-release.md
-    - Getting Started: next/ai-workspace/getting-started.md
-    # Set up the workspace itself.
-    - Setting Up:
-        - Configuration & Interpolation: next/ai-workspace/setting-up/configuration.md
-        - Ports: next/ai-workspace/setting-up/ports.md
-        - Database: next/ai-workspace/setting-up/database.md
-        - Authentication:
-            - Overview: next/ai-workspace/setting-up/authentication/overview.md
-            - Connect an Identity Provider: next/ai-workspace/setting-up/authentication/connect-an-identity-provider.md
-            - Set up Asgardeo: next/ai-workspace/setting-up/authentication/asgardeo-setup.md
-            - Set up Microsoft Entra ID: next/ai-workspace/setting-up/authentication/entra-id-setup.md
-    # Build the artifacts, in the order you create them.
-    - AI Gateways:
-        - Setting Up: next/ai-workspace/ai-gateways/setting-up.md
-    - LLM Providers:
-        - Overview: next/ai-workspace/llm-providers/overview.md
-        - Configure Provider: next/ai-workspace/llm-providers/configure-provider.md
-        - Manage Provider: next/ai-workspace/llm-providers/manage-provider.md
-    - LLM Provider Templates:
-        - Overview: next/ai-workspace/llm-provider-templates/overview.md
-        - Create a Custom Template: next/ai-workspace/llm-provider-templates/configure-template.md
-        - Manage Templates: next/ai-workspace/llm-provider-templates/manage-template.md
-    - App LLM Proxies:
-        - Overview: next/ai-workspace/llm-proxies/overview.md
-        - Configure App LLM Proxy: next/ai-workspace/llm-proxies/configure-proxy.md
-        - Manage App LLM Proxy: next/ai-workspace/llm-proxies/manage-proxy.md
-    - MCP Proxies:
-        - Overview: next/ai-workspace/mcp-proxies/overview.md
-        - Configure Proxy: next/ai-workspace/mcp-proxies/configure-proxy.md
-        - Apply Policies: next/ai-workspace/mcp-proxies/apply-policies.md
-    # Credentials the artifacts above reference.
-    - Secrets Management: next/ai-workspace/secrets-management.md
-    # The other two ways artifacts get created.
-    - Manage Gateway-deployed AI artifacts: next/ai-workspace/sync-gateway-created-artifacts.md
-    - CI/CD:
-        - Overview: next/ai-workspace/ci-cd/overview.md
-        - Configure CI/CD Workflow: next/ai-workspace/ci-cd/configure-ci-cd-workflow.md
-    # Govern what you built.
-    - Policies:
-        - Overview: next/ai-workspace/policies/overview.md
-        - Custom Policies:
-            - Writing an AI Policy: next/ai-workspace/policies/writing-an-ai-policy.md
-            - Building the Gateway with AI Policies: next/ai-workspace/policies/build-gateway-with-ai-policies.md
-            - Apply AI Policies to Proxies: next/ai-workspace/policies/apply-ai-policies-to-proxies.md
-    - Insights: next/ai-workspace/insights.md
-    # Consume it from an application.
-    - GenAI Applications: next/ai-workspace/genai-applications.md
-    - Configure Inbound Auth: next/ai-workspace/configure-inbound-auth.md
-    - Invoke via SDKs: next/ai-workspace/using-sdks.md
+    - "next":
+      - Overview: ai-workspace/next/overview.md
+      - About this Release: ai-workspace/next/about-this-release.md
+      - Getting Started: ai-workspace/next/getting-started.md
+      # Set up the workspace itself.
+      - Setting Up:
+          - Configuration & Interpolation: ai-workspace/next/setting-up/configuration.md
+          - Ports: ai-workspace/next/setting-up/ports.md
+          - Database: ai-workspace/next/setting-up/database.md
+          - Authentication:
+              - Overview: ai-workspace/next/setting-up/authentication/overview.md
+              - Connect an Identity Provider: ai-workspace/next/setting-up/authentication/connect-an-identity-provider.md
+              - Set up Asgardeo: ai-workspace/next/setting-up/authentication/asgardeo-setup.md
+              - Set up Microsoft Entra ID: ai-workspace/next/setting-up/authentication/entra-id-setup.md
+      # Build the artifacts, in the order you create them.
+      - AI Gateways:
+          - Setting Up: ai-workspace/next/ai-gateways/setting-up.md
+      - LLM Providers:
+          - Overview: ai-workspace/next/llm-providers/overview.md
+          - Configure Provider: ai-workspace/next/llm-providers/configure-provider.md
+          - Manage Provider: ai-workspace/next/llm-providers/manage-provider.md
+      - LLM Provider Templates:
+          - Overview: ai-workspace/next/llm-provider-templates/overview.md
+          - Create a Custom Template: ai-workspace/next/llm-provider-templates/configure-template.md
+          - Manage Templates: ai-workspace/next/llm-provider-templates/manage-template.md
+      - App LLM Proxies:
+          - Overview: ai-workspace/next/llm-proxies/overview.md
+          - Configure App LLM Proxy: ai-workspace/next/llm-proxies/configure-proxy.md
+          - Manage App LLM Proxy: ai-workspace/next/llm-proxies/manage-proxy.md
+      - MCP Proxies:
+          - Overview: ai-workspace/next/mcp-proxies/overview.md
+          - Configure Proxy: ai-workspace/next/mcp-proxies/configure-proxy.md
+          - Apply Policies: ai-workspace/next/mcp-proxies/apply-policies.md
+      # Credentials the artifacts above reference.
+      - Secrets Management: ai-workspace/next/secrets-management.md
+      # The other two ways artifacts get created.
+      - Manage Gateway-deployed AI artifacts: ai-workspace/next/sync-gateway-created-artifacts.md
+      - CI/CD:
+          - Overview: ai-workspace/next/ci-cd/overview.md
+          - Configure CI/CD Workflow: ai-workspace/next/ci-cd/configure-ci-cd-workflow.md
+      # Govern what you built.
+      - Policies:
+          - Overview: ai-workspace/next/policies/overview.md
+          - Custom Policies:
+              - Writing an AI Policy: ai-workspace/next/policies/writing-an-ai-policy.md
+              - Building the Gateway with AI Policies: ai-workspace/next/policies/build-gateway-with-ai-policies.md
+              - Apply AI Policies to Proxies: ai-workspace/next/policies/apply-ai-policies-to-proxies.md
+      - Insights: ai-workspace/next/insights.md
+      # Consume it from an application.
+      - GenAI Applications: ai-workspace/next/genai-applications.md
+      - Configure Inbound Auth: ai-workspace/next/configure-inbound-auth.md
+      - Invoke via SDKs: ai-workspace/next/using-sdks.md
+    - "1.0.0":
+      - Overview: ai-workspace/1.0.0/overview.md
+      - About this Release: ai-workspace/1.0.0/about-this-release.md
+      - Getting Started: ai-workspace/1.0.0/getting-started.md
+      # Set up the workspace itself.
+      - Setting Up:
+          - Configuration & Interpolation: ai-workspace/1.0.0/setting-up/configuration.md
+          - Ports: ai-workspace/1.0.0/setting-up/ports.md
+          - Database: ai-workspace/1.0.0/setting-up/database.md
+          - Authentication:
+              - Overview: ai-workspace/1.0.0/setting-up/authentication/overview.md
+              - Connect an Identity Provider: ai-workspace/1.0.0/setting-up/authentication/connect-an-identity-provider.md
+              - Set up Asgardeo: ai-workspace/1.0.0/setting-up/authentication/asgardeo-setup.md
+              - Set up Microsoft Entra ID: ai-workspace/1.0.0/setting-up/authentication/entra-id-setup.md
+      # Build the artifacts, in the order you create them.
+      - AI Gateways:
+          - Setting Up: ai-workspace/1.0.0/ai-gateways/setting-up.md
+      - LLM Providers:
+          - Overview: ai-workspace/1.0.0/llm-providers/overview.md
+          - Configure Provider: ai-workspace/1.0.0/llm-providers/configure-provider.md
+          - Manage Provider: ai-workspace/1.0.0/llm-providers/manage-provider.md
+      - LLM Provider Templates:
+          - Overview: ai-workspace/1.0.0/llm-provider-templates/overview.md
+          - Create a Custom Template: ai-workspace/1.0.0/llm-provider-templates/configure-template.md
+          - Manage Templates: ai-workspace/1.0.0/llm-provider-templates/manage-template.md
+      - App LLM Proxies:
+          - Overview: ai-workspace/1.0.0/llm-proxies/overview.md
+          - Configure App LLM Proxy: ai-workspace/1.0.0/llm-proxies/configure-proxy.md
+          - Manage App LLM Proxy: ai-workspace/1.0.0/llm-proxies/manage-proxy.md
+      - MCP Proxies:
+          - Overview: ai-workspace/1.0.0/mcp-proxies/overview.md
+          - Configure Proxy: ai-workspace/1.0.0/mcp-proxies/configure-proxy.md
+          - Apply Policies: ai-workspace/1.0.0/mcp-proxies/apply-policies.md
+      # Credentials the artifacts above reference.
+      - Secrets Management: ai-workspace/1.0.0/secrets-management.md
+      # The other two ways artifacts get created.
+      - Manage gateway-deployed AI artifacts: ai-workspace/1.0.0/sync-gateway-created-artifacts.md
+      - CI/CD:
+          - Overview: ai-workspace/1.0.0/ci-cd/overview.md
+          - Configure CI/CD Workflow: ai-workspace/1.0.0/ci-cd/configure-ci-cd-workflow.md
+      # Govern what you built.
+      - Policies:
+          - Overview: ai-workspace/1.0.0/policies/overview.md
+          - Custom Policies:
+              - Writing an AI Policy: ai-workspace/1.0.0/policies/writing-an-ai-policy.md
+              - Building the Gateway with AI Policies: ai-workspace/1.0.0/policies/build-gateway-with-ai-policies.md
+              - Apply AI Policies to Proxies: ai-workspace/1.0.0/policies/apply-ai-policies-to-proxies.md
+      - Insights: ai-workspace/1.0.0/insights.md
+      # Consume it from an application.
+      - GenAI Applications: ai-workspace/1.0.0/genai-applications.md
+      - Configure Inbound Auth: ai-workspace/1.0.0/configure-inbound-auth.md
+      - Invoke via SDKs: ai-workspace/1.0.0/using-sdks.md
   - Analytics:
     - Overview: analytics/overview.md
   - Monetization:
@@ -989,6 +1042,44 @@ plugins:
         api-gateway/setup/artifact-templating.md: api-gateway/1.1.0/setup/artifact-templating.md
         api-gateway/setup/storage-and-backends.md: api-gateway/1.1.0/setup/storage-and-backends.md
         api-gateway/setup/upstream-timeouts.md: api-gateway/1.1.0/setup/upstream-timeouts.md
+        # AI Workspace self-hosted docs moved from next/ai-workspace to the
+        # versioned ai-workspace/<version> layout; 1.0.0 is the latest release.
+        next/ai-workspace/index.md: ai-workspace/1.0.0/overview.md
+        next/ai-workspace/about-this-release.md: ai-workspace/1.0.0/about-this-release.md
+        next/ai-workspace/ai-gateways/setting-up.md: ai-workspace/1.0.0/ai-gateways/setting-up.md
+        next/ai-workspace/ci-cd/configure-ci-cd-workflow.md: ai-workspace/1.0.0/ci-cd/configure-ci-cd-workflow.md
+        next/ai-workspace/ci-cd/overview.md: ai-workspace/1.0.0/ci-cd/overview.md
+        next/ai-workspace/configure-inbound-auth.md: ai-workspace/1.0.0/configure-inbound-auth.md
+        next/ai-workspace/genai-applications.md: ai-workspace/1.0.0/genai-applications.md
+        next/ai-workspace/getting-started.md: ai-workspace/1.0.0/getting-started.md
+        next/ai-workspace/insights.md: ai-workspace/1.0.0/insights.md
+        next/ai-workspace/llm-provider-templates/configure-template.md: ai-workspace/1.0.0/llm-provider-templates/configure-template.md
+        next/ai-workspace/llm-provider-templates/manage-template.md: ai-workspace/1.0.0/llm-provider-templates/manage-template.md
+        next/ai-workspace/llm-provider-templates/overview.md: ai-workspace/1.0.0/llm-provider-templates/overview.md
+        next/ai-workspace/llm-providers/configure-provider.md: ai-workspace/1.0.0/llm-providers/configure-provider.md
+        next/ai-workspace/llm-providers/manage-provider.md: ai-workspace/1.0.0/llm-providers/manage-provider.md
+        next/ai-workspace/llm-providers/overview.md: ai-workspace/1.0.0/llm-providers/overview.md
+        next/ai-workspace/llm-proxies/configure-proxy.md: ai-workspace/1.0.0/llm-proxies/configure-proxy.md
+        next/ai-workspace/llm-proxies/manage-proxy.md: ai-workspace/1.0.0/llm-proxies/manage-proxy.md
+        next/ai-workspace/llm-proxies/overview.md: ai-workspace/1.0.0/llm-proxies/overview.md
+        next/ai-workspace/mcp-proxies/apply-policies.md: ai-workspace/1.0.0/mcp-proxies/apply-policies.md
+        next/ai-workspace/mcp-proxies/configure-proxy.md: ai-workspace/1.0.0/mcp-proxies/configure-proxy.md
+        next/ai-workspace/mcp-proxies/overview.md: ai-workspace/1.0.0/mcp-proxies/overview.md
+        next/ai-workspace/overview.md: ai-workspace/1.0.0/overview.md
+        next/ai-workspace/policies/apply-ai-policies-to-proxies.md: ai-workspace/1.0.0/policies/apply-ai-policies-to-proxies.md
+        next/ai-workspace/policies/build-gateway-with-ai-policies.md: ai-workspace/1.0.0/policies/build-gateway-with-ai-policies.md
+        next/ai-workspace/policies/overview.md: ai-workspace/1.0.0/policies/overview.md
+        next/ai-workspace/policies/writing-an-ai-policy.md: ai-workspace/1.0.0/policies/writing-an-ai-policy.md
+        next/ai-workspace/secrets-management.md: ai-workspace/1.0.0/secrets-management.md
+        next/ai-workspace/setting-up/authentication/asgardeo-setup.md: ai-workspace/1.0.0/setting-up/authentication/asgardeo-setup.md
+        next/ai-workspace/setting-up/authentication/connect-an-identity-provider.md: ai-workspace/1.0.0/setting-up/authentication/connect-an-identity-provider.md
+        next/ai-workspace/setting-up/authentication/entra-id-setup.md: ai-workspace/1.0.0/setting-up/authentication/entra-id-setup.md
+        next/ai-workspace/setting-up/authentication/overview.md: ai-workspace/1.0.0/setting-up/authentication/overview.md
+        next/ai-workspace/setting-up/configuration.md: ai-workspace/1.0.0/setting-up/configuration.md
+        next/ai-workspace/setting-up/database.md: ai-workspace/1.0.0/setting-up/database.md
+        next/ai-workspace/setting-up/ports.md: ai-workspace/1.0.0/setting-up/ports.md
+        next/ai-workspace/sync-gateway-created-artifacts.md: ai-workspace/1.0.0/sync-gateway-created-artifacts.md
+        next/ai-workspace/using-sdks.md: ai-workspace/1.0.0/using-sdks.md
         # Administer
         administer/configure-an-external-idp/configure-asgardeo-as-an-external-idp.md: cloud/administer/configure-an-external-idp/configure-asgardeo-as-an-external-idp.md
         administer/configure-an-external-idp/configure-azure-ad-as-an-external-idp.md: cloud/administer/configure-an-external-idp/configure-azure-ad-as-an-external-idp.md
@@ -1035,7 +1126,7 @@ plugins:
         cloud/ai-gateway/llm/ai-tools/codex-configuration-with-ai-gateway.md: guides/ai-and-mcp/ai-coding-assistants/codex-configuration-with-ai-gateway.md
         # AI Workspace policy pages consolidated into the AI Gateway policy reference.
         # AI Workspace keeps only the overview plus rate limiting, which has no AI Gateway equivalent.
-        next/ai-workspace/policies/guardrails/overview.md: next/ai-workspace/policies/overview.md
+        next/ai-workspace/policies/guardrails/overview.md: ai-workspace/1.0.0/policies/overview.md
         next/ai-workspace/policies/guardrails/semantic-prompt-guard.md: cloud/ai-gateway/llm/guardrails/semantic-prompt-guard.md
         next/ai-workspace/policies/guardrails/regex-pii-masking.md: cloud/ai-gateway/llm/guardrails/pii-masking-regex.md
         next/ai-workspace/policies/guardrails/azure-content-safety.md: cloud/ai-gateway/llm/guardrails/azure-content-safety.md
@@ -1047,12 +1138,12 @@ plugins:
         next/ai-workspace/policies/other-policies/semantic-cache.md: cloud/ai-gateway/llm/semantic-caching.md
 
         # The rate limit policy pages merged into the Policies overview page.
-        next/ai-workspace/policies/rate-limit/llm-cost.md: next/ai-workspace/policies/overview.md
-        next/ai-workspace/policies/rate-limit/token-based-rate-limit.md: next/ai-workspace/policies/overview.md
-        next/ai-workspace/policies/rate-limit/llm-cost-based-rate-limit.md: next/ai-workspace/policies/overview.md
-        next/ai-workspace/policies/other-policies/basic-rate-limit.md: next/ai-workspace/policies/overview.md
-        next/ai-workspace/policies/other-policies/token-based-rate-limit.md: next/ai-workspace/policies/overview.md
-        next/ai-workspace/policies/rate-limiting.md: next/ai-workspace/policies/overview.md
+        next/ai-workspace/policies/rate-limit/llm-cost.md: ai-workspace/1.0.0/policies/overview.md
+        next/ai-workspace/policies/rate-limit/token-based-rate-limit.md: ai-workspace/1.0.0/policies/overview.md
+        next/ai-workspace/policies/rate-limit/llm-cost-based-rate-limit.md: ai-workspace/1.0.0/policies/overview.md
+        next/ai-workspace/policies/other-policies/basic-rate-limit.md: ai-workspace/1.0.0/policies/overview.md
+        next/ai-workspace/policies/other-policies/token-based-rate-limit.md: ai-workspace/1.0.0/policies/overview.md
+        next/ai-workspace/policies/rate-limiting.md: ai-workspace/1.0.0/policies/overview.md
 
         # AI Workspace
         ai-workspace/ai-gateways/setting-up.md: cloud/ai-workspace/ai-gateways/setting-up.md
@@ -1266,14 +1357,17 @@ extra:
       versions:
         - "1.1.0"
         - "1.0.0"
+    AI Workspace:
+      slug: ai-workspace
+      default: "1.0.0"
+      versions:
+        - "1.0.0"
   # Top-level nav sections that only apply to a given doc version. They are
   # rendered hidden; theme.js reveals them while the current URL contains the
-  # version as a path segment (e.g. /next/ai-workspace/... or
-  # /api-gateway/next/...). See partials/nav-item.html and theme.js.
+  # version as a path segment (e.g. /next/api-portal/...). See
+  # partials/nav-item.html and theme.js.
   version_scoped_navs:
     - title: API Portal & MCP Hub
-      version: "next"
-    - title: AI Workspace
       version: "next"
   expanded_navs:
     - title: Cloud
@@ -1301,12 +1395,13 @@ extra:
     - title: API Portal & MCP Hub
       options:
         - verticle-line
-    # Root-level (version-scoped) copy only; 'level: 1' keeps the AI Workspace
+    # Root-level (versioned) copy only; 'level: 1' keeps the AI Workspace
     # section nested under Cloud rendering as a regular collapsed item.
     - title: AI Workspace
       level: 1
       options:
         - verticle-line
+        - divider
     - title: API Manager
       options:
         - verticle-line
