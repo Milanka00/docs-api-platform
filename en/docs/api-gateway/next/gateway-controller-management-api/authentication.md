@@ -9,7 +9,7 @@ tags:
   - security
   - management-api
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-17
+last_updated: 2026-08-07
 content_type: "how-to"
 ---
 

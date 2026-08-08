@@ -8,7 +8,7 @@ tags:
   - ai-workspace
   - quickstart
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-08-05
+last_updated: 2026-08-07
 content_type: "quickstart"
 ---
 
@@ -48,7 +48,7 @@ The script prompts for the admin username and password. Press <kbd>Enter</kbd> a
 |----------|----------|---------|
 | Transport Layer Security (TLS) certificate | `resources/certificates/cert.pem` and `key.pem` | Self-signed HTTPS pair shared by the services. |
 | RS256 JSON Web Token (JWT) signing keypair | `resources/keys/jwt_private.pem` and `jwt_public.pem` | The Platform API signs login tokens with the private key; AI Workspace and the API Portal verify them with the public key. There's no shared hash-based message authentication code (HMAC) secret. |
-| At-rest encryption key | `resources/keys/encryption.key` | The Platform API's 32-byte key for encrypting stored secrets, subscription tokens, and WebSub HMAC secrets. **Retain it** — losing or changing it makes previously-encrypted data unreadable. |
+| At-rest encryption key | `resources/keys/encryption.key` | The Platform API's 32-byte key for encrypting stored secrets and subscription tokens. **Retain it** — losing or changing it makes previously-encrypted data unreadable. |
 | API Portal encryption key | `resources/keys/api-portal-encryption.key` | Encrypts the API Portal's subscription and webhook secrets at rest. Retain it for the same reason. |
 | API Portal session secret | `resources/keys/api-portal-session-secret` | Signs API Portal session cookies. Rotating it only signs users out. |
 | Admin credentials | `api-platform.env` | The Platform API's basic-auth admin user: `APIP_CP_ADMIN_USERNAME` plus the bcrypt `APIP_CP_ADMIN_PASSWORD_HASH`. |
@@ -135,11 +135,11 @@ Rerunning `./scripts/setup.sh` is safe. By default it fills in only what's missi
 To rotate a single value by hand, delete it from `api-platform.env` — or delete the file under `resources/certificates` or `resources/keys` — and rerun the script.
 
 !!! warning "Rotating an encryption key destroys encrypted data"
-    `--rotate-encryption-key` replaces both encryption keys, which makes everything encrypted under the old keys permanently unreadable. That covers stored [AI Workspace secrets](secrets-management.md), subscription tokens, and WebSub HMAC secrets held by the Platform API. It also covers the API Portal's subscription secrets and webhook secrets. At an interactive terminal the script asks you to type `rotate` to confirm; in a non-interactive run, passing the flag is itself the confirmation. Rotating the JWT keypair with `--force` is milder — it only invalidates issued login tokens, so everyone signs in again.
+    `--rotate-encryption-key` replaces both encryption keys, which makes everything encrypted under the old keys permanently unreadable. That covers stored [AI Workspace secrets](secrets-management.md) and subscription tokens held by the Platform API. It also covers the API Portal's subscription secrets and webhook secrets. At an interactive terminal the script asks you to type `rotate` to confirm; in a non-interactive run, passing the flag is itself the confirmation. Rotating the JWT keypair with `--force` is milder — it only invalidates issued login tokens, so everyone signs in again.
 
 ## Provision the at-rest encryption key manually
 
-If you don't run `setup.sh`, provision the at-rest encryption key yourself before the first start. It protects [AI Workspace secrets](secrets-management.md), subscription tokens, and WebSub HMAC secrets, and the Platform API refuses to start if it's missing or malformed. Keep it stable across restarts and replicas.
+If you don't run `setup.sh`, provision the at-rest encryption key yourself before the first start. It protects [AI Workspace secrets](secrets-management.md) and subscription tokens, and the Platform API refuses to start if it's missing or malformed. Keep it stable across restarts and replicas.
 
 The key is a single 32-byte AES-256 value, supplied as 64 hex characters or base64. Generate it and write it to the file the container mounts at `/etc/platform-api/keys`. Create the file so that only its owner can read it:
 

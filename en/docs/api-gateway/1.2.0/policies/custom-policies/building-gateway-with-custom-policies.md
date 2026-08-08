@@ -9,7 +9,7 @@ tags:
   - custom-policies
   - cli
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-24
+last_updated: 2026-08-07
 content_type: "how-to"
 ---
 
@@ -249,11 +249,11 @@ export ADMIN_PASSWORD='<the password scripts/setup.sh printed>'
 ```
 
 ```sh
-curl -X POST http://localhost:9090/api/management/v0.9/rest-apis \
+curl -X POST http://localhost:9090/api/management/v1/rest-apis \
   -u "$ADMIN_USERNAME:$ADMIN_PASSWORD" \
   -H "Content-Type: application/yaml" \
   --data-binary @- <<'EOF'
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: RestApi
 metadata:
   name: reading-list-api-v1.0

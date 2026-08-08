@@ -8,7 +8,7 @@ tags:
   - management-api
   - llm
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-17
+last_updated: 2026-08-07
 content_type: "reference"
 ---
 
@@ -73,7 +73,7 @@ Required roles: `admin`, `developer`
 |body|body|[LLMProxyConfigurationRequest](schemas.md#schemallmproxyconfigurationrequest)|true|LLM proxy in YAML or JSON format|
 
 > Example responses
-
+>
 > 201 Response
 
 ```json
@@ -156,7 +156,7 @@ Required roles: `admin`, `developer`
 |status|undeployed|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -231,8 +231,29 @@ Status Code **200**
 |auth|[LLMUpstreamAuth](schemas.md#schemallmupstreamauth)|false|none|none|
 |type|string|true|none|none|
 |header|string|false|none|none|
-|value|string|false|none|none|
-|policies|[[LLMPolicy](schemas.md#schemallmpolicy)]|false|none|List of policies applied only to this operation (overrides or adds to API-level policies)|
+|value|string|false|write-only|Upstream credential. Write-only: accepted on create/update and never returned by the management API on a read, for any role. An update that omits it inherits the stored value; set `type: none` to remove auth.|
+|globalPolicies|[[Policy](schemas.md#schemapolicy)]|false|none|Global (api-level) policies applied across ALL operations as one shared scope, evaluated before operation-level policies.|
+|name|string|true|none|Name of the policy|
+|version|string|true|none|Version of the policy. Only major-only version is allowed (e.g., v0, v1). Full semantic version (e.g., v1.0.0) is not accepted and will be rejected. The Gateway Controller resolves the major version to the single matching full version installed in the gateway image.|
+|executionCondition|string|false|none|Expression controlling conditional execution of the policy|
+|params|object|false|none|Arbitrary parameters for the policy (free-form key/value structure)|
+|operationPolicies|[[OperationPolicy](schemas.md#schemaoperationpolicy)]|false|none|Operation-level policies scoped to specific paths/methods, evaluated after global policies.|
+|name|string|true|none|none|
+|version|string|true|none|none|
+|executionCondition|string|false|none|Expression controlling conditional execution of the policy|
+|paths|[[OperationPolicyPath](schemas.md#schemaoperationpolicypath)]|true|none|none|
+|path|string|true|none|none|
+|methods|[string]|true|none|none|
+|params|object|true|none|JSON Schema describing the parameters accepted by this policy. This itself is a JSON Schema document.|
+|additionalProviders|[[LLMProxyAdditionalProvider](schemas.md#schemallmproxyadditionalprovider)]|false|none|Optional list of additional LLM providers attached to this proxy as selectable upstreams. Policies (e.g. an OpenAI translator) can route requests to any of these by setting the upstream name. The primary `provider` field above remains the default upstream and the FK target.|
+|id|string|true|none|Unique id of a deployed llm provider|
+|as|string|false|none|Logical LLM Provider name used by policies to select this provider. Must be unique within the proxy. Defaults to `id` when omitted.|
+|auth|[LLMUpstreamAuth](schemas.md#schemallmupstreamauth)|false|none|none|
+|transformer|[LLMProxyTransformer](schemas.md#schemallmproxytransformer)|false|none|Request/response translator applied when this provider is the selected upstream. The proxy injects the translator as a conditional policy whose execution condition matches this provider, so it runs only when the provider is selected. The provider's `as` name (defaults to `id`) is passed to the translator as its target upstream.|
+|type|string|true|none|Translator policy name (for example openai-to-anthropic).|
+|version|string|true|none|Major-only translator policy version (for example v1). The Gateway Controller resolves it to the installed full version.|
+|params|object|false|none|Translator-specific parameters (for example model, apiVersion).|
+|policies|[[LLMPolicy](schemas.md#schemallmpolicy)]|false|none|DEPRECATED - use operationPolicies. Still honoured (treated identically to operationPolicies).|
 |name|string|true|none|none|
 |version|string|true|none|none|
 |paths|[[LLMPolicyPath](schemas.md#schemallmpolicypath)]|true|none|none|
@@ -240,6 +261,9 @@ Status Code **200**
 |methods|[string]|true|none|none|
 |params|object|true|none|JSON Schema describing the parameters accepted by this policy. This itself is a JSON Schema document.|
 |deploymentState|string|false|none|Desired deployment state - 'deployed' (default) or 'undeployed'. When set to 'undeployed', the LLM Proxy is removed from router traffic but configuration and policies are preserved for potential redeployment.|
+|resilience|[Resilience](schemas.md#schemaresilience)|false|none|Backend/route timeout configuration. Maps to Envoy RouteAction timeouts. Can be set at the API level (applies to all routes) and/or the operation level (applies to that operation's route). When set at both levels, the operation-level value takes precedence. When unset, the gateway's global route timeout defaults apply.|
+|timeout|string|false|none|Maximum time for the entire route (request to upstream response). "0s" disables the timeout.|
+|idleTimeout|string|false|none|Per-route stream idle timeout (overrides the listener stream idle timeout for this route). "0s" disables the timeout.|
 
 *and*
 
@@ -260,6 +284,8 @@ Status Code **200**
 |apiVersion|gateway.api-platform.wso2.com/v1|
 |kind|LlmProxy|
 |type|api-key|
+|type|other|
+|type|none|
 |deploymentState|deployed|
 |deploymentState|undeployed|
 |state|deployed|
@@ -299,7 +325,7 @@ Required roles: `admin`, `developer`
 |id|path|string|true|Unique identifier of the LLM proxy|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -394,7 +420,7 @@ Required roles: `admin`, `developer`
 |body|body|[LLMProxyConfigurationRequest](schemas.md#schemallmproxyconfigurationrequest)|true|Updated LLM proxy|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -466,7 +492,7 @@ Required roles: `admin`, `developer`
 |id|path|string|true|Unique identifier of the LLM proxy|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -540,7 +566,7 @@ Required roles: `admin`, `consumer`
 |body|body|[APIKeyCreationRequest](schemas.md#schemaapikeycreationrequest)|true|none|
 
 > Example responses
-
+>
 > 201 Response
 
 ```json
@@ -606,7 +632,7 @@ Required roles: `admin`, `consumer`
 |id|path|string|true|Unique handle of the LLM proxy to retrieve keys for|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -681,7 +707,7 @@ Required roles: `admin`, `consumer`
 |body|body|[APIKeyRegenerationRequest](schemas.md#schemaapikeyregenerationrequest)|true|none|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -758,7 +784,7 @@ Required roles: `admin`, `consumer`
 |body|body|[APIKeyUpdateRequest](schemas.md#schemaapikeyupdaterequest)|true|none|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -825,7 +851,7 @@ Required roles: `admin`, `consumer`
 |apiKeyName|path|string|true|Name of the API key to revoke|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
