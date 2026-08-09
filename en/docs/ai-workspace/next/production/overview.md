@@ -28,7 +28,7 @@ A production deployment has three parts.
 
 | Part | What it does | Where it runs |
 |------|--------------|---------------|
-| Platform API | The control plane. Stores gateways, LLM providers, proxies, policies, and secrets, and serves the REST API. | Your cluster or VM |
+| Platform API | The control plane. Stores gateways, large language model (LLM) providers, proxies, policies, and secrets, and serves the representational state transfer (REST) API. | Your cluster or VM |
 | AI Workspace | The browser interface. A React single-page application served by a Go backend-for-frontend (BFF) that owns the user session. | Your cluster or VM |
 | AI gateways | The data plane. Routes traffic between applications and LLM providers, and registers itself with the Platform API. | Anywhere your applications can reach |
 

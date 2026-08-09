@@ -22,7 +22,7 @@ Three hops carry traffic in a production deployment, and each one needs its own 
 | Hop | From | To |
 |-----|------|----|
 | Browser to workspace | A user's browser | Your reverse proxy or ingress, then AI Workspace |
-| Workspace to control plane | The AI Workspace BFF | The Platform API |
+| Workspace to control plane | The AI Workspace backend for frontend (BFF) | The Platform API |
 | Gateway to control plane | Each AI gateway | The Platform API |
 
 ## Step 1: Decide where TLS terminates

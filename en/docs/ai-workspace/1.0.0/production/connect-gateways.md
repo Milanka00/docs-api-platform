@@ -17,7 +17,12 @@ content_type: "how-to"
 
 A gateway is the data plane. It routes traffic between your applications and large language model (LLM) providers, and it holds a long-lived connection to the Platform API for configuration updates.
 
-The registration procedure is the same in production as anywhere else, and [Set up an AI Gateway](../ai-gateways/setting-up.md) covers it. This page covers what a production deployment adds: reachability across networks, handling the registration token as a credential, certificate trust, and the checks the control plane runs at registration.
+The registration procedure is the same in production as anywhere else, and [Set up an AI Gateway](../ai-gateways/setting-up.md) covers it. This page covers what a production deployment adds:
+
+- Reachability across networks.
+- Handling the registration token as a credential.
+- Certificate trust.
+- The checks the control plane runs at registration.
 
 ## How a gateway reaches the control plane
 
@@ -78,10 +83,10 @@ Treat the token as a credential in transit too. A value passed on a command line
 
     ```bash
     umask 077
-    cat >> api-platform.env << 'ENVFILE'
-    APIP_GW_CONTROLLER_CONTROLPLANE_HOST=platform-api.example.com:9243
-    APIP_GW_CONTROLLER_CONTROLPLANE_TOKEN=<registration-token>
-    ENVFILE
+    read -rsp "Registration token: " GW_TOKEN && echo
+    printf 'APIP_GW_CONTROLLER_CONTROLPLANE_HOST=%s\n' 'platform-api.example.com:9243' >> api-platform.env
+    printf 'APIP_GW_CONTROLLER_CONTROLPLANE_TOKEN=%s\n' "$GW_TOKEN" >> api-platform.env
+    unset GW_TOKEN
     chmod 600 api-platform.env
     ```
 
@@ -104,7 +109,7 @@ Treat the token as a credential in transit too. A value passed on a command line
     shred -u default-aesgcm256-v1.bin
     ```
 
-    Put the registration token in its own Secret. Read it into a protected file rather than passing it with `--set` or `--from-literal`, either of which records it in your shell history and in the host's process list:
+    Put the registration token in its own Secret. Read it into a protected file rather than passing it with `--set` or `--from-literal`. Either of those records the token in your shell history and in the host's process list:
 
     ```bash
     umask 077

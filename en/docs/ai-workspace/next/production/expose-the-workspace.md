@@ -22,7 +22,7 @@ Two addresses leave your network in a production deployment: the workspace URL t
 | Workspace URL, such as `https://workspace.example.com/ai-workspace` | People, through a browser | Public, or reachable from your corporate network |
 | Control plane address, such as `platform-api.example.com:9243` | AI gateways | Restricted to the networks your gateways run in |
 
-Nothing else needs an address. The browser never calls the Platform API, because the backend for frontend (BFF) proxies every call server-to-server. The Platform API needs no public route for the interface to work.
+Nothing else needs an address. In the default deployment, the browser doesn't call the Platform API. The backend for frontend (BFF) proxies every call server-to-server, so the Platform API needs no public route for the interface to work. A browser application other than AI Workspace can call the Platform API directly, which needs cross-origin resource sharing (CORS). See [Leave CORS off unless you need it](#step-4-leave-cors-off-unless-you-need-it).
 
 ## The path prefix is fixed
 
@@ -154,7 +154,7 @@ The application bundle sets the prefix at image build time, so it isn't configur
                       number: 9643
     ```
 
-    Both paths point at the same backend. The `/` rule carries the root redirect and the `/healthz` endpoint, which the verification step at the end of this page calls on the public hostname.
+    Both paths point at the same backend. The `/` rule carries the root redirect and the `/healthz` endpoint. The verification step at the end of this page calls `/healthz` on the public hostname.
 
     Confirm the Service name before you apply, because it carries the release name:
 

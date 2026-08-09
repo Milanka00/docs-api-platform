@@ -31,7 +31,7 @@ You need:
 
 ## Step 1: Collect the values you'll need
 
-Write these down before you edit a config file. Every later step reads from this list, and two of the values are hard to change afterward.
+Write these down before you edit a config file. Every later step reads from this list. Two of the values are costly to change once the identity provider and your gateways point at them.
 
 | Value | Example | Where it's used |
 |-------|---------|-----------------|

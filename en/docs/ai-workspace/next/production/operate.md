@@ -44,6 +44,12 @@ Both services log to standard output, so whatever collects container logs on you
           options:
             max-size: "50m"
             max-file: "5"
+      ai-workspace-ui:
+        logging:
+          driver: json-file
+          options:
+            max-size: "50m"
+            max-file: "5"
     ```
 
 === "Kubernetes"
@@ -219,6 +225,7 @@ Read the release notes first, then back up the database, then upgrade. Both proc
 
         ```bash
         kubectl -n <namespace> rollout status deploy/<release-name>-platform-api
+        kubectl -n <namespace> rollout status deploy/<release-name>-ai-workspace-ui
         kubectl -n <namespace> get pods
         ```
 

@@ -98,9 +98,9 @@ The next question is: **who runs the infrastructure?**
 
 Yes. Apart from the full API Manager stack, you can run individual control plane components on your own infrastructure and connect them to your self-hosted gateways:
 
-* **AI Workspace** — A self-hosted control plane for AI traffic. Connect AI Gateway runtimes, configure LLM providers, App LLM proxies, and MCP proxies, apply guardrails and rate limits, manage secrets, and deploy the configuration to one or more gateways. See [AI Workspace documentation](ai-workspace/1.0.0/overview.md).
+* **AI Workspace**—A self-hosted control plane for AI traffic. Connect AI Gateway runtimes and configure LLM providers, App LLM proxies, and MCP proxies. Apply guardrails and rate limits, manage secrets, and deploy the configuration to one or more gateways. See [AI Workspace documentation](ai-workspace/1.0.0/overview.md).
 
-* **API Portal** — A self-hosted developer portal where consumers discover APIs and MCP servers, create applications, and manage subscriptions and keys. See [API Portal documentation](api-portal/1.0.0/overview.md).
+* **API Portal**—A self-hosted developer portal where consumers discover APIs and MCP servers, create applications, and manage subscriptions and keys. See [API Portal documentation](api-portal/1.0.0/overview.md).
 
 Run these components when you want centralized governance in your own environment without adopting the entire platform.
 

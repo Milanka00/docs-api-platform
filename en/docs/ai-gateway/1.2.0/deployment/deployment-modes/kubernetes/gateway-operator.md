@@ -419,6 +419,15 @@ export ADMIN_USERNAME=admin
 export ADMIN_PASSWORD=admin
 ```
 
+Connect to the controller management API first. Find the `gateway-controller` Service the operator registered, then forward its port:
+
+```sh
+kubectl -n <namespace> get svc | grep gateway-controller
+kubectl -n <namespace> port-forward svc/<gateway-controller-service> 9090:9090 &
+```
+
+Then post the certificate:
+
 ```sh
 cert_path="/tmp/test-backend.crt"
 curl -X POST http://localhost:9090/api/management/v1/certificates -u "$ADMIN_USERNAME:$ADMIN_PASSWORD" \

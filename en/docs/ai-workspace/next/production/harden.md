@@ -283,6 +283,8 @@ The Platform API accepts connections from exactly two sources: the AI Workspace 
             - podSelector:
                 matchLabels:
                   app.kubernetes.io/name: ai-workspace-ui
+            # Gateways that arrive through an Ingress. Omit this entry when
+            # gateways reach the Service directly.
             - namespaceSelector:
                 matchLabels:
                   kubernetes.io/metadata.name: ingress-nginx
@@ -301,7 +303,7 @@ The Platform API accepts connections from exactly two sources: the AI Workspace 
               port: 9243
     ```
 
-    Include every source your gateways connect from. Omit the `ipBlock` entry when all gateways run in the cluster, and omit the gateway namespace and pod selectors when none do. A policy that leaves a gateway source out disconnects that gateway from the control plane.
+    Include every source your gateways connect from. Omit the `ipBlock` entry when all gateways run in the cluster. Omit the gateway namespace and pod selectors when none of them run in the cluster. A policy that leaves a gateway source out disconnects that gateway from the control plane.
 
     Confirm the pod labels in your release before you apply it, because a NetworkPolicy that selects nothing silently allows everything:
 
