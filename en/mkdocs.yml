@@ -1071,6 +1071,16 @@ nav:
               - Connect an Identity Provider: ai-workspace/1.0.0/setting-up/authentication/connect-an-identity-provider.md
               - Set up Asgardeo: ai-workspace/1.0.0/setting-up/authentication/asgardeo-setup.md
               - Set up Microsoft Entra ID: ai-workspace/1.0.0/setting-up/authentication/entra-id-setup.md
+      - Production Deployment:
+          - Overview: ai-workspace/1.0.0/production/overview.md
+          - Deploy to Production: ai-workspace/1.0.0/production/deploy.md
+          - Provision Secrets and Keys: ai-workspace/1.0.0/production/secrets-and-keys.md
+          - Secure Traffic with TLS: ai-workspace/1.0.0/production/tls.md
+          - Expose AI Workspace: ai-workspace/1.0.0/production/expose-the-workspace.md
+          - Run in High Availability: ai-workspace/1.0.0/production/high-availability.md
+          - Harden the Deployment: ai-workspace/1.0.0/production/harden.md
+          - Connect AI Gateways: ai-workspace/1.0.0/production/connect-gateways.md
+          - Operate the Deployment: ai-workspace/1.0.0/production/operate.md
       # Build the artifacts, in the order you create them.
       - AI Gateways:
           - Setting Up: ai-workspace/1.0.0/ai-gateways/setting-up.md
