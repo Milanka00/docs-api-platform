@@ -648,12 +648,21 @@ nav:
                 - MCP Authorization: ai-gateway/next/mcp-proxy/policies/mcp-authorization.md
                 - MCP Rewrite: ai-gateway/next/mcp-proxy/policies/mcp-rewrite.md
         - Real-Time AI Streaming: ai-gateway/next/streaming-responses.md
-        - Deployment Modes:
-          - Immutable Gateway: ai-gateway/next/deployment-modes/immutable-gateway.md
-          - Kubernetes:
-            - Overview: ai-gateway/next/deployment-modes/kubernetes/overview.md
-            - Standalone Mode: ai-gateway/next/deployment-modes/kubernetes/kubernetes-standalone.md
-            - Kubernetes Operator Mode: ai-gateway/next/deployment-modes/kubernetes/gateway-operator.md
+        - Deployment:
+          - Deployment Modes:
+            - Immutable Gateway: ai-gateway/next/deployment/deployment-modes/immutable-gateway.md
+            - Kubernetes:
+              - Overview: ai-gateway/next/deployment/deployment-modes/kubernetes/overview.md
+              - Standalone Mode: ai-gateway/next/deployment/deployment-modes/kubernetes/kubernetes-standalone.md
+              - Kubernetes Operator Mode: ai-gateway/next/deployment/deployment-modes/kubernetes/gateway-operator.md
+          - Production Deployment:
+            - Overview: ai-gateway/next/deployment/production-deployment/overview.md
+            - Security Hardening: ai-gateway/next/deployment/production-deployment/security-hardening.md
+            - Database Configuration: ai-gateway/next/deployment/production-deployment/database-configuration.md
+            - Resources & Scaling: ai-gateway/next/deployment/production-deployment/resources-and-scaling.md
+            - Tune for AI Traffic: ai-gateway/next/deployment/production-deployment/ai-workload-tuning.md
+            - Deploy & Verify: ai-gateway/next/deployment/production-deployment/deploy-and-verify.md
+            - Connect to AI Workspace: ai-gateway/next/deployment/production-deployment/control-plane-connection.md
         - Resiliency:
             - Timeouts: ai-gateway/next/resiliency/timeouts.md
         - Observability:
@@ -703,12 +712,21 @@ nav:
                 - MCP Authorization: ai-gateway/1.2.0/mcp-proxy/policies/mcp-authorization.md
                 - MCP Rewrite: ai-gateway/1.2.0/mcp-proxy/policies/mcp-rewrite.md
         - Real-Time AI Streaming: ai-gateway/1.2.0/streaming-responses.md
-        - Deployment Modes:
-          - Immutable Gateway: ai-gateway/1.2.0/deployment-modes/immutable-gateway.md
-          - Kubernetes:
-            - Overview: ai-gateway/1.2.0/deployment-modes/kubernetes/overview.md
-            - Standalone Mode: ai-gateway/1.2.0/deployment-modes/kubernetes/kubernetes-standalone.md
-            - Kubernetes Operator Mode: ai-gateway/1.2.0/deployment-modes/kubernetes/gateway-operator.md
+        - Deployment:
+          - Deployment Modes:
+            - Immutable Gateway: ai-gateway/1.2.0/deployment/deployment-modes/immutable-gateway.md
+            - Kubernetes:
+              - Overview: ai-gateway/1.2.0/deployment/deployment-modes/kubernetes/overview.md
+              - Standalone Mode: ai-gateway/1.2.0/deployment/deployment-modes/kubernetes/kubernetes-standalone.md
+              - Kubernetes Operator Mode: ai-gateway/1.2.0/deployment/deployment-modes/kubernetes/gateway-operator.md
+          - Production Deployment:
+            - Overview: ai-gateway/1.2.0/deployment/production-deployment/overview.md
+            - Security Hardening: ai-gateway/1.2.0/deployment/production-deployment/security-hardening.md
+            - Database Configuration: ai-gateway/1.2.0/deployment/production-deployment/database-configuration.md
+            - Resources & Scaling: ai-gateway/1.2.0/deployment/production-deployment/resources-and-scaling.md
+            - Tune for AI Traffic: ai-gateway/1.2.0/deployment/production-deployment/ai-workload-tuning.md
+            - Deploy & Verify: ai-gateway/1.2.0/deployment/production-deployment/deploy-and-verify.md
+            - Connect to AI Workspace: ai-gateway/1.2.0/deployment/production-deployment/control-plane-connection.md
         - Resiliency:
             - Timeouts: ai-gateway/1.2.0/resiliency/timeouts.md
         - Observability:
@@ -755,12 +773,21 @@ nav:
                 - MCP Authorization: ai-gateway/1.1.0/mcp-proxy/policies/mcp-authorization.md
                 - MCP Rewrite: ai-gateway/1.1.0/mcp-proxy/policies/mcp-rewrite.md
         - Real-Time AI Streaming: ai-gateway/1.1.0/streaming-responses.md
-        - Deployment Modes:
-          - Immutable Gateway: ai-gateway/1.1.0/deployment-modes/immutable-gateway.md
-          - Kubernetes:
-            - Overview: ai-gateway/1.1.0/deployment-modes/kubernetes/overview.md
-            - Standalone Mode: ai-gateway/1.1.0/deployment-modes/kubernetes/kubernetes-standalone.md
-            - Kubernetes Operator Mode: ai-gateway/1.1.0/deployment-modes/kubernetes/gateway-operator.md
+        - Deployment:
+          - Deployment Modes:
+            - Immutable Gateway: ai-gateway/1.1.0/deployment/deployment-modes/immutable-gateway.md
+            - Kubernetes:
+              - Overview: ai-gateway/1.1.0/deployment/deployment-modes/kubernetes/overview.md
+              - Standalone Mode: ai-gateway/1.1.0/deployment/deployment-modes/kubernetes/kubernetes-standalone.md
+              - Kubernetes Operator Mode: ai-gateway/1.1.0/deployment/deployment-modes/kubernetes/gateway-operator.md
+          - Production Deployment:
+            - Overview: ai-gateway/1.1.0/deployment/production-deployment/overview.md
+            - Security Hardening: ai-gateway/1.1.0/deployment/production-deployment/security-hardening.md
+            - Database Configuration: ai-gateway/1.1.0/deployment/production-deployment/database-configuration.md
+            - Resources & Scaling: ai-gateway/1.1.0/deployment/production-deployment/resources-and-scaling.md
+            - Tune for AI Traffic: ai-gateway/1.1.0/deployment/production-deployment/ai-workload-tuning.md
+            - Deploy & Verify: ai-gateway/1.1.0/deployment/production-deployment/deploy-and-verify.md
+            - Connect to a Control Plane: ai-gateway/1.1.0/deployment/production-deployment/control-plane-connection.md
         - Observability:
             - Logging: ai-gateway/1.1.0/observability/logging.md
             - Tracing: ai-gateway/1.1.0/observability/tracing.md
@@ -801,12 +828,20 @@ nav:
                 - MCP Authentication: ai-gateway/1.0.0/mcp-proxy/policies/mcp-authentication.md
                 - MCP Authorization: ai-gateway/1.0.0/mcp-proxy/policies/mcp-authorization.md
                 - MCP Rewrite: ai-gateway/1.0.0/mcp-proxy/policies/mcp-rewrite.md
-        - Deployment Modes:
-          - Immutable Gateway: ai-gateway/1.0.0/deployment-modes/immutable-gateway.md
-          - Kubernetes:
-            - Overview: ai-gateway/1.0.0/deployment-modes/kubernetes/overview.md
-            - Standalone Mode: ai-gateway/1.0.0/deployment-modes/kubernetes/kubernetes-standalone.md
-            - Kubernetes Operator Mode: ai-gateway/1.0.0/deployment-modes/kubernetes/gateway-operator.md
+        - Deployment:
+          - Deployment Modes:
+            - Immutable Gateway: ai-gateway/1.0.0/deployment/deployment-modes/immutable-gateway.md
+            - Kubernetes:
+              - Overview: ai-gateway/1.0.0/deployment/deployment-modes/kubernetes/overview.md
+              - Standalone Mode: ai-gateway/1.0.0/deployment/deployment-modes/kubernetes/kubernetes-standalone.md
+              - Kubernetes Operator Mode: ai-gateway/1.0.0/deployment/deployment-modes/kubernetes/gateway-operator.md
+          - Production Deployment:
+            - Overview: ai-gateway/1.0.0/deployment/production-deployment/overview.md
+            - Security Hardening: ai-gateway/1.0.0/deployment/production-deployment/security-hardening.md
+            - Resources & Scaling: ai-gateway/1.0.0/deployment/production-deployment/resources-and-scaling.md
+            - Tune for AI Traffic: ai-gateway/1.0.0/deployment/production-deployment/ai-workload-tuning.md
+            - Deploy & Verify: ai-gateway/1.0.0/deployment/production-deployment/deploy-and-verify.md
+            - Connect to a Control Plane: ai-gateway/1.0.0/deployment/production-deployment/control-plane-connection.md
         - Observability:
             - Logging: ai-gateway/1.0.0/observability/logging.md
             - Tracing: ai-gateway/1.0.0/observability/tracing.md
@@ -1226,14 +1261,31 @@ plugins:
         api-portal/next/discover-apis/api-search.md: api-portal/next/discover-apis/browse-apis.md
         api-portal/next/mcp-servers/discover-mcp-servers.md: api-portal/next/mcp-servers/browse-mcp-servers.md
         api-portal/next/admin-settings/managing-api-workflows.md: api-portal/next/admin-settings/manage-api-workflows.md
+        # AI Gateway: deployment-modes nested under deployment/ to match API Gateway
+        ai-gateway/1.0.0/deployment-modes/immutable-gateway.md: ai-gateway/1.0.0/deployment/deployment-modes/immutable-gateway.md
+        ai-gateway/1.0.0/deployment-modes/kubernetes/gateway-operator.md: ai-gateway/1.0.0/deployment/deployment-modes/kubernetes/gateway-operator.md
+        ai-gateway/1.0.0/deployment-modes/kubernetes/kubernetes-standalone.md: ai-gateway/1.0.0/deployment/deployment-modes/kubernetes/kubernetes-standalone.md
+        ai-gateway/1.0.0/deployment-modes/kubernetes/overview.md: ai-gateway/1.0.0/deployment/deployment-modes/kubernetes/overview.md
+        ai-gateway/1.1.0/deployment-modes/immutable-gateway.md: ai-gateway/1.1.0/deployment/deployment-modes/immutable-gateway.md
+        ai-gateway/1.1.0/deployment-modes/kubernetes/gateway-operator.md: ai-gateway/1.1.0/deployment/deployment-modes/kubernetes/gateway-operator.md
+        ai-gateway/1.1.0/deployment-modes/kubernetes/kubernetes-standalone.md: ai-gateway/1.1.0/deployment/deployment-modes/kubernetes/kubernetes-standalone.md
+        ai-gateway/1.1.0/deployment-modes/kubernetes/overview.md: ai-gateway/1.1.0/deployment/deployment-modes/kubernetes/overview.md
+        ai-gateway/1.2.0/deployment-modes/immutable-gateway.md: ai-gateway/1.2.0/deployment/deployment-modes/immutable-gateway.md
+        ai-gateway/1.2.0/deployment-modes/kubernetes/gateway-operator.md: ai-gateway/1.2.0/deployment/deployment-modes/kubernetes/gateway-operator.md
+        ai-gateway/1.2.0/deployment-modes/kubernetes/kubernetes-standalone.md: ai-gateway/1.2.0/deployment/deployment-modes/kubernetes/kubernetes-standalone.md
+        ai-gateway/1.2.0/deployment-modes/kubernetes/overview.md: ai-gateway/1.2.0/deployment/deployment-modes/kubernetes/overview.md
+        ai-gateway/next/deployment-modes/immutable-gateway.md: ai-gateway/next/deployment/deployment-modes/immutable-gateway.md
+        ai-gateway/next/deployment-modes/kubernetes/gateway-operator.md: ai-gateway/next/deployment/deployment-modes/kubernetes/gateway-operator.md
+        ai-gateway/next/deployment-modes/kubernetes/kubernetes-standalone.md: ai-gateway/next/deployment/deployment-modes/kubernetes/kubernetes-standalone.md
+        ai-gateway/next/deployment-modes/kubernetes/overview.md: ai-gateway/next/deployment/deployment-modes/kubernetes/overview.md
         # AI/API Gateway versioning restructuring (per-product Cloud/Self-Hosted variants)
         ai-gateway/ai-gateway-rest-api/authentication.md: ai-gateway/1.1.0/ai-gateway-rest-api/authentication.md
         ai-gateway/analytics/analytics-header-filter.md: ai-gateway/1.1.0/analytics/analytics-header-filter.md
         ai-gateway/analytics/moesif-analytics.md: ai-gateway/1.1.0/analytics/moesif-analytics.md
-        ai-gateway/deployment-modes/immutable-gateway.md: ai-gateway/1.1.0/deployment-modes/immutable-gateway.md
-        ai-gateway/deployment-modes/kubernetes/gateway-operator.md: ai-gateway/1.1.0/deployment-modes/kubernetes/gateway-operator.md
-        ai-gateway/deployment-modes/kubernetes/kubernetes-standalone.md: ai-gateway/1.1.0/deployment-modes/kubernetes/kubernetes-standalone.md
-        ai-gateway/deployment-modes/kubernetes/overview.md: ai-gateway/1.1.0/deployment-modes/kubernetes/overview.md
+        ai-gateway/deployment-modes/immutable-gateway.md: ai-gateway/1.1.0/deployment/deployment-modes/immutable-gateway.md
+        ai-gateway/deployment-modes/kubernetes/gateway-operator.md: ai-gateway/1.1.0/deployment/deployment-modes/kubernetes/gateway-operator.md
+        ai-gateway/deployment-modes/kubernetes/kubernetes-standalone.md: ai-gateway/1.1.0/deployment/deployment-modes/kubernetes/kubernetes-standalone.md
+        ai-gateway/deployment-modes/kubernetes/overview.md: ai-gateway/1.1.0/deployment/deployment-modes/kubernetes/overview.md
         ai-gateway/llm-proxy/guardrails/aws-bedrock-guardrail.md: ai-gateway/1.1.0/llm-proxy/guardrails/aws-bedrock-guardrail.md
         ai-gateway/llm-proxy/guardrails/azure-content-safety.md: ai-gateway/1.1.0/llm-proxy/guardrails/azure-content-safety.md
         ai-gateway/llm-proxy/guardrails/content-length.md: ai-gateway/1.1.0/llm-proxy/guardrails/content-length.md
@@ -1469,12 +1521,12 @@ plugins:
         api-platform-gateway/publish-apis/subscription-less-apis.md: cloud/api-platform-gateway/publish-apis/subscription-less-apis.md
         # API Gateway deployment restructuring
         api-gateway/deploying-apis/bottom-up-api-deployment.md: api-gateway/1.1.0/deployment/deploying-apis/bottom-up-api-deployment.md
-        api-gateway/deploying-apis/gateway-operator.md: ai-gateway/1.1.0/deployment-modes/kubernetes/gateway-operator.md
+        api-gateway/deploying-apis/gateway-operator.md: ai-gateway/1.1.0/deployment/deployment-modes/kubernetes/gateway-operator.md
         api-gateway/deployment-modes/immutable-gateway.md: api-gateway/1.1.0/deployment/deployment-modes/immutable-gateway.md
         api-gateway/deployment-modes/kubernetes/gateway-operator.md: api-gateway/1.1.0/deployment/deployment-modes/kubernetes/gateway-operator.md
         api-gateway/deployment-modes/kubernetes/kubernetes-standalone.md: api-gateway/1.1.0/deployment/deployment-modes/kubernetes/kubernetes-standalone.md
         api-gateway/deployment-modes/kubernetes/overview.md: api-gateway/1.1.0/deployment/deployment-modes/kubernetes/overview.md
-        api-gateway/setup/immutable-gateway.md: ai-gateway/1.1.0/deployment-modes/immutable-gateway.md
+        api-gateway/setup/immutable-gateway.md: ai-gateway/1.1.0/deployment/deployment-modes/immutable-gateway.md
         # API Gateway observability split (single pages -> section overview)
         api-gateway/observability/tracing.md: api-gateway/1.1.0/observability/tracing/overview.md
         api-gateway/observability/metrics.md: api-gateway/1.1.0/observability/metrics/overview.md

@@ -164,7 +164,7 @@ spec:
 ```
 
 !!! warning "Substitute the placeholders, and keep credentials out of the file"
-    The manifests in this guide carry placeholders such as `<upstream-api-key>`. The gateway stores whatever you send, so substitute your own values before each request. The commands below pipe the manifest through [`yq`](https://github.com/mikefarah/yq) and post the result. The placeholders stay in the file on disk, which keeps real credentials out of source control. To avoid holding the value in your shell as well, reference a secret. See [Secrets management](secrets-management.md).
+    The manifests in this guide carry placeholders such as `<upstream-api-key>`. The gateway stores whatever you send, so substitute your own values before each request. The commands below pipe the manifest through [`yq`](https://github.com/mikefarah/yq) and post the result. The placeholders stay in the file on disk, which keeps real credentials out of source control. To avoid holding the value in your shell as well, reference a secret. See [Secrets management](./secrets-management.md).
 
     `yq` edits the manifest as YAML, and its `strenv` function assigns each value as a string. A URL or API key that contains `:`, `#`, `{`, or a quotation mark is preserved as a literal value.
 
@@ -328,7 +328,7 @@ You can create artifacts on a gateway while it's disconnected, and they reconcil
 
 ## Immutable gateways
 
-Some gateways run in **immutable** mode, where artifacts are loaded from on-disk configuration at startup rather than created through the management API (see [Immutable Gateway](../../ai-gateway/next/deployment-modes/immutable-gateway.md)).
+Some gateways run in **immutable** mode, where artifacts are loaded from on-disk configuration at startup rather than created through the management API (see [Immutable Gateway](../../ai-gateway/next/deployment/deployment-modes/immutable-gateway.md)).
 
 The sync behaves exactly the same for these gateways: artifacts loaded from files are synced up to AI Workspace just like ones created through the management API, with the same read-only copies and the same automatic reconciliation — no extra configuration. An immutable, file-driven gateway is still fully visible in AI Workspace.
 

@@ -548,7 +548,7 @@ For a larger configuration containing OpenAI, Anthropic, Azure OpenAI, Mistral, 
 
 For automatic traffic distribution across models and providers, see:
 
-- [Model Round Robin](load-balancing/model-round-robin.md)
-- [Model Weighted Round Robin](load-balancing/model-weighted-round-robin.md)
+- [Model Round Robin](./load-balancing/model-round-robin.md)
+- [Model Weighted Round Robin](./load-balancing/model-weighted-round-robin.md)
 
-AWS Bedrock usage can also be evaluated by the [LLM Cost policy](../../../next/ai-workspace/policies/overview.md#llm-cost).
+AWS Bedrock usage can also be evaluated by the [LLM Cost policy](../../../ai-workspace/1.0.0/policies/overview.md#llm-cost).
