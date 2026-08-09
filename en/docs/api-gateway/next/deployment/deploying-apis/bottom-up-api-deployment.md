@@ -8,7 +8,7 @@ tags:
   - deployment
   - api-management
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-11
+last_updated: 2026-08-07
 content_type: "how-to"
 ---
 
@@ -72,7 +72,7 @@ In bottom-up deployment, **REST APIs deployed directly to the gateway are automa
 ### Gateway Controller Requirements
 
 - Gateway controller running locally or remotely
-- Management API endpoint: `http://localhost:9090/api/management/v0.9` (default)
+- Management API endpoint: `http://localhost:9090/api/management/v1` (default)
 
 ### Bottom-Up API Sync Requirements
 
@@ -226,7 +226,7 @@ Bottom-up APIs are REST APIs deployed via the gateway controller that are **auto
 All REST APIs deployed via the gateway will be synced to on-prem APIM automatically. Here's a complete example:
 
 ```yaml
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: RestApi
 metadata:
   name: PetStoreAPI
@@ -300,7 +300,7 @@ spec:
 Save the API definition as `petstore-api.yaml`:
 
 ```yaml
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: RestApi
 metadata:
   name: PetStoreAPI
@@ -345,7 +345,7 @@ spec:
     ```
 
 ```bash
-curl -X POST http://localhost:9090/api/management/v0.9/rest-apis \
+curl -X POST http://localhost:9090/api/management/v1/rest-apis \
   -H "Content-Type: application/yaml" \
   -H "Authorization: Basic ${BASE64_CREDENTIALS}" \
   --data-binary @petstore-api.yaml
@@ -371,7 +371,7 @@ curl -X POST http://localhost:9090/api/management/v0.9/rest-apis \
 
 ```bash
 # Get API key
-curl -X POST http://localhost:9090/api/management/v0.9/rest-apis/PetStoreAPI/api-keys \
+curl -X POST http://localhost:9090/api/management/v1/rest-apis/PetStoreAPI/api-keys \
   -H "Content-Type: application/json" \
   -H "Authorization: Basic ${BASE64_CREDENTIALS}" \
   -d '{"name": "test-key"}'
@@ -404,7 +404,7 @@ When you update an API, it's automatically re-synced to on-prem APIM (if connect
 Update your API definition to add a rate limit policy and save as `petstore-api-updated.yaml`:
 
 ```yaml
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: RestApi
 metadata:
   name: PetStoreAPI
@@ -435,7 +435,7 @@ spec:
 **Send Update Request:**
 
 ```bash
-curl -X PUT http://localhost:9090/api/management/v0.9/rest-apis/PetStoreAPI \
+curl -X PUT http://localhost:9090/api/management/v1/rest-apis/PetStoreAPI \
   -H "Content-Type: application/yaml" \
   -H "Authorization: Basic ${BASE64_CREDENTIALS}" \
   --data-binary @petstore-api-updated.yaml
@@ -466,7 +466,7 @@ Monitor gateway controller logs for the sync result:
 To undeploy an API, send a DELETE request with the API name:
 
 ```bash
-curl -X DELETE http://localhost:9090/api/management/v0.9/rest-apis/PetStoreAPI \
+curl -X DELETE http://localhost:9090/api/management/v1/rest-apis/PetStoreAPI \
   -H "Authorization: Basic ${BASE64_CREDENTIALS}"
 ```
 
@@ -486,7 +486,7 @@ curl -X DELETE http://localhost:9090/api/management/v0.9/rest-apis/PetStoreAPI \
 ### Create API Key
 
 ```bash
-curl -X POST http://localhost:9090/api/management/v0.9/rest-apis/PetStoreAPI/api-keys \
+curl -X POST http://localhost:9090/api/management/v1/rest-apis/PetStoreAPI/api-keys \
   -H "Content-Type: application/json" \
   -H "Authorization: Basic ${BASE64_CREDENTIALS}" \
   -d '{
@@ -514,14 +514,14 @@ curl http://localhost:8080/petstore/pet/1 \
 ### List API Keys
 
 ```bash
-curl -X GET http://localhost:9090/api/management/v0.9/rest-apis/PetStoreAPI/api-keys \
+curl -X GET http://localhost:9090/api/management/v1/rest-apis/PetStoreAPI/api-keys \
   -H "Authorization: Basic ${BASE64_CREDENTIALS}"
 ```
 
 ### Revoke API Key
 
 ```bash
-curl -X DELETE http://localhost:9090/api/management/v0.9/rest-apis/PetStoreAPI/api-keys/key-uuid-12345 \
+curl -X DELETE http://localhost:9090/api/management/v1/rest-apis/PetStoreAPI/api-keys/key-uuid-12345 \
   -H "Authorization: Basic ${BASE64_CREDENTIALS}"
 ```
 
@@ -547,7 +547,7 @@ If sync fails, the gateway automatically retries up to 3 times per sync cycle. S
 To manually trigger a retry, update the API with the same definition:
 
 ```bash
-curl -X PUT http://localhost:9090/api/management/v0.9/rest-apis/PetStoreAPI \
+curl -X PUT http://localhost:9090/api/management/v1/rest-apis/PetStoreAPI \
   -H "Content-Type: application/yaml" \
   -H "Authorization: Basic ${BASE64_CREDENTIALS}" \
   --data-binary @petstore-api.yaml
@@ -609,7 +609,7 @@ curl -k https://192.168.0.102:9443/internal/gateway/.well-known
 **Check API definition:**
 
 ```bash
-curl -X GET http://localhost:9090/api/management/v0.9/rest-apis/PetStoreAPI \
+curl -X GET http://localhost:9090/api/management/v1/rest-apis/PetStoreAPI \
   -H "Authorization: Basic ${BASE64_CREDENTIALS}" | jq '.spec.upstream'
 ```
 
@@ -630,7 +630,7 @@ export APIP_GW_CONTROLLER_LOGGING_LEVEL=debug
 1. Wait for automatic reconnection (happens periodically)
 2. Or manually trigger by updating the API:
    ```bash
-   curl -X PUT http://localhost:9090/api/management/v0.9/rest-apis/PetStoreAPI \
+   curl -X PUT http://localhost:9090/api/management/v1/rest-apis/PetStoreAPI \
      -H "Content-Type: application/yaml" \
      -H "Authorization: Basic ${BASE64_CREDENTIALS}" \
      --data-binary @api-definition.yaml

@@ -8,7 +8,7 @@ tags:
   - llm
   - mcp
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-07-13
+last_updated: 2026-08-07
 content_type: "concept"
 ---
 
@@ -120,6 +120,6 @@ You can extend the AI Gateway with custom guardrail policies by building a custo
 | [Observability](./observability/logging.md) | Logging and tracing configuration |
 | [Analytics](./analytics/moesif-analytics.md) | Analytics integrations (Moesif) |
 | [Policies and Guardrails](https://github.com/wso2/gateway-controllers/blob/main/docs/README.md) | Gateway policies and guardrails for AI traffic control |
-| [REST APIs](./ai-gateway-rest-api/authentication.md) | REST API authentication and usage |
+| [Gateway Controller Management API](./gateway-controller-management-api/overview.md) | REST API reference for managing LLM providers, LLM proxies, MCP proxies, certificates, and secrets |
 | [Production deployment](./deployment/production-deployment/overview.md) | High-availability Kubernetes deployment with Helm, an external database, replicated workloads, and AI workload tuning |
 | [AI Workspace](../../ai-workspace/next/overview.md) | The control plane for governing LLM providers, proxies, and policies across every gateway you run |

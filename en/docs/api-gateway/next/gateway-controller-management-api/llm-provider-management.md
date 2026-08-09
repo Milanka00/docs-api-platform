@@ -8,7 +8,7 @@ tags:
   - management-api
   - llm
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-17
+last_updated: 2026-08-07
 content_type: "reference"
 ---
 
@@ -101,7 +101,7 @@ Required roles: `admin`
 |body|body|[LLMProviderConfigurationRequest](schemas.md#schemallmproviderconfigurationrequest)|true|LLM provider in YAML or JSON format|
 
 > Example responses
-
+>
 > 201 Response
 
 ```json
@@ -120,8 +120,7 @@ Required roles: `admin`
       "url": "https://api.openai.com/v1",
       "auth": {
         "type": "api-key",
-        "header": "Authorization",
-        "value": "Bearer sk-your-api-key"
+        "header": "Authorization"
       }
     },
     "accessControl": {
@@ -212,7 +211,7 @@ Required roles: `admin`, `developer`
 |status|undeployed|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -235,8 +234,7 @@ Required roles: `admin`, `developer`
           "url": "https://api.openai.com/v1",
           "auth": {
             "type": "api-key",
-            "header": "Authorization",
-            "value": "Bearer sk-your-api-key"
+            "header": "Authorization"
           }
         },
         "accessControl": {
@@ -311,6 +309,14 @@ Status Code **200**
 |context|string|false|none|Base path for all API routes (must start with /, no trailing slash)|
 |vhost|string|false|none|Virtual host name used for routing. Supports standard domain names, subdomains, or wildcard domains. Must follow RFC-compliant hostname rules. Wildcards are only allowed in the left-most label (e.g., *.example.com).|
 |template|string|true|none|Template name to use for this LLM Provider|
+|upstreamDefinitions|[[UpstreamDefinition](schemas.md#schemaupstreamdefinition)]|false|none|List of reusable upstream definitions with optional timeout configurations. Referenced by upstream.ref.|
+|name|string|true|none|Unique identifier for this upstream definition|
+|basePath|string|false|none|Base path prefix for all endpoints in this upstream (e.g., /api/v2). All requests to this upstream will have this path prepended. Must start with '/' and must not end with '/'; omit for root.|
+|timeout|[UpstreamTimeout](schemas.md#schemaupstreamtimeout)|false|none|Timeout configuration for upstream requests|
+|connect|string|false|none|Connection timeout duration (e.g., "5s", "500ms")|
+|upstreams|[object]|true|none|List of backend targets with optional weights for load balancing|
+|url|string(uri)|true|none|Backend URL (host and port only, path comes from basePath)|
+|weight|integer|false|none|Relative weight for load balancing across multiple upstream targets. Reserved for future multi-target load balancing; not applied yet (only the first target is currently used).|
 |upstream|any|true|none|none|
 
 *allOf*
@@ -342,7 +348,7 @@ Status Code **200**
 |auth|object|false|none|none|
 |type|string|true|none|none|
 |header|string|false|none|none|
-|value|string|false|none|none|
+|value|string|false|write-only|Upstream credential. Write-only: accepted on create/update and never returned by the management API on a read, for any role. Supply either a literal value or a secret reference (e.g. a `secret` template expression); either way the field is omitted from management API response bodies. An update that omits it inherits the stored value; set `type: none` to remove auth.|
 
 *continued*
 
@@ -353,7 +359,20 @@ Status Code **200**
 |exceptions|[[RouteException](schemas.md#schemarouteexception)]|false|none|Path exceptions to the access control mode|
 |path|string|true|none|Path pattern|
 |methods|[string]|true|none|HTTP methods|
-|policies|[[LLMPolicy](schemas.md#schemallmpolicy)]|false|none|List of policies applied only to this operation (overrides or adds to API-level policies)|
+|globalPolicies|[[Policy](schemas.md#schemapolicy)]|false|none|Global (api-level) policies applied across ALL operations as one shared scope, evaluated before operation-level policies.|
+|name|string|true|none|Name of the policy|
+|version|string|true|none|Version of the policy. Only major-only version is allowed (e.g., v0, v1). Full semantic version (e.g., v1.0.0) is not accepted and will be rejected. The Gateway Controller resolves the major version to the single matching full version installed in the gateway image.|
+|executionCondition|string|false|none|Expression controlling conditional execution of the policy|
+|params|object|false|none|Arbitrary parameters for the policy (free-form key/value structure)|
+|operationPolicies|[[OperationPolicy](schemas.md#schemaoperationpolicy)]|false|none|Operation-level policies scoped to specific paths/methods, evaluated after global policies.|
+|name|string|true|none|none|
+|version|string|true|none|none|
+|executionCondition|string|false|none|Expression controlling conditional execution of the policy|
+|paths|[[OperationPolicyPath](schemas.md#schemaoperationpolicypath)]|true|none|none|
+|path|string|true|none|none|
+|methods|[string]|true|none|none|
+|params|object|true|none|JSON Schema describing the parameters accepted by this policy. This itself is a JSON Schema document.|
+|policies|[[LLMPolicy](schemas.md#schemallmpolicy)]|false|none|DEPRECATED - use operationPolicies. Still honoured (treated identically to operationPolicies).|
 |name|string|true|none|none|
 |version|string|true|none|none|
 |paths|[[LLMPolicyPath](schemas.md#schemallmpolicypath)]|true|none|none|
@@ -361,6 +380,9 @@ Status Code **200**
 |methods|[string]|true|none|none|
 |params|object|true|none|JSON Schema describing the parameters accepted by this policy. This itself is a JSON Schema document.|
 |deploymentState|string|false|none|Desired deployment state - 'deployed' (default) or 'undeployed'. When set to 'undeployed', the LLM Provider is removed from router traffic but configuration and policies are preserved for potential redeployment.|
+|resilience|[Resilience](schemas.md#schemaresilience)|false|none|Backend/route timeout configuration. Maps to Envoy RouteAction timeouts. Can be set at the API level (applies to all routes) and/or the operation level (applies to that operation's route). When set at both levels, the operation-level value takes precedence. When unset, the gateway's global route timeout defaults apply.|
+|timeout|string|false|none|Maximum time for the entire route (request to upstream response). "0s" disables the timeout.|
+|idleTimeout|string|false|none|Per-route stream idle timeout (overrides the listener stream idle timeout for this route). "0s" disables the timeout.|
 
 *and*
 
@@ -383,6 +405,8 @@ Status Code **200**
 |hostRewrite|auto|
 |hostRewrite|manual|
 |type|api-key|
+|type|other|
+|type|none|
 |mode|allow_all|
 |mode|deny_all|
 |deploymentState|deployed|
@@ -424,7 +448,7 @@ Required roles: `admin`, `developer`
 |id|path|string|true|Unique identifier of the LLM provider|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -443,8 +467,7 @@ Required roles: `admin`, `developer`
       "url": "https://api.openai.com/v1",
       "auth": {
         "type": "api-key",
-        "header": "Authorization",
-        "value": "Bearer sk-your-api-key"
+        "header": "Authorization"
       }
     },
     "accessControl": {
@@ -575,7 +598,7 @@ Required roles: `admin`
 |body|body|[LLMProviderConfigurationRequest](schemas.md#schemallmproviderconfigurationrequest)|true|Updated LLM provider|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -594,8 +617,7 @@ Required roles: `admin`
       "url": "https://api.openai.com/v1",
       "auth": {
         "type": "api-key",
-        "header": "Authorization",
-        "value": "Bearer sk-your-api-key"
+        "header": "Authorization"
       }
     },
     "accessControl": {
@@ -675,7 +697,7 @@ Required roles: `admin`
 |id|path|string|true|Unique identifier of the LLM provider|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -749,7 +771,7 @@ Required roles: `admin`, `consumer`
 |body|body|[APIKeyCreationRequest](schemas.md#schemaapikeycreationrequest)|true|none|
 
 > Example responses
-
+>
 > 201 Response
 
 ```json
@@ -815,7 +837,7 @@ Required roles: `admin`, `consumer`
 |id|path|string|true|Unique handle of the LLM provider to retrieve keys for|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -890,7 +912,7 @@ Required roles: `admin`, `consumer`
 |body|body|[APIKeyRegenerationRequest](schemas.md#schemaapikeyregenerationrequest)|true|none|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -967,7 +989,7 @@ Required roles: `admin`, `consumer`
 |body|body|[APIKeyUpdateRequest](schemas.md#schemaapikeyupdaterequest)|true|none|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -1034,7 +1056,7 @@ Required roles: `admin`, `consumer`
 |apiKeyName|path|string|true|Name of the API key to revoke|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json

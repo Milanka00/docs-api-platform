@@ -8,7 +8,7 @@ tags:
   - llm
   - mcp
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-16
+last_updated: 2026-08-07
 content_type: "overview"
 ---
 
@@ -104,4 +104,4 @@ An MCP Proxy routes Model Context Protocol traffic to MCP servers. MCP is a prot
 | [mcp/](mcp/) | MCP proxy setup and policies |
 | [observability/](observability/) | Logging and tracing configuration |
 | [analytics/](analytics/) | Analytics integrations (Moesif) |
-| [ai-gateway-rest-api/](ai-gateway-rest-api/) | REST API authentication and usage |
+| [gateway-controller-management-api/](gateway-controller-management-api/) | Management API reference |

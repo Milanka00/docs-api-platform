@@ -9,7 +9,7 @@ tags:
   - mcp
   - ai-gateway
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-26
+last_updated: 2026-08-07
 content_type: "tutorial"
 ---
 
@@ -134,11 +134,11 @@ Start the sample MCP server, then deploy an MCP proxy that fronts it and require
 2. Deploy the MCP proxy with the `mcp-auth` policy applied. Replace the `issuers` and `jwks` values with your own identity provider details (see [MCP Authentication](../../ai-gateway/1.1.0/mcp-proxy/policies/mcp-authentication.md) for the matching `config.toml` key manager setup):
 
     ```bash
-    curl -X POST http://localhost:9090/api/management/v0.9/mcp-proxies \
+    curl -X POST http://localhost:9090/api/management/v1/mcp-proxies \
       -H "Content-Type: application/yaml" \
       -H "Authorization: Basic YWRtaW46YWRtaW4=" \
       --data-binary @- <<'EOF'
-    apiVersion: gateway.api-platform.wso2.com/v1alpha1
+    apiVersion: gateway.api-platform.wso2.com/v1
     kind: Mcp
     metadata:
       name: everything-mcp-v1.0

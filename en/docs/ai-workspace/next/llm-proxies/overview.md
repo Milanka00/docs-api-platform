@@ -8,7 +8,7 @@ tags:
   - ai-workspace
   - llm-proxies
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-22
+last_updated: 2026-08-07
 content_type: "overview"
 ---
 
@@ -26,7 +26,7 @@ The main benefit is specialization and isolation. You can call a single provider
 
 **Add app-specific controls only when needed.** If provider-level controls are sufficient, call the provider directly. Use an App LLM proxy only when a specific application or agent needs its own authentication, guardrails, exposed resources, or traffic controls.
 
-**Enforce authentication.** Require applications or agents to present an API key before the gateway forwards their requests to the LLM. The workspace generates keys per proxy, and each key expires after 90 days.
+**Enforce authentication.** Require applications or agents to present an API key before the gateway forwards their requests to the LLM. The workspace generates keys per proxy, and a key generated this way expires 90 days later.
 
 **Apply guardrails.** Attach content safety, personally identifiable information (PII) masking, or semantic caching policies globally across all endpoints, or target them at specific resources only.
 

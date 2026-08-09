@@ -9,7 +9,7 @@ tags:
   - certificates
   - tls
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-17
+last_updated: 2026-08-07
 content_type: "reference"
 ---
 
@@ -46,7 +46,7 @@ Required roles: `admin`, `developer`
 </aside>
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -110,7 +110,7 @@ Upload a new TLS certificate (PEM format) to the Gateway. The certificate is loa
 <aside class="warning">
 This operation requires <strong>Basic Auth</strong> authentication.
 
-Required roles: `admin`, `developer`
+Required roles: `admin`
 
 </aside>
 
@@ -121,7 +121,7 @@ Required roles: `admin`, `developer`
 |body|body|[CertificateUploadRequest](schemas.md#schemacertificateuploadrequest)|true|none|
 
 > Example responses
-
+>
 > 201 Response
 
 ```json
@@ -179,7 +179,7 @@ Required roles: `admin`
 |id|path|string|true|ID of the certificate to delete|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -236,7 +236,7 @@ Required roles: `admin`
 </aside>
 
 > Example responses
-
+>
 > 200 Response
 
 ```json

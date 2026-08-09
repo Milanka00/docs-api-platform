@@ -8,7 +8,7 @@ tags:
   - management-api
   - mcp
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-17
+last_updated: 2026-08-07
 content_type: "reference"
 ---
 
@@ -76,7 +76,7 @@ Required roles: `admin`, `developer`
 |body|body|[MCPProxyConfigurationRequest](schemas.md#schemamcpproxyconfigurationrequest)|true|none|
 
 > Example responses
-
+>
 > 201 Response
 
 ```json
@@ -161,7 +161,7 @@ Required roles: `admin`, `developer`
 |status|undeployed|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -235,6 +235,14 @@ Status Code **200**
 |context|string|false|none|MCP Proxy context path|
 |specVersion|string|false|none|MCP specification version|
 |vhost|string|false|none|Virtual host name used for routing. Supports standard domain names, subdomains, or wildcard domains. Must follow RFC-compliant hostname rules. Wildcards are only allowed in the left-most label (e.g., *.example.com).|
+|upstreamDefinitions|[[UpstreamDefinition](schemas.md#schemaupstreamdefinition)]|false|none|List of reusable upstream definitions with optional timeout configurations. Referenced by upstream.ref.|
+|name|string|true|none|Unique identifier for this upstream definition|
+|basePath|string|false|none|Base path prefix for all endpoints in this upstream (e.g., /api/v2). All requests to this upstream will have this path prepended. Must start with '/' and must not end with '/'; omit for root.|
+|timeout|[UpstreamTimeout](schemas.md#schemaupstreamtimeout)|false|none|Timeout configuration for upstream requests|
+|connect|string|false|none|Connection timeout duration (e.g., "5s", "500ms")|
+|upstreams|[object]|true|none|List of backend targets with optional weights for load balancing|
+|url|string(uri)|true|none|Backend URL (host and port only, path comes from basePath)|
+|weight|integer|false|none|Relative weight for load balancing across multiple upstream targets. Reserved for future multi-target load balancing; not applied yet (only the first target is currently used).|
 |upstream|any|true|none|The backend MCP server url and auth configurations|
 
 *allOf*
@@ -266,7 +274,7 @@ Status Code **200**
 |auth|object|false|none|none|
 |type|string|true|none|none|
 |header|string|false|none|none|
-|value|string|false|none|none|
+|value|string|false|write-only|Upstream credential. Write-only: accepted on create/update and never returned by the management API on a read, for any role. Supply either a literal value or a secret reference (e.g. a `secret` template expression); either way the field is omitted from management API response bodies. An update that omits it inherits the stored value; set `type: none` to remove auth.|
 
 *continued*
 
@@ -300,6 +308,9 @@ Status Code **200**
 |required|boolean|false|none|Whether the argument is required|
 |title|string|false|none|Optional human-readable title of the argument|
 |deploymentState|string|false|none|Desired deployment state - 'deployed' (default) or 'undeployed'. When set to 'undeployed', the MCP Proxy is removed from router traffic but configuration and policies are preserved for potential redeployment.|
+|resilience|[Resilience](schemas.md#schemaresilience)|false|none|Backend/route timeout configuration. Maps to Envoy RouteAction timeouts. Can be set at the API level (applies to all routes) and/or the operation level (applies to that operation's route). When set at both levels, the operation-level value takes precedence. When unset, the gateway's global route timeout defaults apply.|
+|timeout|string|false|none|Maximum time for the entire route (request to upstream response). "0s" disables the timeout.|
+|idleTimeout|string|false|none|Per-route stream idle timeout (overrides the listener stream idle timeout for this route). "0s" disables the timeout.|
 
 *and*
 
@@ -322,6 +333,8 @@ Status Code **200**
 |hostRewrite|auto|
 |hostRewrite|manual|
 |type|api-key|
+|type|other|
+|type|none|
 |deploymentState|deployed|
 |deploymentState|undeployed|
 |state|deployed|
@@ -365,7 +378,7 @@ Required roles: `admin`, `developer`
 **id**: Unique public identifier of the MCP Proxy.
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -470,7 +483,7 @@ Required roles: `admin`, `developer`
 **id**: Unique public identifier of the MCP Proxy to update.
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -549,7 +562,7 @@ Required roles: `admin`, `developer`
 **id**: Unique public identifier of the MCP Proxy to delete.
 
 > Example responses
-
+>
 > 200 Response
 
 ```json

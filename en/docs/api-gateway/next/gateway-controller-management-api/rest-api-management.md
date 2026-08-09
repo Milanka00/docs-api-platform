@@ -8,7 +8,7 @@ tags:
   - management-api
   - rest-api
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-17
+last_updated: 2026-08-07
 content_type: "reference"
 ---
 
@@ -120,7 +120,7 @@ Required roles: `admin`, `developer`
 |body|body|[RestAPIRequest](schemas.md#schemarestapirequest)|true|none|
 
 > Example responses
-
+>
 > 201 Response
 
 ```json
@@ -249,7 +249,7 @@ Required roles: `admin`, `developer`
 |status|undeployed|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -367,12 +367,12 @@ Status Code **200**
 |context|string|true|none|Base path for all API routes (must start with /, no trailing slash). Use $version to embed the version in the path (e.g., /reading-list/$version resolves to /reading-list/v1.0).|
 |upstreamDefinitions|[[UpstreamDefinition](schemas.md#schemaupstreamdefinition)]|false|none|List of reusable upstream definitions with optional timeout configurations|
 |name|string|true|none|Unique identifier for this upstream definition|
-|basePath|string|false|none|Base path prefix for all endpoints in this upstream (e.g., /api/v2). All requests to this upstream will have this path prepended.|
+|basePath|string|false|none|Base path prefix for all endpoints in this upstream (e.g., /api/v2). All requests to this upstream will have this path prepended. Must start with '/' and must not end with '/'; omit for root.|
 |timeout|[UpstreamTimeout](schemas.md#schemaupstreamtimeout)|false|none|Timeout configuration for upstream requests|
 |connect|string|false|none|Connection timeout duration (e.g., "5s", "500ms")|
 |upstreams|[object]|true|none|List of backend targets with optional weights for load balancing|
 |url|string(uri)|true|none|Backend URL (host and port only, path comes from basePath)|
-|weight|integer|false|none|Weight for load balancing (optional, default 100)|
+|weight|integer|false|none|Relative weight for load balancing across multiple upstream targets. Reserved for future multi-target load balancing; not applied yet (only the first target is currently used).|
 |upstream|object|true|none|API-level upstream configuration|
 |main|[Upstream](schemas.md#schemaupstream)|true|none|Upstream backend configuration (single target or reference)|
 |url|string(uri)|false|none|Direct backend URL to route traffic to|
@@ -397,7 +397,7 @@ Status Code **200**
 |---|---|---|---|---|
 |sandbox|[Upstream](schemas.md#schemaupstream)|false|none|Upstream backend configuration (single target or reference)|
 |vhosts|object|false|none|Custom virtual hosts/domains for the API|
-|main|string|true|none|Custom virtual host/domain for production traffic|
+|main|string|true|none|Custom virtual host(s)/domain(s) for production traffic. One or more hostnames<br>separated by ';' — each hostname serves the main upstream (e.g. when a Gateway API<br>HTTPRoute attaches to multiple listener hostnames). The first entry is the primary<br>vhost. Each hostname may be a wildcard such as *.example.com.|
 |sandbox|string|false|none|Custom virtual host/domain for sandbox traffic|
 |subscriptionPlans|[string]|false|none|List of subscription plan names available for this API|
 |policies|[[Policy](schemas.md#schemapolicy)]|false|none|List of API-level policies applied to all operations unless overridden|
@@ -405,10 +405,23 @@ Status Code **200**
 |version|string|true|none|Version of the policy. Only major-only version is allowed (e.g., v0, v1). Full semantic version (e.g., v1.0.0) is not accepted and will be rejected. The Gateway Controller resolves the major version to the single matching full version installed in the gateway image.|
 |executionCondition|string|false|none|Expression controlling conditional execution of the policy|
 |params|object|false|none|Arbitrary parameters for the policy (free-form key/value structure)|
+|resilience|[Resilience](schemas.md#schemaresilience)|false|none|Backend/route timeout configuration. Maps to Envoy RouteAction timeouts. Can be set at the API level (applies to all routes) and/or the operation level (applies to that operation's route). When set at both levels, the operation-level value takes precedence. When unset, the gateway's global route timeout defaults apply.|
+|timeout|string|false|none|Maximum time for the entire route (request to upstream response). "0s" disables the timeout.|
+|idleTimeout|string|false|none|Per-route stream idle timeout (overrides the listener stream idle timeout for this route). "0s" disables the timeout.|
 |operations|[[Operation](schemas.md#schemaoperation)]|true|none|List of HTTP operations/routes|
-|method|string|true|none|HTTP method|
-|path|string|true|none|Route path with optional {param} placeholders|
+|method|[OperationMethod](schemas.md#schemaoperationmethod)|false|none|HTTP method (simple form; ignored when 'match' is set)|
+|path|string|false|none|Route path with optional {param} placeholders (simple form; ignored when 'match' is set)|
+|match|[OperationMatch](schemas.md#schemaoperationmatch)|false|none|Request matching criteria for an operation. Extensible with query params, cookies, etc.|
+|method|[OperationMethod](schemas.md#schemaoperationmethod)|true|none|HTTP method|
+|path|[OperationPathMatch](schemas.md#schemaoperationpathmatch)|true|none|none|
+|value|string|true|none|Route path with optional {param} placeholders|
+|type|string|false|none|Path matching semantics for the operation route|
+|headers|[[OperationHeaderMatch](schemas.md#schemaoperationheadermatch)]|false|none|Header matchers ANDed with the path match for Envoy route selection|
+|name|string|true|none|Header name (case-insensitive)|
+|value|string|true|none|Header value to match|
+|type|string|false|none|Header match type|
 |policies|[[Policy](schemas.md#schemapolicy)]|false|none|List of policies applied only to this operation (overrides or adds to API-level policies)|
+|resilience|[Resilience](schemas.md#schemaresilience)|false|none|Backend/route timeout configuration. Maps to Envoy RouteAction timeouts. Can be set at the API level (applies to all routes) and/or the operation level (applies to that operation's route). When set at both levels, the operation-level value takes precedence. When unset, the gateway's global route timeout defaults apply.|
 |deploymentState|string|false|none|Desired deployment state - 'deployed' (default) or 'undeployed'. When set to 'undeployed', the API is removed from router traffic but configuration, API keys, and policies are preserved for potential redeployment.|
 
 *and*
@@ -438,6 +451,17 @@ Status Code **200**
 |method|PATCH|
 |method|HEAD|
 |method|OPTIONS|
+|method|GET|
+|method|POST|
+|method|PUT|
+|method|DELETE|
+|method|PATCH|
+|method|HEAD|
+|method|OPTIONS|
+|type|Exact|
+|type|PathPrefix|
+|type|Exact|
+|type|RegularExpression|
 |deploymentState|deployed|
 |deploymentState|undeployed|
 |state|deployed|
@@ -481,7 +505,7 @@ Required roles: `admin`, `developer`
 **id**: Unique public identifier for the API.
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -674,7 +698,7 @@ Required roles: `admin`, `developer`
 **id**: Unique public identifier of the API to update.
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -797,7 +821,7 @@ Required roles: `admin`, `developer`
 **id**: Unique public identifier of the API to delete.
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -875,7 +899,7 @@ Required roles: `admin`, `consumer`
 **id**: Unique public identifier of the API to generate the key for
 
 > Example responses
-
+>
 > 201 Response
 
 ```json
@@ -944,7 +968,7 @@ Required roles: `admin`, `consumer`
 **id**: Unique public identifier of the API to retrieve the keys for
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -1025,7 +1049,7 @@ Required roles: `admin`, `consumer`
 **apiKeyName**: Name of the API key to regenerate
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -1108,7 +1132,7 @@ Required roles: `admin`, `consumer`
 **apiKeyName**: Name of the API key to update
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -1180,7 +1204,7 @@ Required roles: `admin`, `consumer`
 **apiKeyName**: Name of the API key to revoke
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -1238,7 +1262,7 @@ Create a subscription plan that defines rate limits and access tiers for API sub
 <aside class="warning">
 This operation requires <strong>Basic Auth</strong> authentication.
 
-Required roles: `admin`, `developer`
+Required roles: `admin`
 
 </aside>
 
@@ -1249,7 +1273,7 @@ Required roles: `admin`, `developer`
 |body|body|[SubscriptionPlanCreateRequest](schemas.md#schemasubscriptionplancreaterequest)|true|none|
 
 > Example responses
-
+>
 > 201 Response
 
 ```json
@@ -1300,12 +1324,12 @@ List all subscription plans available in the Gateway.
 <aside class="warning">
 This operation requires <strong>Basic Auth</strong> authentication.
 
-Required roles: `admin`, `developer`
+Required roles: `admin`
 
 </aside>
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -1359,7 +1383,7 @@ Get the details of a subscription plan by its ID.
 <aside class="warning">
 This operation requires <strong>Basic Auth</strong> authentication.
 
-Required roles: `admin`, `developer`
+Required roles: `admin`
 
 </aside>
 
@@ -1370,7 +1394,7 @@ Required roles: `admin`, `developer`
 |planId|path|string|true|none|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -1436,7 +1460,7 @@ Update an existing subscription plan in the Gateway.
 <aside class="warning">
 This operation requires <strong>Basic Auth</strong> authentication.
 
-Required roles: `admin`, `developer`
+Required roles: `admin`
 
 </aside>
 
@@ -1448,7 +1472,7 @@ Required roles: `admin`, `developer`
 |body|body|[SubscriptionPlanUpdateRequest](schemas.md#schemasubscriptionplanupdaterequest)|false|none|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -1498,7 +1522,7 @@ Delete a subscription plan from the Gateway.
 <aside class="warning">
 This operation requires <strong>Basic Auth</strong> authentication.
 
-Required roles: `admin`, `developer`
+Required roles: `admin`
 
 </aside>
 
@@ -1509,7 +1533,7 @@ Required roles: `admin`, `developer`
 |planId|path|string|true|none|
 
 > Example responses
-
+>
 > 404 Response
 
 ```json
@@ -1572,7 +1596,7 @@ Subscribe an application to a RestAPI in the Gateway.
 <aside class="warning">
 This operation requires <strong>Basic Auth</strong> authentication.
 
-Required roles: `admin`, `developer`
+Required roles: `admin`
 
 </aside>
 
@@ -1583,7 +1607,7 @@ Required roles: `admin`, `developer`
 |body|body|[SubscriptionCreateRequest](schemas.md#schemasubscriptioncreaterequest)|true|none|
 
 > Example responses
-
+>
 > 201 Response
 
 ```json
@@ -1634,7 +1658,7 @@ List subscriptions in the Gateway, optionally filtered by API, application, or s
 <aside class="warning">
 This operation requires <strong>Basic Auth</strong> authentication.
 
-Required roles: `admin`, `developer`
+Required roles: `admin`
 
 </aside>
 
@@ -1655,7 +1679,7 @@ Required roles: `admin`, `developer`
 |status|REVOKED|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -1709,7 +1733,7 @@ Get the details of a subscription by its ID.
 <aside class="warning">
 This operation requires <strong>Basic Auth</strong> authentication.
 
-Required roles: `admin`, `developer`
+Required roles: `admin`
 
 </aside>
 
@@ -1720,7 +1744,7 @@ Required roles: `admin`, `developer`
 |subscriptionId|path|string|true|none|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -1780,7 +1804,7 @@ Update an existing subscription in the Gateway.
 <aside class="warning">
 This operation requires <strong>Basic Auth</strong> authentication.
 
-Required roles: `admin`, `developer`
+Required roles: `admin`
 
 </aside>
 
@@ -1792,7 +1816,7 @@ Required roles: `admin`, `developer`
 |body|body|[SubscriptionUpdateRequest](schemas.md#schemasubscriptionupdaterequest)|false|none|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -1842,7 +1866,7 @@ Delete a subscription from the Gateway.
 <aside class="warning">
 This operation requires <strong>Basic Auth</strong> authentication.
 
-Required roles: `admin`, `developer`
+Required roles: `admin`
 
 </aside>
 
@@ -1853,7 +1877,7 @@ Required roles: `admin`, `developer`
 |subscriptionId|path|string|true|none|
 
 > Example responses
-
+>
 > 404 Response
 
 ```json

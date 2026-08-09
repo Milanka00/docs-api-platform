@@ -8,7 +8,7 @@ tags:
   - configuration
   - templating
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-17
+last_updated: 2026-08-07
 content_type: "reference"
 ---
 
@@ -90,7 +90,7 @@ Functions compose as pipelines:
 
 {% raw %}
 ```yaml
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: RestApi
 metadata:
   name: orders-api-v1
