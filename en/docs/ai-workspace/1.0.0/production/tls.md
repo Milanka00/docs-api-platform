@@ -1,8 +1,8 @@
 ---
 title: "Secure traffic with TLS"
 description: "Give AI Workspace and the Platform API certificates from your own CA, decide where TLS terminates, and make the backend-for-frontend verify the control plane."
-canonical_url: https://wso2.com/api-platform/docs/ai-workspace/next/production/tls/
-md_url: https://wso2.com/api-platform/docs/ai-workspace/next/production/tls.md
+canonical_url: https://wso2.com/api-platform/docs/ai-workspace/1.0.0/production/tls/
+md_url: https://wso2.com/api-platform/docs/ai-workspace/1.0.0/production/tls.md
 tags:
   - ai-workspace
   - production
@@ -15,7 +15,7 @@ content_type: "how-to"
 
 # Secure traffic with TLS
 
-Neither service generates a certificate for itself. When an HTTPS listener is on, it needs a certificate and key, and it stops at startup without them. Plan certificates before the first production start.
+Neither service generates a Transport Layer Security (TLS) certificate for itself. When an HTTPS listener is on, it needs a certificate and key, and it stops at startup without them. Plan certificates before the first production start.
 
 Three hops carry traffic in a production deployment, and each one needs its own certificate decision:
 
@@ -163,7 +163,7 @@ Use a certificate whose subject alternative name covers the public hostname brow
 
     Leaving `createIssuer: true` makes the chart create a self-signed issuer. That's fine for a test cluster and wrong for production, because nothing outside the cluster trusts the result.
 
-    **With a Secret you manage.** Create a `kubernetes.io/tls` Secret and reference it:
+    **With a Secret you manage.** Create a `kubernetes.io/tls` Secret for each service and reference it. Both charts support the `secret` provider, so configure both:
 
     ```yaml
     ai-workspace-ui:
@@ -173,14 +173,29 @@ Use a certificate whose subject alternative name covers the public hostname brow
           name: ai-workspace-tls
           certKey: tls.crt
           keyKey: tls.key
+
+    platform-api:
+      tls:
+        certificateProvider: secret
+        secret:
+          name: platform-api-tls
+          certKey: tls.crt
+          keyKey: tls.key
     ```
 
     Neither chart accepts a self-signed provider. Rendering fails rather than starting a listener with no working certificate.
 
-    To terminate TLS at the ingress instead, enable the plain-HTTP listener and route the ingress to it:
+    To terminate TLS at the ingress instead, enable the plain-HTTP listener and route the ingress to it. Apply this to whichever services the ingress fronts:
 
     ```yaml
     ai-workspace-ui:
+      config:
+        server:
+          http:
+            enabled: true
+            port: 9080
+
+    platform-api:
       config:
         server:
           http:
@@ -199,7 +214,7 @@ The BFF opens a server-to-server connection to the Platform API on every proxied
     # configs/config.toml
     [ai_workspace.control_plane]
     url             = "https://platform-api:9243"
-    tls_skip_verify = "false"
+    tls_skip_verify = false
     ca_file         = "/etc/ai-workspace/tls/ca.pem"
     ```
 
@@ -245,15 +260,21 @@ Check the certificate each listener presents, and confirm the chain validates:
 
 ```bash
 # The workspace listener, from outside.
-openssl s_client -connect workspace.example.com:443 -servername workspace.example.com </dev/null \
+openssl s_client -connect workspace.example.com:443 \
+  -servername workspace.example.com -verify_hostname workspace.example.com \
+  -verify_return_error -CAfile /etc/ssl/certs/ca-certificates.crt </dev/null \
   | openssl x509 -noout -subject -issuer -dates
 
 # The control plane, from a host that reaches it.
-openssl s_client -connect platform-api.example.com:9243 </dev/null \
+openssl s_client -connect platform-api.example.com:9243 \
+  -servername platform-api.example.com -verify_hostname platform-api.example.com \
+  -verify_return_error -CAfile ./ca.pem </dev/null \
   | openssl x509 -noout -subject -issuer -dates
 ```
 
-Then sign in through a browser and confirm there's no certificate warning. A warning at this point means the certificate doesn't cover the hostname users type.
+`-verify_return_error` makes `s_client` exit nonzero on a validation failure instead of printing the certificate anyway. Point `-CAfile` at the system trust store for a publicly issued certificate, and at your own bundle for a private one. Because the pipe masks the exit status, run each `openssl s_client` command on its own first and check that it reports `Verify return code: 0 (ok)`.
+
+Then sign in through a browser and confirm there's no certificate warning. A warning means the chain doesn't validate. Check the issuer against the trust store the browser uses, check that the certificate hasn't expired and isn't post-dated, and check that its subject alternative names cover the hostname users type.
 
 Check the BFF hop by making a proxied call from the UI. A `502` in the AI Workspace logs mentioning certificate verification means `ca_file` doesn't cover the Platform API's issuer.
 

@@ -28,6 +28,8 @@ Work through the steps in order. Adding replicas before moving off SQLite corrup
 
 The Platform API coordinates across replicas through an event table in the shared database. Each replica polls it, so a change one replica makes reaches the others without direct communication between them.
 
+The following diagram shows the resulting topology, with both services replicated behind ClusterIP Services, an ingress in front, and the shared database behind:
+
 ![Two AI Workspace pods and two Platform API pods behind ClusterIP Services, with an ingress in front and a shared database behind](../../../assets/img/ai-gateway/standalone-ai-workspace/production/kubernetes-high-availability.png)
 
 ## Step 1: Move to a shared database
@@ -121,7 +123,7 @@ All instances must use the same at-rest encryption key so they can decrypt data 
         replicaCount: 2      # requires session affinity on the ingress
     ```
 
-    The chart's HorizontalPodAutoscaler is gated on the driver being exactly `postgres`. It refuses to render for `sqlite3`, which can't be shared, and also for `sqlserver` and for the `postgresql` and `pgx` aliases. On those, set `replicaCount` yourself and scale manually.
+    The chart's horizontal pod autoscaler (HPA) is gated on the driver being exactly `postgres`. It refuses to render for `sqlite3`, which can't be shared, and also for `sqlserver` and for the `postgresql` and `pgx` aliases. On those, set `replicaCount` yourself and scale manually.
 
     Add session affinity to the workspace Ingress so each user keeps reaching the pod that holds their session:
 
@@ -211,7 +213,7 @@ Set CPU requests first. Without them the autoscaler has no baseline to compute u
     - Drain one host at a time during maintenance, and wait for its health check before you touch the next.
 
 === "Kubernetes"
-    Add a PodDisruptionBudget so a node drain can't take every replica at once. It's meaningful only at two or more replicas. With one replica, `minAvailable: 1` blocks every voluntary eviction and hangs the drain:
+    Add a pod disruption budget (PDB) so a node drain can't take every replica at once. It's meaningful only at two or more replicas. With one replica, `minAvailable: 1` blocks every voluntary eviction and hangs the drain:
 
     ```yaml
     platform-api:
@@ -225,7 +227,7 @@ Set CPU requests first. Without them the autoscaler has no baseline to compute u
         minAvailable: 1
     ```
 
-    Spread replicas across zones so one zone failing leaves the deployment serving:
+    Spread replicas across zones so one zone failing is less likely to take the deployment down:
 
     ```yaml
     ai-workspace-ui:
@@ -239,6 +241,8 @@ Set CPU requests first. Without them the autoscaler has no baseline to compute u
                 app.kubernetes.io/name: ai-workspace-ui
     ```
 
+    `whenUnsatisfiable: ScheduleAnyway` is a best-effort constraint. The scheduler prefers a spread and still places the pod when it can't achieve one, so replicas can end up sharing a zone. Set `whenUnsatisfiable: DoNotSchedule` for a hard separation, and accept that pods stay `Pending` when no zone can take them.
+
     Confirm the label selector matches the pods in your release before you rely on it:
 
     ```bash
@@ -247,7 +251,7 @@ Set CPU requests first. Without them the autoscaler has no baseline to compute u
 
 ## Step 6: Tune the health probes
 
-Both services answer a health endpoint: `/healthz` for AI Workspace, `/health` for the Platform API. The chart defaults suit a fast start. If your first start is slow, such as during a large schema migration, add a startup probe rather than lengthening the liveness delay. A startup probe gives the process time to come up without weakening the liveness check afterwards.
+Both services answer a health endpoint: `/healthz` for AI Workspace, `/health` for the Platform API. The chart defaults suit a fast start. If your first start is slow, such as during a large schema migration, add a startup probe rather than lengthening the liveness delay. A startup probe gives the process time to come up without weakening the liveness check afterward.
 
 === "Virtual machine"
     The shipped Compose health checks call each endpoint from inside the container. Point your load balancer at the same endpoints, over the port each service listens on.

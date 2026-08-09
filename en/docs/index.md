@@ -136,7 +136,7 @@ In platform mode, the gateway is connected to a control plane and you manage eve
 | **Analytics and monetization** | Available (via Moesif) | Basic observability (logs, traces) |
 | **Best for** | Teams managing many APIs across the organization | Individual developers or small teams that want a lightweight gateway |
 
-> You can start with a standalone gateway and connect it to a control plane later. The standalone gateways can be attached to the Cloud control plane (making them hybrid gateways), to a self-hosted control plane such as AI Workspace, or to the API Manager control plane when you need more governance. This is a common adoption path: a developer starts with a standalone gateway, and the organization later adds the control plane for unified governance.
+> Start with a standalone gateway and connect it to a control plane later. Attach it to the Cloud control plane, which makes it a hybrid gateway. Attach it to a self-hosted control plane such as AI Workspace. Or attach it to the API Manager control plane when you need more governance. This is a common adoption path: a developer starts with a standalone gateway, and the organization later adds a control plane for unified governance.
 
 ## Platform components
 The following is a complete view of all components and where to find their documentation.
@@ -146,7 +146,7 @@ The following is a complete view of all components and where to find their docum
 | :--- | :--- | :--- |
 | **API Control Plane** | Design, publish, version, and govern APIs through the web UI and configuration files. Enforce policies across all connected gateways. | Part of [Cloud](cloud/introduction/what-is-bijira.md) and [API Manager](api-manager/overview.md) |
 | **AI Workspace** | The enterprise control plane for AI. Manage LLM providers, MCP servers, and GenAI applications. Configure cost and token-based rate limits, enforce guardrails, and view AI consumption insights at the organizational level. Connected to one or more AI Gateways. Available in Cloud and as a self-hosted control plane. | <ul><li>[Cloud AI Workspace docs](cloud/ai-workspace/overview.md)</li><li>[Self-hosted AI Workspace docs](ai-workspace/1.0.0/overview.md)</li></ul> |
-| **API Portal and MCP Hub** | Developer facing portal for API discovery, subscription management, SDK generation, and theming. Includes agentic consumption capabilities for AI agents, such as the llms.txt endpoint, MCP registry, and Arazzo workflow support. Available in Cloud and as a self-hosted portal. | <ul><li>[Cloud API Portal docs](cloud/devportal/theming-devportal-with-ai.md)</li><li>[Self-hosted API Portal docs](api-portal/1.0.0/overview.md)</li></ul> |
+| **API Portal and MCP Hub** | Developer-facing portal for API discovery, subscription management, SDK generation, and theming. Includes agentic consumption capabilities for AI agents, such as the llms.txt endpoint, MCP registry, and Arazzo workflow support. Available in Cloud and as a self-hosted portal. | <ul><li>[Cloud API Portal docs](cloud/devportal/theming-devportal-with-ai.md)</li><li>[Self-hosted API Portal docs](api-portal/1.0.0/overview.md)</li></ul> |
 | **Analytics and Monetization** | Traffic monitoring, runtime and audit logs, usage tracking, and API monetization with usage-based billing. Powered by Moesif. | [Analytics docs](analytics-and-monetization/overview.md) |
 
 ### Gateway components

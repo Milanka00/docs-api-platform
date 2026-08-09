@@ -22,7 +22,7 @@ Two addresses leave your network in a production deployment: the workspace URL t
 | Workspace URL, such as `https://workspace.example.com/ai-workspace` | People, through a browser | Public, or reachable from your corporate network |
 | Control plane address, such as `platform-api.example.com:9243` | AI gateways | Restricted to the networks your gateways run in |
 
-Nothing else needs an address. The browser never calls the Platform API, because the BFF proxies every call server-to-server. The Platform API needs no public route for the interface to work.
+Nothing else needs an address. The browser never calls the Platform API, because the backend for frontend (BFF) proxies every call server-to-server. The Platform API needs no public route for the interface to work.
 
 ## The path prefix is fixed
 
@@ -58,10 +58,12 @@ The application bundle sets the prefix at image build time, so it isn't configur
         location / {
             proxy_pass https://127.0.0.1:9643;
 
-            # Verify the upstream certificate. Drop these two lines when the
+            # Verify the upstream certificate. Drop these four lines when the
             # workspace listener serves plain HTTP instead.
             proxy_ssl_verify       on;
             proxy_ssl_trusted_certificate /etc/nginx/tls/ca.pem;
+            proxy_ssl_server_name  on;
+            proxy_ssl_name         workspace.example.com;
 
             proxy_set_header Host              $host;
             proxy_set_header X-Real-IP         $remote_addr;
@@ -143,9 +145,16 @@ The application bundle sets the prefix at image build time, so it isn't configur
                     name: <release-name>-ai-workspace-ui
                     port:
                       number: 9643
+              - path: /
+                pathType: Prefix
+                backend:
+                  service:
+                    name: <release-name>-ai-workspace-ui
+                    port:
+                      number: 9643
     ```
 
-    Add a second path for `/` if you want the root redirect to work on the public hostname. Point it at the same backend.
+    Both paths point at the same backend. The `/` rule carries the root redirect and the `/healthz` endpoint, which the verification step at the end of this page calls on the public hostname.
 
     Confirm the Service name before you apply, because it carries the release name:
 

@@ -198,7 +198,7 @@ The gateway you just started serves traffic on its own, and it doesn't have to r
 Both directions work, and you can use them together:
 
 - **Top-down.** Configure an artifact in AI Workspace, apply policies to it, then deploy it to one or more gateways.
-- **Bottom-up.** Keep deploying through the management API, the way this guide does. Every artifact you create on the gateway syncs up to AI Workspace automatically and appears there as a copy the gateway owns, so the OpenAI provider and the `openai-assistant` proxy you deployed above show up without being re-declared. To see what a synced artifact looks like, and what stays editable, see [Manage Gateway-deployed AI artifacts in AI Workspace](../../ai-workspace/1.0.0/sync-gateway-created-artifacts.md).
+- **Bottom-up.** Keep deploying artifacts to the gateway through the management API, as you did earlier on this page. Every artifact you create on the gateway syncs up to AI Workspace automatically. It appears there as a copy the gateway owns, so the OpenAI provider and the `openai-assistant` proxy you deployed above show up without being re-declared. To see what a synced artifact looks like, and what stays editable, see [Manage Gateway-deployed AI artifacts in AI Workspace](../../ai-workspace/1.0.0/sync-gateway-created-artifacts.md).
 
 The gateway keeps serving traffic either way. If AI Workspace is unreachable, the gateway carries on and the sync catches up once the connection is restored.
 

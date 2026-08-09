@@ -1,8 +1,8 @@
 ---
 title: "Harden the deployment"
 description: "Close the gaps a quickstart leaves open: delegate login to an identity provider, keep authorization enforced, bound connections, and restrict what each container can do and reach."
-canonical_url: https://wso2.com/api-platform/docs/ai-workspace/next/production/harden/
-md_url: https://wso2.com/api-platform/docs/ai-workspace/next/production/harden.md
+canonical_url: https://wso2.com/api-platform/docs/ai-workspace/1.0.0/production/harden/
+md_url: https://wso2.com/api-platform/docs/ai-workspace/1.0.0/production/harden.md
 tags:
   - ai-workspace
   - production
@@ -21,7 +21,7 @@ Certificates and secrets have their own pages. This page closes the remaining ga
 
 File-based authentication exists for the quickstart and for air-gapped setups. It gives you one local user whose password hash sits in a config file. That user has no multi-factor authentication, no central revocation, and no audit trail beyond your own logs.
 
-Switch both services to your identity provider. They must agree, because the BFF runs the login flow and the Platform API validates the resulting token.
+Switch both services to your identity provider. They must agree, because the backend for frontend (BFF) runs the login flow and the Platform API validates the resulting token.
 
 === "Virtual machine"
     ```toml
@@ -118,7 +118,26 @@ A mismatch produces no error at startup. The Platform API enforces the authoriza
                   - ap:llm_proxy:manage
                   - ap:mcp_proxy:manage
                   - ap:secret:manage
+
+    ai-workspace-ui:
+      config:
+        auth:
+          authorization:
+            enabled: true
+            mode: role
+            roleToScopeMapping: /etc/ai-workspace/role-to-scope-mapping.yaml
+            roles:
+              - name: ap_admin
+                scopes:
+                  - ap:organization:manage
+                  - ap:gateway:manage
+                  - ap:llm_provider:manage
+                  - ap:llm_proxy:manage
+                  - ap:mcp_proxy:manage
+                  - ap:secret:manage
     ```
+
+    Configure both services with the same `mode` and the same role-to-scope mapping. The mount paths differ because each chart mounts the file at its own location.
 
     The chart renders the `roles` list into a ConfigMap and mounts it at the path above. A scope the Platform API doesn't declare fails startup, so a typo surfaces at install.
 
@@ -267,10 +286,22 @@ The Platform API accepts connections from exactly two sources: the AI Workspace 
             - namespaceSelector:
                 matchLabels:
                   kubernetes.io/metadata.name: ingress-nginx
+            # In-cluster gateways.
+            - namespaceSelector:
+                matchLabels:
+                  kubernetes.io/metadata.name: <gateway-namespace>
+              podSelector:
+                matchLabels:
+                  app.kubernetes.io/name: gateway
+            # Gateways outside the cluster.
+            - ipBlock:
+                cidr: <gateway-source-cidr>
           ports:
             - protocol: TCP
               port: 9243
     ```
+
+    Include every source your gateways connect from. Omit the `ipBlock` entry when all gateways run in the cluster, and omit the gateway namespace and pod selectors when none do. A policy that leaves a gateway source out disconnects that gateway from the control plane.
 
     Confirm the pod labels in your release before you apply it, because a NetworkPolicy that selects nothing silently allows everything:
 

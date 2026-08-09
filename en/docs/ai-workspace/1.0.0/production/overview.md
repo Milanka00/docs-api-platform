@@ -1,8 +1,8 @@
 ---
 title: "Production deployment overview"
 description: "Plan a production AI Workspace deployment: what you deploy, how a virtual machine install differs from Kubernetes, and the decisions to make before you install."
-canonical_url: https://wso2.com/api-platform/docs/ai-workspace/next/production/overview/
-md_url: https://wso2.com/api-platform/docs/ai-workspace/next/production/overview.md
+canonical_url: https://wso2.com/api-platform/docs/ai-workspace/1.0.0/production/overview/
+md_url: https://wso2.com/api-platform/docs/ai-workspace/1.0.0/production/overview.md
 tags:
   - ai-workspace
   - production
@@ -32,11 +32,13 @@ A production deployment has three parts.
 | AI Workspace | The browser interface. A React single-page application served by a Go backend-for-frontend (BFF) that owns the user session. | Your cluster or VM |
 | AI gateways | The data plane. Routes traffic between applications and LLM providers, and registers itself with the Platform API. | Anywhere your applications can reach |
 
-The Platform API and AI Workspace form the control plane and are what this section deploys. Gateways connect to it afterwards. See [Connect AI gateways in production](connect-gateways.md).
+The Platform API and AI Workspace form the control plane and are what this section deploys. Gateways connect to it afterward. See [Connect AI gateways in production](connect-gateways.md).
 
 The distribution also ships the API Portal, a separate product that shares this same control plane. It's off by default, and you can add it later. See [Optional: add the API Portal](#optional-add-the-api-portal).
 
 AI Workspace handles user interactions and communicates with the Platform API. The Platform API manages configuration and data, and validates user tokens through the identity provider. AI Gateways connect to the Platform API to register and receive configuration, then forward application requests to the configured LLM providers.
+
+The following diagram shows that deployment architecture, with browsers and gateways on one side and the database and identity provider on the other:
 
 ![Deployment architecture showing browsers and gateways reaching AI Workspace and the Platform API, which connects to a database and an identity provider](../../../assets/img/ai-gateway/standalone-ai-workspace/production/deployment-architecture.png)
 
@@ -58,12 +60,14 @@ Both shapes run the same container images and read the same configuration keys. 
     To put the control plane on its own host, unpack the distribution on both hosts and set a different profile list on each:
 
     ```bash
-    # On the control plane host.
+    # In .env on the control plane host.
     COMPOSE_PROFILES=platform-api
 
-    # On the workspace host.
+    # In .env on the workspace host.
     COMPOSE_PROFILES=ai-workspace
     ```
+
+    Put the value in the stack's `.env` file rather than exporting it in a shell. Compose reads `.env` from the directory it runs in, so the setting survives a new terminal and applies to every `docker compose` command on that host.
 
     A split like this changes three settings on the workspace host, because the Compose service name `platform-api` no longer resolves across hosts:
 
@@ -78,7 +82,7 @@ Both shapes run the same container images and read the same configuration keys. 
 
     - **Best for:** a cluster you already run, horizontal scaling, and rolling upgrades.
     - **You supply configuration through:** your own values file, layered over the chart defaults with `-f`.
-    - **Scaling:** replica counts, a HorizontalPodAutoscaler, and a PodDisruptionBudget, all backed by a shared database server.
+    - **Scaling:** replica counts and a PodDisruptionBudget, backed by a shared database server. The chart renders a HorizontalPodAutoscaler only when the database driver is exactly `postgres`. SQL Server deployments scale by setting `replicaCount` yourself.
     - **You operate:** the cluster, an ingress controller, cert-manager or your own certificate secrets, and backups.
 
     The charts don't ship an Ingress resource. You write your own, which keeps the ingress class, annotations, and hostnames under your control. See [Expose AI Workspace](expose-the-workspace.md).

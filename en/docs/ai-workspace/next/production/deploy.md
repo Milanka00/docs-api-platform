@@ -31,7 +31,7 @@ You need:
 
 ## Step 1: Collect the values you'll need
 
-Write these down before you edit a config file. Every later step reads from this list, and two of the values are hard to change afterwards.
+Write these down before you edit a config file. Every later step reads from this list, and two of the values are hard to change afterward.
 
 | Value | Example | Where it's used |
 |-------|---------|-----------------|
@@ -39,8 +39,8 @@ Write these down before you edit a config file. Every later step reads from this
 | Control plane address | `platform-api.example.com:443` | The address gateways connect to. It must resolve from the gateway's network |
 | Database endpoint | `postgres.example.com:5432` | The Platform API connection |
 | Identity provider issuer | `https://idp.example.com/oauth2/token` | Both services |
-| Client ID and client secret | Not applicable | The BFF's confidential client registration |
-| Certificate source | Your CA, or cert-manager with a `ClusterIssuer` | Every HTTPS listener |
+| Client ID and client secret | Not applicable | The backend for frontend (BFF) confidential client registration |
+| Certificate source | Your certificate authority (CA), or cert-manager with a `ClusterIssuer` | Every HTTPS listener |
 
 !!! warning "Two of these are expensive to change later"
     The workspace hostname is part of the identity provider redirect URLs, so changing it means editing the provider application too. The control plane address is part of every gateway's configuration, and changing it means reconfiguring each gateway with a fresh registration token. Settle both now.
@@ -63,8 +63,8 @@ On the application, configure:
 
 - **Redirect URL:** `https://<workspace-hostname>/ai-workspace/api/auth/callback`. This is a BFF route, not a page in the interface.
 - **Post-logout redirect URL:** `https://<workspace-hostname>/ai-workspace/login`
-- **Grant types:** authorization code and refresh token, with PKCE enabled. Keep `offline_access` in the requested scopes and allow it for the application. Without it the provider returns no refresh token, and users are signed out the moment their access token expires.
-- **Access token type:** JWT. The Platform API validates the token through your provider's JWKS endpoint, which it can't do with an opaque token. A provider left on opaque tokens shows up after login, as proxied calls failing with an invalid token segment count in the Platform API log.
+- **Grant types:** authorization code and refresh token, with Proof Key for Code Exchange (PKCE) enabled. Keep `offline_access` in the requested scopes and allow it for the application. Without it the provider returns no refresh token, and users are signed out the moment their access token expires.
+- **Access token type:** JSON Web Token (JWT). The Platform API validates the token through your provider's JSON Web Key Set (JWKS) endpoint, which it can't do with an opaque token. A provider left on opaque tokens shows up after login, as proxied calls failing with an invalid token segment count in the Platform API log.
 - **Claims:** the username, email, and organization claims, plus whichever claim carries privileges.
 
 Then decide how privileges reach the token. If your provider can register the platform's `ap:*` scopes, use scope-based authorization. If it can't, use role-based authorization and a shared role-to-scope mapping file.
@@ -251,7 +251,7 @@ Three values in this step are worth getting right the first time, because each f
 
     [ai_workspace.control_plane]
     url             = "https://platform-api:9243"
-    tls_skip_verify = "false"
+    tls_skip_verify = false
     ca_file         = "/etc/ai-workspace/tls/ca.pem"
 
     [ai_workspace.gateway]
@@ -282,6 +282,7 @@ Three values in this step are worth getting right the first time, because each f
         volumes:
           - ./resources/keys:/etc/platform-api/keys:ro
           - ./secrets/postgres_password:/secrets/platform-api/postgres_password:ro
+          - ./resources/tls/ca.pem:/etc/platform-api/tls/ca.pem:ro
 
       ai-workspace:
         image: ghcr.io/wso2/api-platform/ai-workspace:<version>

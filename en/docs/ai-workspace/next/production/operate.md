@@ -19,7 +19,7 @@ Once AI Workspace is serving traffic, three things keep it that way: logs you ca
 
 ## Step 1: Emit structured logs
 
-Both services log to standard output, so whatever collects container logs on your platform already collects theirs. Switch the format to JSON so a log aggregator can index fields instead of matching text.
+Both services log to standard output, so whatever collects container logs on your platform already collects theirs. Switch the format to JavaScript Object Notation (JSON) so a log aggregator can index fields instead of matching text.
 
 === "Virtual machine"
     ```toml
@@ -119,7 +119,7 @@ The line's message is `WS Metrics`, and its `payload` attribute holds a JSON obj
 
 | Field | Meaning |
 |-------|---------|
-| `from`, `to` | The interval the counters cover, in RFC 3339 |
+| `from`, `to` | The interval the counters cover, in Request for Comments (RFC) 3339 format |
 | `totalActiveConnections` | Gateways connected at the end of the interval |
 | `totalActiveOrgs` | Organizations with at least one connected gateway |
 | `successfulConnections` | Connections established during the interval |
@@ -131,7 +131,7 @@ The counters reset each interval, so they're rates rather than running totals. `
 
 ## Step 3: Back up what you can't regenerate
 
-Three things matter, and they're only useful together. A database backup restored without its encryption key gives you rows whose secret columns can't be decrypted.
+Two things matter, and they're only useful together. A database backup restored without its encryption key gives you rows whose secret columns can't be decrypted.
 
 | What | How often | Where |
 |------|-----------|-------|
@@ -165,7 +165,7 @@ Test a restore into a non-production environment on a schedule. Only a tested re
 
 ## Step 4: Upgrade
 
-Read the release notes first, then back up the database, then upgrade one component at a time.
+Read the release notes first, then back up the database, then upgrade. Both procedures below upgrade the whole stack in one step, so plan the upgrade as a change window that covers both services.
 
 === "Virtual machine"
     1. Back up the database, and confirm the backup completed.
@@ -197,8 +197,15 @@ Read the release notes first, then back up the database, then upgrade one compon
     3. Preview what changes before you apply it:
 
         ```bash
+        umask 077
         helm template <release-name> ./ai-workspace -n <namespace> \
-          -f values-secrets.yaml -f my_values.yaml > /tmp/next.yaml
+          -f values-secrets.yaml -f my_values.yaml > ./next.yaml
+        ```
+
+        The rendered output contains Secret manifests in the clear. Review it, then remove it:
+
+        ```bash
+        shred -u ./next.yaml
         ```
 
     4. Upgrade:

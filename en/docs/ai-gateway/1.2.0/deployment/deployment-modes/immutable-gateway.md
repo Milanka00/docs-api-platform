@@ -62,7 +62,7 @@ By default, the gateway controller loads artifacts from `/etc/api-platform-gatew
     ```
     {% endraw %}
 
-    then set `APIP_GW_IMMUTABLE_GATEWAY_ENABLED=true`. See [Gateway Configuration and Environment Interpolation](../../setup/configuration.md).
+    Then set `APIP_GW_IMMUTABLE_GATEWAY_ENABLED=true`. See [Gateway Configuration and Environment Interpolation](../../setup/configuration.md).
 
 ## Artifact format
 

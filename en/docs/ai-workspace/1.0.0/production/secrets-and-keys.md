@@ -1,8 +1,8 @@
 ---
 title: "Provision secrets and keys"
 description: "Generate, store, and reference the encryption key, database password, and OIDC client secret that a production AI Workspace deployment requires."
-canonical_url: https://wso2.com/api-platform/docs/ai-workspace/next/production/secrets-and-keys/
-md_url: https://wso2.com/api-platform/docs/ai-workspace/next/production/secrets-and-keys.md
+canonical_url: https://wso2.com/api-platform/docs/ai-workspace/1.0.0/production/secrets-and-keys/
+md_url: https://wso2.com/api-platform/docs/ai-workspace/1.0.0/production/secrets-and-keys.md
 tags:
   - ai-workspace
   - production
@@ -19,11 +19,13 @@ Both services follow one rule: setup generates, startup only checks. Nothing is 
 
 ## What you need to provision
 
+The following table maps each secret to the service that consumes it, when it's required, and what losing it costs you:
+
 | Secret | Used by | Required when | What losing it costs |
 |--------|---------|---------------|----------------------|
-| At-rest encryption key | Platform API | Always | Every stored secret, subscription token, and WebSub HMAC secret becomes unreadable |
+| At-rest encryption key | Platform API | Always | Every stored secret, subscription token, and WebSub hash-based message authentication code (HMAC) secret becomes unreadable |
 | Database password | Platform API | When the driver isn't SQLite | Nothing, once you reset it on the database server |
-| OIDC client secret | AI Workspace BFF | In OIDC authentication mode | Nothing, once you rotate it in the identity provider |
+| OpenID Connect (OIDC) client secret | AI Workspace backend for frontend (BFF) | In OIDC authentication mode | Nothing, once you rotate it in the identity provider |
 
 
 !!! danger "Back up the encryption key before you store anything"
@@ -86,10 +88,16 @@ The encryption key is a single 32-byte value supplied as 64 hexadecimal characte
       --from-file=OIDC_CLIENT_SECRET=./oidc_client_secret
     ```
 
-    Remove the two password files once the Secrets exist:
+    Remove the local files once the Secrets exist:
 
     ```bash
     shred -u db_password oidc_client_secret
+    ```
+
+    Remove `encryption.key` too, but only after you confirm that an independent copy is in your secret manager. The key has no recovery path, and the Kubernetes Secret is not a backup:
+
+    ```bash
+    shred -u encryption.key
     ```
 
     Then reference the Secrets by name in `values-secrets.yaml`, which holds no values and is safe to commit:
@@ -194,7 +202,7 @@ Resolution fails closed in both deployment shapes. A missing file, a file outsid
 | At-rest encryption key | No supported rotation that preserves data | Everything encrypted under the old key becomes unreadable |
 
 !!! warning "Rotating the encryption key destroys encrypted data"
-    Replacing the at-rest encryption key makes every value encrypted under the previous key permanently unreadable, including stored AI Workspace secrets, subscription tokens, and WebSub HMAC secrets. Treat the key as a value you protect and back up, not one you rotate on a schedule. To move to a different key, plan to re-enter every stored secret afterwards.
+    Replacing the at-rest encryption key makes every value encrypted under the previous key permanently unreadable, including stored AI Workspace secrets, subscription tokens, and WebSub HMAC secrets. Treat the key as a value you protect and back up, not one you rotate on a schedule. To move to a different key, plan to re-enter every stored secret afterward.
 
 ## Back up
 
@@ -223,8 +231,10 @@ Start the stack and confirm no service reports a missing requirement.
 
     ```bash
     kubectl -n <namespace> get secret <release-name>-platform-api-secrets \
-      -o jsonpath='{.data}' | tr ',' '\n'
+      -o json | jq -r '.data | keys[]'
     ```
+
+    This prints the key names only. Don't print `.data` itself: the values are base64-encoded, not encrypted, and they land in your terminal scrollback.
 
 ## Related
 

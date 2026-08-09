@@ -1575,12 +1575,12 @@ plugins:
         api-platform-gateway/publish-apis/subscription-less-apis.md: cloud/api-platform-gateway/publish-apis/subscription-less-apis.md
         # API Gateway deployment restructuring
         api-gateway/deploying-apis/bottom-up-api-deployment.md: api-gateway/1.1.0/deployment/deploying-apis/bottom-up-api-deployment.md
-        api-gateway/deploying-apis/gateway-operator.md: ai-gateway/1.1.0/deployment/deployment-modes/kubernetes/gateway-operator.md
+        api-gateway/deploying-apis/gateway-operator.md: api-gateway/1.1.0/deployment/deployment-modes/kubernetes/gateway-operator.md
         api-gateway/deployment-modes/immutable-gateway.md: api-gateway/1.1.0/deployment/deployment-modes/immutable-gateway.md
         api-gateway/deployment-modes/kubernetes/gateway-operator.md: api-gateway/1.1.0/deployment/deployment-modes/kubernetes/gateway-operator.md
         api-gateway/deployment-modes/kubernetes/kubernetes-standalone.md: api-gateway/1.1.0/deployment/deployment-modes/kubernetes/kubernetes-standalone.md
         api-gateway/deployment-modes/kubernetes/overview.md: api-gateway/1.1.0/deployment/deployment-modes/kubernetes/overview.md
-        api-gateway/setup/immutable-gateway.md: ai-gateway/1.1.0/deployment/deployment-modes/immutable-gateway.md
+        api-gateway/setup/immutable-gateway.md: api-gateway/1.1.0/deployment/deployment-modes/immutable-gateway.md
         # API Gateway observability split (single pages -> section overview)
         api-gateway/observability/tracing.md: api-gateway/1.1.0/observability/tracing/overview.md
         api-gateway/observability/metrics.md: api-gateway/1.1.0/observability/metrics/overview.md
