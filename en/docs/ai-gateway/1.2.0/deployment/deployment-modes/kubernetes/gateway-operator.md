@@ -419,14 +419,19 @@ export ADMIN_USERNAME=admin
 export ADMIN_PASSWORD=admin
 ```
 
-Connect to the controller management API first. Find the `gateway-controller` Service the operator registered, then forward its port:
+Connect to the controller management API first. Find the `gateway-controller` Service the operator registered:
 
 ```sh
 kubectl -n <namespace> get svc | grep gateway-controller
-kubectl -n <namespace> port-forward svc/<gateway-controller-service> 9090:9090 &
 ```
 
-Then post the certificate:
+Forward its port in a separate terminal, and leave the command running. Wait for the `Forwarding from 127.0.0.1:9090` line before you continue:
+
+```sh
+kubectl -n <namespace> port-forward svc/<gateway-controller-service> 9090:9090
+```
+
+Then post the certificate from your original terminal:
 
 ```sh
 cert_path="/tmp/test-backend.crt"
@@ -434,6 +439,8 @@ curl -X POST http://localhost:9090/api/management/v1/certificates -u "$ADMIN_USE
   -H "Content-Type: application/json" \
   -d "{\"certificate\":$(jq -Rs . < $cert_path),\"filename\":\"my-cert.pem\", \"name\":\"test\"}"
 ```
+
+Stop the port-forward with <kbd>Control+C</kbd> once the upload succeeds.
 
 ## Custom Configuration
 

@@ -284,10 +284,15 @@ The Platform API accepts connections from exactly two sources: the AI Workspace 
                 matchLabels:
                   app.kubernetes.io/name: ai-workspace-ui
             # Gateways that arrive through an Ingress. Omit this entry when
-            # gateways reach the Service directly.
+            # gateways reach the Service directly. The pod selector narrows the
+            # peer to the ingress controller pods rather than every pod in the
+            # ingress-nginx namespace.
             - namespaceSelector:
                 matchLabels:
                   kubernetes.io/metadata.name: ingress-nginx
+              podSelector:
+                matchLabels:
+                  app.kubernetes.io/name: ingress-nginx
             # In-cluster gateways.
             - namespaceSelector:
                 matchLabels:
