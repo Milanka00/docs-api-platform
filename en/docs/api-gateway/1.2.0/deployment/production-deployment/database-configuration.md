@@ -10,7 +10,7 @@ tags:
   - sqlserver
   - devops
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-26
+last_updated: 2026-08-07
 content_type: "how-to"
 ---
 
@@ -83,7 +83,7 @@ Apply the schema script for your database before installing the chart.
       -i gateway-controller-db.sqlserver.sql
     ```
 
-The charts do not include a bootstrap job for this, so run it from a CI job, a bastion host, or a temporary pod with network access to the database. If you are also deploying the Event Gateway, apply its supplemental script as well. For the full walkthrough — where to get the scripts, verifying the tables, and restricting runtime privileges — see [Setting Up the Database](../../setup/database-setup.md).
+The charts do not include a bootstrap job for this, so run it from a CI job, a bastion host, or a temporary pod with network access to the database. For the full walkthrough — where to get the scripts, verifying the tables, and restricting runtime privileges — see [Setting Up the Database](../../setup/database-setup.md).
 
 ## Store the Password in a Kubernetes Secret
 

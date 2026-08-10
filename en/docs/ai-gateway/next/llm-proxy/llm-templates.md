@@ -8,7 +8,7 @@ tags:
   - llm
   - reference
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-08-04
+last_updated: 2026-08-07
 content_type: "reference"
 ---
 

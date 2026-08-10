@@ -8,7 +8,7 @@ tags:
   - management-api
   - llm
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-17
+last_updated: 2026-08-07
 content_type: "reference"
 ---
 
@@ -105,7 +105,7 @@ Required roles: `admin`
 |body|body|[LLMProviderTemplateRequest](schemas.md#schemallmprovidertemplaterequest)|true|none|
 
 > Example responses
-
+>
 > 201 Response
 
 ```json
@@ -193,7 +193,7 @@ Required roles: `admin`
 |displayName|query|string|false|Filter by template display name|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -276,6 +276,9 @@ Status Code **200**
 |**additionalProperties**|string|false|none|none|
 |spec|[LLMProviderTemplateData](schemas.md#schemallmprovidertemplatedata)|true|none|none|
 |displayName|string|true|none|Human-readable LLM Template name|
+|groupId|string|false|none|Stable family-grouping identifier shared by every version of this<br>template. Multiple versions with the same groupId but different<br>handles are surfaced as versions of one template. Defaults to<br>metadata.name when omitted.|
+|managedBy|string|false|none|Origin of the template. Built-in templates use 'wso2'; custom<br>templates default to 'customer' and may be set to any value.|
+|version|string|false|none|Template content version (e.g. v1.0). Multiple versions of the same<br>groupId can coexist; defaults to v1.0 when omitted.|
 |promptTokens|[ExtractionIdentifier](schemas.md#schemaextractionidentifier)|false|none|none|
 |location|string|true|none|Where to find the token information|
 |identifier|string|true|none|JSONPath expression or header name to identify the token value|
@@ -353,7 +356,7 @@ Required roles: `admin`
 |id|path|string|true|Unique public identifier for the LLM provider template|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -482,7 +485,7 @@ Required roles: `admin`
 |body|body|[LLMProviderTemplateRequest](schemas.md#schemallmprovidertemplaterequest)|true|none|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json
@@ -570,7 +573,7 @@ Required roles: `admin`
 |id|path|string|true|Unique public identifier of the template to delete|
 
 > Example responses
-
+>
 > 200 Response
 
 ```json

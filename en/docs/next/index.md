@@ -138,7 +138,7 @@ The following is a complete view of all components and where to find their docum
 | Component | What it does | Docs |
 | :--- | :--- | :--- |
 | **API Control Plane** | Design, publish, version, and govern APIs through the web UI and configuration files. Enforce policies across all connected gateways. | Part of [Cloud](../cloud/introduction/what-is-bijira.md) and [API Manager](../api-manager/overview.md) |
-| **AI Workspace** | The enterprise control plane for AI. Manage LLM providers, MCP servers, and GenAI applications. Configure cost and token-based rate limits, enforce guardrails, and view AI consumption insights at the organizational level. Connected to one or more AI Gateways. | [AI Workspace docs](ai-workspace/overview.md) |
+| **AI Workspace** | The enterprise control plane for AI. Manage LLM providers, MCP servers, and GenAI applications. Configure cost and token-based rate limits, enforce guardrails, and view AI consumption insights at the organizational level. Connected to one or more AI Gateways. | [AI Workspace docs](../ai-workspace/next/overview.md) |
 | **API Portal & MCP Hub** | Developer facing portal for API discovery, subscription management, SDK generation, and theming. Includes agentic consumption capabilities for AI agents, such as the llms.txt endpoint, MCP registry, and Arazzo workflow support. | [API Portal docs](api-portal/overview.md) |
 | **Analytics and Monetization** | Traffic monitoring, runtime and audit logs, usage tracking, and API monetization with usage-based billing. Powered by Moesif. | <ul><li>[Analytics docs](../analytics/overview.md)</li><li>[Monetization docs](../monetization/overview.md)</li></ul> |
 
@@ -161,7 +161,7 @@ The following is a complete view of all components and where to find their docum
 | Govern LLM traffic (rate limits, guardrails, cost control) | [AI Gateway LLM Proxy](../ai-gateway/next/llm-proxy/quick-start-guide.md) |
 | Expose my APIs as MCP tools for AI agents | [AI Gateway MCP Proxy](../ai-gateway/next/mcp-proxy/quick-start-guide.md) |
 | Govern MCP traffic (inbound + outbound) | [AI Gateway MCP Proxy](../ai-gateway/next/mcp-proxy/quick-start-guide.md) |
-| Manage LLM providers and AI policies at the organizational level | [AI Workspace](ai-workspace/overview.md) |
+| Manage LLM providers and AI policies at the organizational level | [AI Workspace](../ai-workspace/next/overview.md) |
 | Set up an API Portal & MCP Hub for API discovery | [API Portal](api-portal/overview.md) |
 | Monitor traffic and monetize my APIs | [Analytics](../analytics/overview.md) and [Monetization](../monetization/overview.md) |
 | Follow end-to-end scenario walkthroughs | [Guides](../guides/ai-and-mcp/convert-rest-api-to-mcp-server.md) |

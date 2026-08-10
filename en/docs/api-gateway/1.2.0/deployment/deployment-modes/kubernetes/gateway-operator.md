@@ -9,7 +9,7 @@ tags:
   - deployment
   - operator
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-06-17
+last_updated: 2026-08-07
 content_type: "how-to"
 ---
 
@@ -42,7 +42,7 @@ The operator watches these CRs, runs Helm for the gateway runtime, and deploys A
 |----------|---------|
 | `GatewayClass` | Cluster-scoped class your `Gateway` references (`spec.gatewayClassName` must match the operator allowlist). |
 | `Gateway` (`gateway.networking.k8s.io`) | Triggers the same Helm-based gateway deployment as `APIGateway`; controller endpoint is registered for discovery by routes. |
-| `HTTPRoute` | Parents attach to a `Gateway`; `backendRefs` target a Kubernetes `Service`. The operator maps the route to `APIConfigData` and calls gateway-controller **`/api/management/v0.9/rest-apis`** (same outcome as `RestApi`, different user surface). |
+| `HTTPRoute` | Parents attach to a `Gateway`; `backendRefs` target a Kubernetes `Service`. The operator maps the route to `APIConfigData` and calls gateway-controller **`/api/management/v1/rest-apis`** (same outcome as `RestApi`, different user surface). |
 | `APIPolicy` (optional) | Rule or API-level policies for Gateway API flows; same CRD as HTTPRoute policy demos in-repo. |
 
 **Hands-on walkthrough:** manifests are in **[Kubernetes Gateway API path](#kubernetes-gateway-api-path)** below.
@@ -81,7 +81,7 @@ helm install my-gateway-operator oci://ghcr.io/wso2/api-platform/helm-charts/gat
 Create an `APIGateway` resource to bootstrap gateway components:
 
 ```yaml
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: APIGateway
 metadata:
   name: cluster-gw
@@ -117,7 +117,7 @@ data:
         service:
           type: ClusterIP
 ---
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: APIGateway
 metadata:
   name: cluster-gw
@@ -142,7 +142,7 @@ kubectl get apigateway -n default -o json | jq '.items[0].status'
 Define APIs using the `RestApi` custom resource:
 
 ```yaml
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: RestApi
 metadata:
   name: my-api
@@ -166,7 +166,7 @@ Apply the sample RestApi using the YAML above:
 
 ```sh
 kubectl apply -f - <<'EOF'
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: RestApi
 metadata:
   name: my-api
@@ -386,7 +386,7 @@ Wait until the **Gateway** is **Programmed** and gateway workloads are **Ready**
 
 ```sh
 kubectl apply -f - <<'EOF'
-# Operator maps this route to APIConfigData and calls gateway-controller /api/management/v0.9/rest-apis.
+# Operator maps this route to APIConfigData and calls gateway-controller /api/management/v1/rest-apis.
 # Default REST handle is namespace-name: gateway-api-demo-hello-api (override with gateway.api-platform.wso2.com/api-handle).
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -505,7 +505,7 @@ Use **`NS=gateway-api-demo`** in the port-forward snippet when testing that demo
 
 ### 7. HTTPRoute with Policies (APIPolicy CR)
 
-Attach policies to HTTPRoutes using the `APIPolicy` CR (`gateway.api-platform.wso2.com/v1alpha1`). Two attachment modes:
+Attach policies to HTTPRoutes using the `APIPolicy` CR (`gateway.api-platform.wso2.com/v1`). Two attachment modes:
 
 - **API-level** — set `spec.targetRef` to the HTTPRoute; entries in `spec.policies` are merged into `APIConfigData.policies`.
 - **Rule-scoped** — omit `spec.targetRef`; reference the `APIPolicy` from an HTTPRoute rule via `filters[].type: ExtensionRef`.
@@ -515,7 +515,7 @@ Attach policies to HTTPRoutes using the `APIPolicy` CR (`gateway.api-platform.ws
 ```sh
 kubectl apply -f - <<'EOF'
 # API-level policy: targetRef → hello-apipolicy-demo HTTPRoute
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: APIPolicy
 metadata:
   name: httproute-demo-api-level
@@ -537,7 +537,7 @@ spec:
               value: "1.2.3"
 ---
 # Rule-scoped policy: no targetRef; referenced from HTTPRoute rule via ExtensionRef
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: APIPolicy
 metadata:
   name: httproute-demo-rule-ratelimit
@@ -648,7 +648,7 @@ type: Opaque
 stringData:
   subscriptionKey: My-Key
 ---
-apiVersion: gateway.api-platform.wso2.com/v1alpha1
+apiVersion: gateway.api-platform.wso2.com/v1
 kind: APIPolicy
 metadata:
   name: httproute-demo-rule-secret-params
@@ -754,7 +754,7 @@ export ADMIN_PASSWORD=admin
 
 ```sh
 cert_path="/tmp/test-backend.crt"
-curl -X POST http://localhost:9090/api/management/v0.9/certificates -u "$ADMIN_USERNAME:$ADMIN_PASSWORD" \
+curl -X POST http://localhost:9090/api/management/v1/certificates -u "$ADMIN_USERNAME:$ADMIN_PASSWORD" \
   -H "Content-Type: application/json" \
   -d "{\"certificate\":$(jq -Rs . < $cert_path),\"filename\":\"my-cert.pem\", \"name\":\"test\"}"
 ```
