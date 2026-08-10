@@ -132,11 +132,11 @@ In platform mode, the gateway is connected to a control plane and you manage eve
 | **How you configure it** | Through the platform web UI or configuration files | YAML files, CLI, REST API |
 | **Control plane** | Available. Manage APIs, policies, subscriptions, and lifecycle visually | None. You manage everything in configuration files |
 | **Developer portal** | Available. Developers discover and subscribe to your APIs | None |
-| **AI Workspace** | Available. Manage LLM providers, guardrails, and MCP at org level | Configure per gateway, or connect a self-hosted AI Workspace |
+| **AI Workspace** | Available. Manage LLM providers, guardrails, and Model Context Protocol (MCP) proxies at the organization level | Configure LLM providers, guardrails, and MCP proxies per gateway, or connect a self-hosted AI Workspace |
 | **Analytics and monetization** | Available (via Moesif) | Basic observability (logs, traces) |
 | **Best for** | Teams managing many APIs across the organization | Individual developers or small teams that want a lightweight gateway |
 
-> Start with a standalone gateway and connect it to a control plane later. Attach it to the Cloud control plane, which makes it a hybrid gateway. Attach it to a self-hosted control plane such as AI Workspace. Or attach it to the API Manager control plane when you need more governance. This is a common adoption path: a developer starts with a standalone gateway, and the organization later adds a control plane for unified governance.
+> Start with a standalone gateway and connect it to a control plane later. Attach it to the Cloud control plane, which makes it a hybrid gateway. Attach it to a self-hosted control plane such as AI Workspace. Or attach it to the API Manager control plane when you need more governance. This is a common adoption path: you start with a standalone gateway, and your organization later adds a control plane for unified governance.
 
 ## Platform components
 The following is a complete view of all components and where to find their documentation.
