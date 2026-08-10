@@ -18,8 +18,8 @@ A gateway for managing and securing AI traffic, including Large Language Model (
 
 ## Quick Start
 
-- [LLM Quick Start Guide](llm-proxy/quick-start-guide.md) - Set up the gateway, verify the controller admin health endpoint, and route traffic to LLM providers like OpenAI
-- [MCP Quick Start Guide](mcp-proxy/quick-start-guide.md) - Set up the gateway, verify the controller admin health endpoint, and route traffic to MCP servers
+- [LLM Quick Start Guide](./llm-proxy/quick-start-guide.md)—Install the gateway, confirm the Gateway Controller admin health endpoint reports it healthy, and route traffic to an LLM provider such as OpenAI.
+- [MCP Quick Start Guide](./mcp-proxy/quick-start-guide.md)—Install the gateway, confirm the Gateway Controller admin health endpoint reports it healthy, and route traffic to an MCP server.
 
 ## Key Concepts
 
@@ -56,7 +56,7 @@ To connect the gateway to AWS Bedrock, see [Configure an AWS Bedrock LLM Provide
 An LLM Proxy allows developers to create custom API endpoints that consume an LLM Provider, while inheriting administrator-enforced access control, budgeting and organization-wide policies defined at the provider level. Each proxy gets its own URL context (e.g., `/assistant`) and can have its own policies applied. This enables:
 
 - Multiple AI applications to share a single LLM Provider
-- A single OpenAI-compatible endpoint to route requests to multiple LLM providers. See [Multi-Provider Routing for LLM Proxies](llm-proxy/multi-provider-routing.md).
+- A single OpenAI-compatible endpoint to route requests to multiple LLM providers. See [Multi-Provider Routing for LLM Proxies](./llm-proxy/multi-provider-routing.md).
 - Per-application policies such as prompt management and guardrails
 - Separation between platform administration and application development
 
@@ -70,7 +70,7 @@ An MCP Proxy routes Model Context Protocol traffic to MCP servers. MCP is a prot
 
 ### Streaming
 
-When an upstream service streams its response, the gateway relays it to the client chunk by chunk instead of buffering the whole response. This holds for LLM providers and LLM proxies, and needs no configuration. On MCP proxies, request bodies stream, but response bodies stay buffered. See [Real-time AI streaming](streaming-responses.md).
+When an upstream service streams its response, the gateway relays it to the client chunk by chunk instead of buffering the whole response. This holds for LLM providers and LLM proxies, and needs no configuration. On MCP proxies, request bodies stream, but response bodies stay buffered. See [Real-time AI streaming](./streaming-responses.md).
 
 ## Default Ports
 
@@ -114,12 +114,16 @@ You can extend the AI Gateway with custom guardrail policies by building a custo
 
 ## Documentation
 
+The following table lists the AI Gateway documentation sections and what each one covers:
+
 | Section | Description |
 |---------|-------------|
-| [LLM](llm-proxy/quick-start-guide.md) | LLM provider configuration, guardrails, prompt management, and semantic caching |
-| [MCP](mcp-proxy/quick-start-guide.md) | MCP proxy setup and policies |
-| [Real-time AI streaming](streaming-responses.md) | Streamed responses across providers and proxies, and how policies and analytics behave |
-| [Observability](observability/logging.md) | Logging and tracing configuration |
-| [Analytics](analytics/moesif-analytics.md) | Analytics integrations (Moesif) |
+| [LLM](./llm-proxy/quick-start-guide.md) | LLM provider configuration, guardrails, prompt management, and semantic caching |
+| [MCP](./mcp-proxy/quick-start-guide.md) | MCP proxy setup and policies |
+| [Real-time AI streaming](./streaming-responses.md) | Streamed responses across providers and proxies, and how policies and analytics behave |
+| [Observability](./observability/logging.md) | Logging and tracing configuration |
+| [Analytics](./analytics/moesif-analytics.md) | Analytics integrations (Moesif) |
 | [Policies and Guardrails](https://github.com/wso2/gateway-controllers/blob/main/docs/README.md) | Gateway policies and guardrails for AI traffic control |
-| [Management API](gateway-controller-management-api/overview.md) | REST API reference for managing LLM providers, LLM proxies, MCP proxies, certificates, and secrets |
+| [Management API](./gateway-controller-management-api/overview.md) | REST API reference for managing LLM providers, LLM proxies, MCP proxies, certificates, and secrets |
+| [Production deployment](./deployment/production-deployment/overview.md) | High-availability Kubernetes deployment with Helm, an external database, replicated workloads, and AI workload tuning |
+| [AI Workspace](../../ai-workspace/1.0.0/overview.md) | The control plane for governing LLM providers, proxies, and policies across every gateway you run |

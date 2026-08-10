@@ -198,7 +198,7 @@ The gateway you just started serves traffic on its own. [AI Workspace](../../ai-
 Both directions work, and you can use them together:
 
 - **Top-down.** Configure an artifact in AI Workspace, apply policies to it, then deploy it to one or more gateways.
-- **Bottom-up.** Keep deploying through the management API, as this guide does. The gateway syncs every artifact you create to AI Workspace automatically, where each one appears as a copy the gateway owns. The OpenAI provider and the `openai-assistant` proxy you deployed above appear there without being re-declared. To see what a synced artifact looks like, and what stays editable, see [Manage Gateway-deployed AI artifacts in AI Workspace](../../ai-workspace/next/sync-gateway-created-artifacts.md).
+- **Bottom-up.** Keep deploying through the management API, as this guide does. The gateway syncs every artifact you create to AI Workspace automatically, where each one appears as a copy the gateway owns. The OpenAI provider and the `openai-assistant` proxy from this guide appear there without being re-declared. To see what a synced artifact looks like, and what stays editable, see [Manage Gateway-deployed AI artifacts in AI Workspace](../../ai-workspace/next/sync-gateway-created-artifacts.md).
 
 The gateway keeps serving traffic either way. If AI Workspace is unreachable, the gateway carries on and the sync catches up once the connection is restored.
 
@@ -228,3 +228,5 @@ This stops the containers and removes the `controller-data` volume. The next sta
 - Add guardrails to a proxy, such as [PII masking](./llm-proxy/guardrails/pii-masking-regex.md) or a [JSON schema guardrail](./llm-proxy/guardrails/json-schema.md)
 - Expose an MCP server through the gateway: [MCP proxy quick start guide](./mcp-proxy/quick-start-guide.md)
 - Govern AI traffic across all your gateways from the control plane: [AI Workspace overview](../../ai-workspace/next/overview.md)
+- Take this gateway to production on Kubernetes: [Production deployment overview](./deployment/production-deployment/overview.md)
+- Register a production gateway with the control plane: [Connect to AI Workspace](./deployment/production-deployment/control-plane-connection.md)
