@@ -294,10 +294,10 @@ spec:
     identifier: $.usage.totalTokens
   requestModel:
     location: pathParam
-    identifier: model/([A-Za-z0-9.:-]+)/
+    identifier: model/(.+)$
   responseModel:
     location: pathParam
-    identifier: model/([A-Za-z0-9.:-]+)/
+    identifier: model/(.+)$
 ```
 
 ### Azure AI Foundry
