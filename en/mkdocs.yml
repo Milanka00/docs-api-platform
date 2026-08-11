@@ -347,6 +347,7 @@ nav:
           - Timeouts: api-gateway/next/resiliency/timeouts.md
         - Policies:
           - Overview: api-gateway/next/policies/overview.md
+          - Policy execution order: api-gateway/next/policies/policy-execution-order.md
           - Custom Policies:
             - Writing a Custom Policy: api-gateway/next/policies/custom-policies/writing-a-custom-policy.md
             - Building Gateway with Custom Policies: api-gateway/next/policies/custom-policies/building-gateway-with-custom-policies.md
@@ -619,6 +620,8 @@ nav:
             - LLM Provider Templates: ai-gateway/next/llm-proxy/llm-templates.md
             - Multi-Provider Routing: ai-gateway/next/llm-proxy/multi-provider-routing.md
             - Guardrails:
+                - Overview: ai-gateway/next/llm-proxy/guardrails/overview.md
+                - Guardrail execution order: ai-gateway/next/llm-proxy/guardrails/execution-order.md
                 - AWS Bedrock Guardrail: ai-gateway/next/llm-proxy/guardrails/aws-bedrock-guardrail.md
                 - Azure Content Safety: ai-gateway/next/llm-proxy/guardrails/azure-content-safety.md
                 - Content Length Guardrail: ai-gateway/next/llm-proxy/guardrails/content-length.md
