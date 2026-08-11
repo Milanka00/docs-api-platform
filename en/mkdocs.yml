@@ -418,6 +418,7 @@ nav:
           - Timeouts: api-gateway/1.2.0/resiliency/timeouts.md
         - Policies:
           - Overview: api-gateway/1.2.0/policies/overview.md
+          - Policy execution order: api-gateway/1.2.0/policies/policy-execution-order.md
           - Custom Policies:
             - Writing a Custom Policy: api-gateway/1.2.0/policies/custom-policies/writing-a-custom-policy.md
             - Building Gateway with Custom Policies: api-gateway/1.2.0/policies/custom-policies/building-gateway-with-custom-policies.md
@@ -486,6 +487,7 @@ nav:
         - Quick Start Guide: api-gateway/1.1.0/quick-start-guide.md
         - Policies:
           - Overview: api-gateway/1.1.0/policies/overview.md
+          - Policy execution order: api-gateway/1.1.0/policies/policy-execution-order.md
           - Custom Policies:
             - Writing a Custom Policy: api-gateway/1.1.0/policies/custom-policies/writing-a-custom-policy.md
             - Building Gateway with Custom Policies: api-gateway/1.1.0/policies/custom-policies/building-gateway-with-custom-policies.md
@@ -554,6 +556,7 @@ nav:
         - Quick Start Guide: api-gateway/1.0.0/quick-start-guide.md
         - Policies:
           - Overview: api-gateway/1.0.0/policies/overview.md
+          - Policy execution order: api-gateway/1.0.0/policies/policy-execution-order.md
           - Custom Policies:
             - Writing a Custom Policy: api-gateway/1.0.0/policies/custom-policies/writing-a-custom-policy.md
             - Building Gateway with Custom Policies: api-gateway/1.0.0/policies/custom-policies/building-gateway-with-custom-policies.md
@@ -696,6 +699,8 @@ nav:
             - LLM Provider Templates: ai-gateway/1.2.0/llm-proxy/llm-templates.md
             - Multi-Provider Routing: ai-gateway/1.2.0/llm-proxy/multi-provider-routing.md
             - Guardrails:
+                - Overview: ai-gateway/1.2.0/llm-proxy/guardrails/overview.md
+                - Guardrail execution order: ai-gateway/1.2.0/llm-proxy/guardrails/execution-order.md
                 - AWS Bedrock Guardrail: ai-gateway/1.2.0/llm-proxy/guardrails/aws-bedrock-guardrail.md
                 - Azure Content Safety: ai-gateway/1.2.0/llm-proxy/guardrails/azure-content-safety.md
                 - Content Length Guardrail: ai-gateway/1.2.0/llm-proxy/guardrails/content-length.md
@@ -765,6 +770,8 @@ nav:
             - Quick Start Guide: ai-gateway/1.1.0/llm-proxy/quick-start-guide.md
             - LLM Provider Templates: ai-gateway/1.1.0/llm-proxy/llm-templates.md
             - Guardrails:
+                - Overview: ai-gateway/1.1.0/llm-proxy/guardrails/overview.md
+                - Guardrail execution order: ai-gateway/1.1.0/llm-proxy/guardrails/execution-order.md
                 - AWS Bedrock Guardrail: ai-gateway/1.1.0/llm-proxy/guardrails/aws-bedrock-guardrail.md
                 - Azure Content Safety: ai-gateway/1.1.0/llm-proxy/guardrails/azure-content-safety.md
                 - Content Length Guardrail: ai-gateway/1.1.0/llm-proxy/guardrails/content-length.md
@@ -821,6 +828,8 @@ nav:
             - Quick Start Guide: ai-gateway/1.0.0/llm-proxy/quick-start-guide.md
             - LLM Provider Templates: ai-gateway/1.0.0/llm-proxy/llm-templates.md
             - Guardrails:
+                - Overview: ai-gateway/1.0.0/llm-proxy/guardrails/overview.md
+                - Guardrail execution order: ai-gateway/1.0.0/llm-proxy/guardrails/execution-order.md
                 - AWS Bedrock Guardrail: ai-gateway/1.0.0/llm-proxy/guardrails/aws-bedrock-guardrail.md
                 - Azure Content Safety: ai-gateway/1.0.0/llm-proxy/guardrails/azure-content-safety.md
                 - Content Length Guardrail: ai-gateway/1.0.0/llm-proxy/guardrails/content-length.md
