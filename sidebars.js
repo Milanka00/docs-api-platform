@@ -27,6 +27,7 @@ const sidebars = {
         doc("develop-api-proxy/policy/overview", "Overview"),
         doc("develop-api-proxy/policy/policies", "Policies"),
         doc("develop-api-proxy/policy/attach-and-manage-policies", "Attach and Manage Policies"),
+        doc("develop-api-proxy/policy/add-custom-policies", "Add Custom Policies"),
       ]),
       doc("develop-api-proxy/documents", "Documents"),
       doc("develop-api-proxy/lifecycle", "Lifecycle"),
@@ -43,6 +44,7 @@ const sidebars = {
       doc("api-governance/overview", "Overview"),
     ]),
     group("Gateways", [
+      doc("gateways/overview", "Overview"),
       group("API Gateway", [
         doc("gateways/api-gateway/setting-up", "Setting Up"),
       ]),
@@ -73,9 +75,11 @@ const sidebars = {
     },
     group("Administer", [
       doc("administer/overview", "Overview"),
+      doc("administer/managing-users", "Managing Users"),
       doc("administer/managing-environments", "Managing Environments"),
       doc("administer/creating-subscription-plans", "Creating Subscription Plans"),
     ]),
+    doc("pipelines", "Pipelines"),
     doc("workflows", "Workflows"),
     doc("tutorials", "Tutorials"),
   ],
