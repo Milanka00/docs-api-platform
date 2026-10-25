@@ -32,6 +32,7 @@ const sidebars = {
       doc("develop-api-proxy/documents", "Documents"),
       doc("develop-api-proxy/lifecycle", "Lifecycle"),
       doc("develop-api-proxy/subscription-plans", "Subscription Plans"),
+      doc("develop-api-proxy/make-an-api-ai-ready", "Make an API AI-Ready"),
     ]),
     group("Test API Proxy", [
       doc("test-api-proxy/api-console", "API Console"),
@@ -39,6 +40,7 @@ const sidebars = {
     ]),
     group("MCP Servers", [
       doc("mcp-servers/overview", "Overview"),
+      doc("mcp-servers/mcp-readiness", "MCP Readiness"),
     ]),
     group("API Governance", [
       doc("api-governance/overview", "Overview"),
