@@ -76,12 +76,14 @@ const sidebars = {
     group("Administer", [
       doc("administer/overview", "Overview"),
       doc("administer/managing-users", "Managing Users"),
+      doc("administer/role-based-access-control", "Role Based Access Control"),
       doc("administer/managing-environments", "Managing Environments"),
       doc("administer/creating-subscription-plans", "Creating Subscription Plans"),
     ]),
     doc("pipelines", "Pipelines"),
     doc("workflows", "Workflows"),
     doc("tutorials", "Tutorials"),
+    doc("tools", "Tools"),
   ],
 };
 
