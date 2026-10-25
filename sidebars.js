@@ -85,7 +85,16 @@ const sidebars = {
       doc("administer/creating-application-templates", "Creating Application Templates"),
     ]),
     doc("pipelines", "Pipelines"),
-    doc("workflows", "Workflows"),
+    {
+      type: 'category',
+      label: 'Workflows',
+      // The group's own page (docs/workflows.md).
+      link: {type: 'doc', id: 'workflows'},
+      items: [
+        doc("workflows/application-creation-workflow", "Application Creation Workflow"),
+        doc("workflows/subscription-creation-workflow", "Subscription Creation Workflow"),
+      ],
+    },
     doc("tutorials", "Tutorials"),
     doc("tools", "Tools"),
   ],
