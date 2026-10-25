@@ -83,6 +83,7 @@ const sidebars = {
       doc("administer/managing-environments", "Managing Environments"),
       doc("administer/creating-subscription-plans", "Creating Subscription Plans"),
       doc("administer/creating-application-templates", "Creating Application Templates"),
+      doc("administer/managing-api-consumers", "Managing API Consumers"),
     ]),
     doc("pipelines", "Pipelines"),
     {
@@ -93,6 +94,7 @@ const sidebars = {
       items: [
         doc("workflows/application-creation-workflow", "Application Creation Workflow"),
         doc("workflows/subscription-creation-workflow", "Subscription Creation Workflow"),
+        doc("workflows/deployment-promotion-workflow", "Deployment Promotion Workflow"),
       ],
     },
     doc("tutorials", "Tutorials"),
