@@ -56,6 +56,7 @@ const sidebars = {
       group("Policy Hub", [
         doc("gateways/policy-hub/overview", "Overview"),
       ]),
+      doc("gateways/gateway-federation", "Gateway Federation"),
     ]),
     doc("secret-management", "Secret Management"),
     group("Developer Portal", [
@@ -81,6 +82,7 @@ const sidebars = {
       doc("administer/role-based-access-control", "Role Based Access Control"),
       doc("administer/managing-environments", "Managing Environments"),
       doc("administer/creating-subscription-plans", "Creating Subscription Plans"),
+      doc("administer/creating-application-templates", "Creating Application Templates"),
     ]),
     doc("pipelines", "Pipelines"),
     doc("workflows", "Workflows"),
