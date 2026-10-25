@@ -72,6 +72,7 @@ const sidebars = {
       ],
     },
     group("Administer", [
+      doc("administer/overview", "Overview"),
       doc("administer/managing-environments", "Managing Environments"),
       doc("administer/creating-subscription-plans", "Creating Subscription Plans"),
     ]),
