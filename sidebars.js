@@ -53,13 +53,24 @@ const sidebars = {
         doc("gateways/policy-hub/overview", "Overview"),
       ]),
     ]),
+    doc("secret-management", "Secret Management"),
     group("Developer Portal", [
       doc("developer-portal/setting-up", "Setting Up"),
     ]),
     group("Monetization", [
       doc("monetization/overview", "Overview"),
     ]),
-    doc("monitoring-and-analytics", "Monitoring and Analytics"),
+    {
+      type: 'category',
+      label: 'Monitoring and Analytics',
+      // The group's own page (docs/monitoring-and-analytics.md).
+      link: {type: 'doc', id: 'monitoring-and-analytics'},
+      items: [
+        doc("monitoring-and-analytics/audit-logs", "Audit Logs"),
+        doc("monitoring-and-analytics/alerts", "Alerts"),
+        doc("monitoring-and-analytics/gateway-metrics", "Gateway Metrics"),
+      ],
+    },
     group("Administer", [
       doc("administer/managing-environments", "Managing Environments"),
       doc("administer/creating-subscription-plans", "Creating Subscription Plans"),
