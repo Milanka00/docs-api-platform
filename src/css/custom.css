@@ -430,25 +430,19 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
 }
 
-/* h2 = topic, h3 = subtopic: each gets a rule and extra space above. */
+/* h2 = topic, h3 = subtopic: set apart by space alone, no rules. */
 .markdown h2 {
   font-weight: 500;
   letter-spacing: -0.005em;
-  border-bottom: 1px solid var(--apd-surface-border);
-  padding-bottom: 0.5rem;
-  margin-top: 3rem;
+  margin-top: 2.5rem;
 }
 
 .markdown h3 {
   font-weight: 500;
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--apd-border-subtle);
+  margin-top: 2rem;
 }
 
 .markdown h2 + h3 {
-  border-top: none;
-  padding-top: 0;
   margin-top: 1rem;
 }
 
