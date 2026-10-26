@@ -1,5 +1,5 @@
 ---
-title: "Subscription Plans"
+title: "Subscription Plans and Billing"
 description: "Assign existing subscription plans to an API proxy in WSO2 API Platform to control access levels and pricing tiers for consumers."
 ---
 

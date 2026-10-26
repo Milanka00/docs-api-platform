@@ -35,4 +35,4 @@ To create an organization-level subscription plan, follow the steps given below:
 
 7. Click **Create**. This creates the subscription plan and lists it under **Subscription Plans**.
 
-After creating subscription plans, users with the API publisher role can [assign subscription plans to APIs](../develop-api-proxy/subscription-plans.md). API consumers can then choose the appropriate subscription plan during the subscription process depending on their requirements.
+After creating subscription plans, users with the API publisher role can [assign subscription plans to APIs](../develop-api-proxy/subscription-plans-and-billing.md). API consumers can then choose the appropriate subscription plan during the subscription process depending on their requirements.

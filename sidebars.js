@@ -31,7 +31,7 @@ const sidebars = {
       ]),
       doc("develop-api-proxy/documents", "Documents"),
       doc("develop-api-proxy/lifecycle", "Lifecycle"),
-      doc("develop-api-proxy/subscription-plans", "Subscription Plans"),
+      doc("develop-api-proxy/subscription-plans-and-billing", "Subscription Plans and Billing"),
       doc("develop-api-proxy/make-an-api-ai-ready", "Make an API AI-Ready"),
     ]),
     group("Test API Proxy", [
