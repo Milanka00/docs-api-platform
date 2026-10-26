@@ -1,142 +1,168 @@
 /**
  * WSO2 API Platform Documentation theme
  *
- * Adapted from the WSO2 Integrator docs' "Warm Ink" theme
- * (wso2/docs-integrator, en/src/css/custom.css): warm ink/cream neutrals
- * for surfaces and text, colour only on interactive elements (links,
- * active states), crisp typography.
+ * Matches the WSO2 Cloud / API Platform console: a soft grey canvas with a
+ * faint warm (peach) and cool (lavender) glow, a grey sidebar where the
+ * current page is a rounded grey pill, white translucent cards with
+ * hairline borders, Inter throughout with light-weight headings, and
+ * orange only on actions and links.
  *
- * Light: background #FFFFFF, surface #F7F6F4, sidebar #FAF8F6,
- *        lines #E6E6EA / hairline #ECECEF,
- *        text headings #17171C, body #3A3A44, muted #5A5A66,
- *        primary/accent: the API Platform docs' orange #FF7300
- *        (hover #E46700), highlights as light tints of it.
- * Dark:  background #141210, surface #1E1B19, lines #3B3532,
- *        text headings #EDE7E2, body #C2B8B0, muted #9A8F87,
- *        primary/accent: the same #FF7300.
+ * Light: canvas #F6F6F7, sidebar #F1F1F3, active pill #E4E4E7,
+ *        cards rgba(255,255,255,0.75), lines #E6E6E9,
+ *        text headings #232328, body #3A3A40, muted #6B6B73,
+ *        accent #EE6F2D (button gradient #F38345 → #E85F2A),
+ *        link text #D65A1C (darker, for contrast on the canvas).
+ * Dark:  canvas #131315, sidebar #18181B, active pill #2A2A2E,
+ *        lines #2C2C31, text headings #EDEDEF, body #C6C6CC,
+ *        accent the same orange, links #F59A62.
  *
- * Typography: Inter (body) / Plus Jakarta Sans (headings).
+ * Typography: Inter.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 /* ================================================================
    LIGHT THEME
    ================================================================ */
 :root {
-  /* The orange of the API Platform docs (wso2.com/api-platform/docs):
-     --md-primary-fg-color #FF7300, --md-accent-fg-color #E46700. */
-  --ifm-color-primary: #FF7300;
-  --ifm-color-primary-dark: #E66800;
-  --ifm-color-primary-darker: #D96200;
-  --ifm-color-primary-darkest: #B35100;
-  --ifm-color-primary-light: #FF7F1A;
-  --ifm-color-primary-lighter: #FF8526;
-  --ifm-color-primary-lightest: #FF974D;
+  --ifm-color-primary: #EE6F2D;
+  --ifm-color-primary-dark: #E56322;
+  --ifm-color-primary-darker: #D95C1F;
+  --ifm-color-primary-darkest: #B34C19;
+  --ifm-color-primary-light: #F07E42;
+  --ifm-color-primary-lighter: #F1864D;
+  --ifm-color-primary-lightest: #F49E6D;
 
-  --apd-accent: #FF7300;
-  --apd-accent-text: #FF7300;
-  --apd-active-fill: rgba(255, 115, 0, 0.1);
-  --apd-active-text: #FF7300;
-  --apd-highlight-fill: rgba(255, 115, 0, 0.12);
-  --apd-heading-color: #17171C;
+  --apd-accent: #EE6F2D;
+  --apd-accent-text: #D65A1C;
+  --apd-button-gradient: linear-gradient(180deg, #F38345 0%, #E85F2A 100%);
+  --apd-highlight-fill: rgba(238, 111, 45, 0.1);
+  --apd-heading-color: #232328;
 
-  --ifm-background-color: #FFFFFF;
-  --ifm-background-surface-color: #F7F6F4;
-  --apd-surface-border: #E6E6EA;
-  --apd-border-subtle: #ECECEF;
-  --apd-row-rule: #ECE6E0;
-  --apd-hover: #FBF8F5;
-  --apd-text-muted: #5A5A66;
+  --apd-canvas: #F6F6F7;
+  --apd-glow:
+    radial-gradient(ellipse 55% 50% at 62% 18%, rgba(252, 196, 160, 0.32), transparent 70%),
+    radial-gradient(ellipse 45% 55% at 18% 70%, rgba(205, 205, 238, 0.30), transparent 70%);
+  --apd-card: rgba(255, 255, 255, 0.75);
+  --apd-card-solid: #FFFFFF;
+  --apd-surface-border: #E6E6E9;
+  --apd-border-subtle: #ECECEE;
+  --apd-hover: rgba(0, 0, 0, 0.04);
+  --apd-active-fill: #E4E4E7;
+  --apd-text-muted: #6B6B73;
+  --apd-code-fill: #F1F1F3;
 
-  --ifm-font-color-base: #3A3A44;
-  --ifm-font-color-secondary: #5A5A66;
+  --apd-sidebar-bg: #F1F1F3;
+  --apd-sidebar-border: #E4E4E7;
+  --apd-sidebar-text: #2A2A30;
+
+  --ifm-background-color: var(--apd-canvas);
+  --ifm-background-surface-color: #FFFFFF;
+
+  --ifm-font-color-base: #3A3A40;
+  --ifm-font-color-secondary: #6B6B73;
 
   --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-  --ifm-heading-font-family: 'Plus Jakarta Sans', 'Inter', -apple-system,
-    BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ifm-heading-font-family: var(--ifm-font-family-base);
   --ifm-font-weight-semibold: 600;
-  --ifm-heading-font-weight: 600;
+  --ifm-heading-font-weight: 500;
   --ifm-font-size-base: 16px;
-  --ifm-line-height-base: 1.65;
+  --ifm-line-height-base: 1.6;
 
-  --ifm-h1-font-size: 1.75rem;
-  --ifm-h2-font-size: 1.375rem;
+  --ifm-h1-font-size: 1.8rem;
+  --ifm-h2-font-size: 1.35rem;
   --ifm-h3-font-size: 1.125rem;
   --ifm-h4-font-size: 1rem;
   --ifm-h5-font-size: 0.875rem;
   --ifm-heading-line-height: 1.3;
   --ifm-heading-margin-bottom: 0.5rem;
 
-  --ifm-global-radius: 12px;
-  --ifm-button-border-radius: 10px;
-  --ifm-card-border-radius: 12px;
-  --ifm-code-border-radius: 8px;
+  --ifm-global-radius: 14px;
+  --ifm-button-border-radius: 999px;
+  --ifm-card-border-radius: 16px;
+  --ifm-code-border-radius: 10px;
   --ifm-code-font-size: 93%;
 
-  --ifm-navbar-background-color: #FFFFFF;
-  --ifm-navbar-shadow: 0 1px 0 #ECECEF;
-  --ifm-navbar-link-color: #3A3A44;
-  --ifm-navbar-link-hover-color: #FF7300;
-  --ifm-navbar-height: 4rem;
-  --apd-nav-divider: #ECECEF;
+  --ifm-navbar-background-color: rgba(250, 250, 251, 0.85);
+  --ifm-navbar-shadow: none;
+  --ifm-navbar-link-color: #3A3A40;
+  --ifm-navbar-link-hover-color: var(--apd-heading-color);
+  --ifm-navbar-height: 4.25rem;
+  --apd-nav-divider: #E6E6E9;
 
-  --ifm-menu-color: #3A3A44;
-  --ifm-menu-color-active: #FF7300;
+  --ifm-menu-color: var(--apd-sidebar-text);
+  --ifm-menu-color-active: var(--apd-heading-color);
   --doc-sidebar-width: 320px;
-  /* A thin "up" chevron instead of Infima's solid one. */
-  --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>');
+  /* A thin chevron instead of Infima's solid one. */
+  --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>');
 
-  --ifm-link-color: #FF7300;
-  --ifm-link-hover-color: #E46700;
+  --ifm-link-color: var(--apd-accent-text);
+  --ifm-link-hover-color: #B84C16;
 
-  --docusaurus-highlighted-code-line-bg: rgba(255, 115, 0, 0.08);
+  --ifm-footer-background-color: rgba(255, 255, 255, 0.85);
+
+  --docusaurus-highlighted-code-line-bg: rgba(238, 111, 45, 0.08);
 }
 
 /* ================================================================
    DARK THEME
    ================================================================ */
 [data-theme='dark'] {
-  --ifm-color-primary: #FF7300;
-  --ifm-color-primary-dark: #E66800;
-  --ifm-color-primary-darker: #D96200;
-  --ifm-color-primary-darkest: #B35100;
-  --ifm-color-primary-light: #FF7F1A;
-  --ifm-color-primary-lighter: #FF8526;
-  --ifm-color-primary-lightest: #FF974D;
+  --ifm-color-primary: #EE6F2D;
+  --ifm-color-primary-dark: #E56322;
+  --ifm-color-primary-darker: #D95C1F;
+  --ifm-color-primary-darkest: #B34C19;
+  --ifm-color-primary-light: #F07E42;
+  --ifm-color-primary-lighter: #F1864D;
+  --ifm-color-primary-lightest: #F49E6D;
 
-  --apd-accent: #FF7300;
-  --apd-accent-text: #FF7300;
-  --apd-active-fill: rgba(255, 115, 0, 0.16);
-  --apd-active-text: #FF7300;
-  --apd-highlight-fill: rgba(255, 115, 0, 0.16);
-  --apd-heading-color: #EDE7E2;
+  --apd-accent: #EE6F2D;
+  --apd-accent-text: #F59A62;
+  --apd-highlight-fill: rgba(238, 111, 45, 0.16);
+  --apd-heading-color: #EDEDEF;
 
-  --ifm-background-color: #141210;
-  --ifm-background-surface-color: #1E1B19;
-  --apd-surface-border: #3B3532;
-  --apd-border-subtle: #332E2B;
-  --apd-row-rule: #3B3532;
+  --apd-canvas: #131315;
+  --apd-glow:
+    radial-gradient(ellipse 55% 50% at 62% 18%, rgba(238, 111, 45, 0.08), transparent 70%),
+    radial-gradient(ellipse 45% 55% at 18% 70%, rgba(120, 120, 200, 0.07), transparent 70%);
+  --apd-card: rgba(255, 255, 255, 0.03);
+  --apd-card-solid: #1C1C1F;
+  --apd-surface-border: #2C2C31;
+  --apd-border-subtle: #26262A;
   --apd-hover: rgba(255, 255, 255, 0.05);
-  --apd-text-muted: #9A8F87;
+  --apd-active-fill: #2A2A2E;
+  --apd-text-muted: #9A9AA3;
+  --apd-code-fill: rgba(255, 255, 255, 0.06);
 
-  --ifm-font-color-base: #C2B8B0;
-  --ifm-font-color-secondary: #9A8F87;
+  --apd-sidebar-bg: #18181B;
+  --apd-sidebar-border: #26262A;
+  --apd-sidebar-text: #E2E2E6;
 
-  --ifm-navbar-background-color: #141210;
-  --ifm-navbar-shadow: none;
-  --ifm-navbar-link-color: #D8CFC8;
-  --ifm-navbar-link-hover-color: #FF7300;
-  --apd-nav-divider: #3B3532;
+  --ifm-background-color: var(--apd-canvas);
+  --ifm-background-surface-color: #1C1C1F;
 
-  --ifm-menu-color: #C2B8B0;
-  --ifm-menu-color-active: #FF7300;
+  --ifm-font-color-base: #C6C6CC;
+  --ifm-font-color-secondary: #9A9AA3;
 
-  --ifm-link-color: #FF7300;
-  --ifm-link-hover-color: #FF974D;
+  --ifm-navbar-background-color: rgba(22, 22, 24, 0.85);
+  --ifm-navbar-link-color: #D8D8DE;
+  --ifm-navbar-link-hover-color: #FFFFFF;
+  --apd-nav-divider: #26262A;
 
-  --docusaurus-highlighted-code-line-bg: rgba(255, 115, 0, 0.16);
+  --ifm-link-color: var(--apd-accent-text);
+  --ifm-link-hover-color: #F8B48A;
+
+  --ifm-footer-background-color: rgba(24, 24, 27, 0.9);
+
+  --docusaurus-highlighted-code-line-bg: rgba(238, 111, 45, 0.16);
+}
+
+/* The canvas: soft grey with the console's warm and cool glow. */
+body {
+  background-color: var(--apd-canvas);
+  background-image: var(--apd-glow);
+  background-attachment: fixed;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -144,14 +170,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ================================================================
-   NAVBAR -- solid, with a hairline underneath
+   NAVBAR -- frosted, with a hairline underneath
    ================================================================ */
 .navbar {
   border-bottom: 1px solid var(--apd-nav-divider);
+  backdrop-filter: saturate(160%) blur(12px);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
 }
 
 .navbar-sidebar {
-  background-color: var(--ifm-background-color);
+  background-color: var(--apd-sidebar-bg);
 }
 
 .navbar__logo {
@@ -160,47 +188,41 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar__title {
-  font-family: var(--ifm-heading-font-family);
   font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: -0.015em;
+  color: var(--apd-heading-color);
 }
 
 .navbar__link {
   font-weight: 500;
   font-size: 0.9rem;
-  border-radius: 8px;
-  padding: 0.4rem 0.5rem;
+  border-radius: 10px;
+  padding: 0.4rem 0.6rem;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .navbar__link:hover {
-  background-color: rgba(0, 0, 0, 0.04);
-}
-
-[data-theme='dark'] .navbar__link:hover {
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: var(--apd-hover);
 }
 
 .navbar__link--active {
-  color: var(--apd-accent-text);
+  color: var(--apd-heading-color);
   font-weight: 600;
-  background-color: var(--apd-highlight-fill);
+  background-color: var(--apd-active-fill);
 }
 
-[data-theme='dark'] .navbar__link--active {
-  background-color: var(--apd-highlight-fill);
-}
-
-/* Icon-only navbar links (GitHub, Discord): the same 2rem circular hit
-   target as the colour-mode toggle. */
+/* Icon-only navbar links (GitHub, Discord) and the colour-mode toggle:
+   plain icons that get a soft round fill on hover. */
 .navbar-icon-link {
   display: flex !important;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 2rem;
-  height: 2rem;
+  width: 2.25rem;
+  height: 2.25rem;
   padding: 0 !important;
-  margin: 0 0.0625rem;
+  margin: 0 0.125rem;
   border-radius: 50%;
 }
 
@@ -209,8 +231,9 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--ifm-navbar-link-color);
 }
 
-.navbar-icon-link:hover {
-  background-color: var(--ifm-color-emphasis-200);
+.navbar-icon-link:hover,
+.navbar [class*='toggleButton']:hover {
+  background-color: var(--apd-hover);
 }
 
 @media (max-width: 996px) {
@@ -225,25 +248,32 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ================================================================
-   SIDEBAR
+   SIDEBAR -- a grey column; the current page is a rounded grey pill
    ================================================================ */
+.theme-doc-sidebar-container {
+  background-color: var(--apd-sidebar-bg);
+  border-right-color: var(--apd-sidebar-border) !important;
+}
+
+/* The "hide sidebar" button at the bottom of the column. */
+.theme-doc-sidebar-container button[class*='collapseSidebarButton'] {
+  background-color: var(--apd-sidebar-bg);
+  border-color: var(--apd-sidebar-border);
+}
+
 .menu {
-  padding-right: 0.5rem;
+  padding: 0.75rem 0.5rem 0.75rem 0.5rem;
   scrollbar-gutter: auto;
 }
 
 .menu__link {
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 15px;
   line-height: 1.3;
   font-weight: 400;
-  padding: 11px 12px;
-  color: #2E2E36;
+  padding: 11px 14px;
+  color: var(--apd-sidebar-text);
   transition: background-color 0.15s ease, color 0.15s ease;
-}
-
-[data-theme='dark'] .menu__link {
-  color: #EDE7E2;
 }
 
 .menu__list-item:not(:first-child) {
@@ -253,48 +283,59 @@ h1, h2, h3, h4, h5, h6 {
 .menu__link:hover,
 .menu__list-item-collapsible:hover {
   background-color: var(--apd-hover);
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
-/* Top-level section on the current page's path: a peach fill. */
-.menu__link--active {
-  background-color: var(--apd-active-fill);
-  color: var(--apd-active-text);
-  font-weight: 800;
-}
-
+/* The current page, and a top-level section holding it: the grey pill. */
+.menu__link--active,
 .menu__list-item-collapsible:has(> .menu__link--active) {
   background-color: var(--apd-active-fill);
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
+.menu__link--active {
+  color: var(--apd-heading-color);
+  font-weight: 600;
+}
+
+.menu__list-item-collapsible:has(> .menu__link--active) > .menu__link--active {
+  background-color: transparent;
+}
+
+/* Nested levels: the trail to the current page is just bold... */
 .menu__list .menu__list .menu__list-item-collapsible:has(> .menu__link--active) {
   background-color: transparent;
-  border-radius: 0;
 }
 
-/* Top-level rows are ruled by a hairline. */
-.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible,
-.theme-doc-sidebar-item-link-level-1 > .menu__link {
-  border-bottom: 1px solid var(--apd-row-rule);
-  border-radius: 0;
+.menu__list .menu__list .menu__list-item-collapsible:not(.menu__list-item-collapsible--active) > .menu__link--active {
+  background-color: transparent;
+  font-weight: 600;
 }
 
-.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible:has(> .menu__link--active),
-.theme-doc-sidebar-item-link-level-1 > .menu__link--active {
-  border-bottom-color: transparent;
-  border-radius: 10px;
+/* ...and the current page is the pill. */
+.menu__list .menu__list .theme-doc-sidebar-item-link > .menu__link--active,
+.menu__list .menu__list .menu__list-item-collapsible--active {
+  background-color: var(--apd-active-fill);
+}
+
+.menu__list .menu__list .menu__list-item-collapsible--active > .menu__link {
+  background-color: transparent;
+  font-weight: 600;
 }
 
 /* Chevrons: smaller, muted, aligned. */
+.menu__list-item-collapsible {
+  align-items: center;
+}
+
 .menu__caret {
   width: 28px;
   height: 28px;
   padding: 0;
-  margin-right: 14px;
+  margin-right: 10px;
   display: grid;
   place-items: center;
-  border-radius: 9px;
+  border-radius: 8px;
 }
 
 .menu__caret:before,
@@ -302,19 +343,15 @@ h1, h2, h3, h4, h5, h6 {
   width: 1rem;
   height: 1rem;
   background-size: 1rem 1rem;
-  opacity: 0.6;
-}
-
-.menu__list-item-collapsible {
-  align-items: center;
+  opacity: 0.55;
 }
 
 .menu__link--sublist-caret:after {
-  margin-right: 6px;
+  margin-right: 2px;
 }
 
 .menu__caret:hover {
-  background-color: var(--ifm-color-emphasis-100);
+  background-color: var(--apd-hover);
 }
 
 .menu__caret:hover:before,
@@ -322,113 +359,88 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0.85;
 }
 
-/* Nested levels: the trail to the current page is bold ink... */
-.menu__list .menu__list .menu__list-item-collapsible:not(.menu__list-item-collapsible--active) > .menu__link--active {
-  background-color: transparent;
-  color: var(--apd-heading-color);
-  font-weight: 700;
+[data-theme='dark'] .menu__caret:before,
+[data-theme='dark'] .menu__link--sublist-caret:after {
+  filter: invert(1);
 }
 
-/* ...and the current page is orange with a bar on the guide line. */
-.menu__list .menu__list .theme-doc-sidebar-item-link > .menu__link--active,
-.menu__list .menu__list .menu__list-item-collapsible--active > .menu__link {
-  position: relative;
-  background-color: transparent;
-  color: var(--apd-active-text);
-  font-weight: 700;
-}
-
-.menu__list .menu__list .theme-doc-sidebar-item-link > .menu__link--active::before,
-.menu__list .menu__list .menu__list-item-collapsible--active > .menu__link::before {
-  content: '';
-  position: absolute;
-  left: -11px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--apd-accent);
-}
-
-.menu__list .menu__list .menu__list-item-collapsible--active {
-  background-color: transparent;
-}
-
-/* Guide line along each expanded category's items. */
+/* Expanded categories: their items are indented under a faint guide line. */
 .menu__list .menu__list {
-  border-left: 1px solid var(--apd-surface-border);
-  margin-left: 14px;
-  padding-left: 10px;
+  border-left: 1px solid var(--apd-sidebar-border);
+  margin-left: 18px;
+  padding-left: 8px;
 }
 
-/* Each level down is slightly smaller and softer. */
-.theme-doc-sidebar-item-link-level-2 > .menu__link,
-.theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible > .menu__link {
+/* Nested levels: a touch smaller, tighter and softer. */
+.menu__list .menu__list .menu__link {
   font-size: 14.5px;
-  color: #4A4A55;
+  padding-top: 9px;
+  padding-bottom: 9px;
 }
 
-.theme-doc-sidebar-item-link-level-3 > .menu__link,
-.theme-doc-sidebar-item-category-level-3 > .menu__list-item-collapsible > .menu__link {
-  font-size: 14px;
-  color: #4A4A55;
-}
-
-.theme-doc-sidebar-item-link-level-4 > .menu__link {
-  font-size: 13.5px;
-  color: #5A5A66;
-}
-
-[data-theme='dark'] .theme-doc-sidebar-item-link-level-2 > .menu__link,
-[data-theme='dark'] .theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible > .menu__link,
-[data-theme='dark'] .theme-doc-sidebar-item-link-level-3 > .menu__link,
-[data-theme='dark'] .theme-doc-sidebar-item-category-level-3 > .menu__list-item-collapsible > .menu__link {
-  color: #C2B8B0;
-}
-
-[data-theme='dark'] .theme-doc-sidebar-item-link-level-4 > .menu__link {
-  color: #9A8F87;
+.theme-doc-sidebar-item-link-level-2 > .menu__link:not(.menu__link--active),
+.theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible > .menu__link:not(.menu__link--active),
+.theme-doc-sidebar-item-link-level-3 > .menu__link:not(.menu__link--active),
+.theme-doc-sidebar-item-category-level-3 > .menu__list-item-collapsible > .menu__link:not(.menu__link--active),
+.theme-doc-sidebar-item-link-level-4 > .menu__link:not(.menu__link--active) {
+  color: var(--ifm-font-color-base);
 }
 
 /* ================================================================
-   BUTTONS
+   BUTTONS -- orange gradient pills, like the console's "Create"
    ================================================================ */
 .button {
-  border-radius: 10px;
-  font-weight: 600;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.button--primary {
+  background-image: var(--apd-button-gradient);
+  border-color: transparent;
+  color: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(232, 95, 42, 0.25);
+}
+
+.button--primary:hover {
+  filter: brightness(0.96);
+  border-color: transparent;
 }
 
 /* ================================================================
    DOCS CONTENT
    ================================================================ */
+/* Infima sizes the page title (3rem) and top-level headings on its own
+   scale; bring them back to the console's. */
 .markdown h1:first-child {
-  --ifm-h1-font-size: 1.75rem;
+  --ifm-h1-font-size: 1.8rem;
 }
 
 .markdown > h2 {
-  --ifm-h2-font-size: 1.375rem;
+  --ifm-h2-font-size: 1.35rem;
 }
 
 .markdown > h3 {
   --ifm-h3-font-size: 1.125rem;
 }
 
+/* The page title: regular weight, like the console's page titles. */
 .markdown h1 {
-  font-weight: 700;
-  letter-spacing: -0.015em;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   margin-top: 0;
 }
 
 /* h2 = topic, h3 = subtopic: each gets a rule and extra space above. */
 .markdown h2 {
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-weight: 500;
+  letter-spacing: -0.005em;
   border-bottom: 1px solid var(--apd-surface-border);
   padding-bottom: 0.5rem;
   margin-top: 3rem;
 }
 
 .markdown h3 {
-  font-weight: 600;
+  font-weight: 500;
   margin-top: 2.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--apd-border-subtle);
@@ -441,7 +453,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .markdown h4 {
-  font-weight: 600;
+  font-weight: 500;
   margin-top: 1.25rem;
 }
 
@@ -449,44 +461,54 @@ article {
   max-width: 820px;
 }
 
+/* Heading anchors: a muted link (chain) icon instead of Docusaurus's "#". */
+.hash-link {
+  padding-left: 0.4rem;
+  color: var(--apd-text-muted);
+}
+
+.hash-link:hover {
+  color: var(--apd-accent);
+}
+
+.hash-link::before {
+  content: '';
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  vertical-align: middle;
+  background-color: currentColor;
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>') no-repeat center / contain;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>') no-repeat center / contain;
+}
+
 /* Inline code: a neutral chip. */
 code {
   border-radius: 6px;
   padding: 0.15rem 0.4rem;
-  background-color: #F2F5F9;
-  border: 1px solid #E5E9F0;
+  background-color: var(--apd-code-fill);
+  border: 1px solid var(--apd-surface-border);
   color: var(--apd-heading-color);
 }
 
-[data-theme='dark'] code {
-  background-color: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-/* Code blocks. */
+/* Code blocks: a white card. */
 .prism-code {
   border-radius: var(--ifm-code-border-radius);
-  border: 1px solid #E5E9F0;
-  background-color: #F2F5F9 !important;
+  border: 1px solid var(--apd-surface-border);
+  background-color: var(--apd-card-solid) !important;
   padding: 1rem !important;
   line-height: 1.5;
 }
 
-[data-theme='dark'] .prism-code {
-  border-color: rgba(255, 255, 255, 0.09);
-  background-color: #1E1B19 !important;
-}
-
 /* A code block's title bar matches its body. */
 .theme-code-block [class*='codeBlockTitle'] {
-  border: 1px solid #E5E9F0;
+  border: 1px solid var(--apd-surface-border);
   border-bottom: none;
-  background-color: #F2F5F9;
+  background-color: var(--apd-card-solid);
 }
 
-[data-theme='dark'] .theme-code-block [class*='codeBlockTitle'] {
-  border-color: rgba(255, 255, 255, 0.09);
-  background-color: #1E1B19;
+.theme-code-block {
+  box-shadow: none;
 }
 
 .prism-code code {
@@ -503,104 +525,84 @@ code {
   display: block;
   margin: 1.5rem auto;
   max-width: 100%;
-  border: 1px solid #E5E9F0;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(27, 42, 73, 0.08);
+  border: 1px solid var(--apd-surface-border);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(30, 30, 40, 0.05);
 }
 
 [data-theme='dark'] .markdown img {
-  border-color: rgba(255, 255, 255, 0.09);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 blockquote {
-  border-left: 4px solid #E5E9F0;
-  background: #F7F9FC;
-  border-radius: 0 12px 12px 0;
+  border-left: 3px solid var(--apd-surface-border);
+  background: var(--apd-card);
+  border-radius: 0 14px 14px 0;
   padding: 1rem 1.25rem;
 }
 
-[data-theme='dark'] blockquote {
-  border-left-color: rgba(255, 255, 255, 0.09);
-  background: rgba(255, 255, 255, 0.03);
-}
-
-/* Tables: clean and neutral. */
+/* Tables: a white card like the console's lists. */
 table {
   border-collapse: separate;
   border-spacing: 0;
-  border-radius: 10px;
+  border-radius: 14px;
   overflow: auto;
-  border: 1px solid #E5E9F0;
+  border: 1px solid var(--apd-surface-border);
+  background: var(--apd-card);
   width: max-content;
   max-width: 100%;
   display: block;
 }
 
-[data-theme='dark'] table {
-  border-color: rgba(255, 255, 255, 0.09);
-}
-
-table thead tr {
-  background: #F7F9FC;
-}
-
-[data-theme='dark'] table thead tr {
-  background: rgba(255, 255, 255, 0.04);
-}
-
-table thead th {
-  font-weight: 600;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  color: #7B8598;
-  border-bottom: 2px solid #E5E9F0;
-}
-
-[data-theme='dark'] table thead th {
-  color: #8B94A7;
-  border-bottom-color: rgba(255, 255, 255, 0.09);
+table tr {
+  background: transparent;
+  border-top: none;
 }
 
 table tbody tr:nth-child(even) {
-  background: #F7F9FC;
+  background: transparent;
 }
 
-[data-theme='dark'] table tbody tr:nth-child(even) {
-  background: rgba(255, 255, 255, 0.02);
+table thead th {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--apd-heading-color);
+  border-bottom: 1px solid var(--apd-surface-border);
 }
 
 table td,
 table th {
-  border-color: #E5E9F0;
+  border: none;
+  padding: 0.75rem 1.25rem;
 }
 
-[data-theme='dark'] table td,
-[data-theme='dark'] table th {
-  border-color: rgba(255, 255, 255, 0.09);
+table tbody tr:not(:last-child) td {
+  border-bottom: 1px solid var(--apd-border-subtle);
 }
 
-/* Admonitions: a neutral box with a coloured left border. */
+/* Admonitions: a white card with a coloured left edge. */
 .theme-admonition {
-  border-radius: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--apd-surface-border);
   border-left-width: 4px;
-  background: #F7F9FC;
+  background: var(--apd-card);
   color: var(--ifm-font-color-base);
   box-shadow: none;
 }
 
-[data-theme='dark'] .theme-admonition {
-  background: rgba(255, 255, 255, 0.03);
-}
-
 .theme-admonition.alert--info { border-left-color: #38BDF8; }
 .theme-admonition.alert--success { border-left-color: #34D399; }
-.theme-admonition.alert--secondary { border-left-color: #94A3B8; }
+.theme-admonition.alert--secondary { border-left-color: #A1A1AA; }
 .theme-admonition.alert--warning { border-left-color: var(--apd-accent); }
-.theme-admonition.alert--danger { border-left-color: #F87171; }
+.theme-admonition.alert--danger { border-left-color: #EF4444; }
 
 .theme-admonition [class*='admonitionHeading'] {
+  color: var(--apd-heading-color);
+}
+
+/* Tabs: an orange underline on the selected tab. */
+.tabs__item--active {
+  border-bottom-color: var(--apd-accent);
   color: var(--apd-heading-color);
 }
 
@@ -608,72 +610,50 @@ table th {
 .table-of-contents__link {
   display: inline-block;
   font-size: 0.875rem;
-  color: var(--ifm-font-color-base);
+  color: var(--apd-text-muted);
   border-left: 2px solid transparent;
   padding-left: 0.7rem;
   margin-left: -1px;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
-[data-theme='dark'] .table-of-contents__link {
-  color: var(--apd-text-muted);
-}
-
 .table-of-contents__link:hover {
-  color: var(--apd-accent-text);
+  color: var(--apd-heading-color);
 }
 
 .table-of-contents__link--active {
-  color: var(--apd-accent-text);
+  color: var(--apd-heading-color);
   font-weight: 600;
-  border-left-color: var(--ifm-color-primary);
+  border-left-color: var(--apd-accent);
 }
 
-/* Breadcrumbs. */
+/* Breadcrumbs: the current page is a grey pill, like the sidebar. */
 .breadcrumbs__link {
-  border-radius: 8px;
-  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
   transition: background-color 0.15s ease;
 }
 
 .breadcrumbs__link:hover {
-  background-color: rgba(0, 0, 0, 0.04);
-}
-
-[data-theme='dark'] .breadcrumbs__link:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--apd-hover);
 }
 
 .breadcrumbs__item--active .breadcrumbs__link {
-  background-color: var(--apd-highlight-fill);
-  color: var(--apd-accent-text);
+  background-color: var(--apd-active-fill);
+  color: var(--apd-heading-color);
 }
 
-[data-theme='dark'] .breadcrumbs__item--active .breadcrumbs__link {
-  background-color: var(--apd-highlight-fill);
-}
-
-/* Previous / Next links. */
+/* Previous / Next links: console-style cards. */
 .pagination-nav__link {
-  border-radius: 12px;
+  border-radius: 16px;
   border-color: var(--apd-surface-border);
-  transition: all 0.2s ease;
-  background: var(--ifm-background-color);
+  background: var(--apd-card);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .pagination-nav__link:hover {
   border-color: var(--apd-surface-border);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-  background: var(--ifm-background-surface-color);
-}
-
-[data-theme='dark'] .pagination-nav__link {
-  background: var(--ifm-background-surface-color);
-}
-
-[data-theme='dark'] .pagination-nav__link:hover {
-  border-color: var(--ifm-color-primary);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 24px rgba(30, 30, 40, 0.06);
 }
 
 .pagination-nav__sublabel {
@@ -682,60 +662,66 @@ table th {
 
 .pagination-nav__label {
   color: var(--apd-accent-text);
+  font-weight: 500;
 }
 
-/* Hybrid gateways: an always-open sidebar group set off by dividers above
-   and below (className in sidebars.js). */
-.sidebar-section-divided {
-  margin: 0.5rem 0;
-  padding: 0.5rem 0;
-  border-top: 1px solid var(--apd-row-rule);
-  border-bottom: 1px solid var(--apd-row-rule);
+/* ================================================================
+   FOOTER -- one light line: copyright left, links right
+   ================================================================ */
+.footer {
+  border-top: 1px solid var(--apd-nav-divider);
+  padding: 1.25rem 2rem;
+  font-size: 0.9rem;
 }
 
-.sidebar-section-divided > .menu__list-item-collapsible,
-.sidebar-section-divided > .menu__list-item-collapsible:hover {
-  border-bottom: none;
-  background: transparent;
+.footer > .container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: none;
 }
 
-/* The row right above the section would draw its own hairline on top of the
-   section's divider (two lines); the divider alone separates them. */
-.theme-doc-sidebar-item-category-level-1:has(+ .sidebar-section-divided) > .menu__list-item-collapsible,
-.theme-doc-sidebar-item-link-level-1:has(+ .sidebar-section-divided) > .menu__link {
-  border-bottom: none;
+.footer__links {
+  margin-bottom: 0;
 }
 
-/* Sidebar: a faint tint of the brand orange, so the navigation column reads
-   as its own surface next to the white content. */
-:root {
-  --apd-sidebar-bg: #FFF8F3;
-  --apd-sidebar-border: #F3E6DC;
+.footer__bottom {
+  text-align: left;
 }
 
-[data-theme='dark'] {
-  --apd-sidebar-bg: #1A1512;
-  --apd-sidebar-border: #2E2620;
+.footer__copyright {
+  color: var(--ifm-font-color-base);
 }
 
-.theme-doc-sidebar-container {
-  background-color: var(--apd-sidebar-bg);
-  border-right-color: var(--apd-sidebar-border) !important;
+.footer__link-item {
+  color: var(--ifm-font-color-base);
 }
 
-/* The "hide sidebar" button at the bottom of the column. */
-.theme-doc-sidebar-container button[class*='collapseSidebarButton'] {
-  background-color: var(--apd-sidebar-bg);
-  border-color: var(--apd-sidebar-border);
+.footer__link-item:hover {
+  color: var(--apd-heading-color);
+  text-decoration: none;
 }
 
-/* Hover rows: a touch stronger than the column so they still show. */
-.theme-doc-sidebar-container .menu__link:hover,
-.theme-doc-sidebar-container .menu__list-item-collapsible:hover {
-  background-color: rgba(255, 115, 0, 0.06);
+.footer__link-separator {
+  display: none;
 }
 
-[data-theme='dark'] .theme-doc-sidebar-container .menu__link:hover,
-[data-theme='dark'] .theme-doc-sidebar-container .menu__list-item-collapsible:hover {
-  background-color: rgba(255, 115, 0, 0.08);
+/* The links row: plain text links, spaced, without external-link icons. */
+.footer__links > .footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+
+.footer__link-item svg {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .footer > .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

@@ -95,29 +95,14 @@ const config = {
           },
         ],
       },
+      // A single light line, as in the console: copyright left, links right.
       footer: {
-        style: 'dark',
+        style: 'light',
         links: [
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'Discord',
-                href: 'https://discord.com/invite/wso2',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'GitHub',
-                href: 'https://github.com/wso2/docs-api-platform',
-              },
-            ],
-          },
+          {label: 'Discord', href: 'https://discord.com/invite/wso2'},
+          {label: 'GitHub', href: 'https://github.com/wso2/docs-api-platform'},
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} WSO2 LLC.`,
+        copyright: `© ${new Date().getFullYear()} WSO2 LLC.`,
       },
       prism: {
         theme: prismThemes.github,
