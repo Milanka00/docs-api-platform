@@ -24,45 +24,58 @@ const sidebars = {
     doc("overview", "Overview"),
     doc("key-concepts", "Key Concepts"),
     group("API Control Plane", [
-      doc("api-control-plane/overview", "Overview"),
       group("Getting Started", [
         doc("getting-started/api-proxy", "API Proxy"),
         doc("getting-started/mcp-server", "MCP Server"),
       ]),
-      group("Create API Proxy", [
-        doc("create-api-proxy/overview", "Overview"),
-        group("Ingress APIs", [
-          doc("create-api-proxy/ingress-apis/rest-apis", "REST APIs"),
-          doc("create-api-proxy/ingress-apis/web-socket-apis", "Web Socket APIs"),
-          doc("create-api-proxy/ingress-apis/graphql-apis", "GraphQL APIs"),
+      group("API Proxies", [
+        group("Create", [
+          doc("create-api-proxy/overview", "Overview"),
+          group("Ingress APIs", [
+            doc("create-api-proxy/ingress-apis/rest-apis", "REST APIs"),
+            doc("create-api-proxy/ingress-apis/web-socket-apis", "Web Socket APIs"),
+            doc("create-api-proxy/ingress-apis/graphql-apis", "GraphQL APIs"),
+          ]),
+          doc("create-api-proxy/egress-apis", "Egress APIs"),
         ]),
-        doc("create-api-proxy/egress-apis", "Egress APIs"),
-      ]),
-      group("Develop API Proxy", [
-        doc("develop-api-proxy/authentication-and-authorization", "Authentication and Authorization"),
-        group("Policy", [
-          doc("develop-api-proxy/policy/overview", "Overview"),
-          doc("develop-api-proxy/policy/policies", "Policies"),
-          doc("develop-api-proxy/policy/attach-and-manage-policies", "Attach and Manage Policies"),
-          doc("develop-api-proxy/policy/add-custom-policies", "Add Custom Policies"),
+        group("Develop", [
+          doc("develop-api-proxy/authentication-and-authorization", "Authentication and Authorization"),
+          group("Policy", [
+            doc("develop-api-proxy/policy/overview", "Overview"),
+            doc("develop-api-proxy/policy/policies", "Policies"),
+            doc("develop-api-proxy/policy/attach-and-manage-policies", "Attach and Manage Policies"),
+            doc("develop-api-proxy/policy/add-custom-policies", "Add Custom Policies"),
+          ]),
+          doc("develop-api-proxy/make-an-api-ai-ready", "Make an API AI-Ready"),
         ]),
-        doc("develop-api-proxy/documents", "Documents"),
-        doc("develop-api-proxy/lifecycle", "Lifecycle"),
-        doc("develop-api-proxy/subscription-plans-and-billing", "Subscription Plans and Billing"),
-        doc("develop-api-proxy/make-an-api-ai-ready", "Make an API AI-Ready"),
-      ]),
-      group("Test API Proxy", [
-        doc("test-api-proxy/api-console", "API Console"),
-        doc("test-api-proxy/api-chat", "API Chat"),
+        group("Test", [
+          doc("test-api-proxy/api-console", "API Console"),
+          doc("test-api-proxy/api-chat", "API Chat"),
+        ]),
+        group("Publish", [
+          doc("develop-api-proxy/documents", "Documents"),
+          doc("develop-api-proxy/subscription-plans-and-billing", "Subscription Plans and Billing"),
+          doc("develop-api-proxy/lifecycle", "Lifecycle"),
+        ]),
       ]),
       group("MCP Servers", [
         doc("mcp-servers/overview", "Overview"),
         doc("mcp-servers/mcp-readiness", "MCP Readiness"),
       ]),
-      group("API Governance", [
-        doc("api-governance/overview", "Overview"),
-      ]),
+      doc("api-governance/overview", "API Governance"),
       doc("secret-management", "Secret Management"),
+      doc("pipelines", "Pipelines"),
+      {
+        type: 'category',
+        label: 'Workflows',
+        // The group's own page (docs/workflows.md).
+        link: {type: 'doc', id: 'workflows'},
+        items: [
+          doc("workflows/application-creation-workflow", "Application Creation Workflow"),
+          doc("workflows/subscription-creation-workflow", "Subscription Creation Workflow"),
+          doc("workflows/deployment-promotion-workflow", "Deployment Promotion Workflow"),
+        ],
+      },
     ]),
     group("AI Workspace", [
       doc("ai-workspace/overview", "Overview"),
@@ -223,18 +236,6 @@ const sidebars = {
       doc("administer/creating-application-templates", "Creating Application Templates"),
       doc("administer/managing-api-consumers", "Managing API Consumers"),
     ]),
-    doc("pipelines", "Pipelines"),
-    {
-      type: 'category',
-      label: 'Workflows',
-      // The group's own page (docs/workflows.md).
-      link: {type: 'doc', id: 'workflows'},
-      items: [
-        doc("workflows/application-creation-workflow", "Application Creation Workflow"),
-        doc("workflows/subscription-creation-workflow", "Subscription Creation Workflow"),
-        doc("workflows/deployment-promotion-workflow", "Deployment Promotion Workflow"),
-      ],
-    },
     doc("tutorials", "Tutorials"),
   ],
 };
