@@ -10,8 +10,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'API Control Plane Documentation',
-  tagline: 'Documentation for API Control Plane in WSO2 API Platform Cloud',
+  title: 'API Platform Cloud Documentation',
+  tagline: 'Documentation for WSO2 API Platform Cloud',
   favicon: 'img/favicon.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -21,8 +21,8 @@ const config = {
 
   url: 'https://wso2.com',
   // The path the site is served under. Override with BASE_URL to build for
-  // another environment, e.g. BASE_URL=/api-platform/docs-staging/api-control-plane/cloud/
-  baseUrl: process.env.BASE_URL || '/api-platform/docs/api-control-plane/cloud/',
+  // another environment, e.g. BASE_URL=/api-platform/docs-staging/cloud/
+  baseUrl: process.env.BASE_URL || '/api-platform/docs/cloud/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -49,7 +49,7 @@ const config = {
           routeBasePath: '/',
           sidebarPath: './sidebars.js',
           editUrl:
-            'https://github.com/wso2/docs-api-platform/tree/cloud-api-control-plane/',
+            'https://github.com/wso2/docs-api-platform/tree/cloud-docusaurus/',
         },
         blog: false,
         theme: {

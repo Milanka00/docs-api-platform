@@ -719,3 +719,22 @@ table tbody tr:not(:last-child) td {
     align-items: flex-start;
   }
 }
+
+/* Sidebar section titles (section() in sidebars.js): a small uppercase
+   label under a divider, like the console's "ADMIN". */
+.sidebar-section-title {
+  margin: 0.75rem 6px 0.25rem;
+  padding: 1rem 8px 0.25rem;
+  border-top: 1px solid var(--apd-sidebar-border);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--apd-text-muted);
+}
+
+/* The divider that closes a sidebar section (sectionEnd() in sidebars.js). */
+.sidebar-section-end {
+  margin: 0.5rem 6px;
+  border-top: 1px solid var(--apd-sidebar-border);
+}
