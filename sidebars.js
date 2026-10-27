@@ -62,6 +62,7 @@ const sidebars = {
       group("API Governance", [
         doc("api-governance/overview", "Overview"),
       ]),
+      doc("secret-management", "Secret Management"),
     ]),
     group("AI Workspace", [
       doc("ai-workspace/overview", "Overview"),
@@ -202,7 +203,6 @@ const sidebars = {
       },
     ]),
     sectionEnd(),
-    doc("secret-management", "Secret Management"),
     {
       type: 'category',
       label: 'Monitoring and Analytics',
