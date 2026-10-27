@@ -2,11 +2,15 @@
 title: "Key Concepts"
 ---
 
+Key concepts are the core building blocks of API Platform that define how users, resources, and runtime infrastructure are organized and managed.
+
+- [Organizations in API Platform](#organizations-in-api-platform)
+- [Projects in API Platform](#projects-in-api-platform)
+- [Data Planes](#data-planes)
+
 ## Organizations in API Platform
 
-Organizations are the foundational building blocks in API Platform, providing a secure and logical grouping of users, resources, and projects. This covers everything you need to know about organizations in API Platform, including their structure, management, permissions, and unique identifiers.
-
----
+Organizations are the foundational building blocks in API Platform, providing a secure and logical grouping of users, resources, and projects.
 
 ### What is an Organization?
 
@@ -16,23 +20,18 @@ An **organization** in API Platform is a logical container for users and their r
 - **Resource isolation**: Users and resources in one organization cannot access those in another, unless explicitly invited.
 - **Single organization per user**: A user can only create one organization, but may be invited to join others.
 
----
-
 ### Switching between Organizations
 
 If you are a member of multiple organizations, you can easily switch between them by following steps below.
 
-1. In the API Platform Console header, click the **Organization** list.
+1. In the API Platform Console header, click the **Organizations** list.
 2. Select the desired organization from the dropdown.
-
----
 
 ### Inviting Members to Your Organization
 
-To collaborate, you can invite new members to your organization. (See the Inviting Members guide for step-by-step instructions.)
+To collaborate, you can invite new members to your organization. An organization administrator can invite users to the organization by assigning them specific groups. Invited users receive an invitation via email. An invited user must accept the invitation to join the organization and access the resources of that organization.
 
----
-
+{/*
 ### Managing User Permissions
 
 API Platform uses a combination of **groups** and **roles** to manage user permissions efficiently.
@@ -63,8 +62,6 @@ Roles define what actions a user can perform within an organization. The main ro
 - **Choreo DevOps**: Users who are involved in deployment management.
 - **Choreo Platform Engineer**: Users who perform tasks focusing on infrastructure, governance, service mesh, and monitoring.
 
----
-
 ### Organization Identifiers
 
 API Platform uses two unique identifiers for organizations, the **Organization ID** and the **Organization Handle**.
@@ -78,17 +75,16 @@ A unique, system-generated identifier for each organization. To find your Organi
 3. In the left navigation, click **Settings**.
 4. In the header, click the **Organization** list to open organization-level settings.
 5. Under **Organization**, click **Copy ID**.
+*/}
 
-#### Organization Handle
+### Organization Identifier
 
-A unique, human-readable string that corresponds to your organization's name. To find your Organization Handle:
+A unique, human-readable string that corresponds to your organization's name. To find your Organization ID:
 
 1. Go to the [API Platform Console](https://console.bijira.dev/) and sign in.
-2. Click the **Organization** list in the header and select your organization.
+2. Click the **Organizations** list in the header and select your organization.
 3. In the left navigation, click **Settings**.
-4. Under **Organization**, click **Copy Handle**.
-
----
+4. Under **Organization Details**, click **Copy ID**.
 
 ### Best Practices for Organization Management
 
@@ -99,15 +95,11 @@ A unique, human-readable string that corresponds to your organization's name. To
 
 ## Projects in API Platform
 
-Projects are a core organizational unit in API Platform, designed to group related components and resources that together represent a cloud-native application or solution. This document provides a comprehensive overview of projects in API Platform, including their structure and the deployment.
-
----
+Projects are a core organizational unit in API Platform, designed to group related components and resources that together represent a cloud-native application or solution.
 
 ### What is a Project?
 
 A **project** in API Platform is a logical grouping of API Proxies that typically work together to deliver a business capability. Projects help organize development, deployment, and management workflows for cloud-native applications. Each project is isolated from others, ensuring clear boundaries for resources, permissions, and deployments.
-
----
 
 ### Project Structure and Components
 
@@ -117,8 +109,6 @@ A project may include:
 - **MCP Servers**: Managed MCP servers to be consumed by AI agents.
 
 All components within a project can be managed together, versioned, and deployed as a unit.
-
----
 
 ### Deployment Model
 
