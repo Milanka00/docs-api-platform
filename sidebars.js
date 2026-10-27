@@ -39,20 +39,40 @@ const sidebars = {
           doc("create-api-proxy/egress-apis", "Egress APIs"),
         ]),
         group("Develop", [
-          doc("develop-api-proxy/authentication-and-authorization", "Authentication and Authorization"),
-          group("Policy", [
-            doc("develop-api-proxy/policy/overview", "Overview"),
-            doc("develop-api-proxy/policy/policies", "Policies"),
-            doc("develop-api-proxy/policy/attach-and-manage-policies", "Attach and Manage Policies"),
-            doc("develop-api-proxy/policy/add-custom-policies", "Add Custom Policies"),
+          group("Security", [
+            {
+              type: 'category',
+              label: 'Secure API Access',
+              // The group's own page (docs/develop-api-proxy/security/secure-api-access.md).
+              link: {type: 'doc', id: 'develop-api-proxy/security/secure-api-access'},
+              items: [
+                doc("develop-api-proxy/security/secure-api-access/api-platform-sts", "API Platform STS"),
+                doc("develop-api-proxy/security/secure-api-access/asgardeo", "Asgardeo"),
+                doc("develop-api-proxy/security/secure-api-access/azure-ad", "Microsoft Entra ID (Azure AD)"),
+                doc("develop-api-proxy/security/secure-api-access/external-key-manager", "External Key Manager"),
+              ],
+            },
+            group("Secure Backend Communication", [
+              doc("develop-api-proxy/security/secure-backend-communication/oauth2", "OAuth2"),
+              doc("develop-api-proxy/security/secure-backend-communication/mutual-tls", "Mutual TLS"),
+            ]),
           ]),
-          doc("develop-api-proxy/make-an-api-ai-ready", "Make an API AI-Ready"),
+          group("Policies", [
+            doc("develop-api-proxy/policy/overview", "Overview"),
+            doc("develop-api-proxy/policy/policies", "Built-in Policies"),
+            doc("develop-api-proxy/policy/attach-and-manage-policies", "Attach and Manage Policies"),
+            group("Custom Policies", [
+              doc("develop-api-proxy/policy/write-a-custom-policy", "Write a Custom Policy (Ballerina)"),
+              doc("develop-api-proxy/policy/add-custom-policies", "Add Custom Policies from a Gateway"),
+            ]),
+          ]),
         ]),
         group("Test", [
           doc("test-api-proxy/api-console", "API Console"),
           doc("test-api-proxy/api-chat", "API Chat"),
         ]),
         group("Publish", [
+          doc("develop-api-proxy/make-an-api-ai-ready", "Make an API AI-Ready"),
           doc("develop-api-proxy/documents", "Documents"),
           doc("develop-api-proxy/subscription-plans-and-billing", "Subscription Plans and Billing"),
           doc("develop-api-proxy/lifecycle", "Lifecycle"),

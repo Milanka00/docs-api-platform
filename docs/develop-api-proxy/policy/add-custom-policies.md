@@ -1,5 +1,5 @@
 ---
-title: "Add Custom Policies"
+title: "Add Custom Policies from a Gateway"
 description: "Sync a custom policy from your Self-Hosted Gateway to your organization and apply it to API proxies."
 ---
 

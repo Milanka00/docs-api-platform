@@ -1,5 +1,5 @@
 ---
-title: "Policies"
+title: "Built-in Policies"
 description: "Reference for WSO2 API Platform inbuilt API- and resource-level mediation policies: OAuth2, rate limiting, CORS, and payload transforms."
 ---
 
