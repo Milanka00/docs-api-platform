@@ -58,10 +58,6 @@ const sidebars = {
           doc("develop-api-proxy/lifecycle", "Lifecycle"),
         ]),
       ]),
-      group("MCP Servers", [
-        doc("mcp-servers/overview", "Overview"),
-        doc("mcp-servers/mcp-readiness", "MCP Readiness"),
-      ]),
       doc("api-governance/overview", "API Governance"),
       doc("secret-management", "Secret Management"),
       doc("pipelines", "Pipelines"),
