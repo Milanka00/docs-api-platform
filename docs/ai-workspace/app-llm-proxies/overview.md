@@ -45,7 +45,7 @@ This guide walks you through creating an App LLM Proxy, optionally attaching gua
 
 :::info[Before You Begin]
 - Access to API Platform Console with **Admin** or **Developer** role
-- At least one [configured and deployed LLM Provider](../llm-providers/overview.md)
+- At least one [configured and deployed LLM Provider](../llm-providers/configure-and-consume-provider.md)
 :::
 
 ---

@@ -258,5 +258,5 @@ Deleting a gateway is permanent. All providers and proxies deployed to this gate
 
 ## Next Steps
 
-- [Configure LLM Provider](../llm-providers/overview.md) - Set up an LLM provider and deploy it to your gateway
+- [Configure and Consume an LLM Provider](../llm-providers/configure-and-consume-provider.md) - Set up an LLM provider and deploy it to your gateway
 - [Configure App LLM Proxy](../app-llm-proxies/overview.md) - Create a specialized LLM proxy for a Gen AI application or agent and deploy it to your gateway

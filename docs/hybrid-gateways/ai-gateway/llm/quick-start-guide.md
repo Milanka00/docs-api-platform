@@ -155,6 +155,6 @@ A successful response returns the model's completion.
 
 ## Next steps
 
-- [Manage LLM Provider](../../../ai-workspace/llm-providers/overview.md): configure access control, rate limiting, and guardrails on the provider you just deployed
+- [Manage LLM Provider](../../../ai-workspace/llm-providers/manage-provider.md): configure access control, rate limiting, and guardrails on the provider you just deployed
 - [Configure App LLM Proxy](../../../ai-workspace/app-llm-proxies/overview.md): create an application-specific endpoint on top of this provider, with its own guardrails and authentication
 - [LLM Provider Templates](./llm-templates.md): the metadata WSO2 API Platform extracts for each supported provider

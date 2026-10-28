@@ -528,6 +528,21 @@ code {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Icons in table cells (e.g. provider logos): inline beside the text, no card. */
+.markdown td img,
+[data-theme='dark'] .markdown td img {
+  display: inline-block;
+  margin: 0 0.5rem 0 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  vertical-align: middle;
+}
+
+.markdown td:has(> img) {
+  white-space: nowrap;
+}
+
 blockquote {
   border-left: 3px solid var(--apd-surface-border);
   background: var(--apd-card);
@@ -737,4 +752,14 @@ table tbody tr:not(:last-child) td {
 .sidebar-section-end {
   margin: 0.5rem 6px;
   border-top: 1px solid var(--apd-sidebar-border);
+}
+
+/* Sub-steps inside numbered steps: a, b, c instead of i, ii, iii. */
+.markdown ol ol {
+  list-style-type: lower-alpha;
+}
+
+/* A table or note that follows a list inside a step: keep the same gap as between paragraphs. */
+.markdown li > :is(ul, ol) + :is(table, .theme-admonition) {
+  margin-top: var(--ifm-paragraph-margin-bottom);
 }

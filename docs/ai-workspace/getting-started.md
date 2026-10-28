@@ -368,7 +368,7 @@ If something doesn't work as expected, check here before anything else:
 
 ### Next steps
 
-- [Manage an LLM provider](./llm-providers/overview.md): configure connection, access control, security, rate limiting, and guardrails for the provider you just created
+- [Manage an LLM provider](./llm-providers/manage-provider.md): configure connection, access control, security, rate limiting, and guardrails for the provider you just created
 - [Create an App LLM Proxy](./app-llm-proxies/overview.md): give one application its own endpoint, key, and policies on top of a shared provider
 - [Configure an App LLM Proxy](./app-llm-proxies/overview.md): add an application-specific endpoint on top of a provider, with its own guardrails and access rules
 - [Manage an App LLM Proxy](./app-llm-proxies/overview.md): configure provider settings, resources, security, and guardrails for an existing proxy
@@ -405,11 +405,11 @@ An LLM provider connects the AI Workspace to an AI service platform like OpenAI,
 4. Click **Add Provider**.
 5. Click **Deploy to Gateway** and deploy to your active gateway.
 
-For detailed instructions, see [Configure LLM Provider](./llm-providers/overview.md).
+For detailed instructions, see [Configure and Consume an LLM Provider](./llm-providers/configure-and-consume-provider.md).
 
 ### What's Next
 
-- [Manage your provider](./llm-providers/overview.md) — Configure connection, access control, security, rate limiting, guardrails, and models
+- [Manage your provider](./llm-providers/manage-provider.md) — Configure connection, access control, security, rate limiting, guardrails, and models
 
 :::note
 You can optionally create an LLM proxy if a specific Gen AI application or agent needs its own guardrails, authentication, exposed resources, routing, or other app-specific controls on top of providers.

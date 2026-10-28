@@ -78,7 +78,11 @@ const sidebars = {
     ]),
     group("AI Workspace", [
       doc("ai-workspace/getting-started", "Quick Start Guide"),
-      doc("ai-workspace/llm-providers/overview", "LLM Providers"),
+      group("LLM Providers", [
+        doc("ai-workspace/llm-providers/overview", "Overview"),
+        doc("ai-workspace/llm-providers/configure-and-consume-provider", "Configure and Consume Provider"),
+        doc("ai-workspace/llm-providers/manage-provider", "Manage Provider"),
+      ]),
       doc("ai-workspace/app-llm-proxies/overview", "App LLM Proxies"),
       doc("ai-workspace/mcp-proxies/overview", "MCP Proxies"),
       doc("ai-workspace/agent-proxies", "Agent Proxies"),
