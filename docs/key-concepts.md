@@ -2,53 +2,47 @@
 title: "Key Concepts"
 ---
 
-Key concepts are the core building blocks of API Platform that define how users, resources, and runtime infrastructure are organized and managed.
+Key concepts are the core building blocks of API Platform that define how your resources and runtime infrastructure are organized and managed.
 
 - [Organizations](#organizations)
 - [Projects](#projects)
+- [Gateways](#gateways)
+- [Environments](#environments)
+- [Pipelines](#pipelines)
 - [Control Plane and Data Planes](#control-plane-and-data-planes)
 
 ## Organizations
 
-An **organization** is a logical container for users and their resources. Every user must belong to an organization to use API Platform, and organizations isolate resources, manage access, and enable collaboration within a defined boundary.
-
-- **Resource isolation:** Users and resources in one organization cannot access those in another.
-- **One organization per user:** A user can create only one organization, but can be invited to join others.
-- **Membership by invitation:** An organization administrator invites users, and they join once they accept the invitation.
-
-### Users, Groups, and Roles
-
-API Platform manages permissions through groups and roles. A **role** defines the actions a user can perform. A **group** is a collection of users with one or more roles assigned, and its members inherit the permissions of those roles.
-
-| Role | Responsibilities |
-|:-----|:-----------------|
-| **Admin** | Full access to API Platform, including user management, application development, and billing. |
-| **API Publisher** | Creates, documents, and publishes APIs to the Developer Portal. |
-| **API Subscriber** | Discovers APIs in the Developer Portal, subscribes to them, and invokes them. |
-| **Choreo DevOps** | Manages deployments. |
-| **Choreo Platform Engineer** | Manages infrastructure, governance, service mesh, and monitoring. |
-
-For details, see [Role Based Access Control](./administer/role-based-access-control.md).
+An **organization** is the top-level container for everything you create in API Platform, including projects, API proxies, gateways, and environments. Resources in one organization are isolated from those in another.
 
 ## Projects
 
-A **project** is a logical grouping of API proxies and MCP servers that work together to deliver a business capability. Components in a project are managed and deployed together, and each project is deployed into its own isolated namespace in a Kubernetes cluster.
+A **project** in API Platform is a logical grouping of API Proxies that typically work together to deliver a business capability. Projects help organize development, deployment, and management workflows for cloud-native applications. Each project is isolated from others, ensuring clear boundaries for resources, permissions, and deployments.
 
-A project is represented as a **cell** in the [Cell-based architecture](https://github.com/wso2/reference-architecture/blob/master/reference-architecture-cell-based.md). Its components can be exposed to the public internet, internally to the organization, or only within the project.
+## Gateways
 
-![Cell-based project boundary showing components exposed to internet, organization, and project namespace](/img/cloud/concepts/project.png)
+A **gateway** is the runtime that receives API traffic, applies the policies you configure, and routes requests to your backend services. You deploy API proxies to gateways, and each gateway is associated with an environment.
+
+API Platform supports the following kinds of gateways:
+
+- **WSO2-managed gateways:** Run in the cloud data plane and are provisioned and operated by WSO2.
+- **Self-hosted gateways:** Run on your own infrastructure, such as a virtual machine, Docker, or Kubernetes, and connect to the API Platform control plane for configuration and management. See [Self-Hosted Gateway](./hybrid-gateways/api-gateway/getting-started.md).
+- **Third-party gateways:** Gateways from other vendors, such as AWS API Gateway, whose APIs you can discover and manage from API Platform. See [AWS API Gateway](./hybrid-gateways/api-gateway/third-party-gateways/api-discovery-aws.md).
+
+## Environments
+
+An **environment** is an isolated deployment area, such as development or production, that runs on a data plane. Each environment has its own gateways, configuration, and endpoint URLs, so you can test changes without affecting the API that consumers use.
+
+## Pipelines
+
+A **pipeline** is the ordered sequence of environments that an API proxy moves through on its way to production, for example from development to production. You deploy an API proxy to the first environment in the pipeline, test it, and then promote the same build to the next environment.
+
+Promoting the same build, rather than rebuilding it for each environment, ensures that what you tested is exactly what runs in production. Environment-specific values, such as backend endpoints, are configured separately for each environment.
 
 ## Control Plane and Data Planes
 
-API Platform's architecture is built around two core components: the control plane and the data plane.
+API Platform's architecture is built around two core components, namely the control plane and the data plane.
 
-The **control plane** manages organizations, users, and projects, and orchestrates the API proxy lifecycle, from creation and deployment to governance, observability, and publishing to the Developer Portal.
+The **control plane** manages organizations and projects, and orchestrates the API proxy lifecycle, from creation and deployment to governance, observability, and publishing to the Developer Portal.
 
-The **data plane** is where deployed API proxies run, based on the configuration defined in the control plane. All API traffic stays within the data plane, so user data remains securely contained. API Platform supports two types of data planes:
-
-- **Cloud Data Planes (CDP):** Multi-tenant infrastructure that offers a shared yet secure runtime environment.
-- **Private Data Planes (PDP):** Dedicated infrastructure for a single organization, for enhanced privacy and control to meet compliance or security requirements.
-
-![API Platform high-level architecture with control plane, cloud data plane, and private data plane](/img/cloud/concepts/high-level-view.png)
-
-To run gateways on your own infrastructure, see [Self-Hosted Gateway](./hybrid-gateways/api-gateway/getting-started.md).
+The **data plane** is where deployed API proxies run, based on the configuration defined in the control plane. All API traffic stays within the data plane, so user data remains securely contained.
