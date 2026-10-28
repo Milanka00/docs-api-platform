@@ -37,7 +37,7 @@ Subscription-less behavior applies when no subscription plans are active for the
 1. Sign in to the [API Platform Console](https://console.bijira.dev/).
 2. Open the project and select the API proxy.
 3. In the left navigation menu, click **Manage** and then **Monetize**.
-4. Ensure **Subscription Plan Status** is **disabled** (off) for all plans. For background on plans, see [Assign Subscription Plans to APIs](../../../develop-api-proxy/subscription-plans-and-billing.md).
+4. Ensure **Subscription Plan Status** is **disabled** (off) for all plans. For background on plans, see [Assign Subscription Plans to APIs](../../../publish-api-proxy/subscription-plans-and-billing.md).
 
     ![Subscription Plans page listing 3PerMin, Bronze, Gold, Silver, and Unlimited plans with all Enabled toggles turned off](/img/cloud/api-platform-gateway/subscriptions/subscription-plan-disabled.png)
 
@@ -96,7 +96,7 @@ This model fits APIs where you need tiered access, usage limits, or clear commer
 
     ![Subscription Plans page listing 3PerMin, Bronze, Gold, Silver, and Unlimited plans with all Enabled toggles turned on](/img/cloud/api-platform-gateway/subscriptions/subscription-plan-enable.png)
 
-For detailed steps and field behavior, see [Assign Subscription Plans to APIs](../../../develop-api-proxy/subscription-plans-and-billing.md).
+For detailed steps and field behavior, see [Assign Subscription Plans to APIs](../../../publish-api-proxy/subscription-plans-and-billing.md).
 
 ### Assign Subscription Validation Policy to the API
 
@@ -212,5 +212,5 @@ To change the lifecycle state of an API via the API Platform Console, follow the
 ## Related documentation
 
 - [Getting Started with Self-Hosted Gateway](../getting-started.md): Create the gateway, add an API proxy, and deploy
-- [Assign Subscription Plans to APIs](../../../develop-api-proxy/subscription-plans-and-billing.md): Enable subscription plans on an API
+- [Assign Subscription Plans to APIs](../../../publish-api-proxy/subscription-plans-and-billing.md): Enable subscription plans on an API
 - [Create API Subscription Plans](../../../administer/creating-subscription-plans.md): Define plans at organization level

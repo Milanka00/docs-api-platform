@@ -62,9 +62,9 @@ const sidebars = {
         doc("test-api-proxy/curl", "cURL"),
       ]),
       group("Publish", [
-        doc("develop-api-proxy/make-an-api-ai-ready", "Make an API AI-Ready"),
-        doc("develop-api-proxy/lifecycle", "Lifecycle"),
-        doc("develop-api-proxy/subscription-plans-and-billing", "Subscription Plans"),
+        doc("publish-api-proxy/make-an-api-ai-ready", "Make an API AI-Ready"),
+        doc("publish-api-proxy/lifecycle", "Lifecycle"),
+        doc("publish-api-proxy/subscription-plans-and-billing", "Subscription Plans"),
       ]),
       group("Observability and Insights", [
         group("Logs", [
