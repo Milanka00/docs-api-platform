@@ -1,35 +1,50 @@
 ---
 title: "Documents"
-description: "Add supporting documentation, usage guides, and version history to an API proxy before publishing it to the Developer Portal."
+description: "Add guides, samples, and support resources to an API proxy so consumers can understand and use it in the Developer Portal."
 ---
 
-When an API consumer signs in to the API Platform Developer Portal to browse APIs, it is not sufficient to just have an API thumbnail along with the name and version of the API. An API consumer would expect to see more details about the API, such as the following:
+When API consumers browse APIs in the Developer Portal, they need more than the API name and version to decide whether to use an API. Documents let you provide that information, such as,
 
 - A brief description of the API.
 - How to invoke the API.
-- The limitations/restrictions of the API.
+- The limitations or restrictions of the API.
 - Version history.
 
-To provide such information that improves the overall visibility of the API, an API developer can add such documentation to an API before publishing it to the Developer Portal.
+You write documents in Markdown and add them to the API before you publish it. You can add as many documents as you need.
 
-## Add Documents to an API
+## Create a Document
 
-To add documentation for an API, follow the steps given below.
+To add a document to an API, follow the steps given below.
 
 1. Sign in to the [API Platform Console](https://console.bijira.dev/).
-
-2. Select the project and the API that you want to add documentation.
-
-3. In the left navigation menu, click **Develop** and then click **Documents**.
-
+2. In the header, select the project from the **Projects** list and the API from the **APIs** list.
+3. In the left navigation menu, click **Develop**, then click **Documents**.
 4. Click **Create Document**.
 
-5. Specify document name and document type for the document and provide the content in markdown syntax.
+    ![Documents page showing No Documents available for this API with a Create Document button](/img/cloud/develop-api-proxy/documents/no-documents.png)
 
-6. Click **Create** to save the document.
+5. On the **Create Document** page, provide the following details.
 
-    ![Documents page showing Developer Documents tab with a document list and content preview panel](/img/cloud/develop-api-proxy/documents.png)
+    - **Document type:** Select the type of document, for example, **How To**.
+    - **Name:** Enter a name for the document, for example, `Getting started`.
+    - **Content:** Write the document content in Markdown.
 
-Depending on the information you need to add to the API, you can add one or more documents.
+    To choose how the editor is displayed, select **Source** to show only the Markdown, **Split** to show the Markdown and a preview side by side, or **Preview** to show only the rendered document.
 
-You can also edit existing documents and delete documents if necessary.
+    ![Create Document page with the How To document type, a document name, and Markdown content shown side by side with its preview in Split view](/img/cloud/develop-api-proxy/documents/create-document.png)
+
+6. Click **Create**.
+
+The document appears under **All documents**, grouped by document type. Click a document to view its content.
+
+![Documents page listing Reading List API Doc under How To in All documents, with the rendered document and edit and delete icons on the right](/img/cloud/develop-api-proxy/documents/documents-list.png)
+
+To add more documents, click **Create Document** at the top of the page.
+
+## Edit or Delete a Document
+
+1. On the **Documents** page, under **All documents**, click the document.
+2. Do one of the following:
+
+    - To edit the document, click the edit (pencil) icon, make your changes, and save them.
+    - To delete the document, click the delete (trash) icon and confirm the deletion.

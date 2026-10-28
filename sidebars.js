@@ -52,7 +52,6 @@ const sidebars = {
         ]),
         group("Policies", [
           doc("develop-api-proxy/policy/overview", "Overview"),
-          doc("develop-api-proxy/policy/policies", "Built-in Policies"),
           doc("develop-api-proxy/policy/attach-and-manage-policies", "Attach and Manage Policies"),
         ]),
         doc("develop-api-proxy/documents", "Documents"),

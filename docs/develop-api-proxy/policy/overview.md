@@ -1,25 +1,33 @@
 ---
 title: "Overview"
-description: "Customize an API proxy in WSO2 API Platform's interactive UI: add or remove resources, map resources, and manage policies."
+description: "How policies work on API proxies in WSO2 API Platform, and the Policy Hub categories of policies you can attach."
 ---
 
-API Platform simplifies the design, management, and mediation of API proxies with its interactive UI. It enables seamless API proxy customization within its unified UI, allowing you to add or remove resources, map resources, and apply policies at both the API and resource levels—all from the same interface.
+A policy is a self-contained unit of behavior that plugs into the API's request and response pipeline. Policies let you add capabilities such as authentication, rate limiting, or header changes to an API proxy without writing custom code or changing your backend.
 
-You can intuitively map API proxies to service contracts with API Platform's interactive UI, ensuring clear and consistent request routing to backend services. With built-in mediation policies, API Platform provides flexibility to manage API requests and responses, facilitating custom transformations and logic without requiring custom code. This enhances API manageability, making it easier to configure, update, and control API traffic within the platform.
+Rather than building each concern from scratch, you compose policies. For example, you can stack authentication on top of rate limiting to secure and protect the same API proxy.
 
-## Designing API Proxies
+## How Policies Work
 
-You can further redesign and customize your API proxy created from following the [Create API Proxy](../../create-api-proxy/overview.md) flow.
+Attach a policy at the API level to apply it to every resource in the API proxy, or at the resource level to apply it to a single resource. A policy runs on the request, the response, or both.
 
-1. You can add new resources and delete existing ones as necessary
-   ![API proxy resource list with add resource button on API Proxy Contract and delete icons on each resource row](/img/cloud/develop-api-proxy/overview/add_delete_resource.png)
+When you attach multiple policies, the gateway chains them together at runtime. Each policy processes the message in sequence before passing it to the next, and you can change the order at any time.
 
-2. You can delete existing resource mappings, with the option to delete the resources along with the mapping if you do not intend to map it to a different backend resource
-   ![API proxy resource list with a highlighted delete icon on the GET /books mapping connector](/img/cloud/develop-api-proxy/overview/delete_mapping.png)
+## Policy Categories
 
-3. You can create a new mapping for a new resource you created
-   ![API proxy resource list showing a new GET /documents resource mapped with crossing lines to backend service routes](/img/cloud/develop-api-proxy/overview/new_mapping.png)
+Policies come from the [Policy Hub](https://wso2.com/api-platform/docs/policy-hub/overview/), the official, curated collection of production-ready, versioned gateway policies for API Platform. They are grouped into the following categories:
 
-:::info
-Each change made to proxy will be automatically saved as the `Latest saved` version in History. You can restore to the initial version or to an earlier version that has been deployed by clicking the `Restore` button in the History Pane.
+| Category | What it covers | Example policies |
+|:---------|:---------------|:-----------------|
+| **Security** | Controls who can call your APIs and how traffic to your backends is secured. | API Key Auth, Basic Auth, JWT Auth, OAuth2 Generator, CORS, Subscription Validation, Rate Limit |
+| **Guardrails** | Screens what goes into and comes out of AI models. | AWS Bedrock Guardrail, Azure Content Safety, PII Masking, JSON Schema Guardrail, Regex Guardrail |
+| **AI and LLM** | Handles cost, token usage, latency, and prompt structure for AI APIs. | LLM Cost, Token-Based Rate Limit, Semantic Cache, Prompt Template, Model Round Robin |
+| **MCP (Model Context Protocol)** | Secures and controls MCP servers. | MCP Authentication, MCP Authorization, MCP Access Control, MCP Rewrite |
+| **Transformation** | Modifies requests and responses as they pass through the gateway. | Request Rewrite, Host Rewrite, Dynamic Endpoint, Set Headers, Remove Headers, JSON/XML Mediator |
+| **Logging, Analytics, and Monitoring** | Records request and response data, and controls which headers appear in analytics. | Log Message, Analytics Header Filter |
+
+:::note
+The Policy Hub is powered by an [open source repository on GitHub](https://github.com/wso2/gateway-controllers), where the full source and documentation of each policy live. Every policy is versioned independently. See the [Policy Hub](https://wso2.com/api-platform/docs/policy-hub/overview/) for the full list of policies in each category, their configuration, and their latest versions.
 :::
+
+For details on attaching and managing one or more policies to an API proxy component implementation via the API Platform Console, see [Attach and Manage Policies](./attach-and-manage-policies.md).
