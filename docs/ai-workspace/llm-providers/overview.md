@@ -1,5 +1,5 @@
 ---
-title: "Overview"
+title: "LLM Providers"
 ---
 
 import Tabs from '@theme/Tabs';
@@ -550,4 +550,3 @@ Deleting a provider will:
 ### Next Steps
 
 - [Configure App LLM Proxy](../app-llm-proxies/overview.md) - Configure and deploy specialized proxy endpoints for Gen AI applications or agents using your provider
-- [Policies Overview](../policies/overview.md) - Explore all available guardrails and policies

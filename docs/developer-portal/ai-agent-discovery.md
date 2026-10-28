@@ -1,5 +1,5 @@
 ---
-title: "AI Agent Discovery"
+title: "Discover AI Agents"
 description: "Expose published APIs and workflows through llms.txt and machine-readable Markdown endpoints so AI agents can discover and invoke them."
 ---
 
@@ -26,7 +26,7 @@ GET /{orgName}/views/{viewName}/llms.txt
 An agent or agentic framework that starts at `llms.txt` immediately understands the scope of available APIs and workflows without crawling the entire portal. This makes it the standard starting point for LLM native API consumption.
 
 :::tip
-Portal admins can enrich `llms.txt` with high-level guidance for agents such as how APIs are organized, common authentication patterns, and recommended workflows using [LLM Instructions](./admin-settings.md).
+Portal admins can enrich `llms.txt` with high-level guidance for agents such as how APIs are organized, common authentication patterns, and recommended workflows using LLM Instructions.
 :::
 
 ---
@@ -83,8 +83,5 @@ For details on how visibility is controlled, see Make an API AI-Ready.
 
 ## Related
 
-- [LLM Instructions](./admin-settings.md) — configure the portal-level context that appears at the top of `llms.txt`
-- [Managing API Workflows](./admin-settings.md) — publish workflows that guide agents through common multi-step use cases
-- [Consuming API Workflows](./api-workflows.md) — how agents discover and follow published workflows
 - Make an API AI-Ready — publisher guidance on descriptions, specifications, and visibility settings
 - MCP Servers — expose APIs as agent-native MCP tools

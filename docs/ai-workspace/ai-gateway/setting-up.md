@@ -1,5 +1,5 @@
 ---
-title: "Setting Up"
+title: "AI Gateways"
 description: "Register an AI Gateway in AI Workspace, connect the runtime with a registration token, and manage existing gateways."
 ---
 

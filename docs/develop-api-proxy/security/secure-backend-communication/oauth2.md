@@ -24,7 +24,7 @@ Only the client-credentials grant type is currently supported.
 To configure the OAuth2 policy, follow the steps given below:
 
 1. Sign in to the [API Platform Console](https://console.bijira.dev/).
-2. In the **Proxies** pane, click on the API proxy for which you want to configure OAuth2. For instructions on how to create an API proxy component, see [Develop an API Proxy: Step 1](../../../create-api-proxy/ingress-apis/rest-apis.md).
+2. In the **Proxies** pane, click on the API proxy for which you want to configure OAuth2. For instructions on how to create an API proxy component, see [Create a REST API Proxy from Scratch](../../../create-api-proxy/rest-apis/start-from-scratch.md).
 3. In the left navigation menu, click **Develop** and then click **Policies**.
 4. Choose the resource you want to secure, then click **Attach Mediation Policy**.
 5. In the policy picker, select **OAuth2 (1.0.0)**.

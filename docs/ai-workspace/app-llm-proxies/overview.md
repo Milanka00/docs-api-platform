@@ -1,5 +1,5 @@
 ---
-title: "Overview"
+title: "App LLM Proxies"
 ---
 
 ## App LLM Proxies Overview
@@ -176,9 +176,7 @@ The **Deployed Gateways** section lists all gateways this proxy is deployed to, 
 
 ### Next Steps
 
-- [Invoke via SDKs](../invoke-via-sdk.md) - Connect to your proxy from Python using provider-native SDKs
 - Manage Your App LLM Proxy - Configure provider, resources, security, and guardrails
-- [Apply Policies](../policies/overview.md) - Learn about available policies for rate limiting and caching
 
 ## Manage App LLM Proxy
 
@@ -418,5 +416,4 @@ Deleting a proxy is permanent and cannot be undone.
 
 ### Next Steps
 
-- [Policies Overview](../policies/overview.md) - Learn about all available policies for proxies
 - [Policy Hub](https://wso2.com/api-platform/policy-hub/) - Browse the full catalog of available guardrails and policies

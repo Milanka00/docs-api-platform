@@ -93,4 +93,4 @@ Follow the steps below to consume the API Platform API and use an external key m
     </TabItem>
     </Tabs>
 
-5. Once you receive the access token, you can [test invoking the resource using cURL](../../../test-api-proxy/api-console.md) in API Platform.
+5. Once you receive the access token, you can [test invoking the resource using cURL](../../../test-api-proxy/curl.md) in API Platform.

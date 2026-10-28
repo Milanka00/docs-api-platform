@@ -1,5 +1,5 @@
 ---
-title: "Theming Developer Portal"
+title: "Theming"
 ---
 
 ## Theming Developer Portal with AI for your Organization

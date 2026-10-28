@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Self-Hosted Gateway"
+title: "Quick Start Guide"
 description: "Set up an API Platform Self-Hosted Gateway in your own infrastructure and connect it to the API Platform Cloud control plane."
 ---
 
@@ -178,12 +178,6 @@ Your Self-Hosted Gateway is now running! Here's what to do next:
 
 - **Configure Policies**: Apply policies through the [Adding and Managing Policies](./manage-policies.md) guide
 - **Monitor**: View gateway health and metrics using Analytics
-
-## Alternative Deployment Options
-
-For production environments or specific infrastructure requirements, see the detailed configuration guide:
-
-- [Setting Up](./setting-up.md): Configure on Virtual Machine, Docker, or Kubernetes with tabs for each infrastructure option
 
 ## Troubleshooting
 

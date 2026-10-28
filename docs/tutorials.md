@@ -163,7 +163,7 @@ Let’s take a look at the steps to implement the scenario described above using
 #### Step 1: Create an API proxy component and deploy it
 
 1. Go to [API Platform Console](https://console.bijira.dev/) and sign in. This opens the project home page.
-2. To create an API proxy component, follow the instructions in [Start with Endpoint](./create-api-proxy/ingress-apis/rest-apis.md).
+2. To create an API proxy component, follow the instructions in [Create a REST API Proxy from Scratch](./create-api-proxy/rest-apis/start-from-scratch.md).
 3. In the left navigation menu, click **Policy**.
 4. Click the **+** in the **API Proxy Contract** and replace the resources with following.
     - **GET** `/users`

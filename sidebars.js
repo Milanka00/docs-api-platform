@@ -24,149 +24,101 @@ const sidebars = {
     doc("overview", "Overview"),
     doc("key-concepts", "Key Concepts"),
     group("API Control Plane", [
-      group("Getting Started", [
-        doc("getting-started/api-proxy", "API Proxy"),
-        doc("getting-started/mcp-server", "MCP Server"),
-      ]),
-      group("API Proxies", [
-        group("Create", [
-          doc("create-api-proxy/overview", "Overview"),
-          group("Ingress APIs", [
-            doc("create-api-proxy/ingress-apis/rest-apis", "REST APIs"),
-            doc("create-api-proxy/ingress-apis/web-socket-apis", "Web Socket APIs"),
-            doc("create-api-proxy/ingress-apis/graphql-apis", "GraphQL APIs"),
-          ]),
-          doc("create-api-proxy/egress-apis", "Egress APIs"),
+      doc("getting-started/api-proxy", "Quick Start Guide"),
+      group("Create", [
+        doc("create-api-proxy/overview", "Overview"),
+        group("REST APIs", [
+          doc("create-api-proxy/rest-apis/start-from-scratch", "Start from Scratch"),
+          doc("create-api-proxy/rest-apis/start-with-a-contract", "Start with a Contract"),
         ]),
-        group("Develop", [
-          group("Security", [
-            {
-              type: 'category',
-              label: 'Secure API Access',
-              // The group's own page (docs/develop-api-proxy/security/secure-api-access.md).
-              link: {type: 'doc', id: 'develop-api-proxy/security/secure-api-access'},
-              items: [
-                doc("develop-api-proxy/security/secure-api-access/api-platform-sts", "API Platform STS"),
-                doc("develop-api-proxy/security/secure-api-access/asgardeo", "Asgardeo"),
-                doc("develop-api-proxy/security/secure-api-access/azure-ad", "Microsoft Entra ID (Azure AD)"),
-                doc("develop-api-proxy/security/secure-api-access/external-key-manager", "External Key Manager"),
-              ],
-            },
-            group("Secure Backend Communication", [
-              doc("develop-api-proxy/security/secure-backend-communication/oauth2", "OAuth2"),
-              doc("develop-api-proxy/security/secure-backend-communication/mutual-tls", "Mutual TLS"),
-            ]),
-          ]),
-          group("Policies", [
-            doc("develop-api-proxy/policy/overview", "Overview"),
-            doc("develop-api-proxy/policy/policies", "Built-in Policies"),
-            doc("develop-api-proxy/policy/attach-and-manage-policies", "Attach and Manage Policies"),
-            group("Custom Policies", [
-              doc("develop-api-proxy/policy/write-a-custom-policy", "Write a Custom Policy (Ballerina)"),
-              doc("develop-api-proxy/policy/add-custom-policies", "Add Custom Policies from a Gateway"),
-            ]),
-          ]),
-        ]),
-        group("Test", [
-          doc("test-api-proxy/api-console", "API Console"),
-          doc("test-api-proxy/api-chat", "API Chat"),
-        ]),
-        group("Publish", [
-          doc("develop-api-proxy/make-an-api-ai-ready", "Make an API AI-Ready"),
-          doc("develop-api-proxy/documents", "Documents"),
-          doc("develop-api-proxy/subscription-plans-and-billing", "Subscription Plans and Billing"),
-          doc("develop-api-proxy/lifecycle", "Lifecycle"),
+        group("GraphQL APIs", [
+          doc("create-api-proxy/graphql-apis/start-from-scratch", "Start from Scratch"),
+          doc("create-api-proxy/graphql-apis/start-with-a-schema", "Start with a Schema"),
         ]),
       ]),
-      doc("api-governance/overview", "API Governance"),
-      doc("secret-management", "Secret Management"),
-      doc("pipelines", "Pipelines"),
-      {
-        type: 'category',
-        label: 'Workflows',
-        // The group's own page (docs/workflows.md).
-        link: {type: 'doc', id: 'workflows'},
-        items: [
-          doc("workflows/application-creation-workflow", "Application Creation Workflow"),
-          doc("workflows/subscription-creation-workflow", "Subscription Creation Workflow"),
-          doc("workflows/deployment-promotion-workflow", "Deployment Promotion Workflow"),
-        ],
-      },
+      group("Develop", [
+        group("Security", [
+          group("Secure API Access", [
+            doc("develop-api-proxy/security/secure-api-access/overview", "Overview"),
+            doc("develop-api-proxy/security/secure-api-access/api-platform-sts", "API Platform STS"),
+            doc("develop-api-proxy/security/secure-api-access/asgardeo", "Asgardeo"),
+            doc("develop-api-proxy/security/secure-api-access/azure-ad", "Microsoft Entra ID (Azure AD)"),
+            doc("develop-api-proxy/security/secure-api-access/external-key-manager", "External Key Manager"),
+          ]),
+          group("Secure Backend Communication", [
+            doc("develop-api-proxy/security/secure-backend-communication/oauth2", "OAuth2"),
+            doc("develop-api-proxy/security/secure-backend-communication/mutual-tls", "Mutual TLS"),
+          ]),
+        ]),
+        group("Policies", [
+          doc("develop-api-proxy/policy/overview", "Overview"),
+          doc("develop-api-proxy/policy/policies", "Built-in Policies"),
+          doc("develop-api-proxy/policy/attach-and-manage-policies", "Attach and Manage Policies"),
+        ]),
+        doc("develop-api-proxy/documents", "Documents"),
+      ]),
+      group("Test", [
+        doc("test-api-proxy/api-console", "API Console"),
+        doc("test-api-proxy/graphql-console", "GraphQL Console"),
+        doc("test-api-proxy/curl", "cURL"),
+      ]),
+      group("Publish", [
+        doc("develop-api-proxy/make-an-api-ai-ready", "Make an API AI-Ready"),
+        doc("develop-api-proxy/lifecycle", "Lifecycle"),
+        doc("develop-api-proxy/subscription-plans-and-billing", "Subscription Plans"),
+      ]),
+      group("Observability and Insights", [
+        group("Logs", [
+          doc("observability-and-insights/runtime-logs", "Runtime Logs"),
+          doc("monitoring-and-analytics/audit-logs", "Audit Logs"),
+        ]),
+        doc("observability-and-insights/insights", "Insights"),
+      ]),
+      doc("gateways", "Gateways"),
+      doc("portals", "Portals"),
     ]),
     group("AI Workspace", [
-      doc("ai-workspace/overview", "Overview"),
-      doc("ai-workspace/getting-started", "Getting Started"),
-      group("AI Gateway", [
-        doc("ai-workspace/ai-gateway/setting-up", "Setting Up"),
-      ]),
-      group("LLM Providers", [
-        doc("ai-workspace/llm-providers/overview", "Overview"),
-      ]),
-      group("App LLM Proxies", [
-        doc("ai-workspace/app-llm-proxies/overview", "Overview"),
-      ]),
-      group("MCP Proxies", [
-        doc("ai-workspace/mcp-proxies/overview", "Overview"),
-      ]),
-      group("MCP Registry", [
-        doc("ai-workspace/mcp-registry/overview", "Overview"),
-      ]),
-      group("Policies", [
-        doc("ai-workspace/policies/overview", "Overview"),
-        doc("ai-workspace/policies/policy-hub", "Policy Hub"),
-      ]),
-      doc("ai-workspace/secret-management", "Secret Management"),
+      doc("ai-workspace/getting-started", "Quick Start Guide"),
+      doc("ai-workspace/llm-providers/overview", "LLM Providers"),
+      doc("ai-workspace/app-llm-proxies/overview", "App LLM Proxies"),
+      doc("ai-workspace/mcp-proxies/overview", "MCP Proxies"),
+      doc("ai-workspace/agent-proxies", "Agent Proxies"),
       doc("ai-workspace/gen-ai-applications", "Gen AI Applications"),
-      doc("ai-workspace/configure-inbound-auth", "Configure Inbound Auth"),
-      doc("ai-workspace/invoke-via-sdk", "Invoke via SDK"),
-      doc("ai-workspace/monitoring-and-analytics", "Monitoring and Analytics"),
+      doc("ai-workspace/ai-gateway/setting-up", "AI Gateways"),
+      doc("ai-workspace/monitoring-and-analytics", "Insights"),
     ]),
     group("Developer Portal", [
-      doc("developer-portal/overview", "Overview"),
-      doc("developer-portal/getting-started", "Getting Started"),
-      doc("developer-portal/setting-up", "Setting Up"),
+      doc("developer-portal/getting-started", "Quick Start Guide"),
       group("Discover APIs", [
         doc("developer-portal/discover-apis/searching", "Searching"),
         doc("developer-portal/discover-apis/documentation", "Documentation"),
       ]),
-      doc("developer-portal/discover-mcp-servers", "Discover MCP Servers"),
-      doc("developer-portal/ai-agent-discovery", "AI Agent Discovery"),
+      doc("developer-portal/discover-mcp-servers", "Discover MCP Proxies"),
+      doc("developer-portal/ai-agent-discovery", "Discover AI Agents"),
       doc("developer-portal/consume-an-api", "Consume an API"),
       doc("developer-portal/manage-applications", "Manage Applications"),
-      doc("developer-portal/application-sharing", "Application Sharing"),
       doc("developer-portal/manage-subscriptions", "Manage Subscriptions"),
-      doc("developer-portal/sdk-generation", "SDK Generation"),
-      doc("developer-portal/api-workflows", "API Workflows"),
-      doc("developer-portal/theming-developer-portal", "Theming Developer Portal"),
-      doc("developer-portal/admin-settings", "Admin Settings"),
+      doc("developer-portal/theming-developer-portal", "Theming"),
     ]),
     section("Hybrid Gateways"),
     group("API Gateway", [
       group("Self-Hosted Gateway", [
-        doc("hybrid-gateways/api-gateway/architecture", "Architecture"),
-        doc("hybrid-gateways/api-gateway/getting-started", "Getting Started"),
-        doc("hybrid-gateways/api-gateway/setting-up", "Setting Up"),
-        doc("hybrid-gateways/api-gateway/manage-policies", "Adding and Managing Policies"),
-        group("Custom Policies", [
-          doc("hybrid-gateways/api-gateway/writing-a-custom-policy", "Writing a Custom Policy"),
-          doc("hybrid-gateways/api-gateway/build-gateway-with-custom-policies", "Building the Gateway with Custom Policies"),
-          doc("hybrid-gateways/api-gateway/apply-custom-policies-to-apis", "Apply Custom Policies to APIs"),
+        doc("hybrid-gateways/api-gateway/getting-started", "Quick Start Guide"),
+        group("Policies", [
+          doc("hybrid-gateways/api-gateway/manage-policies", "Adding and Managing Policies"),
+          group("Custom Policies", [
+            doc("hybrid-gateways/api-gateway/writing-a-custom-policy", "Writing a Custom Policy"),
+            doc("hybrid-gateways/api-gateway/build-gateway-with-custom-policies", "Building the Gateway with Custom Policies"),
+            doc("hybrid-gateways/api-gateway/apply-custom-policies-to-apis", "Apply Custom Policies to APIs"),
+          ]),
         ]),
-        group("Publish APIs", [
-          doc("hybrid-gateways/api-gateway/publish-apis/overview", "Overview"),
-          doc("hybrid-gateways/api-gateway/publish-apis/subscription-based-apis", "Subscription Based APIs"),
-          doc("hybrid-gateways/api-gateway/publish-apis/subscription-less-apis", "Subscription Less APIs"),
-          doc("hybrid-gateways/api-gateway/publish-apis/lifecycle-management", "Lifecycle Management"),
-        ]),
-        doc("hybrid-gateways/api-gateway/high-availability", "High Availability"),
+        doc("hybrid-gateways/api-gateway/publish-apis/overview", "Publishing APIs"),
       ]),
-      group("Third-Party Gateways", [
-        doc("hybrid-gateways/api-gateway/third-party-gateways/overview", "Overview"),
-        doc("hybrid-gateways/api-gateway/third-party-gateways/api-discovery-aws", "Discover APIs from AWS API Gateway"),
+      group("Third Party Gateways", [
+        doc("hybrid-gateways/api-gateway/third-party-gateways/api-discovery-aws", "AWS API Gateway"),
       ]),
     ]),
     group("AI Gateway", [
-      doc("hybrid-gateways/ai-gateway/overview", "Overview"),
       {
         type: 'category',
         label: 'LLM',
@@ -221,15 +173,6 @@ const sidebars = {
           doc("hybrid-gateways/ai-gateway/observability/tracing", "Tracing"),
         ],
       },
-      {
-        type: 'category',
-        label: 'Analytics',
-        link: {type: 'doc', id: 'hybrid-gateways/ai-gateway/analytics/index'},
-        items: [
-          doc("hybrid-gateways/ai-gateway/analytics/moesif-analytics", "Moesif Analytics"),
-          doc("hybrid-gateways/ai-gateway/analytics/analytics-header-filter", "Analytics Header Filter"),
-        ],
-      },
     ]),
     sectionEnd(),
     {
@@ -238,7 +181,6 @@ const sidebars = {
       // The group's own page (docs/monitoring-and-analytics.md).
       link: {type: 'doc', id: 'monitoring-and-analytics'},
       items: [
-        doc("monitoring-and-analytics/audit-logs", "Audit Logs"),
         doc("monitoring-and-analytics/alerts", "Alerts"),
         doc("monitoring-and-analytics/gateway-metrics", "Gateway Metrics"),
       ],

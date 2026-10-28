@@ -6,8 +6,6 @@ description: "Authenticate API invocations in WSO2 API Platform with an external
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-API security refers to the measures and practices used to protect Application Programming Interfaces (APIs) from potential threats and vulnerabilities. APIs are essential for enabling communication and data exchange between different software applications and services, making them a critical component in modern software development. However, their openness and accessibility can also make them targets for various security risks. Authentication and authorization are key aspects of API security. Authentication is ensuring that only authorized users or applications can access the API. This can involve using API keys, tokens, or more advanced authentication methods like OAuth 2.0. Authorization is controlling what authenticated users or applications are allowed to do within the API. Authorization mechanisms restrict access to specific resources and actions based on user roles or permissions. 
-
 This guide will walk you through setting up API Platform to authenticate API invocations through an external key manager.
 
 This guide walks you through the following steps:
@@ -69,4 +67,4 @@ Follow the steps below to consume the API Platform API and use an external key m
     </TabItem>
     </Tabs>
 
-5. Once you receive the access token, you can [test invoking the resource using cURL](../../../test-api-proxy/api-console.md) in API Platform.
+5. Once you receive the access token, you can [test invoking the resource using cURL](../../../test-api-proxy/curl.md) in API Platform.

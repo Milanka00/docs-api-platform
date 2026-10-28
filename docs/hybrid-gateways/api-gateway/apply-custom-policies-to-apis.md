@@ -93,6 +93,4 @@ For detailed instructions on attaching and configuring policies on an API, see [
 ## What's Next?
 
 - [Publish APIs Overview](./publish-apis/overview.md): Learn about publishing APIs on the self-hosted gateway
-- [Subscription Based APIs](./publish-apis/subscription-based-apis.md): Publish APIs with subscription-based access control
-- [Subscription Less APIs](./publish-apis/subscription-less-apis.md): Publish APIs without subscription requirements
-- [Lifecycle Management](./publish-apis/lifecycle-management.md): Manage the lifecycle of your published APIs
+- [Publishing APIs](./publish-apis/overview.md): Publish APIs with or without subscriptions, and manage their lifecycle

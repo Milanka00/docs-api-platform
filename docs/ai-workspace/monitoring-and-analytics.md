@@ -1,3 +1,3 @@
 ---
-title: "Monitoring and Analytics"
+title: "Insights"
 ---

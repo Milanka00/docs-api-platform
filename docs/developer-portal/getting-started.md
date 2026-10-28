@@ -1,5 +1,5 @@
 ---
-title: "Getting Started"
+title: "Quick Start Guide"
 description: "Run the API Portal & MCP Hub locally with Docker Compose, sign in, and publish your first API to the catalog."
 ---
 

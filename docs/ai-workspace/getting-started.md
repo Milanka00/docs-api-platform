@@ -1,5 +1,5 @@
 ---
-title: "Getting Started"
+title: "Quick Start Guide"
 ---
 
 ## Get started with AI Workspace
@@ -27,7 +27,6 @@ By the end, you'll have an AI Gateway, connected through AI Workspace to both an
 
 It's written for platform engineers, developers, and anyone evaluating AI Workspace for AI governance. No prior WSO2 API Platform experience is required. For optional background on the concepts this guide uses, see:
 
-- [AI Workspace and how it relates to the AI Gateway](./overview.md)
 - [LLM providers](./llm-providers/overview.md)
 - [MCP proxies](./mcp-proxies/overview.md)
 
@@ -155,7 +154,7 @@ This section configures Mistral AI as a worked example. The same steps apply to 
 
     ![Provider form with Mistral selected and the name, context, and API key filled in](/img/cloud/ai-gateway/ai-workspace/quickstart/configure-mistral-provider.png)
 
-    The **Guardrails & Policies** panel pre-selects a suggested `llm-cost` guardrail. Leave it, remove it, or add more later from the provider's **Guardrails & Policies** tab. See [Policies overview](./policies/overview.md).
+    The **Guardrails & Policies** panel pre-selects a suggested `llm-cost` guardrail. Leave it, remove it, or add more later from the provider's **Guardrails & Policies** tab.
 
 4. Click **Add Provider**.
 
@@ -202,7 +201,7 @@ This part sends a real chat completion request through your deployed provider an
 
 By default, this provider authenticates requests with the `X-API-Key` header, the same header named on the provider's **Security** tab. Mistral AI exposes an OpenAI-compatible API at `/v1`, so append that to the Invoke URL to reach the chat completions resource.
 
-The following example assumes the Mistral AI provider from Part 3. If you configured a different kind of provider instead, this exact request path and body don't apply. Anthropic and Gemini each use their own native request shape. Azure OpenAI and Azure AI Foundry use the same OpenAI-compatible shape as this example, but need your Azure deployment name instead of a model ID. See [Invoke providers and proxies via SDKs](./invoke-via-sdk.md) for the equivalent call.
+The following example assumes the Mistral AI provider from Part 3. If you configured a different kind of provider instead, this exact request path and body don't apply. Anthropic and Gemini each use their own native request shape. Azure OpenAI and Azure AI Foundry use the same OpenAI-compatible shape as this example, but need your Azure deployment name instead of a model ID.
 
 ```bash
 curl -k -X POST "<INVOKE_URL>/v1/chat/completions" \
@@ -373,12 +372,10 @@ If something doesn't work as expected, check here before anything else:
 - [Create an App LLM Proxy](./app-llm-proxies/overview.md): give one application its own endpoint, key, and policies on top of a shared provider
 - [Configure an App LLM Proxy](./app-llm-proxies/overview.md): add an application-specific endpoint on top of a provider, with its own guardrails and access rules
 - [Manage an App LLM Proxy](./app-llm-proxies/overview.md): configure provider settings, resources, security, and guardrails for an existing proxy
-- [Invoke providers and proxies via SDKs](./invoke-via-sdk.md): call your deployed endpoint from the OpenAI, Anthropic, Gemini, Mistral, Azure OpenAI (including Azure AI Foundry), or LangChain software development kits (SDKs)
 - Add a guardrail: apply content safety, personally identifiable information (PII) masking, or prompt checks, then send a request that trips one
 - [Apply MCP policies](./mcp-proxies/overview.md): add authentication, authorization, and access control to the MCP proxy you just created
 - Limit cost and volume: cap spend and requests per key
 - [GenAI applications](./gen-ai-applications.md): group API keys under a named application for usage visibility and governance
-- [Configure inbound authentication](./configure-inbound-auth.md): change the header name your applications use to call a provider or proxy
 - [Set up an AI Gateway](./ai-gateway/setting-up.md): run the gateway on a VM or Kubernetes instead of locally, and manage or reconfigure it
 
 ## Getting Started

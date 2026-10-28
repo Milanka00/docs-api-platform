@@ -6,8 +6,6 @@ description: "Authenticate API invocations in WSO2 API Platform with Microsoft E
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-API security refers to the measures and practices used to protect Application Programming Interfaces (APIs) from potential threats and vulnerabilities. Authentication and authorization are key aspects of API security. Authentication is ensuring that only authorized users or applications can access the API. This can involve using API keys, tokens, or more advanced authentication methods like OAuth 2.0. Authorization is controlling what authenticated users or applications are allowed to do within the API. Authorization mechanisms restrict access to specific resources and actions based on user roles or permissions.
-
 Organizations using Microsoft Azure AD for identity and access management (IAM) can seamlessly integrate it with API Platform as an external key manager. This guide will walk you through setting up API Platform to authenticate API invocations through Azure AD which is configured as an external key manager.
 
 This guide walks you through the following steps:

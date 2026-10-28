@@ -26,7 +26,7 @@ To establish secure connectivity between the API Platform Gateway and your backe
 To configure the backend certificate, follow the steps given below:
 
 1. Sign in to the [API Platform Console](https://console.bijira.dev/).
-2. In the **Proxy Listing** pane, click on the API proxy for which you want to configure TLS. For instructions on how to create an API proxy component, see [Develop an API Proxy: Step 1](../../../create-api-proxy/ingress-apis/rest-apis.md).
+2. In the **Proxy Listing** pane, click on the API proxy for which you want to configure TLS. For instructions on how to create an API proxy component, see [Create a REST API Proxy from Scratch](../../../create-api-proxy/rest-apis/start-from-scratch.md).
 3. In the left navigation menu, click **Develop** -> **Policy** and then click **Endpoint Configuration** in Service Contract Endpoint section
 4. On the **Endpoint Configuration** section, click **Configure** corresponding to the endpoint.
 5. Click **Upload Endpoint Certificate**, and select the certificate file that you extracted in the prerequisites section to add it. This adds the certificate to all the environments as the default certificate for the endpoint. You can override this certificate if necessary when you deploy or promote the API.
@@ -46,7 +46,7 @@ Follow the step-by-step instructions below depending on how you want to establis
 When you follow these steps, API Platform generates a key pair with a self-signed certificate. You can attach this key pair to any API proxy created within the same project.
 
 1. Sign in to the [API Platform Console](https://console.bijira.dev/).
-2. In the **Proxy Listing** pane, click on the API proxy for which you want to generate a key pair. For instructions on how to create an API proxy component, see [Develop an API Proxy: Step 1](../../../create-api-proxy/ingress-apis/rest-apis.md).
+2. In the **Proxy Listing** pane, click on the API proxy for which you want to generate a key pair. For instructions on how to create an API proxy component, see [Create a REST API Proxy from Scratch](../../../create-api-proxy/rest-apis/start-from-scratch.md).
 3. In the left navigation menu, click **Develop** and then click **Endpoints**.
 4. On the **Endpoints** page, click **Configure** corresponding to the endpoint.    
 5. If your backend does not use a CA-signed certificate and you have not already added the backend certificate, click **Upload Endpoint Certificate** and add the backend certificate.
@@ -76,7 +76,7 @@ Now you can associate the certificate with the API and deploy the API.
 Here, you can use your own public certificate and private certificate as client certificates.
 
 1. Sign in to the [API Platform Console](https://console.bijira.dev/).
-2. In the **Proxy Listing** pane, click on the API proxy for which you want to generate a key pair. For instructions on how to create an API proxy component, see [Develop an API Proxy: Step 1](../../../create-api-proxy/ingress-apis/rest-apis.md).
+2. In the **Proxy Listing** pane, click on the API proxy for which you want to generate a key pair. For instructions on how to create an API proxy component, see [Create a REST API Proxy from Scratch](../../../create-api-proxy/rest-apis/start-from-scratch.md).
 3. In the left navigation menu, click **Develop** and then click **Endpoints**.
 4. On the **Endpoints** page, click **Configure** corresponding to the endpoint.  
 5. If your backend does not use a CA-signed certificate and you have not already added the backend certificate, click **Upload Endpoint Certificate** and add the backend certificate.

@@ -1,5 +1,5 @@
 ---
-title: "API Proxy"
+title: "Quick Start Guide"
 description: "Expose a service as an API proxy with WSO2 API Platform and publish it to the Developer Portal for application developers to consume."
 ---
 

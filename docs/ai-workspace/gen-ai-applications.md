@@ -113,4 +113,3 @@ See Insights for more on the analytics experience.
 
 - [App LLM Proxies](./app-llm-proxies/overview.md) - Create application-specific endpoints and controls
 - Insights - Analyze usage by application
-- [Invoke via SDKs](./invoke-via-sdk.md) - Use mapped keys when calling providers and proxies

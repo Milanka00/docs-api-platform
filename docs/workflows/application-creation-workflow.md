@@ -1,3 +1,0 @@
----
-title: "Application Creation Workflow"
----

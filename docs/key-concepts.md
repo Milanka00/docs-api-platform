@@ -51,4 +51,4 @@ The **data plane** is where deployed API proxies run, based on the configuration
 
 ![API Platform high-level architecture with control plane, cloud data plane, and private data plane](/img/cloud/concepts/high-level-view.png)
 
-To run gateways on your own infrastructure, see [Self-Hosted Gateway](./hybrid-gateways/api-gateway/architecture.md).
+To run gateways on your own infrastructure, see [Self-Hosted Gateway](./hybrid-gateways/api-gateway/getting-started.md).
