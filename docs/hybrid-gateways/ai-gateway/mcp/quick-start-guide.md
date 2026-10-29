@@ -120,6 +120,6 @@ Add that URL to your MCP client and connect. The Everything MCP Server exposes s
 
 ## Next steps
 
-- [Apply Policies to an MCP Proxy](../../../ai-workspace/mcp-proxies/overview.md): secure the Proxy you just deployed with authentication, authorization, and access-control policies
+- [Apply Policies to an MCP Proxy](../../../ai-workspace/mcp-proxies/apply-policies.md): secure the Proxy you just deployed with authentication, authorization, and access-control policies
 - [MCP Authentication](./policies/mcp-authentication.md): protect MCP traffic against unauthenticated callers
 - [MCP Proxies Overview](../../../ai-workspace/mcp-proxies/overview.md): what else a Proxy offers
