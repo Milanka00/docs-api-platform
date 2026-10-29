@@ -370,8 +370,8 @@ If something doesn't work as expected, check here before anything else:
 
 - [Manage an LLM provider](./llm-providers/manage-provider.md): configure connection, access control, security, rate limiting, and guardrails for the provider you just created
 - [Create an App LLM Proxy](./app-llm-proxies/overview.md): give one application its own endpoint, key, and policies on top of a shared provider
-- [Configure an App LLM Proxy](./app-llm-proxies/overview.md): add an application-specific endpoint on top of a provider, with its own guardrails and access rules
-- [Manage an App LLM Proxy](./app-llm-proxies/overview.md): configure provider settings, resources, security, and guardrails for an existing proxy
+- [Configure an App LLM Proxy](./app-llm-proxies/configure-proxy.md): add an application-specific endpoint on top of a provider, with its own guardrails and access rules
+- [Manage an App LLM Proxy](./app-llm-proxies/manage-proxy.md): configure provider settings, resources, security, and guardrails for an existing proxy
 - Add a guardrail: apply content safety, personally identifiable information (PII) masking, or prompt checks, then send a request that trips one
 - [Apply MCP policies](./mcp-proxies/apply-policies.md): add authentication, authorization, and access control to the MCP proxy you just created
 - Limit cost and volume: cap spend and requests per key
@@ -415,5 +415,5 @@ For detailed instructions, see [Configure and Consume an LLM Provider](./llm-pro
 You can optionally create an LLM proxy if a specific Gen AI application or agent needs its own guardrails, authentication, exposed resources, routing, or other app-specific controls on top of providers.
 :::
 
-- [Configure App LLM Proxy](./app-llm-proxies/overview.md) — Create a specialized endpoint only when you need app-specific or agent-specific controls on top of a provider
-- [Manage your App LLM Proxy](./app-llm-proxies/overview.md) — Configure provider settings, resources, security, and guardrails
+- [Configure App LLM Proxy](./app-llm-proxies/configure-proxy.md) — Create a specialized endpoint only when you need app-specific or agent-specific controls on top of a provider
+- [Manage your App LLM Proxy](./app-llm-proxies/manage-proxy.md) — Configure provider settings, resources, security, and guardrails

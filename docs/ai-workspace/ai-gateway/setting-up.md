@@ -1,262 +1,142 @@
 ---
 title: "AI Gateways"
-description: "Register an AI Gateway in AI Workspace, connect the runtime with a registration token, and manage existing gateways."
+description: "Use a managed AI gateway or a self-hosted AI Gateway 1.2.0 runtime with AI Workspace, and edit or delete existing gateways."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-AI Gateways are the runtime components that process and route requests between your applications and LLM providers. You can create and manage AI gateways directly within the AI Workspace to deploy your LLM providers and proxies.
+An AI gateway is the runtime that receives AI traffic, applies the policies you configure, and routes requests to LLM providers and other backends. AI Workspace is the control plane. From this console you can use a **managed gateway** or a **self-hosted gateway**.
 
-## Prerequisites
+## Managed and self-hosted gateways
 
-- Access to API Platform Console with **Admin** role
+**Managed gateways** run in the WSO2 cloud data plane. WSO2 provisions and operates them. The **development** environment includes a managed AI gateway by default. You can deploy to that gateway, and you can add more managed gateways in the same environment.
 
----
+You can also create another environment. Each new environment comes with its own default managed AI gateway, and you can add more gateways to it.
 
-## View AI Gateways
+**Self-hosted gateways** run on your own infrastructure. Use [AI Gateway 1.2.0](https://wso2.com/api-platform/docs/ai-gateway/next/quick-start-guide/), then connect that runtime to AI Workspace so you can govern it from this console.
 
-1. Navigate to **AI Gateways** in the left navigation menu.
+### Create an environment
 
-The AI Gateways page displays a list of all configured gateways with the following details:
+1. Sign in to AI Workspace and open your organization.
+2. In the left navigation menu, click **Environments**.
+3. Click **Create**.
+4. Enter a **Name**. Use lowercase letters, numbers, and hyphens. The name cannot be changed later.
+5. Select **Critical environment** when the environment is for production-grade deployments. Critical environments require greater care.
+6. Click **Create**.
+
+Setting up the environment can take a few minutes. When it is ready, it has its own default managed AI gateway. Open **AI Gateways** to use that gateway or to add more.
+
+{/* Screenshot: Environments list with Create. File: static/img/cloud/ai-workspace/ai-gateway/environments.png */}
+
+## View AI gateways
+
+1. Sign in to AI Workspace and open your organization.
+2. In the left navigation menu, click **AI Gateways**.
+
+The **Gateways** page lists the gateways in the organization. Use **Search Gateways...** to filter the list.
 
 | Column | Description |
-|--------|-------------|
-| **Name** | The gateway name |
-| **Description** | A brief description of the gateway |
-| **Status** | Current status (Active or Not Active) |
-| **Last Updated** | Timestamp of the most recent change |
-| **Actions** | Edit and delete options |
+|---|---|
+| **Name** | The gateway name. The gateway marked **Default** is the default gateway for its environment. |
+| **Description** | A short description. The gateway provided with an environment is described as a managed AI gateway. |
+| **Type** | The gateway type, such as **AI Gateway**. |
+| **Status** | The current status, such as **Active**. |
+| **Environment** | The environment the gateway belongs to, such as **development**. |
+| **Actions** | Edit, configure, and delete the gateway. |
 
----
+{/* Screenshot: AI Gateways list with the default managed gateway. File: static/img/cloud/ai-workspace/ai-gateway/list.png */}
 
-## Add a New AI Gateway
+## Create a managed gateway
 
-1. Navigate to **AI Gateways** in the left navigation menu.
+1. Sign in to AI Workspace and open your organization.
+2. In the left navigation menu, click **AI Gateways**.
+3. Click **Add Gateway**.
 
-2. Click **+ Add AI Gateway**.
+   When the organization has no gateways, the page displays **No available gateways** and **Add Gateway**.
 
-   3. Fill in the gateway details:
+4. Provide the following details:
 
-       1. **Name*** (Required): Enter a unique name for the gateway (e.g., `production-gateway`, `dev-gateway`).
+   | Field | Description |
+   |---|---|
+   | **Name** | Required. The gateway handle is derived from this name and cannot be changed later. As you type, the form shows the handle. |
+   | **Description** | Optional. |
+   | **Environment** | Required. The environment that will run this gateway. |
+   | **Default gateway for this environment** | The first AI gateway in an environment is the default, and this switch stays on. When the environment already has an AI gateway, turn the switch on to make this gateway the default. |
 
-       2. **Description** (Optional): Add a brief description to identify the gateway's purpose.
+5. Click **Add Gateway**.
 
-       3. **URL*** (Required): Enter the gateway URL (e.g., `https://localhost:8443`). This is the endpoint where the gateway runtime is accessible.
+{/* Screenshot: Add Gateway form with name, environment, and the default switch. File: static/img/cloud/ai-workspace/ai-gateway/add-gateway.png */}
 
-       4. **Associated Environment*** (Required): Select the environment from the dropdown (e.g., `Development`, `Production`).
+## Create a self-hosted gateway
 
-    ![Add AI Gateway form showing Name, Description, URL pre-filled with localhost:8443, and Associated Environment dropdown set to Development](/img/cloud/ai-gateway/ai-workspace/ai-gateway/ai-gateway-form.png)
+Install and start **AI Gateway 1.2.0** on your own infrastructure, then connect it to AI Workspace. The [AI Gateway Quick Start Guide](https://wso2.com/api-platform/docs/ai-gateway/next/quick-start-guide/) uses version `1.2.0` and walks through a first LLM request. This section covers starting that runtime.
 
-4. Click **Add Gateway** to create the gateway.
+Use a Docker-compatible container runtime:
 
-5. After creation, the gateway detail page opens showing the gateway name, status (**Inactive** initially), vhost, and creation timestamp.
+- Docker Desktop (Windows / macOS)
+- Podman Desktop or Podman (Windows / macOS / Linux)
+- Rancher Desktop (Windows / macOS)
+- Colima (macOS)
+- Docker Engine and the Compose plugin (Linux)
 
----
-
-## Set Up the Gateway
-
-After creating an AI gateway, you need to set up the gateway runtime. The detail page provides a **Get Started** section with setup instructions.
-
-### Gateway Registration Token
-
-A **Gateway Registration Token** is displayed at the top of the Get Started section. This token is required to connect your gateway runtime to the control plane.
-
-:::danger[Important]
-This token is shown only once. Ensure it is securely saved before leaving this page.
-:::
-
-:::tip[Lost your token?]
-The registration token is single-use. If you need to reconfigure the gateway, click the **Reconfigure** button to generate a new token. This will revoke the old token and disconnect the gateway from the control plane.
-:::
-
-### Installation Methods
-
-The Get Started section provides setup instructions for multiple deployment options:
+The commands below use `docker compose`. If you use another Compose-compatible runtime, use the equivalent commands. On Windows, the PowerShell examples require PowerShell 7.3 or later.
 
 <Tabs>
-<TabItem value="quick-start" label="Quick Start">
-
-**Prerequisites:**
-
-- cURL installed
-- unzip installed
-- Docker installed and running
-
-**Step 1: Download the Gateway**
-
-Run this command in your terminal to download the gateway:
+<TabItem value="linux-macos" label="Linux / macOS">
 
 ```bash
-curl -sLO https://github.com/wso2/api-platform/releases/download/ai-gateway/v1.0.0/wso2apip-ai-gateway-1.0.0.zip && \
-unzip wso2apip-ai-gateway-1.0.0.zip
+curl -fL -o wso2apip-ai-gateway-1.2.0.zip https://github.com/wso2/api-platform/releases/download/ai-gateway/v1.2.0/wso2apip-ai-gateway-1.2.0.zip
+unzip wso2apip-ai-gateway-1.2.0.zip
+cd wso2apip-ai-gateway-1.2.0/
+./scripts/setup.sh
+docker compose up
 ```
 
-**Step 2: Configure the Gateway**
-
-Run this command to create the environment configuration file with the required environment variables:
-
-```bash
-cat > wso2apip-ai-gateway-1.0.0/configs/keys.env << 'ENVFILE'
-MOESIF_KEY=<your-moesif-key>
-GATEWAY_CONTROLPLANE_HOST=connect.bijira.dev
-GATEWAY_REGISTRATION_TOKEN=<your-gateway-token>
-ENVFILE
-```
-
-Replace `<your-gateway-token>` with the token from the Get Started section.
-
-**Step 3: Start the Gateway**
-
-1. Navigate to the gateway folder:
-
-    ```bash
-    cd wso2apip-ai-gateway-1.0.0
-    ```
-
-2. Run this command to start the gateway using the environment file created in Step 2:
-
-    ```bash
-    docker compose --env-file configs/keys.env up
-    ```
+`setup.sh` creates the AES-256 at-rest encryption key, the router HTTPS listener certificate, `api-platform.env`, and the gateway-controller admin credentials. It prints the admin password once. Copy that password.
 
 </TabItem>
-<TabItem value="virtual-machine" label="Virtual Machine">
+<TabItem value="windows" label="Windows (PowerShell)">
 
-**Prerequisites:**
-
-- cURL installed
-- unzip installed
-- A Docker-compatible container runtime such as:
-    - Docker Desktop (Windows / macOS)
-    - Rancher Desktop (Windows / macOS)
-    - Colima (macOS)
-    - Docker Engine + Compose plugin (Linux)
-
-Ensure docker and docker compose commands are available:
-
-```bash
-docker --version
-docker compose version
+```powershell
+Invoke-WebRequest -Uri https://github.com/wso2/api-platform/releases/download/ai-gateway/v1.2.0/wso2apip-ai-gateway-1.2.0.zip -OutFile wso2apip-ai-gateway-1.2.0.zip
+Expand-Archive -Path wso2apip-ai-gateway-1.2.0.zip -DestinationPath .
+Set-Location wso2apip-ai-gateway-1.2.0
+pwsh -ExecutionPolicy Bypass -File .\scripts\setup.ps1
+docker compose up
 ```
 
-**Step 1: Download the Gateway**
-
-Run this command in your terminal to download the gateway:
-
-```bash
-curl -sLO https://github.com/wso2/api-platform/releases/download/ai-gateway/v1.1.0/wso2apip-ai-gateway-1.1.0.zip && \
-unzip wso2apip-ai-gateway-1.1.0.zip
-```
-
-**Step 2: Configure the Gateway**
-
-The registration token is single-use. If you need to reconfigure the gateway, click **Reconfigure** to generate a new token — this will revoke the old token and disconnect the gateway from the control plane.
-
-**Step 3: Start the Gateway**
-
-1. Navigate to the gateway folder:
-
-    ```bash
-    cd wso2apip-ai-gateway-1.1.0
-    ```
-
-2. Run this command to start the gateway using the environment file created in Step 2:
-
-    ```bash
-    docker compose --env-file configs/keys.env up
-    ```
-
-</TabItem>
-<TabItem value="docker" label="Docker">
-
-**Prerequisites:**
-
-- cURL installed
-- unzip installed
-
-**Step 1: Download the Gateway**
-
-Run this command in your terminal to download the gateway:
-
-```bash
-curl -sLO https://github.com/wso2/api-platform/releases/download/ai-gateway/v1.1.0/wso2apip-ai-gateway-1.1.0.zip && \
-unzip wso2apip-ai-gateway-1.1.0.zip
-```
-
-**Step 2: Configure the Gateway**
-
-The registration token is single-use. If you need to reconfigure the gateway, click **Reconfigure** to generate a new token — this will revoke the old token and disconnect the gateway from the control plane.
-
-**Step 3: Start the Gateway**
-
-1. Navigate to the gateway folder:
-
-    ```bash
-    cd wso2apip-ai-gateway-1.1.0
-    ```
-
-2. Run this command to start the gateway using the environment file created in Step 2:
-
-    ```bash
-    docker compose --env-file configs/keys.env up
-    ```
-
-</TabItem>
-<TabItem value="kubernetes" label="Kubernetes">
-
-**Prerequisites:**
-
-- cURL installed
-- unzip installed
-- Kubernetes 1.32+
-- Helm 3.18+
-
-The registration token is a one-time generated token for this gateway. If you need to install or update the gateway chart again, first reconfigure this gateway to generate a new registration token. Reconfiguring will revoke the previous token.
-
-**Installing the Chart**
-
-Run this command to install the gateway chart with control plane configurations:
-
-```bash
-helm install gateway oci://ghcr.io/wso2/api-platform/helm-charts/gateway --version 1.0.0 \
---set gateway.controller.controlPlane.host="host.docker.internal" \
---set gateway.controller.controlPlane.port=8443 \
---set gateway.controller.controlPlane.token.value="your-gateway-token"
-```
-
-Replace `your-gateway-token` with the token from the Get Started section.
+`setup.ps1` creates the same local configuration as `setup.sh`, including `api-platform.env`, and prints the admin password once. Copy that password.
 
 </TabItem>
 </Tabs>
 
-Once the gateway runtime is running and connected, the gateway status will change from **Inactive** to **Active**.
+If `docker compose up` fails because port `8080`, `8443`, `9090`, or `9094` is already in use, follow the port guidance in the [quick start guide](https://wso2.com/api-platform/docs/ai-gateway/next/quick-start-guide/).
 
----
+To govern this runtime from AI Workspace, connect it to the control plane. [Connect the gateway to AI Workspace](https://wso2.com/api-platform/docs/ai-gateway/next/ai-workspace/connect-the-gateway/) covers the registration token and how to give that token and the AI Workspace address to the runtime.
 
-## Manage AI Gateways
+## Edit a gateway
 
-### Edit a Gateway
+1. On the **Gateways** page, click the edit icon for the gateway.
+2. Update the **Name** or **Description**. The **Environment** cannot be changed.
+3. **Default gateway for this environment** stays on when this gateway is already the default.
+4. Click **Save Changes**.
 
-1. In the AI Gateways list, click the **edit** icon next to the gateway you want to modify.
+{/* Screenshot: Edit Gateway with the environment field disabled. File: static/img/cloud/ai-workspace/ai-gateway/edit-gateway.png */}
 
-2. Update the gateway details as needed.
+**Configure** opens **Gateway Configuration** for that gateway. You can change runtime settings such as log levels, rate limits, and replicas, then click **Save**.
 
-3. Click **Save** to apply the changes.
+## Delete a gateway
 
-### Delete a Gateway
+1. On the **Gateways** page, click the delete icon for the gateway.
+2. In **Delete Gateway**, confirm that you want to delete the named gateway.
+3. Click **Delete**. Click **Cancel** to keep the gateway.
 
-1. In the AI Gateways list, click the **delete** icon (trash icon) next to the gateway you want to remove.
-
-2. Confirm the deletion when prompted.
-
-:::danger[Irreversible Action]
-Deleting a gateway is permanent. All providers and proxies deployed to this gateway will be undeployed immediately.
+:::warning
+Deleting a gateway is permanent.
 :::
 
----
+## Next steps
 
-## Next Steps
-
-- [Configure and Consume an LLM Provider](../llm-providers/configure-and-consume-provider.md) - Set up an LLM provider and deploy it to your gateway
-- [Configure App LLM Proxy](../app-llm-proxies/overview.md) - Create a specialized LLM proxy for a Gen AI application or agent and deploy it to your gateway
+- [Configure and consume an LLM provider](../llm-providers/configure-and-consume-provider.md)
+- [Configure an App LLM proxy](../app-llm-proxies/configure-proxy.md)

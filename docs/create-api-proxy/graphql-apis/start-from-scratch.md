@@ -1,54 +1,68 @@
 ---
-title: "Create a GraphQL API Proxy from Scratch"
+title: "Start from scratch"
+description: "Create a GraphQL API in API Platform Cloud from a backend endpoint, then deploy and test it."
 ---
 
 A GraphQL API proxy operates based on the GraphQL query language specification. GraphQL provides a flexible and efficient approach to API development by allowing clients to request exactly the data they need, nothing more and nothing less.
 
-Unlike traditional REST APIs that require multiple endpoints for different resources, GraphQL uses a single endpoint and a type system to define the API's capabilities. This enables clients to compose complex queries that fetch related data in a single request, reducing over-fetching and under-fetching of data. GraphQL is ideal for applications that need flexible data fetching, real-time subscriptions, and efficient data aggregation.
+Unlike traditional REST APIs that require multiple endpoints for different resources, GraphQL uses a single endpoint and a type system to define the API's capabilities. This enables clients to compose complex queries that fetch related data in a single request, reducing over-fetching and under-fetching of data. GraphQL is ideal for applications that need flexible data fetching and efficient data aggregation.
+
+This walks you through creating a GraphQL API using a sample backend, deploying it to a gateway, testing it, and publishing it to a developer portal.
 
 ## Prerequisites
 
-- If you're signing in to the API Platform Console for the first time, create an organization:
-    1. Go to [API Platform Console](https://console.bijira.dev/) and sign in using your preferred method.
-    2. Enter a unique organization name. For example, `Stark Industries`.
-    3. Read and accept the privacy policy and terms of use.
-    4. Click **Create**.
+1. Go to API Platform Cloud Console and sign in with Google or GitHub.
+2. Open your organization, then select the **Default project** or create a new project.
 
-  This creates the organization and opens the **Project Home** page of the default project created for you.
+## Create the API
 
-## Create an API Proxy
+1. On the project home page, click **Create API**.
+2. Select **GraphQL API**, then choose **Start from scratch**.
+3. Under **Backend endpoint**, enter your backend URL in the **Endpoint URL** field, or click **Try with Sample URL** to use the Countries sample service.
 
-In this guide, you will create a GraphQL API proxy using an endpoint.
+   The sample URL is:
 
-1. Go to [API Platform Console](https://console.bijira.dev/) and sign in. This opens the project home page.
-2. If you already have one or more components in your project, click + Create. Otherwise, proceed to the next step.
-3. Select **Start with Endpoint**.
-4. Select the API Type as **GraphQL**.
-5. Click **Try with Sample URL** to use the sample GraphQL endpoint URL.
+   ```text
+   https://countries.trevorblades.com/graphql
+   ```
 
-6. Click outside the input field or press Tab to validate the endpoint. API Platform will automatically validate the endpoint and fetch the GraphQL schema through introspection. Wait for the validation to complete.
+   When introspection succeeds, the page displays **Introspection enabled · SDL fetched**, indicating that the console has retrieved the GraphQL schema.
 
-7. Click **Next**.
-8. Edit the pre-defined values as needed. You can keep the default values for this sample.
+4. Click **Continue**.
+5. On the **Configure and create** page, review the generated values. The sample endpoint populates the fields as follows:
 
-9. Click **Create** to create the API Proxy. Wait for the setup to complete.
+   | Field | Example value |
+   | --- | --- |
+   | **Name** | `Countries` |
+   | **Identifier** | `countries` |
+   | **Version** | `1.0` |
+   | **Context** | `/countries/v1.0/graphql` |
+   | **Description** | Empty |
+   | **Query and Mutation URL** | `https://countries.trevorblades.com/graphql` |
 
-## Configure and Deploy the API Proxy
+   Ensure that the **Identifier** is unique across your organization. Update the generated values if needed.
 
-1. Navigate to the **Deploy** page of the API Proxy.
-2. Select **Configure and Deploy** option from the **Deploy** dropdown and click it.
-3. Select **External** as API Access Mode.
-4. Click **Deploy**.
+6. Click **Create**.
 
-## Test the API Proxy
+## Deploy the API
 
-1. Navigate to the **Test --> Console** page of the API Proxy.
-2. Use the GraphQL Console to test the API Proxy.
+A newly created GraphQL API does not have a build yet. Deploying the API prepares a build and deploys it to the selected gateway.
 
-## Promote the API Proxy to Production and Publish the API Proxy
+1. Open the API.
+2. In the left navigation menu, click **Deploy**. Alternatively, click **Deploy to Gateway** on the API overview page.
+3. In the **Deploy to development** dialog, select the gateway. **Default** is selected by default. Click **Deploy**.
 
-1. Navigate to the **Deploy** page of the API Proxy.
-2. Click **Promote**. This promotes the API proxy from the Development environment to the Production environment.
-3. In the left navigation menu, click **Lifecycle** under **Develop**. This takes you to the **Lifecycle** page.
-4. Click **Publish**.
-5. In the **Publish API** dialog, click **Confirm** to proceed with publishing the API. If you want to change the display name, make the necessary changes and then click **Confirm**. This sets the API lifecycle state to **Published**.
+   Check the gateway's deployment status to confirm that the deployment succeeds before proceeding.
+
+## Test the API
+
+1. In the left navigation menu, click **Test**.
+2. Use the GraphQL Console to execute queries against the deployed API and inspect the responses.
+
+For more information, see the [GraphQL Console](../../test-api-proxy/graphql-console.md) guide.
+
+## Publish the API
+
+Publishing makes the API available to developers through a developer portal, where they can discover the API and access its documentation.
+
+See the [API publishing guide] for instructions on configuring a portal and publishing the API.
