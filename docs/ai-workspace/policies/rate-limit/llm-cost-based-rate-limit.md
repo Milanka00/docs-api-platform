@@ -17,7 +17,7 @@ The **LLM Cost** policy must be added to the same provider or proxy **after** th
 | **Budget Limits[].amount** | Yes | Maximum spend in USD within the time window (e.g., `10` for $10.00). Minimum: `0.000001`. |
 | **Budget Limits[].duration** | Yes | Time window as a Go duration string (e.g., `"1h"`, `"24h"`, `"168h"` for one week). |
 
-When multiple budget limits are configured, all of them are enforced — the most restrictive active limit applies.
+When multiple budget limits are configured, all of them are enforced. The most restrictive active limit applies.
 
 ## Add This Policy
 
@@ -25,7 +25,7 @@ When multiple budget limits are configured, all of them are enforced — the mos
 The **LLM Cost** policy must run after this policy. In the **Guardrails & Policies** tab, drag **LLM Cost** so that it appears after **LLM Cost-Based Rate Limit**.
 :::
 
-1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/). To add the policy to an App LLM Proxy, also select the project from the top navigation.
+1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/).
 2. In the left navigation menu, under **LLM**, click **LLM Providers** or **App LLM Proxies**, and then click the provider or proxy.
 3. Click the **Guardrails & Policies** tab.
 4. To apply the policy to all resources, click **Add** in the **Global Guardrails & Policies** section. To apply it to a specific resource, expand the resource in the resource-wise section and add the policy there.
@@ -60,6 +60,6 @@ The following configuration enforces two simultaneous spending limits. Both must
 
 ## Related
 
-- [LLM Cost](llm-cost.md) — Required: calculates the cost stored in metadata
-- [Token-Based Rate Limit](token-based-rate-limit.md) — Enforce token consumption limits instead of monetary budgets
-- [Policy Hub](https://wso2.com/api-platform/policy-hub/) — Full policy specification and latest version
+- [LLM Cost](llm-cost.md) - Required: calculates the cost stored in metadata
+- [Token-Based Rate Limit](token-based-rate-limit.md) - Enforce token consumption limits instead of monetary budgets
+- [Policy Hub](https://wso2.com/api-platform/policy-hub/) - Full policy specification and latest version

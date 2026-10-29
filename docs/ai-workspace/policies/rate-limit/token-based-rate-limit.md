@@ -3,7 +3,7 @@ title: "Token-Based Rate Limit"
 description: "Limit LLM traffic by prompt, completion, or total token consumption within a configurable time window."
 ---
 
-The Token-Based Rate Limit policy enforces rate limits based on token consumption rather than request count. Limits can be applied to prompt (input) tokens, completion (output) tokens, or total tokens — independently or in combination.
+The Token-Based Rate Limit policy enforces rate limits based on token consumption rather than request count. Limits can be applied to prompt (input) tokens, completion (output) tokens, or total tokens independently or in combination.
 
 ## Configuration Parameters
 
@@ -26,7 +26,7 @@ When multiple limits are configured within a category, the most restrictive limi
 
 ## Add This Policy
 
-1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/). To add the policy to an App LLM Proxy, also select the project from the top navigation.
+1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/).
 2. In the left navigation menu, under **LLM**, click **LLM Providers** or **App LLM Proxies**, and then click the provider or proxy.
 3. Click the **Guardrails & Policies** tab.
 4. To apply the policy to all resources, click **Add** in the **Global Guardrails & Policies** section. To apply it to a specific resource, expand the resource in the resource-wise section and add the policy there.
@@ -55,8 +55,8 @@ Block requests once 100,000 total tokens have been consumed in a 1-minute window
 
 | Parameter | Value |
 |-----------|-------|
-| Total Token Limits — count | `100000` |
-| Total Token Limits — duration | `1m` |
+| Total Token Limits - count | `100000` |
+| Total Token Limits - duration | `1m` |
 
 ## Example: Separate Prompt and Completion Limits
 
@@ -69,5 +69,5 @@ Limit prompt tokens to 50,000 per hour and completion tokens to 20,000 per hour 
 
 ## Related
 
-- [LLM Cost-Based Rate Limit](llm-cost-based-rate-limit.md) — Enforce monetary spending budgets instead of token counts
-- [Policy Hub](https://wso2.com/api-platform/policy-hub/) — Full policy specification and latest version
+- [LLM Cost-Based Rate Limit](llm-cost-based-rate-limit.md) - Enforce monetary spending budgets instead of token counts
+- [Policy Hub](https://wso2.com/api-platform/policy-hub/) - Full policy specification and latest version

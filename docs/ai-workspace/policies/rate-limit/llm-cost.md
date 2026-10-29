@@ -3,7 +3,7 @@ title: "LLM Cost"
 description: "Calculate the USD cost of each LLM call from token usage and pricing tier, for use with LLM cost-based rate limiting."
 ---
 
-The LLM Cost policy calculates the monetary cost of each LLM API call and makes the result available to other policies — primarily [LLM Cost-Based Rate Limit](llm-cost-based-rate-limit.md). It runs in the response phase, requires no user configuration, and never exposes the cost to the caller.
+The LLM Cost policy calculates the monetary cost of each LLM API call and makes the result available to other policies, primarily [LLM Cost-Based Rate Limit](llm-cost-based-rate-limit.md). It runs in the response phase, requires no user configuration, and never exposes the cost to the caller.
 
 :::info[Required for cost-based rate limiting]
 Add this policy to the same provider or proxy as **LLM Cost-Based Rate Limit**, and place it **after** it in the policy list. The gateway evaluates response-phase policies in reverse order, so the cost is calculated before the budget is checked.
@@ -16,7 +16,7 @@ Add this policy to the same provider or proxy as **LLM Cost-Based Rate Limit**, 
 3. It calculates the cost in USD based on token usage, context window tier, and service tier.
 4. The result is stored in `SharedContext.Metadata["x-llm-cost"]` as a 10-decimal USD string (e.g., `"0.0000423100"`).
 
-The cost is internal — it is never forwarded to the caller.
+The cost is internal. It is never forwarded to the caller.
 
 ## Supported Providers
 
@@ -33,11 +33,7 @@ This policy has no user-configurable parameters. The pricing database path is a 
 
 ## Add This Policy
 
-:::note
-Every LLM provider has the **LLM Cost** policy by default, and you can't remove it. Add it only where it isn't already applied.
-:::
-
-1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/). To add the policy to an App LLM Proxy, also select the project from the top navigation.
+1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/).
 2. In the left navigation menu, under **LLM**, click **LLM Providers** or **App LLM Proxies**, and then click the provider or proxy.
 3. Click the **Guardrails & Policies** tab.
 4. To apply the policy to all resources, click **Add** in the **Global Guardrails & Policies** section. To apply it to a specific resource, expand the resource in the resource-wise section and add the policy there.
@@ -62,5 +58,5 @@ Every LLM provider has the **LLM Cost** policy by default, and you can't remove 
 
 ## Related
 
-- [LLM Cost-Based Rate Limit](llm-cost-based-rate-limit.md) — Enforce spending budgets using the calculated cost
-- [Policy Hub](https://wso2.com/api-platform/policy-hub/) — Full policy specification and latest version
+- [LLM Cost-Based Rate Limit](llm-cost-based-rate-limit.md) - Enforce spending budgets using the calculated cost
+- [Policy Hub](https://wso2.com/api-platform/policy-hub/) - Full policy specification and latest version
