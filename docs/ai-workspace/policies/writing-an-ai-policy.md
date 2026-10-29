@@ -7,14 +7,14 @@ AI policies allow you to inspect, control, and modify traffic going to and from 
 
 AI policies use the same `Policy` interface as standard gateway policies. For full API details, see the [SDK Documentation](https://pkg.go.dev/github.com/wso2/api-platform/sdk/core/policy/v1alpha2).
 
-The key difference is how you handle LLM request and response bodies, especially:
+The key difference is how you handle LLM request and response bodies, especially
 
 - JSON responses
 - Streaming responses (SSE)
 
 ## Key Idea
 
-LLM responses come in two formats:
+LLM responses come in two formats.
 
 | Mode | Format |
 |------|--------|
@@ -25,7 +25,7 @@ Your policy must be implemented to handle **both formats**.
 
 ## Which Interfaces to Implement
 
-Choose based on what your policy needs to do:
+Choose based on what your policy needs to do.
 
 | Goal | Interface | Mode Setting |
 |------|-----------|-------------|
@@ -36,7 +36,7 @@ Choose based on what your policy needs to do:
 
 ## Recommended Pattern
 
-For most AI policies, implement both:
+For most AI policies, implement both.
 
 - **`ResponsePolicy`** - Handles buffered responses where the entire response is available at once. This could be a non-streaming JSON response or concatenated SSE events.
 - **`StreamingResponsePolicy`** - Handles streaming responses, which could be JSON or SSE events.
