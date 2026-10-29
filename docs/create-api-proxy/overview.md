@@ -1,27 +1,17 @@
 ---
 title: "Overview"
-description: "Learn the ways to create an API proxy in WSO2 API Platform: front your own APIs (ingress) or third-party APIs (egress) using several methods."
+description: "Create a REST or GraphQL API in API Platform Cloud from a backend or a contract."
 ---
 
-API Platform API Manager allows you to create API proxies that can be used to secure, protect, and manage access to your APIs. You can create an API proxy by defining a set of policies and behaviors that control how the API proxy interacts with the backend service.
+API Platform Cloud enables you to create API proxies that secure your APIs, enforce policies, and control access to backend services. An API proxy acts as an intermediary between clients and your backend, allowing you to manage how requests are handled before they reach your services.
 
-An API proxy can be used to expose an existing API which is hosted in same organization or a third party API.
+Choose an API type below to get started.
 
-Creating an **API proxy** for:
+- **REST APIs**
+  - [Start from scratch](./rest-apis/start-from-scratch.md) - Create an API by providing a backend URL.
+  - [Start with a contract](./rest-apis/start-with-a-contract.md) - Import an OpenAPI definition from a URL or file.
 
-- **My APIs (Ingress APIs)**
+- **GraphQL APIs**
+  - [Start from scratch](./graphql-apis/start-from-scratch.md) - Create an API by providing a backend endpoint.
+  - [Start with a schema](./graphql-apis/start-with-a-schema.md) - Import a GraphQL schema from a URL or file.
 
-    An API Proxy can be created to front an existing ingress API in the following scenarios:
-
-      - [Import API Contract](./rest-apis/start-with-a-contract.md)
-      - Start with Endpoint
-      - [Start from Scratch](./rest-apis/start-from-scratch.md)
-      - Create with GenAI
-
-- **Third Party APIs(Egress APIs)**
-
-    An API Proxy can be created to front an Endpoint or API which is managed by a third party in following scenarios:
-
-      - Get from Marketplace
-      - Import API Contract
-      - AI APIs

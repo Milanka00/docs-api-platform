@@ -3,6 +3,7 @@ title: "Audit Logs"
 description: "View organization-level audit logs and grant other members access to audit log data in API Platform."
 ---
 
+{/* Content need to be updated for API Platform cloud */}
 Audit logs, also called audit trails, enhance security, ensure compliance, provide operational insights, and help manage risks. 
 
 In API Platform, an audit log records organization-level user-specific operations performed via the API Platform Console. It also captures the timestamp and the outcome of the action. 

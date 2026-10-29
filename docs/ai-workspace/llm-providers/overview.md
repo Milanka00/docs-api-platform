@@ -208,7 +208,7 @@ The **Deployed Gateways** section lists all gateways this provider is deployed t
 
 ### Next Steps
 
-- [Configure App LLM Proxy](../app-llm-proxies/overview.md) - Configure and deploy a specialized proxy endpoint for a Gen AI application or agent using your provider
+- [Configure App LLM Proxy](../app-llm-proxies/configure-proxy.md) - Configure and deploy a specialized proxy endpoint for a Gen AI application or agent using your provider
 - Manage Provider - Configure access control, security, rate limiting, and more
 
 ## Manage LLM Provider
@@ -549,4 +549,4 @@ Deleting a provider will:
 
 ### Next Steps
 
-- [Configure App LLM Proxy](../app-llm-proxies/overview.md) - Configure and deploy specialized proxy endpoints for Gen AI applications or agents using your provider
+- [Configure App LLM Proxy](../app-llm-proxies/configure-proxy.md) - Configure and deploy specialized proxy endpoints for Gen AI applications or agents using your provider

@@ -68,8 +68,9 @@ const sidebars = {
       ]),
       group("Observability and Insights", [
         group("Logs", [
+          doc("observability-and-insights/overview", "Overview"),
           doc("observability-and-insights/runtime-logs", "Runtime Logs"),
-          doc("monitoring-and-analytics/audit-logs", "Audit Logs"),
+          doc("observability-and-insights/audit-logs", "Audit Logs"),
         ]),
         doc("observability-and-insights/insights", "Insights"),
       ]),
@@ -79,9 +80,18 @@ const sidebars = {
     group("AI Workspace", [
       doc("ai-workspace/getting-started", "Quick Start Guide"),
       doc("ai-workspace/llm-providers/overview", "LLM Providers"),
-      doc("ai-workspace/app-llm-proxies/overview", "App LLM Proxies"),
+      group("App LLM Proxies", [
+        doc("ai-workspace/app-llm-proxies/overview", "Overview"),
+        doc("ai-workspace/app-llm-proxies/configure-proxy", "Configure App LLM Proxy"),
+        doc("ai-workspace/app-llm-proxies/manage-proxy", "Manage App LLM Proxy"),
+        doc("ai-workspace/app-llm-proxies/multi-provider", "Route to several providers"),
+      ]),
       doc("ai-workspace/mcp-proxies/overview", "MCP Proxies"),
-      doc("ai-workspace/agent-proxies", "Agent Proxies"),
+      group("Agent Proxies", [
+        doc("ai-workspace/agent-proxies/overview", "Overview"),
+        doc("ai-workspace/agent-proxies/configure-proxy", "Configure Agent Proxy"),
+        doc("ai-workspace/agent-proxies/manage-proxy", "Manage Agent Proxy"),
+      ]),
       doc("ai-workspace/gen-ai-applications", "Gen AI Applications"),
       doc("ai-workspace/ai-gateway/setting-up", "AI Gateways"),
       doc("ai-workspace/monitoring-and-analytics", "Insights"),

@@ -1,67 +1,76 @@
 ---
-title: "Create a REST API Proxy from a Contract"
+title: "Start with a contract"
+description: "Create a REST API in API Platform Cloud by importing an OpenAPI contract, then deploy, test, and publish it."
 ---
 
-An API proxy acts as an intermediary between an existing API and API Platform, intercepting all requests made to the API.It also functions as a managed API, allowing you to apply essential API management features such as security policies and rate limiting.
+In API Platform Cloud, you can expose an existing HTTP backend through a gateway by creating a REST API proxy. When you start from scratch, you provide a backend URL, and the console generates the initial API details for you. You can then review the API definition, customize its operations, and deploy it to a gateway.
 
-In this guide, you will:
-
-- Create an API proxy.
-- Configure and Deploy the API proxy.
-- Test the API proxy to verify its functionality.
-
+This walks you through creating a REST API using a sample contract, deploying it to a gateway, testing it, and publishing it to a developer portal.
 ## Prerequisites
 
-- If you're signing in to the API Platform Console for the first time, create an organization:
-    1. Go to [API Platform Console](https://console.bijira.dev/) and sign in using your preferred method.
-    2. Enter a unique organization name. For example, `Stark Industries`.
-    3. Read and accept the privacy policy and terms of use.
-    4. Click **Create**.
+1. Open the API Platform Cloud Console and sign in using Google or GitHub.
+2. Open your organization, then select the **Default project** or create a new project.
 
-  This creates the organization and opens the **Project Home** page of the default project created for you.
+## Create the API
 
-## Create an API Proxy
+1. On the project home page, click **Create API**.
+2. Select **REST API**, then choose **Start with a contract**.
+3. Import the API contract using one of the following methods:
 
-In this guide, you will specify a URL to an OpenAPI definition of a sample API to create an API proxy.
+   - **URL:** Select URL and enter the contract URL in the **URL for API Contract** field. Alternatively, click **Try with Sample URL** to use the Petstore sample contract.
 
-1. Go to [API Platform Console](https://console.bijira.dev/) and sign in. This opens the project home page.
-2. If you already have one or more components in your project, click + Create. Otherwise, proceed to the next step.
-3. Select **Import API Contract**.
-4. Select **URL** option and provide the following URL to import the API contract from the GitHub repository:
+     ```text
+     https://petstore3.swagger.io/api/v3/openapi.json
+     ```
 
-   ```text
-   https://raw.githubusercontent.com/wso2/bijira-samples/refs/heads/main/reading-list-api/openapi.yaml   
-   ```
+     Wait for the contract to finish loading. The **API resources** list displays the imported operations. You can search by path or description and filter the results by HTTP method.
 
-5. Click **Next** and edit pre-defined values as needed. You can keep the default values for this sample.
-6. Click **Create** to create the API Proxy. Wait for the setup to complete.
 
-## Configure and Deploy the API Proxy
+   - **Upload:** Select Upload then drag and drop the contract file into the designated area or click to browse for a file. Supported file types are `.json`, `.yaml`, and `.yml`.
 
-1. Navigate to the **Deploy** page of the API Proxy.
-2. Select **Configure and Deploy** option from the **Deploy** dropdown and click it.
-3. Select **External** as API Access Mode.
-4. Click **Deploy**.
+4. Click **Continue**.
+5. On the **Configure and create** page, review the values populated from the imported contract. For the Petstore sample, the fields are populated as follows:
 
-## Test the API Proxy
+   | Field | Example value |
+   | --- | --- |
+   | **Name** | `Swagger Petstore - OpenAPI 3.0` |
+   | **Identifier** | `swagger-petstore-openapi-3-0` |
+   | **Version** | `1.0.28` |
+   | **Context** | `/sample-project/swagger-petstore-openapi-3-0/v1.0.28` |
+   | **Description** | Taken from the contract's `info.description` field |
+   | **Target URL** | `https://petstore3.swagger.io/api/v3` |
 
-1. Navigate to the **Test --> OpenAPI Console** page of the API Proxy.
-2. Use the OpenAPI Console to test the API Proxy.
+   Review the generated values and update them if needed. Make sure the **Target URL** points to the backend service that the gateway should call. For the Petstore sample, use `https://petstore3.swagger.io/api/v3`.
 
-## Promote the API Proxy to Production and Publish the API Proxy
+8. Click **Create**.
 
-1. Navigate to the **Deploy** page of the API Proxy.
-2. Click **Promote**. This promotes the API proxy from the Development environment to the Production environment.
-3. In the left navigation menu, click **Lifecycle** under **Develop**. This takes you to the **Lifecycle** page.
-4. Click **Publish**.
-5. In the **Publish API** dialog, click **Confirm** to proceed with publishing the API. If you want to change the display name, make the necessary changes and then click **Confirm**. This sets the API lifecycle state to **Published**.
+## Deploy the API to a gateway
 
-## API Proxy Behavior
+1. Open the API you created.
+2. In the left navigation menu, click **Deploy**. Alternatively, click **Deploy to Gateway** on the API overview page.
+3. In the **Build Area**, click **Deploy**. You can also select **Build and Deploy** if you need to build the API before deployment.
+4. In the **Deploy to development** dialog, configure the deployment:
 
-The Reading List API Proxy provides the following functionality:
+   1. **Select the gateway:** Choose the gateway to deploy the API to. **Default** represents your organization's default gateway.
+   2. **Confirm the Endpoint URL:** Verify that the backend URL is correct. For the Petstore sample, use `https://petstore3.swagger.io/api/v3`.
+   3. **Confirm the build:** Review the build details and click **Deploy**.
 
-- **GET /books**: Returns a list of pre-defined books with a warning that changes are not persisted.
-- **POST /books**: Adds a new book to the reading list (without including `id` in the request body). Returns the created book along with a warning that changes are not persisted.
-- **PUT /books/\{id\}**: Updates the status of an existing book. The request body only includes the `status` to update, and the `id` is passed in the URL. Returns the updated book with a warning.
-- **GET /books/\{id\}**: Retrieves a book by its `id`. If the `id` does not exist, a 404 error is returned.
-- **DELETE /books/\{id\}**: Deletes a book by its `id`.
+After the deployment succeeds, the gateway status changes to **Active**. The API overview page lists the gateway under **Deployed gateways** and displays its **Invoke URL**.
+
+**Note:** If the API is already deployed to a gateway, that gateway remains selected in the deployment configuration. Undeploy the API before clearing that gateway selection.
+
+## Test the API
+
+1. In the left navigation menu, click **Test**.
+2. Select the gateway where the API is deployed. The endpoint associated with the selected gateway appears next to the gateway selector.
+3. Choose one of the following testing options:
+
+   - **Console view:** Expand an operation from the imported contract. Choose **Through proxy** to send the request through the gateway, or **Direct** to send it directly to the backend. Click **Execute** to run the request. For more information, see [API Console](../../test-api-proxy/api-console.md).
+
+   - **cURL view:** Select the HTTP method and path, configure any required query parameters, headers, or request body, and copy the generated cURL command to run it from your terminal. For more information, see [cURL](../../test-api-proxy/curl.md).
+
+## Publish the API
+
+Publishing makes the API available to developers through a developer portal, where they can discover the API and access its documentation.
+
+See the [API publishing guide] for instructions on configuring a portal and publishing the API.
