@@ -92,7 +92,29 @@ const sidebars = {
       doc("ai-workspace/agent-proxies", "Agent Proxies"),
       doc("ai-workspace/gen-ai-applications", "Gen AI Applications"),
       doc("ai-workspace/ai-gateway/setting-up", "AI Gateways"),
-      doc("ai-workspace/monitoring-and-analytics", "Insights"),
+      group("Policies", [
+        doc("ai-workspace/policies/overview", "Overview"),
+        group("Guardrails", [
+          doc("ai-workspace/policies/guardrails/overview", "Overview"),
+          doc("ai-workspace/policies/guardrails/regex-pii-masking", "PII Masking Regex"),
+          doc("ai-workspace/policies/guardrails/azure-content-safety", "Azure Content Safety"),
+          doc("ai-workspace/policies/guardrails/word-count-guardrail", "Word Count"),
+          doc("ai-workspace/policies/guardrails/sentence-count-guardrail", "Sentence Count"),
+        ]),
+        group("Rate Limit", [
+          doc("ai-workspace/policies/rate-limit/llm-cost", "LLM Cost"),
+          doc("ai-workspace/policies/rate-limit/token-based-rate-limit", "Token-Based Rate Limit"),
+          doc("ai-workspace/policies/rate-limit/llm-cost-based-rate-limit", "LLM Cost-Based Rate Limit"),
+        ]),
+        group("Other Policies", [
+          doc("ai-workspace/policies/other-policies/model-round-robin", "Model Round Robin"),
+          doc("ai-workspace/policies/other-policies/prompt-decorator", "Prompt Decorator"),
+          doc("ai-workspace/policies/other-policies/prompt-template", "Prompt Template"),
+          doc("ai-workspace/policies/other-policies/semantic-cache", "Semantic Cache"),
+        ]),
+        doc("ai-workspace/policies/writing-an-ai-policy", "Writing an AI Policy"),
+      ]),
+      doc("ai-workspace/insights", "Insights"),
     ]),
     group("Developer Portal", [
       doc("developer-portal/getting-started", "Quick Start Guide"),

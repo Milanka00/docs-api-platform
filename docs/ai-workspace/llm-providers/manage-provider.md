@@ -99,7 +99,7 @@ The tab has two sections that you configure separately.
 To apply the changes to the gateways that the provider is deployed to, [redeploy the provider](#redeploy-provider).
 
 :::tip
-Start with conservative **Backend** limits to protect your provider credentials. Monitor the actual usage in [Insights](../monitoring-and-analytics.md) before you increase the limits. Use **Per Resource** only when resources have very different usage patterns.
+Start with conservative **Backend** limits to protect your provider credentials. Monitor the actual usage in [Insights](../insights.md) before you increase the limits. Use **Per Resource** only when resources have very different usage patterns.
 :::
 
 ## Guardrails & Policies

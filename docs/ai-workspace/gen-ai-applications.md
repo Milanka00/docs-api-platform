@@ -102,7 +102,7 @@ This lets you analyze usage by application, including
 
 This is especially useful for teams that need to understand which GenAI applications are driving traffic and spend.
 
-See [Insights](./monitoring-and-analytics.md) for more on the analytics experience.
+See [Insights](./insights.md) for more on the analytics experience.
 
 ## Best Practices
 
@@ -115,4 +115,4 @@ See [Insights](./monitoring-and-analytics.md) for more on the analytics experien
 ## Related
 
 - [App LLM Proxies](./app-llm-proxies/overview.md) - Create application-specific endpoints and controls
-- [Insights](./monitoring-and-analytics.md) - Analyze usage by application
+- [Insights](./insights.md) - Analyze usage by application
