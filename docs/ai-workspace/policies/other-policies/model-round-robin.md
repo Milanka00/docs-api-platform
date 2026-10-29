@@ -14,7 +14,7 @@ The Model Round Robin policy distributes requests across multiple AI models usin
 
 ## Add This Policy
 
-1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/). To add the policy to an App LLM Proxy, also select the project from the top navigation.
+1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/).
 2. In the left navigation menu, under **LLM**, click **LLM Providers** or **App LLM Proxies**, and then click the provider or proxy.
 3. Click the **Guardrails & Policies** tab.
 4. To apply the policy to all resources, click **Add** in the **Global Guardrails & Policies** section. To apply it to a specific resource, expand the resource in the resource-wise section and add the policy there.
@@ -33,4 +33,4 @@ The Model Round Robin policy distributes requests across multiple AI models usin
 ## Related
 
 - [Policies Overview](../overview.md)
-- [Policy Hub](https://wso2.com/api-platform/policy-hub/) — Full policy specification and latest version
+- [Policy Hub](https://wso2.com/api-platform/policy-hub/) - Full policy specification and latest version

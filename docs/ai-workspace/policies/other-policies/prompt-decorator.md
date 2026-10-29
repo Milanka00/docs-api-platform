@@ -3,7 +3,7 @@ title: "Prompt Decorator"
 description: "Prepend or append system instructions or context to every LLM request, configured in AI Workspace."
 ---
 
-The Prompt Decorator policy prepends or appends content to prompts before they are sent to the upstream LLM. Use it to inject system instructions, safety guidelines, or contextual information into every request — without requiring changes to the client application.
+The Prompt Decorator policy prepends or appends content to prompts before they are sent to the upstream LLM. Use it to inject system instructions, safety guidelines, or contextual information into every request without requiring changes to the client application.
 
 ## Configuration Parameters
 
@@ -15,13 +15,13 @@ The Prompt Decorator policy prepends or appends content to prompts before they a
 
 ### Decoration Formats
 
-**Text decoration** — Use a plain string to inject text into a single-field prompt:
+**Text decoration** - Use a plain string to inject text into a single-field prompt:
 
 ```json
 "decoration": "You are a helpful assistant. Always respond in formal English.\n\n"
 ```
 
-**Chat message decoration** — Use an array of role/content objects to inject messages into a chat conversation:
+**Chat message decoration** - Use an array of role/content objects to inject messages into a chat conversation:
 
 ```json
 "decoration": [
@@ -34,7 +34,7 @@ The Prompt Decorator policy prepends or appends content to prompts before they a
 
 ## Add This Policy
 
-1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/). To add the policy to an App LLM Proxy, also select the project from the top navigation.
+1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/).
 2. In the left navigation menu, under **LLM**, click **LLM Providers** or **App LLM Proxies**, and then click the provider or proxy.
 3. Click the **Guardrails & Policies** tab.
 4. To apply the policy to all resources, click **Add** in the **Global Guardrails & Policies** section. To apply it to a specific resource, expand the resource in the resource-wise section and add the policy there.
@@ -47,7 +47,7 @@ The Prompt Decorator policy prepends or appends content to prompts before they a
 
 ## Example: Inject a System Prompt
 
-The following configuration prepends a system instruction to every chat completion request:
+The following configuration prepends a system instruction to every chat completion request.
 
 | Parameter | Value |
 |-----------|-------|
@@ -81,5 +81,5 @@ The following configuration prepends a system instruction to every chat completi
 ## Related
 
 - [Policies Overview](../overview.md)
-- [Prompt Template](prompt-template.md) — Apply reusable prompt templates with parameter substitution
-- [Policy Hub](https://wso2.com/api-platform/policy-hub/) — Full policy specification and latest version
+- [Prompt Template](prompt-template.md) - Apply reusable prompt templates with parameter substitution
+- [Policy Hub](https://wso2.com/api-platform/policy-hub/) - Full policy specification and latest version

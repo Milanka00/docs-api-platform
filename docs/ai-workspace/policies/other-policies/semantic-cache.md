@@ -3,7 +3,7 @@ title: "Semantic Cache"
 description: "Cache LLM responses using vector embeddings and cosine similarity to serve semantically similar future requests without calling the upstream LLM."
 ---
 
-The Semantic Cache policy caches LLM responses and serves them for semantically similar future requests — without calling the upstream LLM. Unlike exact-match caching, it uses vector embeddings and cosine similarity to recognize requests that ask essentially the same question with different wording.
+The Semantic Cache policy caches LLM responses and serves them for semantically similar future requests without calling the upstream LLM. Unlike exact-match caching, it uses vector embeddings and cosine similarity to recognize requests that ask essentially the same question with different wording.
 
 :::info[Prerequisites]
 Before using this policy, the embedding provider and vector database must be configured in the gateway's `config.toml`. The policy UI only exposes the similarity threshold and JSON path — all embedding and database connection details are system-level settings.
@@ -16,10 +16,10 @@ See [Gateway Configuration](#gateway-configuration) below for the required `conf
 1. An incoming request arrives. The policy extracts the relevant text (full payload or a JSONPath-specified field).
 2. The embedding provider converts the text into a vector.
 3. The vector database is searched for a cached entry with a cosine similarity score at or above the configured **Similarity Threshold**.
-4. **Cache hit** — The cached response is returned immediately with an `X-Cache-Status: HIT` header. The upstream LLM is not called.
-5. **Cache miss** — The request is forwarded to the upstream LLM. A successful (`200`) response is stored in the vector database for future reuse.
+4. **Cache hit** - The cached response is returned immediately with an `X-Cache-Status: HIT` header. The upstream LLM is not called.
+5. **Cache miss** - The request is forwarded to the upstream LLM. A successful (`200`) response is stored in the vector database for future reuse.
 
-If the embedding service or vector database is unreachable, the policy fails open — the request proceeds to the upstream LLM as normal.
+If the embedding service or vector database is unreachable, the policy fails to open and the request proceeds to the upstream LLM as normal.
 
 ## Configuration Parameters
 
@@ -68,7 +68,7 @@ vector_db_provider_ttl = 3600
 ## Add This Policy
 
 1. Configure the embedding provider and vector database in `config.toml` and restart the gateway.
-2. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/). To add the policy to an App LLM Proxy, also select the project from the top navigation.
+2. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/).
 3. In the left navigation menu, under **LLM**, click **LLM Providers** or **App LLM Proxies**, and then click the provider or proxy.
 4. Click the **Guardrails & Policies** tab.
 5. To apply the policy to all resources, click **Add** in the **Global Guardrails & Policies** section. To apply it to a specific resource, expand the resource in the resource-wise section and add the policy there.
@@ -82,10 +82,10 @@ vector_db_provider_ttl = 3600
 
 | Threshold | Effect |
 |-----------|--------|
-| **0.95–1.0** | Very strict — only near-identical questions return cached responses |
-| **0.85–0.94** | Recommended for most use cases — catches semantically equivalent questions with some wording variation |
-| **0.75–0.84** | More flexible — useful for broader conceptual similarity |
-| **Below 0.75** | Not recommended — risk of returning cached responses for unrelated questions |
+| **0.95–1.0** | Very strict - only near-identical questions return cached responses |
+| **0.85–0.94** | Recommended for most use cases - catches semantically equivalent questions with some wording variation |
+| **0.75–0.84** | More flexible - useful for broader conceptual similarity |
+| **Below 0.75** | Not recommended - risk of returning cached responses for unrelated questions |
 
 Start at `0.85` and adjust based on observed cache hit rates and response relevance.
 
@@ -98,4 +98,4 @@ Start at `0.85` and adjust based on observed cache hit rates and response releva
 
 ## Related
 
-- [Policy Hub](https://wso2.com/api-platform/policy-hub/) — Full policy specification and latest version
+- [Policy Hub](https://wso2.com/api-platform/policy-hub/) - Full policy specification and latest version
