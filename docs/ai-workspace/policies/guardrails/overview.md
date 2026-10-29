@@ -3,7 +3,7 @@ title: "Guardrails Overview"
 description: "Detect unsafe content, mask sensitive data, and enforce content limits on LLM traffic using guardrails configured in AI Workspace."
 ---
 
-Guardrails inspect and act on the content of requests and responses flowing through the AI Gateway — detecting unsafe content, masking sensitive data, and caching responses. They run without any changes to client applications.
+Guardrails inspect and act on the content of requests and responses flowing through the AI Gateway detecting unsafe content, masking sensitive data, and caching responses. They run without any changes to client applications.
 
 ## Available Guardrails
 
@@ -35,33 +35,49 @@ Guardrails can be configured on both LLM Providers and App LLM Proxies:
 | **App LLM Proxy (Global)** | All endpoints of the proxy | Proxy-wide rules for a specific Gen AI application or agent |
 | **App LLM Proxy (Per Resource)** | A specific endpoint within the proxy | Endpoint-specific rules scoped to a single specialized proxy |
 
+:::note
 When guardrails are configured at multiple levels, all of them are evaluated. Provider-level guardrails run first, followed by proxy-level guardrails.
+:::
 
 ### How to Add a Guardrail
 
 **On an LLM Provider:**
 
-1. Navigate to **AI Workspace** > **LLM Providers**.
-2. Click on the provider name.
-3. Go to the **Guardrails** tab.
-4. To add a guardrail to all endpoints, click **+ Add Guardrail** under **Global Guardrails**.
-5. To add a guardrail to a specific endpoint, expand the resource card and click **+ Add Guardrail**.
-6. Select a guardrail from the sidebar panel.
-7. Configure the guardrail parameters.
-8. Click **Add**.
-9. Click **Deploy to Gateway** to apply the changes.
+1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/).
+2. In the left navigation menu, under **LLM**, click **LLM Providers**, and then click the provider.
+3. Click the **Guardrails & Policies** tab.
+
+    ![Guardrails & Policies tab of the WSO2 OpenAI Provider showing the Global Guardrails & Policies section with the LLM Cost (v1) policy and an Add button, and the Resource-wise Guardrails section](</img/cloud/ai-gateway/ai-workspace/policies/llm-provider-guardrails.png>)
+
+4. Add the guardrail.
+
+    - To add a guardrail to all resources, click **Add** in the **Global Guardrails & Policies** section.
+    - To add a guardrail to a specific resource, expand the resource in the **Resource-wise Guardrails** section, and add the guardrail there.
+
+5. In the **Guardrails** panel, click the guardrail, configure its parameters, and add it.
+6. To change the order in which the guardrails and policies run, drag them in the section.
+7. Click **Save**.
+8. To apply the changes to the gateways, click **Deploy to Gateway** and deploy the provider.
 
 **On an App LLM Proxy:**
 
-1. Navigate to **AI Workspace** > **App LLM Proxies**.
-2. Click on the proxy name.
-3. Go to the **Guardrails** tab.
-4. To add a guardrail to all endpoints, click **+ Add Guardrail** under **Global Guardrails**.
-5. To add a guardrail to a specific endpoint, expand the resource under **Resource-wise Guardrails** and click **+ Add Guardrail**.
-6. Select a guardrail from the sidebar panel.
-7. Configure the guardrail parameters.
-8. Click **Submit**.
-9. Save the proxy configuration and redeploy as needed.
+1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/), and select the project from the top navigation.
+2. In the left navigation menu, under **LLM**, click **App LLM Proxies**, and then click the proxy.
+3. Click the **Guardrails & Policies** tab.
+
+    ![Guardrails & Policies tab of the Support Chat Proxy showing the Global Guardrails & Policies section with the API Key Auth (1) policy and an Add button, and the Resource-wise Guardrails & Policies section with a search box and a Policy applied filter](</img/cloud/ai-gateway/ai-workspace/policies/app-llm-proxy-guardrails.png>)
+
+4. Add the guardrail.
+
+    - To add a guardrail to all resources, click **Add** in the **Global Guardrails & Policies** section.
+    - To add a guardrail to a specific resource, expand the resource in the **Resource-wise Guardrails & Policies** section, and add the guardrail there. To find a resource, type its path in **Search resources**.
+
+5. In the **Guardrails** panel, click the guardrail, configure its parameters, and add it.
+6. To change the order in which the guardrails and policies run, drag them in the section.
+7. Click **Save**.
+8. To apply the changes to the gateways, click **Deploy to Gateway** and deploy the proxy.
+
+To remove a guardrail, click **×** next to it, and then click **Save**.
 
 ## Guardrail Intervention Response
 

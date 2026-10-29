@@ -34,15 +34,16 @@ The Prompt Decorator policy prepends or appends content to prompts before they a
 
 ## Add This Policy
 
-1. Navigate to **AI Workspace** > **LLM Providers** or **App LLM Proxies**.
-2. Click on the provider or proxy name.
-3. Go to the **Guardrails** tab.
-4. Click **+ Add Guardrail** and select **Prompt Decorator** from the sidebar.
-5. Enter the **Decoration** content.
-6. Set the **JSON Path** to the field in the request where content should be injected.
-7. Choose whether to **Append** (after) or prepend (before) the existing content.
-8. Click **Add** (for providers) or **Submit** (for proxies).
-9. Deploy the provider or proxy to apply the changes.
+1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/). To add the policy to an App LLM Proxy, also select the project from the top navigation.
+2. In the left navigation menu, under **LLM**, click **LLM Providers** or **App LLM Proxies**, and then click the provider or proxy.
+3. Click the **Guardrails & Policies** tab.
+4. To apply the policy to all resources, click **Add** in the **Global Guardrails & Policies** section. To apply it to a specific resource, expand the resource in the resource-wise section and add the policy there.
+5. In the **Guardrails** panel, click **Prompt Decorator**.
+6. Enter the **Decoration** content.
+7. Set the **JSON Path** to the field in the request where content should be injected.
+8. Choose whether to **Append** (after) or prepend (before) the existing content.
+9. Add the policy, and then click **Save**.
+10. To apply the changes to the gateways, click **Deploy to Gateway** and deploy the provider or proxy.
 
 ## Example: Inject a System Prompt
 

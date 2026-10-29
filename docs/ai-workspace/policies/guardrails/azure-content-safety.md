@@ -3,7 +3,7 @@ title: "Azure Content Safety Content Moderation"
 description: "Filter hate speech, sexual content, self-harm, and violence in LLM traffic using Azure Content Safety, configured in AI Workspace."
 ---
 
-The Azure Content Safety guardrail integrates with the Azure Content Safety API to filter harmful content in requests and LLM-generated responses. It checks for four categories — hate speech, sexual content, self-harm, and violence — each with a configurable severity threshold.
+The Azure Content Safety guardrail integrates with the Azure Content Safety API to filter harmful content in requests and LLM-generated responses. It checks for four categories, namely hate speech, sexual content, self-harm, and violence, each with a configurable severity threshold.
 
 :::info[Prerequisites]
 This guardrail requires an active Azure subscription with the Azure Content Safety service enabled.
@@ -23,7 +23,7 @@ azurecontentsafety_key = "your-api-key"
 
 ### Advanced Settings
 
-Content moderation settings are configured independently for the **request** and **response** phases. Both sections have the same parameters:
+Content moderation settings are configured independently for the **request** and **response** phases. Both sections have the same parameters.
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
@@ -46,13 +46,14 @@ Content moderation settings are configured independently for the **request** and
 
 ## Add This Policy
 
-1. Navigate to **AI Workspace** > **LLM Providers** or **App LLM Proxies**.
-2. Click on the provider or proxy name.
-3. Go to the **Guardrails** tab.
-4. Click **+ Add Guardrail** and select **Azure Content Safety Content Moderation** from the sidebar.
-5. Expand **Advanced Settings** to configure severity thresholds and error handling separately for request and response phases.
-6. Click **Add** (for providers) or **Submit** (for proxies).
-7. Deploy the provider or proxy to apply the changes.
+1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/).
+2. In the left navigation menu, under **LLM**, click **LLM Providers** or **App LLM Proxies**, and then click the provider or proxy.
+3. Click the **Guardrails & Policies** tab.
+4. To apply the policy to all resources, click **Add** in the **Global Guardrails & Policies** section. To apply it to a specific resource, expand the resource in the resource-wise section and add the policy there.
+5. In the **Guardrails** panel, click **Azure Content Safety Content Moderation**.
+6. Expand **Advanced Settings** to configure severity thresholds and error handling separately for request and response phases.
+7. Add the policy, and then click **Save**.
+8. To apply the changes to the gateways, click **Deploy to Gateway** and deploy the provider or proxy.
 
 ## Behavior
 
@@ -63,5 +64,5 @@ Content moderation settings are configured independently for the **request** and
 ## Related
 
 - [Guardrails Overview](overview.md)
-- [PII Masking Regex](regex-pii-masking.md) — Lightweight PII masking without external services
-- [Policy Hub](https://wso2.com/api-platform/policy-hub/) — Full policy specification and latest version
+- [PII Masking Regex](regex-pii-masking.md) - Lightweight PII masking without external services
+- [Policy Hub](https://wso2.com/api-platform/policy-hub/) - Full policy specification and latest version

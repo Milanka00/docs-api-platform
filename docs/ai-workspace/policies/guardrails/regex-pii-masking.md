@@ -5,10 +5,10 @@ description: "Detect and mask personally identifiable information in LLM request
 
 The PII Masking Regex guardrail detects and masks Personally Identifiable Information (PII) in request and response payloads using regex patterns. It supports built-in detectors for common PII types and custom regex patterns for additional entities.
 
-It operates in two modes:
+It operates in two modes.
 
-- **Masking (default)** — Detected PII is replaced with a reversible placeholder (e.g., `[EMAIL_0000]`). The original value can be restored in the response flow.
-- **Redaction** — Detected PII is permanently replaced with `*****` and cannot be restored.
+- **Masking (default)** - Detected PII is replaced with a reversible placeholder (e.g., `[EMAIL_0000]`). The original value can be restored in the response flow.
+- **Redaction** - Detected PII is permanently replaced with `*****` and cannot be restored.
 
 ## Configuration Parameters
 
@@ -25,13 +25,14 @@ All parameters are optional.
 
 ## Add This Policy
 
-1. Navigate to **AI Workspace** > **LLM Providers** or **App LLM Proxies**.
-2. Click on the provider or proxy name.
-3. Go to the **Guardrails** tab.
-4. Click **+ Add Guardrail** and select **PII Masking Regex** from the sidebar.
-5. Expand **Advanced Settings** and enable the built-in detectors and/or add custom PII entities.
-6. Click **Add** (for providers) or **Submit** (for proxies).
-7. Deploy the provider or proxy to apply the changes.
+1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/).
+2. In the left navigation menu, under **LLM**, click **LLM Providers** or **App LLM Proxies**, and then click the provider or proxy.
+3. Click the **Guardrails & Policies** tab.
+4. To apply the policy to all resources, click **Add** in the **Global Guardrails & Policies** section. To apply it to a specific resource, expand the resource in the resource-wise section and add the policy there.
+5. In the **Guardrails** panel, click **PII Masking Regex**.
+6. Expand **Advanced Settings** and enable the built-in detectors and/or add custom PII entities.
+7. Add the policy, and then click **Save**.
+8. To apply the changes to the gateways, click **Deploy to Gateway** and deploy the provider or proxy.
 
 ## Behavior
 
@@ -42,4 +43,4 @@ All parameters are optional.
 ## Related
 
 - [Guardrails Overview](overview.md)
-- [Policy Hub](https://wso2.com/api-platform/policy-hub/) — Full policy specification and latest version
+- [Policy Hub](https://wso2.com/api-platform/policy-hub/) - Full policy specification and latest version

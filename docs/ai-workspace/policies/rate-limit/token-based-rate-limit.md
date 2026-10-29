@@ -26,13 +26,14 @@ When multiple limits are configured within a category, the most restrictive limi
 
 ## Add This Policy
 
-1. Navigate to **AI Workspace** > **LLM Providers** or **App LLM Proxies**.
-2. Click on the provider or proxy name.
-3. Go to the **Guardrails** tab.
-4. Click **+ Add Guardrail** and select **Token Based Rate Limit** from the sidebar.
-5. Configure limits for prompt tokens, completion tokens, total tokens, or any combination.
-6. Click **Add** (for providers) or **Submit** (for proxies).
-7. Deploy the provider or proxy to apply the changes.
+1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/). To add the policy to an App LLM Proxy, also select the project from the top navigation.
+2. In the left navigation menu, under **LLM**, click **LLM Providers** or **App LLM Proxies**, and then click the provider or proxy.
+3. Click the **Guardrails & Policies** tab.
+4. To apply the policy to all resources, click **Add** in the **Global Guardrails & Policies** section. To apply it to a specific resource, expand the resource in the resource-wise section and add the policy there.
+5. In the **Guardrails** panel, click **Token Based Rate Limit**.
+6. Configure limits for prompt tokens, completion tokens, total tokens, or any combination.
+7. Add the policy, and then click **Save**.
+8. To apply the changes to the gateways, click **Deploy to Gateway** and deploy the provider or proxy.
 
 ## Behavior
 

@@ -1,9 +1,9 @@
 ---
 title: "Policies Overview"
-description: "Apply built-in guardrail, rate-limiting, and traffic-management policies to LLM providers and App LLM proxies in AI Workspace."
+description: "Apply built-in guardrail, rate-limiting, and traffic-management policies to LLM providers, App LLM proxies, MCP proxies, and agent proxies in AI Workspace."
 ---
 
-The AI Workspace provides built-in policies that let you govern how traffic flows through your LLM Providers and App LLM Proxies. Policies can be applied at the provider level (affecting all proxies that use the provider) or at the proxy level (scoped to a specific proxy or individual endpoints).
+The AI Workspace provides built-in policies that let you govern how traffic flows through your LLM Providers, App LLM Proxies, MCP Proxies, and Agent Proxies. For LLM traffic, policies can be applied at the provider level (affecting all proxies that use the provider) or at the proxy level (scoped to a specific proxy or individual endpoints).
 
 ## Guardrails
 
@@ -18,7 +18,7 @@ Guardrails enforce content safety and compliance on requests and responses.
 
 ## Rate Limit
 
-Rate limit policies control how much LLM traffic — by token count or monetary cost — can flow through a provider or proxy.
+Rate limit policies control how much LLM traffic by token count or monetary cost can flow through a provider or proxy.
 
 | Policy | Description |
 |--------|-------------|
@@ -38,12 +38,14 @@ Rate limit policies control how much LLM traffic — by token count or monetary 
 
 ## Where Policies are Applied
 
-Policies are configured through the management tabs of your LLM Providers and App LLM Proxies:
+You configure policies on the LLM Providers, App LLM Proxies, MCP Proxies, and Agent Proxies in AI Workspace.
 
-- **LLM Provider** — Rate limits and guardrails configured on a provider apply to all proxies that use it. Guardrails can be applied globally (all endpoints) or per resource (specific endpoints).
-- **App LLM Proxy** — Guardrails configured on a proxy can be applied globally (all endpoints) or per resource (specific endpoints) to specialize the behavior for a specific Gen AI application or agent.
+- **LLM Provider** - Rate limits and guardrails configured on a provider apply to all proxies that use it. Guardrails can be applied globally (all endpoints) or per resource (specific endpoints).
+- **App LLM Proxy** - Guardrails configured on a proxy can be applied globally (all endpoints) or per resource (specific endpoints) to specialize the behavior for a specific Gen AI application or agent.
+- **MCP Proxy** - Policies configured in the **Policies** tab of an MCP proxy apply to all the MCP traffic through the proxy.
+- **Agent Proxy** - Policies configured on an agent proxy apply to the agent-to-agent (A2A) traffic through the proxy.
 
-When both provider-level and proxy-level policies are active, they are both enforced. Provider-level policies act as a baseline, and proxy-level policies add additional protection.
+When both provider-level and proxy-level policies are active on LLM traffic, they are both enforced. Provider-level policies act as a baseline, and proxy-level policies add additional protection.
 
 ## Policy Hub
 

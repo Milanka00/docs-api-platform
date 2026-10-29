@@ -31,14 +31,15 @@ When a client calls `template://translate?from=English&to=Spanish&text=Hello`, t
 
 ## Add This Policy
 
-1. Navigate to **AI Workspace** > **LLM Providers** or **App LLM Proxies**.
-2. Click on the provider or proxy name.
-3. Go to the **Guardrails** tab.
-4. Click **+ Add Guardrail** and select **Prompt Template** from the sidebar.
-5. Add one or more templates, each with a name and prompt string using `[[param]]` placeholders.
-6. Optionally expand **Advanced Settings** to configure JSON Path, On Missing Template, or On Unresolved Placeholder behavior.
-7. Click **Add** (for providers) or **Submit** (for proxies).
-8. Deploy the provider or proxy to apply the changes.
+1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/). To add the policy to an App LLM Proxy, also select the project from the top navigation.
+2. In the left navigation menu, under **LLM**, click **LLM Providers** or **App LLM Proxies**, and then click the provider or proxy.
+3. Click the **Guardrails & Policies** tab.
+4. To apply the policy to all resources, click **Add** in the **Global Guardrails & Policies** section. To apply it to a specific resource, expand the resource in the resource-wise section and add the policy there.
+5. In the **Guardrails** panel, click **Prompt Template**.
+6. Add one or more templates, each with a name and prompt string using `[[param]]` placeholders.
+7. Optionally, expand **Advanced Settings** to configure JSON Path, On Missing Template, or On Unresolved Placeholder behavior.
+8. Add the policy, and then click **Save**.
+9. To apply the changes to the gateways, click **Deploy to Gateway** and deploy the provider or proxy.
 
 ## Example: Translation Template
 

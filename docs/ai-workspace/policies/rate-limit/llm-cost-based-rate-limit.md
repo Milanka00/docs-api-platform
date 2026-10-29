@@ -21,14 +21,18 @@ When multiple budget limits are configured, all of them are enforced — the mos
 
 ## Add This Policy
 
-1. Add this policy first, then add the **LLM Cost** policy after it in the policy list.
-2. Navigate to **AI Workspace** > **LLM Providers** or **App LLM Proxies**.
-3. Click on the provider or proxy name.
-4. Go to the **Guardrails** tab.
-5. Click **+ Add Guardrail** and select **LLM Cost-Based Rate Limit** from the sidebar.
+:::note
+The **LLM Cost** policy must run after this policy. In the **Guardrails & Policies** tab, drag **LLM Cost** so that it appears after **LLM Cost-Based Rate Limit**.
+:::
+
+1. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/). To add the policy to an App LLM Proxy, also select the project from the top navigation.
+2. In the left navigation menu, under **LLM**, click **LLM Providers** or **App LLM Proxies**, and then click the provider or proxy.
+3. Click the **Guardrails & Policies** tab.
+4. To apply the policy to all resources, click **Add** in the **Global Guardrails & Policies** section. To apply it to a specific resource, expand the resource in the resource-wise section and add the policy there.
+5. In the **Guardrails** panel, click **LLM Cost-Based Rate Limit**.
 6. Add one or more budget limits, each with an **amount** and **duration**.
-7. Click **Add** (for providers) or **Submit** (for proxies).
-8. Deploy the provider or proxy to apply the changes.
+7. Add the policy, and then click **Save**.
+8. To apply the changes to the gateways, click **Deploy to Gateway** and deploy the provider or proxy.
 
 ## Behavior
 

@@ -68,14 +68,15 @@ vector_db_provider_ttl = 3600
 ## Add This Policy
 
 1. Configure the embedding provider and vector database in `config.toml` and restart the gateway.
-2. Navigate to **AI Workspace** > **LLM Providers** or **App LLM Proxies**.
-3. Click on the provider or proxy name.
-4. Go to the **Guardrails** tab.
-5. Click **+ Add Guardrail** and select **Semantic Cache** from the sidebar.
-6. Set the **Similarity Threshold**.
-7. Optionally set a **JSON Path** under **Advanced Settings**.
-8. Click **Add** (for providers) or **Submit** (for proxies).
-9. Deploy the provider or proxy to apply the changes.
+2. Sign in to [AI Workspace](https://ai-workspace.bijira.dev/). To add the policy to an App LLM Proxy, also select the project from the top navigation.
+3. In the left navigation menu, under **LLM**, click **LLM Providers** or **App LLM Proxies**, and then click the provider or proxy.
+4. Click the **Guardrails & Policies** tab.
+5. To apply the policy to all resources, click **Add** in the **Global Guardrails & Policies** section. To apply it to a specific resource, expand the resource in the resource-wise section and add the policy there.
+6. In the **Guardrails** panel, click **Semantic Cache**.
+7. Set the **Similarity Threshold**.
+8. Optionally, set a **JSON Path** under **Advanced Settings**.
+9. Add the policy, and then click **Save**.
+10. To apply the changes to the gateways, click **Deploy to Gateway** and deploy the provider or proxy.
 
 ## Choosing a Similarity Threshold
 
