@@ -261,7 +261,7 @@ AI Workspace includes a hosted sample MCP server, so you don't need to run one y
     AI Workspace fetches the server's capabilities and lists them: 4 tools (including `echo` and `add`), 10 resources, and 3 prompts.
 
     :::note[Using your own MCP server?]
-    Paste its URL instead of using the sample. It must be reachable from AI Workspace over the internet. AI Workspace fetches its capabilities from the hosted side, so a `localhost` URL won't work. Add credentials under **Advanced Configurations** if the server needs them. See [Configure an MCP proxy](./mcp-proxies/overview.md) for details on connecting a protected server.
+    Paste its URL instead of using the sample. It must be reachable from AI Workspace over the internet. AI Workspace fetches its capabilities from the hosted side, so a `localhost` URL won't work. Add credentials under **Advanced Configurations** if the server needs them. See [Configure an MCP proxy](./mcp-proxies/configure-proxy.md) for details on connecting a protected server.
     :::
 
 3. Click **Next**.
@@ -336,7 +336,7 @@ data: {"result":{"content":[{"type":"text","text":"The sum of 4 and 5 is 9."}]},
 
 That result means your request reached the sample server's `add` tool and came back through the gateway. To explore the other tools interactively, point an MCP client such as [MCP Inspector](https://github.com/modelcontextprotocol/inspector) at the same URL.
 
-The sample proxy has no authentication policy, so these calls need no key. Keep this sample only while the gateway listens on `localhost`. Add the [MCP Authentication policy](./mcp-proxies/overview.md) before you deploy this proxy to a gateway reachable from anywhere else.
+The sample proxy has no authentication policy, so these calls need no key. Keep this sample only while the gateway listens on `localhost`. Add the [MCP Authentication policy](./mcp-proxies/apply-policies.md) before you deploy this proxy to a gateway reachable from anywhere else.
 
 At this point, you also have that same AI Gateway routing governed traffic to an MCP server, alongside the LLM provider from Part 3. AI Workspace configures both from one place.
 
@@ -368,12 +368,12 @@ If something doesn't work as expected, check here before anything else:
 
 ### Next steps
 
-- [Manage an LLM provider](./llm-providers/overview.md): configure connection, access control, security, rate limiting, and guardrails for the provider you just created
+- [Manage an LLM provider](./llm-providers/manage-provider.md): configure connection, access control, security, rate limiting, and guardrails for the provider you just created
 - [Create an App LLM Proxy](./app-llm-proxies/overview.md): give one application its own endpoint, key, and policies on top of a shared provider
 - [Configure an App LLM Proxy](./app-llm-proxies/configure-proxy.md): add an application-specific endpoint on top of a provider, with its own guardrails and access rules
 - [Manage an App LLM Proxy](./app-llm-proxies/manage-proxy.md): configure provider settings, resources, security, and guardrails for an existing proxy
 - Add a guardrail: apply content safety, personally identifiable information (PII) masking, or prompt checks, then send a request that trips one
-- [Apply MCP policies](./mcp-proxies/overview.md): add authentication, authorization, and access control to the MCP proxy you just created
+- [Apply MCP policies](./mcp-proxies/apply-policies.md): add authentication, authorization, and access control to the MCP proxy you just created
 - Limit cost and volume: cap spend and requests per key
 - [GenAI applications](./gen-ai-applications.md): group API keys under a named application for usage visibility and governance
 - [Set up an AI Gateway](./ai-gateway/setting-up.md): run the gateway on a VM or Kubernetes instead of locally, and manage or reconfigure it
@@ -405,11 +405,11 @@ An LLM provider connects the AI Workspace to an AI service platform like OpenAI,
 4. Click **Add Provider**.
 5. Click **Deploy to Gateway** and deploy to your active gateway.
 
-For detailed instructions, see [Configure LLM Provider](./llm-providers/overview.md).
+For detailed instructions, see [Configure and Consume an LLM Provider](./llm-providers/configure-and-consume-provider.md).
 
 ### What's Next
 
-- [Manage your provider](./llm-providers/overview.md) — Configure connection, access control, security, rate limiting, guardrails, and models
+- [Manage your provider](./llm-providers/manage-provider.md) — Configure connection, access control, security, rate limiting, guardrails, and models
 
 :::note
 You can optionally create an LLM proxy if a specific Gen AI application or agent needs its own guardrails, authentication, exposed resources, routing, or other app-specific controls on top of providers.

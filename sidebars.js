@@ -62,9 +62,11 @@ const sidebars = {
         doc("test-api-proxy/curl", "cURL"),
       ]),
       group("Publish", [
-        doc("publish-api-proxy/make-an-api-ai-ready", "Make an API AI-Ready"),
-        doc("publish-api-proxy/lifecycle", "Lifecycle"),
+        doc("publish-api-proxy/publish-an-api", "Publish an API"),
+        doc("publish-api-proxy/customize-portal-listing", "Customize the Portal Listing"),
         doc("publish-api-proxy/subscription-plans-and-billing", "Subscription Plans"),
+        doc("publish-api-proxy/deprecate-or-unpublish", "Deprecate or Unpublish an API"),
+        doc("publish-api-proxy/make-an-api-ai-ready", "Make an API AI-Ready"),
       ]),
       group("Observability and Insights", [
         group("Logs", [
@@ -79,14 +81,22 @@ const sidebars = {
     ]),
     group("AI Workspace", [
       doc("ai-workspace/getting-started", "Quick Start Guide"),
-      doc("ai-workspace/llm-providers/overview", "LLM Providers"),
+      group("LLM Providers", [
+        doc("ai-workspace/llm-providers/overview", "Overview"),
+        doc("ai-workspace/llm-providers/configure-and-consume-provider", "Configure and Consume Provider"),
+        doc("ai-workspace/llm-providers/manage-provider", "Manage Provider"),
+      ]),
       group("App LLM Proxies", [
         doc("ai-workspace/app-llm-proxies/overview", "Overview"),
         doc("ai-workspace/app-llm-proxies/configure-proxy", "Configure App LLM Proxy"),
         doc("ai-workspace/app-llm-proxies/manage-proxy", "Manage App LLM Proxy"),
         doc("ai-workspace/app-llm-proxies/multi-provider", "Route to several providers"),
       ]),
-      doc("ai-workspace/mcp-proxies/overview", "MCP Proxies"),
+      group("MCP Proxies", [
+        doc("ai-workspace/mcp-proxies/overview", "Overview"),
+        doc("ai-workspace/mcp-proxies/configure-proxy", "Configure Proxy"),
+        doc("ai-workspace/mcp-proxies/apply-policies", "Apply Policies"),
+      ]),
       group("Agent Proxies", [
         doc("ai-workspace/agent-proxies/overview", "Overview"),
         doc("ai-workspace/agent-proxies/configure-proxy", "Configure Agent Proxy"),
@@ -94,7 +104,29 @@ const sidebars = {
       ]),
       doc("ai-workspace/gen-ai-applications", "Gen AI Applications"),
       doc("ai-workspace/ai-gateway/setting-up", "AI Gateways"),
-      doc("ai-workspace/monitoring-and-analytics", "Insights"),
+      group("Policies", [
+        doc("ai-workspace/policies/overview", "Overview"),
+        group("Guardrails", [
+          doc("ai-workspace/policies/guardrails/overview", "Overview"),
+          doc("ai-workspace/policies/guardrails/regex-pii-masking", "PII Masking Regex"),
+          doc("ai-workspace/policies/guardrails/azure-content-safety", "Azure Content Safety"),
+          doc("ai-workspace/policies/guardrails/word-count-guardrail", "Word Count"),
+          doc("ai-workspace/policies/guardrails/sentence-count-guardrail", "Sentence Count"),
+        ]),
+        group("Rate Limit", [
+          doc("ai-workspace/policies/rate-limit/llm-cost", "LLM Cost"),
+          doc("ai-workspace/policies/rate-limit/token-based-rate-limit", "Token-Based Rate Limit"),
+          doc("ai-workspace/policies/rate-limit/llm-cost-based-rate-limit", "LLM Cost-Based Rate Limit"),
+        ]),
+        group("Other Policies", [
+          doc("ai-workspace/policies/other-policies/model-round-robin", "Model Round Robin"),
+          doc("ai-workspace/policies/other-policies/prompt-decorator", "Prompt Decorator"),
+          doc("ai-workspace/policies/other-policies/prompt-template", "Prompt Template"),
+          doc("ai-workspace/policies/other-policies/semantic-cache", "Semantic Cache"),
+        ]),
+        doc("ai-workspace/policies/writing-an-ai-policy", "Writing an AI Policy"),
+      ]),
+      doc("ai-workspace/insights", "Insights"),
     ]),
     group("Developer Portal", [
       doc("developer-portal/getting-started", "Quick Start Guide"),

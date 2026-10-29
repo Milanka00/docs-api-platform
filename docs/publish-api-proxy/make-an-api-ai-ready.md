@@ -44,3 +44,25 @@ Use documents to cover things the specification cannot express well.
 - Changelog and migration notes
 
 Well written prose documents reduce the chance that an agent will misinterpret the specification or hallucinate behavior that doesn't exist.
+
+## Control Agent Visibility
+
+By default, AI agents in the portal can discover a published API and invoke it on behalf of users. If an API shouldn't be available to AI agents, for example, an internal API that isn't intended for external consumption, you can hide it from agents while keeping it available to human users in the portal.
+
+To control whether AI agents can discover an API, follow the steps given below.
+
+1. Sign in to the [API Platform Console](https://console.bijira.dev/).
+2. In the header, select the project from the **Projects** list and the API from the **APIs** list.
+3. In the left navigation menu, click **Publish**.
+4. On the portal, click **Go to Publish**.
+5. On the **API Details** tab, turn the **Make this API discoverable by AI agents** toggle on or off.
+
+    ![API Details tab of the publish page with the Make this API discoverable by AI agents toggle turned on, and its tooltip saying that agents in the API Portal can discover and invoke the API on behalf of users](/img/cloud/publish-api-proxy/ai-agent-discovery.png)
+
+6. Click **Publish**.
+
+When you turn off the toggle, the API is excluded from `llms.txt`, `apis.md`, and the per API Markdown and specification endpoints of the portal. It remains visible to human users in the portal.
+
+:::note
+This setting applies to each API in each portal separately. Hiding one API doesn't affect the visibility of other APIs, or of the same API in other portals.
+:::

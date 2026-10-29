@@ -138,5 +138,5 @@ Deleting a gateway is permanent.
 
 ## Next steps
 
-- [Configure an LLM provider](../llm-providers/overview.md)
+- [Configure and consume an LLM provider](../llm-providers/configure-and-consume-provider.md)
 - [Configure an App LLM proxy](../app-llm-proxies/configure-proxy.md)
