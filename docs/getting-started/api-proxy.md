@@ -1,136 +1,106 @@
 ---
 title: "Quick Start Guide"
-description: "Expose a service as an API proxy with WSO2 API Platform and publish it to the Developer Portal for application developers to consume."
+description: "Create a REST API from a backend URL, deploy it to a gateway, test it, and publish it to a Developer Portal."
 ---
 
-WSO2 API Platform simplifies securely exposing existing services as managed APIs. It also allows you to manage all aspects of an API's lifecycle, security, throttling, and governance, so you can focus on service development.
+In API Platform Cloud, you can expose an existing HTTP backend through a gateway by creating a REST API proxy. When you start from scratch, you provide a backend URL, and the console generates the initial API details for you. You can then review the API definition, deploy the API to a gateway, test it, and publish it to a Developer Portal.
 
-In this tutorial, you will use API Platform to expose a service as an API proxy and publish it to the API Platform Developer Portal for application developers to consume.
-
-:::info[Watch the video walkthrough]
-[Check out this quick start on YouTube](https://youtu.be/kElzVeJPlRs?rel=0) or watch below.
-:::
-
-<iframe width="100%" src="https://www.youtube.com/embed/kElzVeJPlRs?rel=0" title="YouTube video player" style={{border: '0', display: 'block', aspectRatio: '16 / 9'}} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+This guide uses the sample Reading List API backend.
 
 ## Prerequisites
 
-1. If you're signing in to the API Platform Console for the first time, create an organization:
-    1. Go to [API Platform Console](https://console.bijira.dev/) and sign in using your Google, GitHub, or Microsoft account.
-    2. Enter a unique organization name.
-    3. Read and accept the privacy policy and terms of use.
-    4. Click **Create**.
+1. Sign in to the [API Platform Console](https://console.bijira.dev).
+2. Create an organization:
 
-    This creates the organization and opens the organization home page.
+    1. Enter a **Display name**.
+    2. Enter a **Handle**.
+    3. Click **Create**.
 
-## Step 1: Create a Project
+    If you already have an organization, open it and continue.
 
-1. Go to [API Platform Console](https://console.bijira.dev/) and sign in. This opens the organization home page.
-2. On the organization home page, click **+ Create Project**.
-3. Enter the following details:
+3. Use the **Default project**, or create a project:
 
-    :::info
-    The **Name** field must be unique and cannot be changed after creation.
-    :::
+    1. On the organization home page, click **New project**.
+    2. Enter a **Display name**, an **Identifier**, and a **Description**.
+    3. Click **Create**.
 
-    | **Field**        | **Value**         |
-    | ---------------- | ----------------- |
-    | **Display Name** | Sample Project    |
-    | **Identifier**   | sample-project    |
-    | **Description**  | My sample project |
+    The project home page opens. Continue from there to create the API.
 
-4. Click **Create**. This creates the project and takes you to the project home page.
 
-## Step 2: Create an API Proxy
+## Create the REST API
 
-1. On the project home page, click **Import API Contract** under **My APIs (Ingress)**.
-2. Click **URL for API Contract**, enter the following URL, and then click **Next**:
-   ```http
-   https://raw.githubusercontent.com/wso2/docs-bijira/refs/heads/main/en/docs/assets/files/sample-api.yaml
-   ```
-3. **Create API Proxy from Contract** page will be opened. Click **Create** to complete the API proxy creation process.
-    ![Create API Proxy from Contract form with HTTP type, name Sample API, identifier, version, base path, description, target URL, and External and Internal access mode options](/img/cloud/introduction/create-api-proxy-from-contract.png)
+1. On the project home page, click **Create API**.
+2. Select **REST API**, then click **Continue**.
+3. Select **Start from scratch**.
+4. Under **Backend endpoint**, enter your backend URL in **Endpoint URL**. To use the sample Reading List API, click **Try with Sample URL**.
 
-## Step 3: Test the API Proxy
+    The sample URL is:
 
-You can test the API proxy in the development environment before promoting it to production. API Platform provides the following options to test your API proxy:
+    ```text
+    https://apis.bijira.dev/samples/reading-list-api-service/v1.0/books
+    ```
 
-- OpenAPI Console
-- cURL
-- API Chat
+5. Click **Continue**.
+6. On **Configure and create**, review **Basic information** and **Backend endpoint**. The console fills **Name** with `Untitled API` and derives **Identifier** and **Context** from that name.
 
-In this guide, you will use the OpenAPI Console.
+    ![Configure and create page with the generated name Untitled API, identifier, version, context, description, and target URL](/img/cloud/getting-started/configure-and-create.png)
 
-1. In the left navigation menu, click **Test** and then click **Console**.
+    For this sample, set **Name** to `Reading List API`. The identifier becomes `reading-list-api`, and the context includes your project identifier, for example `/default/reading-list-api/v1.0.0`.
 
-    :::tip
-    Since the API proxy is secured when deployed, you will need a key to invoke it. API Platform automatically generates a key when you navigate to the **OpenAPI Console** pane.
-    :::
+    | Field | Value |
+    | --- | --- |
+    | **Name** | `Reading List API` |
+    | **Identifier** | `reading-list-api` |
+    | **Version** | `1.0.0` |
+    | **Context** | `/default/reading-list-api/v1.0.0` |
+    | **Description** | `A starting point. Edit the operations, or ask AI to refine them.` |
+    | **Target URL** | `https://apis.bijira.dev/samples/reading-list-api-service/v1.0/books` |
 
-2. In the **OpenAPI Console** pane, select **Development** from the environment drop-down list.
-3. Expand the `GET /uuid` method and click **Try it Out** to test it.
-4. Click **Execute**. You will see a response similar to the following:
+7. Click **Create**.
 
-    ![OpenAPI Console showing GET /uuid expanded with HTTP 200 server response, curl command, request URL, and UUID JSON response body](/img/cloud/introduction/test-response.png)
+The REST API is added to the project. Its overview lists the generated operations, such as `GET /*`, `POST /*`, `PATCH /*`, and `DELETE /*`, and the backend endpoint.
 
-    This indicates that your API proxy is working as expected.
+To view or edit the API definition, open the API and in the left navigation menu click **Develop**, then **Definition**. You can view the OpenAPI definition as **YAML** or **JSON**, or click **Edit** to change the operations.
 
-## Step 4: Promote the API Proxy to Production
+![Definition page showing the OpenAPI document, with YAML, JSON, and Edit](/img/cloud/getting-started/definition.png)
 
-Once you verify that the API proxy is working as expected in the development environment, you can promote it to production.
+## Deploy the API to a gateway
 
-1. In the left navigation menu, click **Deploy**.
-2. In the **Development** card, click **Promote**.
-3. In the **Configuration Types** pane, select the option **Use Development endpoint configuration** and click **Next**.
+Deploy the API so requests can be sent through a gateway.
 
-    :::tip
-    If you want to specify a different endpoint for your production environment, you can make the change in the **Configuration Types** pane.
-    :::
+1. Open the API you created.
+2. In the left navigation menu, click **Deploy**. You can also click **Deploy to Gateway** on the API overview.
+3. In **Build Area**, click **Build and deploy**.
 
-    The **Production** card indicates the **Deployment Status** as **Active** when the API proxy is successfully deployed to production.
+    The page lists the gateways in the environment, such as **development**.
 
-    If you want to verify that the API proxy is working as expected in production, you can test the API in the production environment.
+    ![Deploy page with Build and deploy and the gateways in the development environment](/img/cloud/getting-started/deploy.png)
 
-Now that your API is deployed in both development and production environments and can be invoked, the next step is to publish it so that consumers can discover and subscribe to it.
+4. In **Deploy to development**, confirm the deployment:
 
-## Step 5: Publish the API Proxy
+    1. Under **Gateways**, keep the gateway marked **Default** selected. All selected gateways receive the same build.
+    2. Confirm the **Endpoint URL**.
+    3. Click **Deploy**.
 
-1. In the left navigation menu, click **Develop** and then click **Lifecycle**. This opens the **Lifecycle** page, where you can see the different lifecycle stages of the API. The current lifecycle stage is **Created**.
-2. Click **Publish**.
-3. In the **Publish API** dialog, click **Confirm** to proceed with publishing the API with the specified display name. If you want to change the display name, make the necessary changes and then click **Confirm**. This changes the API lifecycle state to **Published**.
+    ![Deploy to development dialog with the Default gateway selected and the Reading List endpoint URL](/img/cloud/getting-started/deploy-dialog.png)
 
-You can observe that the API lifecycle stage has changed to **Published**. Now the API is available for consumption. API consumers can consume the API via the API Platform Developer Portal.
+When the deployment finishes, that gateway is no longer marked **Not deployed**. The API overview lists it under the deployed gateways and shows the invoke URL.
 
-## Step 6: Invoke the API
+## Test the API
 
-To generate credentials for the published API and invoke it via the Developer Portal, follow these steps.
+After the API is deployed, test an operation to confirm that requests go through the gateway.
 
-1. In the **Lifecycle Management** pane, click **Go to DevPortal**. This takes you to the Sample API published to the API Platform Developer Portal.
-    ![Lifecycle page showing API in Published state with lifecycle flow diagram including Created, Pre-released, Published, Deprecated, Blocked, and Retired stages, and Go to Devportal button highlighted](/img/cloud/introduction/go-to-developer-portal.png)
-2. Subscribe to the API and Generate credentials.
-    1. In the Developer Portal left navigation menu, click **Applications**.
-    2. Click **Create**.
-    3. Add a sample application name and click **Create**. This will create a new application. Click on the application name and it will navigate you to the application's home page.
-    4. Click **Subscribe to more APIs** under **Subscribed APIs** section. This will navigate you to the API proxy listing page.
-    5. From the respective API card, choose the Application and click **Subscribe**. Now your application is subscribed to the published API with your selected subscription plan.
-    6. Open the created application by selecting **Applications** from the left menu, and click on the application name.
-    7. In the Application detail banner, click **Manage Keys**. This opens the **Manage Keys** page.
-    8. On the **Manage Keys** page, select either the **Production** or **Sandbox** tab based on your requirement.
+1. Open the API and click **Test** in the left navigation menu.
+2. Select the gateway where the API is deployed. The endpoint for that gateway appears next to the gateway selector.
+3. Choose one of the following:
 
-        :::info
-        Sandbox keys can only be used in the sandbox environment.
-        :::
+    - **Console view:** Expand an operation, such as `GET /books` for the Reading List API. Choose **Through proxy** to send the request through the gateway, or **Direct** to send it to the backend. Click **Execute**. See [API Console](../test-api-proxy/api-console.md).
+    - **cURL view:** Select the HTTP method and path, set any query parameters, headers, or request body, and copy the cURL command to run from a terminal. See [cURL](../test-api-proxy/curl.md).
 
-    9. Click **Generate** and wait for the keys to be generated. If you want to configure Advanced Configurations, click on the **Modify** button once the keys are generated and configure the values. API Platform generates new tokens and populates the **Consumer Key** and **Consumer Secret** fields.
-    10. Close the dialog.
-    11. Click **Generate** to generate an access token that you can use to invoke APIs. Copy the generated access token.
+Review the response to confirm that the API behaves as expected.
 
-3. Invoke the API:
-    1. Go to the APIs listing page using the left navigation menu.
-    2. Click on the API to open your API.
-    3. Click **Documentation** to open the swagger definition of the API.
-    4. Select the API resource that you want to invoke.
-    5. Paste your copied access token with following format: `Bearer <ACCESS_TOKEN>`
-    6. Click **Send API Request**.
+## Publish the API
 
-Now you have successfully created, deployed, tested, and published an API proxy using API Platform.
+Publishing makes the API available in a Developer Portal, where consumers can discover it and read its documentation.
+
+See [Publish an API](../publish-api-proxy/publish-an-api.md).
