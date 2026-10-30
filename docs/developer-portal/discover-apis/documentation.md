@@ -11,7 +11,7 @@ The API documentation page provides essential information such as endpoints, sch
 2. Select an API to view the documentation.
 3. Select **Documentation** under APIs or you can click the **documentation** button in the header section.
 
-    ![API sidebar navigation showing Home, APIs, Overview, and Documentation menu items](/img/cloud/devportal/go-to-api-documentation.png)\{style="max-width:250px;"\}
+    ![API sidebar navigation showing Home, APIs, Overview, and Documentation menu items](/img/cloud/devportal/go-to-api-documentation.png)
 
 4. You can see the Documentations added to your API under different sections.
 5. Select the documentation to view the content.

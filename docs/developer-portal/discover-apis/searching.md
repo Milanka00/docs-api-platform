@@ -3,7 +3,7 @@ title: "Searching"
 description: "Search published APIs in the Developer Portal by name, type, version, or description."
 ---
 
-You can search for APIs in the Developer Portal that have already been published from API Platform.
+You can search for APIs in the API Portal that have already been published from API Platform Cloud.
 
 1. Click **APIs** from the sidebar.APIs list can be seen
 

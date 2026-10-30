@@ -9,7 +9,7 @@ This page explains how those endpoints work and how agents navigate the portal.
 
 ## `llms.txt`: The Entry Point for Agents
 
-The portal dynamically generates an `llms.txt` file — a plain-text Markdown index designed as the entry point for AI agents. It provides a structured overview of everything the portal exposes for AI consumption.
+The portal dynamically generates an `llms.txt` file - a plain-text Markdown index designed as the entry point for AI agents. It provides a structured overview of everything the portal exposes for AI consumption.
 
 **Endpoint:**
 
@@ -69,11 +69,11 @@ Beyond `llms.txt`, the portal exposes all content as clean Markdown and raw spec
 
 A typical agent discovery flow looks like this:
 
-1. **Start at `llms.txt`** — the agent fetches the portal's `llms.txt` to get an overview of available APIs and workflows.
-2. **Browse the API catalog** — if the agent needs more detail, it fetches `apis.md` to read descriptions of all APIs at once.
-3. **Retrieve per API documentation** — once the agent identifies a relevant API, it fetches `/{orgName}/views/{viewName}/api/{apiHandle}.md` for full documentation.
-4. **Fetch the specification** — the agent retrieves the OpenAPI, GraphQL, or AsyncAPI specification for the precise endpoint and parameter details needed to make a call.
-5. **Follow a workflow** — if a published workflow matches the task, the agent retrieves the Arazzo specification and agent prompt to follow a vetted, step-by-step call sequence rather than reasoning from scratch.
+1. **Start at `llms.txt`** - the agent fetches the portal's `llms.txt` to get an overview of available APIs and workflows.
+2. **Browse the API catalog** - if the agent needs more detail, it fetches `apis.md` to read descriptions of all APIs at once.
+3. **Retrieve per API documentation** - once the agent identifies a relevant API, it fetches `/{orgName}/views/{viewName}/api/{apiHandle}.md` for full documentation.
+4. **Fetch the specification** - the agent retrieves the OpenAPI, GraphQL, or AsyncAPI specification for the precise endpoint and parameter details needed to make a call.
+5. **Follow a workflow** - if a published workflow matches the task, the agent retrieves the Arazzo specification and agent prompt to follow a vetted, step-by-step call sequence rather than reasoning from scratch.
 
 ## Visibility Controls
 
@@ -83,5 +83,4 @@ For details on how visibility is controlled, see Make an API AI-Ready.
 
 ## Related
 
-- Make an API AI-Ready — publisher guidance on descriptions, specifications, and visibility settings
-- MCP Servers — expose APIs as agent-native MCP tools
+- [Make an API AI-Ready](../publish-api-proxy/make-an-api-ai-ready.md) - publisher guidance on descriptions, specifications, and visibility settings

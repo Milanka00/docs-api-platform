@@ -1,49 +1,64 @@
 ---
 title: "Manage Applications"
-description: "Create an application in the Developer Portal to subscribe to APIs and generate access credentials."
+description: "Create an application in the Developer Portal and associate an existing key with it."
 ---
 
-An application is a logical representation of a physical application such as a mobile app, webapp, device, etc. If an application needs to consume an API, it should subscribe to the required API over a selected business plan, which determines the usage quota the application is allowed. A single application can have multiple API subscriptions.
+An application holds the API keys and subscriptions you use to call APIs. Create one in the Developer Portal, then associate an existing key so its usage is counted for that application.
 
-## Prerequisites
+## Open Applications
 
-- If you're signing in to the Developer portal for the first time, go to API Platform and create an organization:
-    1. Go to [API Platform Console](https://console.bijira.dev/) and sign in using your preferred method.
-    2. Enter a unique organization name. For example, `TestingOrg`.
-    3. Read and accept the privacy policy and terms of use.
-    4. Click **Create**.
+1. Sign in to the API Platform Cloud API Portal associated to your organization.
+2. In the left navigation menu, click **Applications**.
 
-This creates the organization and opens the **Project Home** page of the default project created for you.
+The **Applications** page lists your applications. Each card shows the application name and description.
 
-## Create a new application
+## Create an application
 
-1. Replace `<organization name>` in the following URL with your actual organization name to access your Developer Portal.
+1. Click **Create application**. The same action is available when you have no applications yet.
+2. Enter the application details.
 
-    ```url
-    https://devportal.bijira.dev/<organization name>/views/default
-    ```
+    | Field | Description |
+    |---|---|
+    | **Application name** | Required. The name of the application. |
+    | **Description** | Optional. What this application is for. |
 
-2. Sign in to Developer Portal using your preferred method.
-3. Click **Applications** from the sidebar.
-4. Click **Create Application** card. If you already have one or more applications click **+ Create** button.
+3. Click **Create**. **Create** stays unavailable until you enter a name. Click **Cancel** to leave without creating the application.
 
-    ![Applications page showing an empty Create Application card with a plus icon](/img/cloud/devportal/create-application-card.png)\{style="max-width:500px;"\}
+    ![Create application dialog with the name Reading List App, a description, and the Cancel and Create buttons](/img/cloud/devportal/create-application.png)
 
-5. Enter application name and click **Create**.
+The application is added to the list. Open it to edit the name or the description.
 
-    ![Applications page with name input field showing DemoBookingApp and Cancel and Create buttons](/img/cloud/devportal/name-application-card.png)\{style="max-width:500px;"\}
+## Associate an existing key
 
-6. You will find the created applications list.
+Generate the key before associating it with an application. See [Consume an API](./consume-an-api.md) for instructions.
 
-   ![Applications list showing DemoBookingApp, Testapp01, and SampleIntegrationApp cards with subscription counts](/img/cloud/devportal/applications-list.png)
+Associating a key with an application enables usage analytics for that application. It does not affect the key's validity.
 
-## Add Application Description
+### API keys
 
-1. Selected application.
-2. Click **+ Add description** to add the application's description.
+1. Open the application.
+2. Under **API keys**, click **Associate existing key**.
+3. Select the **API**, then select the **Key**. The key list remains unavailable until you select an API.
+4. Click **Associate** to associate the key with the application. Click **Cancel** to close the dialog without associating a key.
 
-    ![DemoBookingApp detail page with Add description link, Subscriptions count, and Generate Key button](/img/cloud/devportal/application-description.png)
+### OAuth2 keys
 
-3. Click **✔** to save the description.
+1. Open the application.
+2. Under **OAuth2 keys**, click **Associate existing key**.
+3. Select the **Key**. Only keys that belong to you are listed. If the key is already associated with another application, it is moved to the current application. A key can be associated with only one application at a time.
+4. Click **Associate** to associate the key with the application. This button remains unavailable until you select a key. Click **Cancel** to close the dialog without associating a key.
 
-    ![DemoBookingApp description text input field with save checkmark and cancel buttons visible](/img/cloud/devportal/add-application-description.png)
+## Delete an application
+
+1. On the application card, click the delete icon.
+2. In **Delete application**, confirm that you want to delete the named application. Its API keys and subscriptions will be revoked.
+3. Click **Delete**. Click **Cancel** to keep the application.
+
+:::warning
+Deleting an application cannot be undone.
+:::
+
+## Next steps
+
+- [Consume an API](./consume-an-api.md) - Generate a key, then use it to call an API
+- [Manage Subscriptions](./manage-subscriptions.md) - Subscribe the application to an API
