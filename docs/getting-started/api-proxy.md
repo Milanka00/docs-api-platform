@@ -43,7 +43,6 @@ This guide uses the sample Reading List API backend.
 5. Click **Continue**.
 6. On **Configure and create**, review **Basic information** and **Backend endpoint**. The console fills **Name** with `Untitled API` and derives **Identifier** and **Context** from that name.
 
-    ![Configure and create page with the generated name Untitled API, identifier, version, context, description, and target URL](/img/cloud/getting-started/configure-and-create.png)
 
     For this sample, set **Name** to `Reading List API`. The identifier becomes `reading-list-api`, and the context includes your project identifier, for example `/default/reading-list-api/v1.0.0`.
 
@@ -62,8 +61,6 @@ The REST API is added to the project. Its overview lists the generated operation
 
 To view or edit the API definition, open the API and in the left navigation menu click **Develop**, then **Definition**. You can view the OpenAPI definition as **YAML** or **JSON**, or click **Edit** to change the operations.
 
-![Definition page showing the OpenAPI document, with YAML, JSON, and Edit](/img/cloud/getting-started/definition.png)
-
 ## Deploy the API to a gateway
 
 Deploy the API so requests can be sent through a gateway.
@@ -74,15 +71,12 @@ Deploy the API so requests can be sent through a gateway.
 
     The page lists the gateways in the environment, such as **development**.
 
-    ![Deploy page with Build and deploy and the gateways in the development environment](/img/cloud/getting-started/deploy.png)
-
 4. In **Deploy to development**, confirm the deployment:
 
     1. Under **Gateways**, keep the gateway marked **Default** selected. All selected gateways receive the same build.
     2. Confirm the **Endpoint URL**.
     3. Click **Deploy**.
 
-    ![Deploy to development dialog with the Default gateway selected and the Reading List endpoint URL](/img/cloud/getting-started/deploy-dialog.png)
 
 When the deployment finishes, that gateway is no longer marked **Not deployed**. The API overview lists it under the deployed gateways and shows the invoke URL.
 
